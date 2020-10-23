@@ -20,13 +20,9 @@ export default function Course() {
       <Relation />
 
       <Box
-        // boxShadow={3}
-
         p={2}
-
-        // style={{ background: '#ffffff', borderRadius: '10px 10px 10px 10px' }}
       >
-        <Container>
+        <Container maxWidth='lg'>
           <Grid container direction="row" justify="center" alignItems="center" spacing={2}>
             <GroupSearch
               value={value}
@@ -109,12 +105,16 @@ export default function Course() {
           </Grid>
 
          
+          <Box style={{width:`${window.screen.width}px`}}>
+ 
+ <Facebook />
 
-              <Facebook />
-  
+</Box>
      
         </Container>
+
       </Box>
+  
     </div>
   )
 }

@@ -54,7 +54,7 @@ class FacebookComponent extends Component {
             )}
           </Login>
           <FacebookProvider appId="324263845303507">
-            <Comments href="https://cubioinfo.com/course/plugins/comments#configurator" width='100%'/>
+            <Comments href="https://cubioinfo.com/course/plugins/comments#configurator" width={`${window.screen.width}px`}/>
           </FacebookProvider>
         </FacebookProvider>
       </>
