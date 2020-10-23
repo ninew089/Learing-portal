@@ -147,8 +147,8 @@ export default function PointNavigationMenu(){
 
     return (
         <>
- 
- <Box p={2}fontWeight={900} style={{marginTop:20 ,background:'white',color:'rgb(19 39 64)',borderRadius:'10px 10px 0px 0px'}} fontSize="h4.fontSize" >
+ <div style={{marginTop:20 ,background:'white',color:'rgb(19 39 64)',borderRadius:10}}>
+ <Box p={2}fontWeight={900} style={{marginTop:20 ,background:'white',color:'rgb(19 39 64)'}} fontSize="h4.fontSize" >
 หมวดหมู่
 <Hidden smUp> 
 
@@ -179,6 +179,7 @@ export default function PointNavigationMenu(){
 
             ))}
                  </Hidden>
+              
      <Hidden smUp>
      {renderCatagoryXs()}
          
@@ -186,6 +187,7 @@ export default function PointNavigationMenu(){
      </Hidden>
       
       </Container>
+      </div>
           <Courses id={catagory[index]}/>
 
 

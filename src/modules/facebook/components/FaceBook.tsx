@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { FacebookProvider, Comments, Login } from 'react-facebook'
 import {Button} from '@material-ui/core'
 
-
+import 'assets/css/facebook.css'
 import { FaFacebookSquare } from "react-icons/fa";
 
 
@@ -16,7 +16,7 @@ class FacebookComponent extends Component {
 
   render() {
     return (
-      <>
+      <div  style={{width:`${window.screen.width}px`}}>
         <h1>Community</h1>
        
         <FacebookProvider appId="324263845303507">
@@ -53,11 +53,12 @@ class FacebookComponent extends Component {
               </span>
             )}
           </Login>
-          <FacebookProvider appId="324263845303507">
-            <Comments href="https://cubioinfo.com/course/plugins/comments#configurator" width={`${window.screen.width}px`}/>
-          </FacebookProvider>
+         
         </FacebookProvider>
-      </>
+        <FacebookProvider appId="324263845303507">
+            <Comments href="https://cubioinfo.com/course/plugins/comments#configurator" width='100%' className='fb_iframe_widget_fluid_desktop' data-width="100%"/>
+          </FacebookProvider>
+      </div>
     )
   }
 }

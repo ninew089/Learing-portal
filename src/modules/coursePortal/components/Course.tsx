@@ -85,16 +85,6 @@ export default function Course() {
               <SocialCardDemo title={'รายการแนะนำ'} />
             </Grid>
           
-        
-          </Grid>
-
-          {/*
-              <Grid item xs={12}>
-            <Recomment name={'รายการ'} title={'แนะนำ'} type={0} />
-          </Grid>
-          */}
-          {/* หมวดหมู่ */}
-     
             <Grid item xs={12} >
             <TapsCourse/>
         
@@ -103,16 +93,28 @@ export default function Course() {
           <Grid item xs={12}>
             <CourseList title={'หลักสูตร'} name={''} type={2} />
           </Grid>
-
-         
-          <Box style={{width:`${window.screen.width}px`}}>
+          <Grid   container
+                justify="center"
+                alignItems="center"
+                xs={12}
+                sm={12}
+                md={12}
+                lg={12}
+          >
+          
  
  <Facebook />
 
-</Box>
+
+          </Grid>
+          </Grid>
+     
+            
+
+         
+          
      
         </Container>
-
       </Box>
   
     </div>
