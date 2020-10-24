@@ -1,20 +1,12 @@
 import React from 'react'
 import clsx from 'clsx'
 import { makeStyles } from '@material-ui/core/styles'
-
 import {
-  createMuiTheme,
-  responsiveFontSizes,
-  ThemeProvider,
-} from '@material-ui/core/styles'
-import {
-
   CssBaseline,
   AppBar,
   Toolbar,
   Grid,
   Typography,
-
   Hidden,
   Box,Container,
   Avatar,
@@ -34,33 +26,23 @@ const drawerWidth = 240
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'block',
+    background:'#f5f5f5'
 
-    // background: '#FAFAFA',
   },
   title: {
-    fontWeight: 900,
+    fontWeight: 700,
     flexGrow: 1,
     display: 'flex',
     marginLeft: 10,
   },
   appBar: {
-    //  transition: theme.transitions.create(['margin', 'width'], {
-    //easing: theme.transitions.easing.sharp,
-    // duration: theme.transitions.duration.leavingScreen,
-    // }),
-    background: '#0f1626', //transparent
+ 
+    background: '#0f1626', 
     color: '#f3f3fb',
     backdropFilter: 'blur(6px)',
   },
 
-  appBarShift: {
-    // width: `calc(100% - ${drawerWidth}px)`,
-    //  marginLeft: drawerWidth,
-    // transition: theme.transitions.create(['margin', 'width'], {
-    // easing: theme.transitions.easing.easeOut,
-    //duration: theme.transitions.duration.enteringScreen,
-    // }),
-  },
+
   menuButton: {
     marginRight: theme.spacing(2),
   },
@@ -78,7 +60,6 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     padding: theme.spacing(0, 3),
-    // necessary for content to be below app bar
     ...theme.mixins.toolbar,
     justifyContent: 'flex-end',
   },
@@ -104,26 +85,26 @@ const useStyles = makeStyles((theme) => ({
   },
   color: {
     color: '#f5f5f5',
-    fontWeight: 900,
+    fontWeight: 700,
     fontSize: 14,
     [theme.breakpoints.down('sm')]: {
       fontSize: 6,
     },
   },
   color1: {
-    fontWeight: 900,
+    fontWeight: 700,
     fontSize: 14,
     [theme.breakpoints.down('sm')]: {
       fontSize: 6,
     },
   },
   name: {
-    fontWeight: 900,
+    fontWeight: 700,
     fontSize: 16,
     marginLeft: 10,
   },
   main: {
-    fontWeight: 900,
+    fontWeight: 700,
     fontSize: 16,
 
 
@@ -139,31 +120,10 @@ export default function PersistentDrawerLeft(props: any) {
   const classes = useStyles()
 
  
-
-
-
-  
-
-  let themes = createMuiTheme({
-    typography: {
-      fontFamily: ['Prompt', 'sans-serif'].join(','),
-    },
-    overrides: {
-      MuiTab: {
-        root: {
-          minWidth: 100,
-          '@media (min-width: 0px)': {
-            minWidth: 80,
-          },
-        },
-      },
-    },
-  })
-  themes = responsiveFontSizes(themes)
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <ThemeProvider theme={themes}>
+ 
 
                
           <AppBar
@@ -215,7 +175,6 @@ export default function PersistentDrawerLeft(props: any) {
                   marginLeft: 0,
                 }}
               />
-
               <Avatar alt="Remy Sharp" src={avatar} />
               <Hidden xsDown>
                 <Box className={classes.name}>อนุสรา</Box>
@@ -250,7 +209,7 @@ export default function PersistentDrawerLeft(props: any) {
           </Typography>
           </Container>
         </Box>
-      </ThemeProvider>
+
     </div>
   )
 }

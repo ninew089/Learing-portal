@@ -23,7 +23,7 @@ export default function SingleLineGridList(props: any) {
       },button:{
         float: 'right'
       },box:{
-        background: '#f5f5f5'  ,borderRadius:'0 0 10px 10px',paddingRight:8,paddingLeft:8,marginBottom:10,paddingBottom:10
+      borderRadius:'0 0 10px 10px',paddingRight:8,paddingLeft:8,marginBottom:10,paddingBottom:10,width:'100%',marginTop:10
       },
       
    
@@ -187,7 +187,7 @@ const classes=useStyles()
             </Grid>
             <Divider style={{ marginBottom: 20 }} />
             <Hidden smUp>
- 
+           
               {tileData.map((tile) => (
                 <Listitems
                   data={tile.title}
@@ -198,10 +198,11 @@ const classes=useStyles()
                   vote={tile.vote}
                 />
               ))}
+      
             </Hidden>
             <Hidden xsDown>
-              <Container maxWidth={getSize()} >
-                <Grid container direction="row" alignItems="center" spacing={3}>
+        
+                <Grid container direction="row" alignItems="center" spacing={4}>
                   {tileData.map((tile) => (
                     <Grid item xs={12} sm={6} md={4} lg={3} xl={3} >
                       <Course2
@@ -215,7 +216,7 @@ const classes=useStyles()
                     </Grid>
                   ))}
                 </Grid>
-              </Container>
+         
             </Hidden>
      
     </Box>

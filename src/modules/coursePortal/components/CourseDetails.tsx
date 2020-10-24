@@ -89,7 +89,7 @@ const useStyles = makeStyles((theme) => ({
     textOverflow: 'ellipsis',
     whiteSpace: 'nowrap',
     overflow: 'hidden',
-    fontWeight: 900,
+    fontWeight: 700,
     maxWidth: 140,
   },
   cardHeaderSecondaryText: {
@@ -161,7 +161,7 @@ export default function RecipeReviewCard(props: any) {
               <div className={classes.dot} />
             </Grid>
             <Grid item>
-              <Box fontWeight={900}>สังคมศาสตร์</Box>
+              <Box fontWeight={700}>สังคมศาสตร์</Box>
             </Grid>
           </Grid>
 

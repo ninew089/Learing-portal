@@ -12,8 +12,9 @@ import { useCoverCardMediaStyles } from '@mui-treasury/styles/cardMedia/cover';
 //box-shadow 0.1s ease-out 0s, transform 0.1s ease-out 0s, opacity 0.1s ease-out 0s
 const useStyles = makeStyles(() => ({
   card: {
+    width:'100%',
     background:'#fdfdfd',
-    height:369,
+    height:420,
     boxShadow: '4px 4px 4px 4px rgb(0 0 0 / 8%)',
     borderRadius: '0.5rem',
     transition: '0.4s',
@@ -88,6 +89,18 @@ const useStyles = makeStyles(() => ({
     paddingLeft:8
   },logo:{
     paddingLeft:'0.4rem'
+  },caption:{
+    overflow: 'hidden',
+    display: '-webkit-box',
+    textOverflow: 'ellipsis',
+    WebkitLineClamp: 3,
+    WebkitBoxOrient: 'vertical',
+    fontSize: '10px',
+
+    color: '#434a54',
+    paddingLeft:8,
+    paddingRight:8
+
   }
 }));
 
@@ -138,7 +151,15 @@ export default function IconBreadcrumbs(props: any) {
               <div className={classes.dot} />
             </Grid>
             <Grid item>
-              <Box fontWeight={900}>สังคมศาสตร์</Box>
+              <Box fontWeight={500}>สังคมศาสตร์</Box>
+            </Grid>
+            <Grid item>
+              <Box fontWeight={400} className={classes.caption}>
+              &nbsp;&nbsp;&nbsp;เรียนรู้ที่จะพูดภาษาอังกฤษกับหลักสูตรที่พิสูจน์แล้วว่าได้ผล
+            เรียนที่ไหน เมื่อไหร่ก็ได้ ได้เรียนภาษาอังกฤษกับอ.ผู้เชียวชาญ
+            พร้อมที่ปรึกษาส่วนตัว และเรายังการันตีผลลัพท์ที่ได้ Native level
+            Teachers Engaging TV series Small Classes
+              </Box>
             </Grid>
 
   </Grid>

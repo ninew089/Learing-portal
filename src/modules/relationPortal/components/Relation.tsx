@@ -109,7 +109,7 @@ const useStyles = makeStyles(({ palette, breakpoints, spacing }) => ({
   text: {
     // shared style for text-top and text-bottom
     fontFamily: 'Poppins, san-serif',
-    fontWeight: 900,
+    fontWeight: 700,
     position: 'absolute',
     color: palette.common.white,
     padding: '0 8px',

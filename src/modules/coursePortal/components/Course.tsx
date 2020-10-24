@@ -85,28 +85,23 @@ export default function Course() {
               <SocialCardDemo title={'รายการแนะนำ'} />
             </Grid>
           
-            <Grid item xs={12} >
+            <Grid item xs={12} sm={12} md={12} lg={12}>
             <TapsCourse/>
-        
             </Grid>
+         
+        
+  
           
-          <Grid item xs={12}>
+     
             <CourseList title={'หลักสูตร'} name={''} type={2} />
-          </Grid>
-          <Grid   container
-                justify="center"
-                alignItems="center"
-                xs={12}
-                sm={12}
-                md={12}
-                lg={12}
-          >
+      
+       
           
  
  <Facebook />
 
 
-          </Grid>
+
           </Grid>
      
             

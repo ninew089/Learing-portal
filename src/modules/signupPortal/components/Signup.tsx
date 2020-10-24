@@ -277,7 +277,7 @@ export default function SignIn() {
   return (
     <>
       <form onSubmit={accountForm.handleSubmit(onSubmitData)}>
-        <Container component="main" maxWidth="lg" className={classes.paper}>
+        <Container component="main" maxWidth="xs" className={classes.paper}>
           <Account formProps={accountForm} />
           <Information formProps={accountForm} />
           <TypeSelect formProps={accountForm} />

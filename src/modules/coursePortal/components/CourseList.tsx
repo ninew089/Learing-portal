@@ -20,16 +20,9 @@ import img2 from 'assets/logo/logo2.png'
 import img3 from 'assets/logo/logo3.png'
 import img4 from 'assets/logo/logo4.png'
 const useStyles = makeStyles((theme) => ({
-  gridTile: {
-    width: '25%;',
 
-    height: '1000px',
-  },
   gridList: {
     flexWrap: 'nowrap',
-
-
-    // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
   },
   title: {
     color: theme.palette.primary.light,
@@ -40,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
       'linear-gradient(to top, rgba(0,0,0,0.0) 0%, rgba(0,0,0,0.0) 0%, rgba(0,0,0,0) 0%)',
   },
   container: {
+    width:'100%',
     background: '#f5f5f5',
     marginBottom: '10px',
     marginTop: '10px',
@@ -69,23 +63,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-/**
- * The example data is structured as follows:
- *
- * import image from 'path/to/image.jpg';
- * [etc...]
- *
-  const tileData = [
- *   {
- *     img: image,
- *     title: 'Image',
- *     author: 'author',
- *   },
- *   {
- *     [etc...]
- *   },
- * ];
- */
+
 export default function SingleLineGridList(props: any) {
   const { number, name, title, type } = props
   const [progress, setProgress] = React.useState(0)
@@ -365,14 +343,14 @@ export default function SingleLineGridList(props: any) {
       return 5.8
     }
     if (lg) {
-      return 4.5
+      return 4.1
     }
     if (md) {
-      return 3.4
+      return 3.2
     }
 
     if (sm) {
-      return 2.4
+      return 2.2
     }
     if (xs) {
       return 1.1
@@ -409,7 +387,7 @@ export default function SingleLineGridList(props: any) {
             >
               <Typography
                 variant={'subtitle1'}
-                style={{ fontWeight: 900 }}
+                style={{ fontWeight: 700 }}
                 noWrap
               >
                 {name} {number} {title}
@@ -418,7 +396,7 @@ export default function SingleLineGridList(props: any) {
             <Grid item xs={3} className={classes.linkall}>
               <Typography
                 variant={'button'}
-                style={{ fontWeight: 900, color: getColor(type) }}
+                style={{ fontWeight: 700, color: getColor(type) }}
                 noWrap
                 onClick={Next}
               >
@@ -433,7 +411,7 @@ export default function SingleLineGridList(props: any) {
             <GridList
               className={classes.gridList}
               cols={getCol()}
-              cellHeight={390}
+              cellHeight={440}
             >
               {tileData1.map((tile) => (
                 <GridListTile key={tile.img}>

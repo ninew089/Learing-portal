@@ -13,10 +13,13 @@ const useStyles = makeStyles((theme: Theme) =>
         width:80
       },
       [theme.breakpoints.only('xs')]:{
-        width:60
+        width:`${window.screen.width/6}px`,
+      },
+      [theme.breakpoints.only('sm')]:{
+        width:`${window.screen.width/10}px`,
       }
     },menus:{
-        paddingLeft:30,
+       width:'100%',
         borderRadius:'0 0 10px 10px',
         background: '#ffffff',
         [theme.breakpoints.only('xs')]:{
@@ -36,8 +39,6 @@ const useStyles = makeStyles((theme: Theme) =>
         display: '-webkit-box',
         textOverflow: 'ellipsis',
         fontSize: 10,
-    
-
         WebkitLineClamp: 1,
         WebkitBoxOrient: 'vertical',
       },
@@ -47,7 +48,13 @@ const useStyles = makeStyles((theme: Theme) =>
         paddingBottom:'2px'
       },button:{
         float: 'right'
-      }
+      },box:{
+        [theme.breakpoints.only('xs')]:{
+          marginInlineStart:`${window.screen.width/30}px`
+        }
+        
+       
+      } 
    
   }),
 );
@@ -87,37 +94,55 @@ export default function PointNavigationMenu(){
  const theme = useTheme();
  const xs = useMediaQuery(theme.breakpoints.only('xs'));
  const sm = useMediaQuery(theme.breakpoints.only('sm'));
- const md = useMediaQuery(theme.breakpoints.only('md'));
- const lg = useMediaQuery(theme.breakpoints.only('lg'));
- const getSize=()=>{
-   if(xs){
-     return 'xs'
+ const checkOpen=()=>{
+  if (xs||sm){
+   if (open){
+     return 'inherit'
    }
-   if(sm){
-     return 'sm'
+   else{
+     return 'hidden'
    }
-   if(md){
-     return 'md'
-   }
-   if(lg){
-     return 'lg'
-   }
- 
-
-
+  }
  }
+ const checkOpenHight=()=>{
+   if (xs||sm){
+    if (open){
+      return ''
+    }
+    else{
+      return `180px`
+    }
+   }
+
+}
+const Select=(number:number)=>{
+  if(number===index){
+    return '#f9b122'
+  }
+
+}
+const SelectWeight=(number:number)=>{
+  if(number===index){
+    return 'bold'
+  }
+
+}
+
+
  const renderCatagoryXs = () => {
    
     return catagory.map((name, index) => {
         if (open===false){
-            if (index < 10) {
+            if (index < 14) {
                 return (
                     <IconButton onClick={handleClick(index)} className={classes.root} disableRipple>
                     <Grid container direction="row" alignItems="center" justify='center'>
-                   
-                  <Avatar alt={name} src="/static/images/avatar/1.jpg" className={classes.large} />
-                
-                  <Grid className={classes.text}>
+                   <Grid item>
+                   <Avatar alt={name} src="/static/images/avatar/1.jpg" className={classes.large} />
+                   </Grid>
+                  
+          
+                  <Grid className={classes.text} style={{color:Select(index),fontWeight:SelectWeight(index)}}>
                   {name}
                   </Grid>
                 </Grid>
@@ -133,8 +158,11 @@ export default function PointNavigationMenu(){
         <Grid container direction="row" alignItems="center" justify='center'>
       <Avatar alt={name} src="/static/images/avatar/1.jpg" className={classes.large} />
       </Grid>
-      <Grid className={classes.text}>
-      {name}
+      <Grid className={classes.text} style={{color:Select(index),fontWeight:SelectWeight(index)}}>
+       
+        {name}
+   
+
       </Grid>
     </Grid>
     </IconButton>)
@@ -147,20 +175,24 @@ export default function PointNavigationMenu(){
 
     return (
         <>
- <div style={{marginTop:20 ,background:'white',color:'rgb(19 39 64)',borderRadius:10}}>
- <Box p={2}fontWeight={900} style={{marginTop:20 ,background:'white',color:'rgb(19 39 64)'}} fontSize="h4.fontSize" >
+         <Grid container direction="row" justify="center" alignItems="center" spacing={2}>
+ <div style={{padding:10,background:'white',color:'rgb(19 39 64)',borderRadius:10,width:'100%'}}>
+ <Box p={2}fontWeight={700} style={{ background:'white',color:'rgb(19 39 64)'}} fontSize="h4.fontSize" >
 หมวดหมู่
-<Hidden smUp> 
+<Hidden mdUp> 
 
 <Button  onClick={handleOpen()} className={classes.button}>
-เพิ่มเติม
+{open?"แสดงน้อยลง":"แสดงเพิ่มเติม"}
     </Button>
 
 </Hidden>
  </Box>
- <Container className={classes.menus}  maxWidth={getSize()}>
+ <Container fixed  >
+ <Grid container direction="row" justify="flex-start" alignItems="center" className={classes.box} style={{overflowY:checkOpen(),height:checkOpenHight()}} >
+  
 
- <Hidden xsDown>
+ <Hidden smDown>
+       
           {catagory.map((name, i) => (
        
      
@@ -170,7 +202,7 @@ export default function PointNavigationMenu(){
     <Grid container direction="row" alignItems="center" justify='center'>
   <Avatar alt={name} src="/static/images/avatar/1.jpg" className={classes.large} />
   </Grid>
-  <Grid className={classes.text}>
+  <Grid className={classes.text} style={{color:Select(i),fontWeight:SelectWeight(i)}}>
   {name}
   </Grid>
 </Grid>
@@ -178,18 +210,25 @@ export default function PointNavigationMenu(){
 
 
             ))}
+        
                  </Hidden>
-              
-     <Hidden smUp>
+                      
+     <Hidden mdUp>
      {renderCatagoryXs()}
          
 
      </Hidden>
-      
+     
+    
+      </Grid>
       </Container>
-      </div>
-          <Courses id={catagory[index]}/>
+     
+      <Grid container direction="row" justify="flex-start" alignItems="center" spacing={2}>
 
+          <Courses id={catagory[index]}/>
+          </Grid>
+           </div>
+          </Grid>
 
           </>
     )

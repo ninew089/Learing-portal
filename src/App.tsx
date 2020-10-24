@@ -6,7 +6,6 @@ import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import configureStore from 'store/configureStore'
-
 import './assets/css/fonts/font.css'
 export default function APP() {
   const theme = createMuiTheme({
@@ -38,7 +37,7 @@ export default function APP() {
             </Route>
             <Route exact path="/learning-portal/admins">
               <ThemeProvider theme={theme}>
-                <Admin></Admin>
+                <Admin/>
               </ThemeProvider>
             </Route>
             <Route path="/learning-portal">

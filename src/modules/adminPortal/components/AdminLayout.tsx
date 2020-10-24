@@ -22,8 +22,10 @@ const drawerWidth = 240
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
+    background:'#ab987a',
   },
   appBar: {
+    background:'#ab987a',
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
@@ -96,6 +98,7 @@ export default function PersistentDrawerLeft() {
         className={clsx(classes.appBar, {
           [classes.appBarShift]: open,
         })}
+        elevation={0}
       >
         <Toolbar>
           <IconButton
