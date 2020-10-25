@@ -2,15 +2,15 @@ import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Rating from '@material-ui/lab/Rating'
 
-
 const useStyles = makeStyles({
   root: {
     display: 'flex',
     alignItems: 'center',
     height: 1,
-  },font:{
-    whiteSpace: 'nowrap'
-  }
+  },
+  font: {
+    whiteSpace: 'nowrap',
+  },
 })
 
 export default function HoverRating(props: any) {
@@ -28,9 +28,8 @@ export default function HoverRating(props: any) {
         value={point}
         precision={0.1}
       />
-  
-        <h5 className={classes.font}>( {vote} )</h5>
 
+      <h5 className={classes.font}>( {vote} )</h5>
     </div>
   )
 }

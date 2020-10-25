@@ -20,68 +20,63 @@ import * as yup from 'yup'
 
 const useStyles = makeStyles((theme) => ({
   input: {
-    color: "#0f1626",
-    fontWeight:700,
+    color: '#0f1626',
+    fontWeight: 700,
     '& .MuiInputBase-root.MuiOutlineInput-root': {
       color: '#45A29E',
       borderColor: '#757575',
-      fontWeight:700
-   
+      fontWeight: 700,
     },
   },
   textfield: {
-    margin: theme.spacing(1),
+    marginTop: 10,
 
-    padding: theme.spacing(1),
-    '& .MuiFormHelperText-root.Mui-error ':{
+    '& .MuiFormHelperText-root.Mui-error ': {
       color: 'ff533d',
-      fontWeight:700,
-      borderWidth:'3px'
+      fontWeight: 700,
+      borderWidth: '3px',
     },
-      '& .MuiInput-underline.Mui-error:after':{
-        borderColor: 'ff533d',
-        borderWidth:'3px'
-       
-      },
+    '& .MuiInput-underline.Mui-error:after': {
+      borderColor: 'ff533d',
+      borderWidth: '3px',
+    },
     '& label.MuiFormLabel-root': {
-      fontWeight:700,
+      fontWeight: 700,
       '&:after .Mui-error': {
         borderColor: '#ff533d',
-        borderWidth:'3px'
-      }
-
+        borderWidth: '3px',
+      },
     },
     '& label.Mui-focused': {
       color: '#132740',
-  
     },
     '& .MuiInput-underline:after': {
       borderBottomColor: '#ffae0c',
     },
     '& .MuiOutlinedInput-root': {
-      borderWidth:'3px',
+      borderWidth: '3px',
       '& fieldset': {
         borderColor: '#ffae0c',
-        borderWidth:'2px'
+        borderWidth: '2px',
       },
       '&:hover fieldset': {
         borderColor: '#a8c6ff',
-        borderWidth:'3px'
+        borderWidth: '3px',
       },
       '&.Mui-focused fieldset': {
         borderColor: '#a8c6ff',
-        borderWidth:'3px'
-      },'&.Mui-error .MuiOutlinedInput-notchedOutline': {
+        borderWidth: '3px',
+      },
+      '&.Mui-error .MuiOutlinedInput-notchedOutline': {
         borderColor: '#ff533d',
-        borderWidth:'3px'
-      }
-    
-      
+        borderWidth: '3px',
+      },
     },
   },
   paper: {
     marginTop: theme.spacing(4),
     display: 'flex',
+    padding: 10,
     flexDirection: 'column',
     alignItems: 'center',
   },
@@ -94,9 +89,25 @@ const useStyles = makeStyles((theme) => ({
   },
 
   submit: {
-    margin: theme.spacing(3, 0, 2),
+    marginTop: '10px',
+    background: '#ff533dcf',
+    borderRadius: 20,
+    padding: 8,
+    color: '#fdfdfd',
+    '&:hover': {
+      background: '#ff533d',
+    },
   },
-
+  etda: {
+    marginTop: '10px',
+    background: '#4d74bbba',
+    borderRadius: 20,
+    padding: 8,
+    color: '#fdfdfd',
+    '&:hover': {
+      background: '#4d74bb',
+    },
+  },
   container: {
     display: 'flex',
     alignItems: 'center',
@@ -123,21 +134,20 @@ const useStyles = makeStyles((theme) => ({
   form: {
     background: 'white',
     borderRadius: '10px',
-    padding: '10px',
     height: '100%',
     marginTop: '20px',
   },
   font: {
-    fontWeight: 700,color:'#0f1726'
-
+    fontWeight: 700,
+    color: '#0f1726',
   },
-  image:{
-      margin:10,
-      display: 'block',
+  image: {
+    margin: 10,
+    display: 'block',
     marginLeft: 'auto',
     marginRight: 'auto',
-    width: '50%'
-    }
+    width: '50%',
+  },
 }))
 
 export default function SignIn() {
@@ -154,42 +164,40 @@ export default function SignIn() {
   }
 
   return (
-
-    <Container component="main" maxWidth="xs" >
-    <form onSubmit={handleSubmit(submit)} autoComplete="off"className={classes.form}>
-
+    <Container component="main" maxWidth="xs">
+      <form
+        onSubmit={handleSubmit(submit)}
+        autoComplete="off"
+        className={classes.form}
+      >
         <CssBaseline />
         <div className={classes.paper}>
-        <img alt="banner" src={img} className={classes.image}/>
+          <img alt="banner" src={img} className={classes.image} />
           <Typography component="h1" variant="h5" className={classes.font}>
             Learning Portal
           </Typography>
           <form className={classes.form} noValidate>
-            
             <TextField
-variant='outlined'
-className={classes.textfield}
-InputProps={{
-  className: classes.input,
-  startAdornment: (
-    <InputAdornment position="start">
-      <AiOutlineUser size={24} />
-    </InputAdornment>
-  ),
-}}
-
+              variant="outlined"
+              className={classes.textfield}
+              InputProps={{
+                className: classes.input,
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <AiOutlineUser size={24} />
+                  </InputAdornment>
+                ),
+              }}
               fullWidth
               label="เลขประจำตัวประชาชน"
-             
               inputRef={register}
               name="user"
               helperText={errors.user ? 'กรุณากรอกเลขประจำตัวประชาชน' : ''}
               error={!!errors.user}
-              
             />
             <TextField
-                 className={classes.textfield}
-                 variant='outlined'
+              className={classes.textfield}
+              variant="outlined"
               fullWidth
               id="input-with-icon-textfield"
               label="รหัสผ่าน"
@@ -208,22 +216,18 @@ InputProps={{
               }}
             />
 
-            <Button
-              type="submit"
-              fullWidth
-              style={{ marginTop: '10px', background: '#ff533dcf' ,color:'#f5f5f5'}}
-            >
+            <Button type="submit" fullWidth className={classes.submit}>
               เข้าสู่ระบบ
             </Button>
 
             <Grid container>
               <Grid item xs>
                 <NavLink to="/learning-portal/forget" className={classes.nav}>
-                  <Link variant="body2">ลืมรหัสผ่าน</Link>
+                  <Link variant="body2">ลืมรหัสผ่าน?</Link>
                 </NavLink>
               </Grid>
               <Grid item>
-                <NavLink to="/learning-portal/sign" className={classes.nav}>
+                <NavLink to="/learning-portal/signup" className={classes.nav}>
                   <Link variant="body2">{'สมัครสมาชิก'}</Link>
                 </NavLink>
               </Grid>
@@ -236,18 +240,12 @@ InputProps={{
               <div className={classes.border} />
             </div>
 
-            <Button
-              type="submit"
-              fullWidth
-              style={{ marginTop: '10px', background: '#4d74bbba',color:'#f5f5f5' }}
-            >
+            <Button type="submit" fullWidth className={classes.etda}>
               LOGIN WITH ETDA CONNECT
             </Button>
           </form>
         </div>
-
-    </form>
+      </form>
     </Container>
-
   )
 }

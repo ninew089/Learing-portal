@@ -1,5 +1,8 @@
 import React from 'react'
-
+//@ts-ignore
+import { autoPlay } from 'react-swipeable-views-utils'
+//@ts-ignore
+import SwipeableViews from 'react-swipeable-views'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 //@ts-ignore
 import ParallaxSlide from '@mui-treasury/components/slide/parallax'
@@ -12,7 +15,7 @@ import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft'
 import DotIndicator from '@mui-treasury/components/indicator/dot'
 import img from 'assets/images/03.jpg'
 import img2 from 'assets/images/04.jpg'
-
+import { NavLink } from 'react-router-dom'
 //@ts-ignore
 
 const data = [
@@ -41,7 +44,7 @@ const data = [
       'https://material-ui.com/static/images/grid-list/morning.jpg',
   },
 ]
-
+const AutoPlaySwipeableViews = autoPlay(SwipeableViews)
 const useStyles = makeStyles(({ palette, breakpoints, spacing }) => ({
   root: {
     // a must if you want to set arrows, indicator as absolute
@@ -105,6 +108,16 @@ const useStyles = makeStyles(({ palette, breakpoints, spacing }) => ({
   arrowRight: {
     right: 0,
   },
+  link: {
+    display: 'inline-flex',
+    position: 'absolute',
+    top: '50%',
+    transform: 'translateY(-50%)',
+    [breakpoints.up('sm')]: {
+      display: 'inline-flex',
+    },
+    left: '20%',
+  },
 
   text: {
     // shared style for text-top and text-bottom
@@ -152,19 +165,11 @@ const ParallaxCarousel = () => {
       return 320
     }
   }
-
-  // eslint-disable-next-line react/prop-types
-  const renderElements = ({
-    index,
-    onChangeIndex,
-  }: {
-    index: number
-    onChangeIndex: any
-  }) => (
+  const [index, onChangeIndex] = React.useState<number>(0)
+  const renderElements = () => (
     <>
       <Button
         className={cx(classes.arrow, classes.arrowLeft)}
-        // classes={arrowStyles}
         disabled={index === 0}
         onClick={() => onChangeIndex(index - 1)}
       >
@@ -172,12 +177,18 @@ const ParallaxCarousel = () => {
       </Button>
       <Button
         className={cx(classes.arrow, classes.arrowRight)}
-        //classes={arrowStyles}
         disabled={index === data.length - 1}
         onClick={() => onChangeIndex(index + 1)}
       >
         <KeyboardArrowRight />
       </Button>
+      {index === 5 ? (
+        <Button className={classes.link} style={{ color: 'white' }}>
+          Click
+        </Button>
+      ) : (
+        ''
+      )}
 
       <div className={classes.indicatorContainer}>
         {data.map(({ id }, i) => (
@@ -190,27 +201,35 @@ const ParallaxCarousel = () => {
       </div>
     </>
   )
-  const renderChildren = ({
-    injectStyle,
-    fineIndex,
-  }: {
-    injectStyle: any
-    fineIndex: any
-  }) =>
-    data.map(({ id, title, subtitle, image }, i) => (
-      <div key={id} className={classes.slide}>
-        <div
-          className={classes.imageContainer}
-          style={{
-            background: `#fffff`,
-            backgroundSize: ` ${window.screen.width}px ${findScreen()}px`,
-          }}
-        >
-          <img src={image} alt="" width={'100%'} height={`${findScreen()}px`} />
-          <div style={{ position: 'fixed', bottom: 0, right: 0 }}></div>
+  const renderChildren = () => (
+    <AutoPlaySwipeableViews index={index} onChangeIndex={onChangeIndex}>
+      {data.map(({ id, title, subtitle, image }, i) => (
+        <div key={id} className={classes.slide}>
+          <div
+            className={classes.imageContainer}
+            style={{
+              background: `#fffff`,
+              backgroundSize: ` ${window.screen.width}px ${findScreen()}px`,
+            }}
+          >
+            <NavLink
+              to="/learning-portal/login"
+              style={{ color: 'inherit', textDecoration: 'inherit' }}
+            >
+              <img
+                src={image}
+                alt=""
+                width={'100%'}
+                height={`${findScreen()}px`}
+              />
+            </NavLink>
+            <div style={{ position: 'fixed', bottom: 0, right: 0 }}></div>
+          </div>
         </div>
-      </div>
-    ))
+      ))}
+    </AutoPlaySwipeableViews>
+  )
+
   return (
     <div className={classes.root}>
       <ParallaxSlide renderElements={renderElements}>

@@ -13,26 +13,18 @@ const filterOptions = createFilterOptions({
   stringify: (option: any) => option.title,
 })
 const useStyles = makeStyles(theme => ({
-  listbox: {
-    background: "black"
-  },
-  option: {
-    borderBottom: `1px solid  black `,
-    // Hover
-    '&[data-focus="true"]': {
-      backgroundColor:  'black',
-      borderColor: 'transparent',
+  inputRoot: {
+    color: "purple",
+    "& .MuiOutlinedInput-notchedOutline": {
+      borderColor: "green"
     },
-    // Selected
-    '&[aria-selected="true"]': {
-      backgroundColor: 'black',
-      borderColor: 'transparent',
+    "&:hover .MuiOutlinedInput-notchedOutline": {
+      borderColor: "red"
     },
-  
-    input: {
-      color: "white"
+    "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+      borderColor: "purple"
     }
-  },
+  }
 }));
 export default function Filter({
   search,
@@ -53,9 +45,7 @@ export default function Filter({
         freeSolo
         disableClearable
         id="filter-demo"
-        classes={{
-          option: classes.option
-        }}
+        classes={classes}
         value={search}
         options={top100Films}
         getOptionLabel={(option) => option.title}

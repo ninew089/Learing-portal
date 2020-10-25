@@ -20,7 +20,6 @@ import img2 from 'assets/logo/logo2.png'
 import img3 from 'assets/logo/logo3.png'
 import img4 from 'assets/logo/logo4.png'
 const useStyles = makeStyles((theme) => ({
-
   gridList: {
     flexWrap: 'nowrap',
   },
@@ -33,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
       'linear-gradient(to top, rgba(0,0,0,0.0) 0%, rgba(0,0,0,0.0) 0%, rgba(0,0,0,0) 0%)',
   },
   container: {
-    width:'100%',
+    width: '100%',
     background: '#f5f5f5',
     marginBottom: '10px',
     marginTop: '10px',
@@ -58,11 +57,11 @@ const useStyles = makeStyles((theme) => ({
   listitem: {
     margin: '8px',
     padding: '8px',
-  },box:{
-    paddingTop:10
-  }
+  },
+  box: {
+    paddingTop: 10,
+  },
 }))
-
 
 export default function SingleLineGridList(props: any) {
   const { number, name, title, type } = props
@@ -416,15 +415,15 @@ export default function SingleLineGridList(props: any) {
               {tileData1.map((tile) => (
                 <GridListTile key={tile.img}>
                   <div className={classes.box}>
-                  <Course2
-                    data={tile.title}
-                    logo={tile.logo}
-                    int={tile.int}
-                    view={tile.view}
-                    point={tile.point}
-                    vote={tile.vote}
-                  />
-</div>
+                    <Course2
+                      data={tile.title}
+                      logo={tile.logo}
+                      int={tile.int}
+                      view={tile.view}
+                      point={tile.point}
+                      vote={tile.vote}
+                    />
+                  </div>
                   <GridListTileBar
                     classes={{
                       root: classes.titleBar,

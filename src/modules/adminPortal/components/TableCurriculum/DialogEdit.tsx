@@ -1,6 +1,12 @@
 import React from 'react'
 
-import { createStyles, Theme, withStyles, WithStyles ,makeStyles} from '@material-ui/core/styles';
+import {
+  createStyles,
+  Theme,
+  withStyles,
+  WithStyles,
+  makeStyles,
+} from '@material-ui/core/styles'
 
 import CloseIcon from '@material-ui/icons/Close'
 
@@ -18,7 +24,6 @@ import {
   Button,
 } from '@material-ui/core'
 
-
 const styles = (theme: Theme) =>
   createStyles({
     root: {
@@ -31,55 +36,55 @@ const styles = (theme: Theme) =>
       top: theme.spacing(1),
       color: theme.palette.grey[500],
     },
-  });
+  })
 
-const useStyles = makeStyles((theme:Theme) => 
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-  margin: {
-    margin: theme.spacing(1),
-    padding: theme.spacing(1),
-  },
-  button: {
-    display: 'block',
-    marginTop: theme.spacing(2),
-  },
-  formControl: {
-    margin: theme.spacing(2),
-    minWidth: 120,
-  },
-  formControlInfo: {
-    margin: theme.spacing(2),
-    paddingRight: theme.spacing(4),
-  },
-}))
-
+    paper: {
+      marginTop: theme.spacing(8),
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+    },
+    avatar: {
+      margin: theme.spacing(1),
+      backgroundColor: theme.palette.secondary.main,
+    },
+    form: {
+      width: '100%', // Fix IE 11 issue.
+      marginTop: theme.spacing(1),
+    },
+    submit: {
+      margin: theme.spacing(3, 0, 2),
+    },
+    margin: {
+      margin: theme.spacing(1),
+      padding: theme.spacing(1),
+    },
+    button: {
+      display: 'block',
+      marginTop: theme.spacing(2),
+    },
+    formControl: {
+      margin: theme.spacing(2),
+      minWidth: 120,
+    },
+    formControlInfo: {
+      margin: theme.spacing(2),
+      paddingRight: theme.spacing(4),
+    },
+  }),
+)
 
 export interface DialogTitleProps extends WithStyles<typeof styles> {
-  id: string;
-  children: React.ReactNode;
+  id: string
+  children: React.ReactNode
 
-  onClose: () => void;
+  onClose: () => void
 }
 
 const MuiDialogTitle = withStyles(styles)((props: DialogTitleProps) => {
-  const { children, classes, onClose, ...other } = props;
+  const { children, classes, onClose, ...other } = props
   return (
     <DialogTitle disableTypography className={classes.root} {...other}>
       <Typography variant="h6">{children}</Typography>
@@ -109,7 +114,13 @@ const MuiDialogActions = withStyles((theme) => ({
   },
 }))(DialogActions)
 
-export default function CustomizedDialogs({ open, setOpen }:{open:any,setOpen:any}) {
+export default function CustomizedDialogs({
+  open,
+  setOpen,
+}: {
+  open: any
+  setOpen: any
+}) {
   const handleClose = () => {
     setOpen(false)
   }
@@ -155,7 +166,7 @@ export default function CustomizedDialogs({ open, setOpen }:{open:any,setOpen:an
                     id="input-with-icon-textfield"
                     label="ชื่อรายวิชา"
                   />
-            
+
                   <TextField
                     fullWidth
                     multiline
@@ -193,7 +204,7 @@ export default function CustomizedDialogs({ open, setOpen }:{open:any,setOpen:an
         </MuiDialogContent>
         <MuiDialogActions>
           <Button color="primary" fullWidth>
-          ส่งข้อมูล
+            ส่งข้อมูล
           </Button>
         </MuiDialogActions>
       </Dialog>

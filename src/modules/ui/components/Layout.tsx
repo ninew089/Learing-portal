@@ -8,26 +8,23 @@ import {
   Grid,
   Typography,
   Hidden,
-  Box,Container,
+  Box,
+  Container,
   Avatar,
 } from '@material-ui/core'
-
 import MenuList from './MenuList'
 import banner from 'assets/images/OCSC-banner.png'
-
 import { NavLink } from 'react-router-dom'
-
 import Routes from './Routes'
-
 import avatar from 'assets/images/user.svg'
-import 'assets/css/bg.css'
+
 const drawerWidth = 240
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'block',
-    background:'#f5f5f5'
-
+    background: '#f5f5f5',
+    width: '100%',
   },
   title: {
     fontWeight: 700,
@@ -36,12 +33,10 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 10,
   },
   appBar: {
- 
-    background: '#0f1626', 
+    background: '#0f1626',
     color: '#f3f3fb',
     backdropFilter: 'blur(6px)',
   },
-
 
   menuButton: {
     marginRight: theme.spacing(2),
@@ -66,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
   content: {
     flexGrow: 1,
     minHeight: ` ${window.screen.height - 180}px`,
-    background:'#f5f5f5'
+    background: '#f5f5f5',
   },
   push: {
     height: '90px',
@@ -106,90 +101,77 @@ const useStyles = makeStyles((theme) => ({
   main: {
     fontWeight: 700,
     fontSize: 16,
-
-
-  },line:{
-    display:'inline-block',
-    borderBottom:'3px solid #f9b122',
-    paddingBottom:'2px'
-  }
-  
+  },
+  line: {
+    display: 'inline-block',
+    borderBottom: '3px solid #f9b122',
+    paddingBottom: '2px',
+  },
 }))
 
 export default function PersistentDrawerLeft(props: any) {
   const classes = useStyles()
 
- 
   return (
     <div className={classes.root}>
       <CssBaseline />
- 
-
-               
-          <AppBar
-            position="fixed"
-            className={clsx(classes.appBar)}
-            elevation={0}
-          >
-            <Toolbar>
-
-         
-                <div className={classes.title}>
-                  <Grid
-                    container
-                    direction="row"
-                    justify="flex-start"
-                    alignItems="center"
-                  >
-                    <NavLink
-                      to="/learning-portal"
-                      style={{ color: 'inherit', textDecoration: 'inherit' }}
-                    >
-                      <img alt="" src={banner} width={140} />
-                    </NavLink>
-
-                    <Hidden smDown>
-                      <Typography variant="h6" noWrap className={classes.title}>
-                        ศูนย์รวมหลักสูตร/รายวิชาที่เรียนรู้ทางสื่ออิเล็กทรอนิกส์
-                      </Typography>
-                    </Hidden>
-                  </Grid>
-                </div>
-         
-     
+      <AppBar position="fixed" className={clsx(classes.appBar)} elevation={0}>
+        <Toolbar>
+          <div className={classes.title}>
+            <Grid
+              container
+              direction="row"
+              justify="flex-start"
+              alignItems="center"
+            >
               <NavLink
-                      to="/learning-portal"
-                      style={{ color: 'inherit', textDecoration: 'inherit' }}
-                    >
-              <div className={classes.line}>
-              <Box className={classes.main}>หน้าหลัก</Box>
-              </div>
+                to="/learning-portal"
+                style={{ color: 'inherit', textDecoration: 'inherit' }}
+              >
+                <img alt="" src={banner} width={140} />
               </NavLink>
-             
-              <Typography
-                style={{
-                  borderRight: '0.1em solid white',
-                  padding: '1em',
-                  marginRight: 10,
-                  paddingLeft: 0,
-                  marginLeft: 0,
-                }}
-              />
-              <Avatar alt="Remy Sharp" src={avatar} />
-              <Hidden xsDown>
-                <Box className={classes.name}>อนุสรา</Box>
+
+              <Hidden smDown>
+                <Typography variant="h6" noWrap className={classes.title}>
+                  ศูนย์รวมหลักสูตร/รายวิชาที่เรียนรู้ทางสื่ออิเล็กทรอนิกส์
+                </Typography>
               </Hidden>
+            </Grid>
+          </div>
 
-              <MenuList />
-            </Toolbar>
-          </AppBar>
+          <NavLink
+            to="/learning-portal"
+            style={{ color: 'inherit', textDecoration: 'inherit' }}
+          >
+            <div className={classes.line}>
+              <Box className={classes.main}>หน้าหลัก</Box>
+            </div>
+          </NavLink>
 
-        <Grid className={clsx(classes.content)}>
-          <Toolbar />
-          <Routes />
-        </Grid>
-        <div className={classes.push} />
-        <Box p={3} className={classes.footer}>
+          <Typography
+            style={{
+              borderRight: '0.1em solid white',
+              padding: '1em',
+              marginRight: 10,
+              paddingLeft: 0,
+              marginLeft: 0,
+            }}
+          />
+          <Avatar alt="Remy Sharp" src={avatar} />
+          <Hidden xsDown>
+            <Box className={classes.name}>อนุสรา</Box>
+          </Hidden>
+
+          <MenuList />
+        </Toolbar>
+      </AppBar>
+
+      <Grid className={clsx(classes.content)}>
+        <Toolbar />
+        <Routes />
+      </Grid>
+      <div className={classes.push} />
+      <Box p={3} className={classes.footer}>
         <Container>
           <Typography
             variant="button"
@@ -207,9 +189,8 @@ export default function PersistentDrawerLeft(props: any) {
           >
             Copyright © office of the Civil Service Commission (OCSC) 2020
           </Typography>
-          </Container>
-        </Box>
-
+        </Container>
+      </Box>
     </div>
   )
 }

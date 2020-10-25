@@ -21,8 +21,6 @@ import {
 
 import { BsLink } from 'react-icons/bs'
 
-
-
 const styles = (theme: Theme) =>
   createStyles({
     root: {
@@ -101,9 +99,7 @@ export default function CustomizedDialogs({
         </MuiDialogTitle>
         <MuiDialogContent dividers>
           <Grid container dir="row">
-            <Grid item xs={12}>
-  
-            </Grid>
+            <Grid item xs={12}></Grid>
           </Grid>
           <h3>เป้าหมายการเรียนรู้</h3>
 

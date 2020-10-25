@@ -1,5 +1,5 @@
-import React,{useState} from 'react'
-import { Avatar, Grid, Box, Divider,Button } from '@material-ui/core'
+import React, { useState } from 'react'
+import { Avatar, Grid, Box, Divider, Button } from '@material-ui/core'
 import { Row, Item } from '@mui-treasury/components/flex'
 import { Info, InfoCaption } from '@mui-treasury/components/info'
 import Rating from './Rating'
@@ -66,15 +66,16 @@ const useStyles = makeStyles((theme) => ({
     color: '#A9A9A9',
   },
   rating: {
-    paddingTop:8,
+    paddingTop: 8,
     fontSize: 10,
     maxWidth: 240,
-    marginBottom: 4, marginTop: 4,
-
-  },int:{
-    paddingTop:8,
-    paddingBottom:4
-  }
+    marginBottom: 4,
+    marginTop: 4,
+  },
+  int: {
+    paddingTop: 8,
+    paddingBottom: 4,
+  },
 }))
 export default function PopularListItemDemo(props: any) {
   const classes = useStyles()
@@ -125,16 +126,13 @@ export default function PopularListItemDemo(props: any) {
             <AiFillEye size={6} /> {numberFormat(view)}
           </InfoCaption>
 
-        
           <Button
-                color="primary"
-                href="/learning-portal/catalog/12321"
-                style={{ padding: 0,float:'right' }}
-                
-              >
-                <BsLink size={16} />
-              </Button>
-      
+            color="primary"
+            href="/learning-portal/catalog/12321"
+            style={{ padding: 0, float: 'right' }}
+          >
+            <BsLink size={16} />
+          </Button>
         </Info>
       </Row>
       <Divider />

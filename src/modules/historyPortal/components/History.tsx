@@ -235,7 +235,6 @@ export default function MaterialTableDemo(props: any) {
 
           { title: ' หน่วยงานที่ให้ประกาศนียบัตร', field: 'complete' },
         ]}
-  
         data={data_course}
         detailPanel={(rowData) => {
           return (

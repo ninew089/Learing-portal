@@ -3,13 +3,9 @@ import React from 'react'
 import NoSsr from '@material-ui/core/NoSsr'
 import GoogleFontLoader from 'react-google-font-loader'
 import TopCourse from './TopCourse'
-import {  Grid } from '@material-ui/core'
+import { Grid } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { Column, Row, Item } from '@mui-treasury/components/flex'
-
-
-
-
 
 const useStyles = makeStyles(() => ({
   card: {

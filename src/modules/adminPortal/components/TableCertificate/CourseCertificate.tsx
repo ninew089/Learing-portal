@@ -20,7 +20,7 @@ import {
   ViewColumn,
 } from '@material-ui/icons'
 
-export default function MaterialTableDemo(props:any) {
+export default function MaterialTableDemo(props: any) {
   const tableIcons = {
     Add: forwardRef<SVGSVGElement>((props: any, ref: any) => (
       <AddBox {...props} ref={ref} />

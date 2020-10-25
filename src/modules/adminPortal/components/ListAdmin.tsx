@@ -53,7 +53,10 @@ export default function PersistentDrawerLeft() {
             <ListItemText primary={'หน้าหลัก'} />
           </ListItem>
         </NavLink>
-        <NavLink to="/learning-portal/admins/main/course" className={classes.nav}>
+        <NavLink
+          to="/learning-portal/admins/main/course"
+          className={classes.nav}
+        >
           <ListItem button key={'รายวิชา'}>
             <ListItemIcon>
               <AiOutlineFolderOpen size={24} />
@@ -61,7 +64,10 @@ export default function PersistentDrawerLeft() {
             <ListItemText primary={'รายวิชา'} />
           </ListItem>
         </NavLink>
-        <NavLink to="/learning-portal/admins/main/curriculm" className={classes.nav}>
+        <NavLink
+          to="/learning-portal/admins/main/curriculm"
+          className={classes.nav}
+        >
           <ListItem button key={'หลักสูตร'}>
             <ListItemIcon>
               <AiOutlineFolderOpen size={24} />
@@ -69,7 +75,10 @@ export default function PersistentDrawerLeft() {
             <ListItemText primary={'หลักสูตร'} />
           </ListItem>
         </NavLink>
-        <NavLink to="/learning-portal/admins/main/subcurriculum" className={classes.nav}>
+        <NavLink
+          to="/learning-portal/admins/main/subcurriculum"
+          className={classes.nav}
+        >
           <ListItem button>
             <ListItemIcon>
               <AiOutlineFolderOpen size={24} />
@@ -77,7 +86,10 @@ export default function PersistentDrawerLeft() {
             <ListItemText primary={'รายวิชาในหลักสูตร'} />
           </ListItem>
         </NavLink>
-        <NavLink to="/learning-portal/admins/main/progress" className={classes.nav}>
+        <NavLink
+          to="/learning-portal/admins/main/progress"
+          className={classes.nav}
+        >
           <ListItem button key={'ความก้าวหน้า'}>
             <ListItemIcon>
               <AiOutlineFolderOpen size={24} />
@@ -86,7 +98,10 @@ export default function PersistentDrawerLeft() {
           </ListItem>
         </NavLink>
 
-        <NavLink to="/learning-portal/admins/main/coursecertificate" className={classes.nav}>
+        <NavLink
+          to="/learning-portal/admins/main/coursecertificate"
+          className={classes.nav}
+        >
           <ListItem button key={'person'}>
             <ListItemIcon>
               <AiOutlineFolderOpen size={24} />
@@ -97,7 +112,10 @@ export default function PersistentDrawerLeft() {
 
         <Divider />
 
-        <NavLink to="/learning-portal/admins/main/person" className={classes.nav}>
+        <NavLink
+          to="/learning-portal/admins/main/person"
+          className={classes.nav}
+        >
           <ListItem button key={'person'}>
             <ListItemIcon>
               <AiOutlineUserAdd size={24} />
@@ -105,7 +123,10 @@ export default function PersistentDrawerLeft() {
             <ListItemText primary={'แก้ไขข้อมูลส่วนบุคคล'} />
           </ListItem>
         </NavLink>
-        <NavLink to="/learning-portal/admins/main/reset" className={classes.nav}>
+        <NavLink
+          to="/learning-portal/admins/main/reset"
+          className={classes.nav}
+        >
           <ListItem button key={'เปลี่ยนรหัสผ่าน'}>
             <ListItemIcon>
               <CgPassword size={24} />

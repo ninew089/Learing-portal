@@ -7,10 +7,8 @@ import Facebook from 'modules/facebook/components/FaceBook'
 import { SocialCardDemo } from './CardRecomment'
 import CourseDetail from './CourseDetails-v2'
 import GroupSearch from './GroupSearch'
-
 import TapsCourse from './TapsCourse'
 export default function Course() {
-
   //const [search, setSearch] = React.useState('')
   const fixedOptions: any[] = []
   const [value, setValue] = React.useState([...fixedOptions])
@@ -19,11 +17,15 @@ export default function Course() {
     <div>
       <Relation />
 
-      <Box
-        p={2}
-      >
-        <Container maxWidth='lg'>
-          <Grid container direction="row" justify="center" alignItems="center" spacing={2}>
+      <Box p={2}>
+        <Container maxWidth="lg">
+          <Grid
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
+            spacing={2}
+          >
             <GroupSearch
               value={value}
               fixedOptions={fixedOptions}
@@ -84,34 +86,17 @@ export default function Course() {
             <Grid item xs={12} sm={6} md={6} lg={6}>
               <SocialCardDemo title={'รายการแนะนำ'} />
             </Grid>
-          
+
             <Grid item xs={12} sm={12} md={12} lg={12}>
-            <TapsCourse/>
+              <TapsCourse />
             </Grid>
-         
-        
-  
-          
-     
+
             <CourseList title={'หลักสูตร'} name={''} type={2} />
-      
-       
-          
- 
- <Facebook />
 
-
-
+            <Facebook />
           </Grid>
-     
-            
-
-         
-          
-     
         </Container>
       </Box>
-  
     </div>
   )
 }

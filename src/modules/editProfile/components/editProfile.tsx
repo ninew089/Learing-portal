@@ -2,7 +2,6 @@ import React from 'react'
 
 import Avatar from '@material-ui/core/Avatar'
 
-
 import {
   Container,
   Button,
@@ -10,7 +9,6 @@ import {
   Grid,
   Divider,
   Box,
-
 } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import profilepicture from 'assets/images/user.svg'
@@ -22,12 +20,20 @@ import * as yup from 'yup'
 const useStyles = makeStyles((theme) => ({
   paper: {
     background: 'white',
-    borderRadius: ' 0px 0px 10px 10px',
+    borderRadius: '10px',
     padding: '24px',
+    marginTop: 40,
   },
   submit: {
     marginTop: '10px',
-    background: 'lavender',
+    borderRadius: 20,
+    padding: 10,
+    background: '#ff533d',
+    color: '#fdfdfd',
+    '&:hover': {
+      background: '#ff533d',
+      color: '#fdfdfd',
+    },
   },
   large: {
     align: 'center',
@@ -58,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignIn() {
   const classes = useStyles()
-
+  const [types, setType] = React.useState<string>('')
   const accountForm = useForm({
     mode: 'onChange',
     validationSchema: yup.object().shape({
@@ -77,6 +83,7 @@ export default function SignIn() {
 
       jobtypeId: yup.string().when('type', {
         is: (type) => {
+          setType(type)
           switch (type) {
             case 'ข้าราชการพลเรือน':
               return true
@@ -104,7 +111,7 @@ export default function SignIn() {
               return true
             case 'บุคคลทั่วไป':
               return true
-       
+
             case 'พนักงานรัฐวิสาหกิจ':
               return true
           }
@@ -286,14 +293,8 @@ export default function SignIn() {
 
   return (
     <>
-      <Container maxWidth="md">
-        <Grid
-          container
-          direction="row"
-          justify="center"
-          alignItems="center"
-          className={classes.paper}
-        >
+      <Container component="main" maxWidth="sm" className={classes.paper}>
+        <Grid container direction="row" justify="center" alignItems="center">
           <Box fontWeight="fontWeightBold" fontSize={24} textAlign="center">
             {' '}
             โปรไฟล์
@@ -318,7 +319,7 @@ export default function SignIn() {
 
           <Divider variant="middle" />
 
-          <Grid item md={12}>
+          <Grid item xs={12} sm={12}>
             <form
               className={classes.form}
               onSubmit={accountForm.handleSubmit(onSubmitData)}

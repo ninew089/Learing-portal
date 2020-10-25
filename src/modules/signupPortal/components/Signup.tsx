@@ -2,7 +2,6 @@ import React from 'react'
 
 import { Container, Button } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-
 import Account from './Account'
 import Information from './Information'
 import TypeSelect from './TypeSelect'
@@ -12,18 +11,27 @@ import * as yup from 'yup'
 const useStyles = makeStyles((theme) => ({
   paper: {
     background: 'white',
-    borderRadius: ' 0px 0px 10px 10px',
+    borderRadius: ' 10px',
     padding: '10px',
+    marginTop: theme.spacing(4),
   },
   submit: {
     marginTop: '10px',
-    background: 'lavender',
+    borderRadius: 20,
+    padding: 10,
+    background: '#ff533d',
+    color: '#fdfdfd',
+    '&:hover': {
+      background: '#ff533d',
+      color: '#fdfdfd',
+    },
   },
 }))
 
 export default function SignIn() {
   const classes = useStyles()
-
+  // eslint-disable-next-line
+  const [type, setType] = React.useState<string>('')
   const accountForm = useForm({
     mode: 'onChange',
     validationSchema: yup.object().shape({
@@ -68,6 +76,7 @@ export default function SignIn() {
 
       jobtypeId: yup.string().when('type', {
         is: (type) => {
+          setType(type)
           switch (type) {
             case 'ข้าราชการพลเรือน':
               return true
@@ -123,7 +132,6 @@ export default function SignIn() {
 
       jobLevel: yup.string().when('type', {
         is: (type) => {
-          console.log(type)
           switch (type) {
             case 'ข้าราชการพลเรือน':
               return false

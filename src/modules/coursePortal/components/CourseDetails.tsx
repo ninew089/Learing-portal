@@ -176,14 +176,13 @@ export default function RecipeReviewCard(props: any) {
             alignItems="center"
           >
             <Grid item xs={9}>
-              <Rating vote={vote}     point={point}  />
+              <Rating vote={vote} point={point} />
             </Grid>
             <Grid item xs={3}>
               <Button
                 color="primary"
                 href="/learning-portal/catalog/12321"
                 style={{ padding: 0 }}
-                
               >
                 <BsLink size={24} />
               </Button>

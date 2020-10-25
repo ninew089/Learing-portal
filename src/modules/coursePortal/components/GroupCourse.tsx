@@ -9,7 +9,6 @@ import img3 from 'assets/logo/logo3.png'
 import img4 from 'assets/logo/logo4.png'
 import Listitems from './Listitems'
 
-
 export default function SingleLineGridList(props: any) {
   interface ParamTypes {
     id: string
@@ -134,56 +133,51 @@ export default function SingleLineGridList(props: any) {
   }, [])
 
   return (
-    <Box
-    
-
-      p={2}
-
-      
-    >
-
-  
-   
-          <div>
-            <Grid container direction="row" alignItems="center">
-              <Grid item xs={7}>
-                <h2>{id}</h2>
-              </Grid>
-            </Grid>
-            <Divider style={{ marginBottom: 20 }} />
-            <Hidden smUp>
+    <Box p={2}>
+      <div>
+        <Grid container direction="row" alignItems="center">
+          <Grid item xs={7}>
+            <h2>{id}</h2>
+          </Grid>
+        </Grid>
+        <Divider style={{ marginBottom: 20 }} />
+        <Hidden smUp>
+          {tileData.map((tile) => (
+            <Listitems
+              data={tile.title}
+              logo={tile.logo}
+              int={tile.int}
+              view={tile.view}
+              point={tile.point}
+              vote={tile.vote}
+            />
+          ))}
+        </Hidden>
+        <Hidden xsDown>
+          <Container maxWidth="lg">
+            <Grid
+              container
+              direction="row"
+              alignItems="center"
+              justify="center"
+              spacing={3}
+            >
               {tileData.map((tile) => (
-                <Listitems
-                  data={tile.title}
-                  logo={tile.logo}
-                  int={tile.int}
-                  view={tile.view}
-                  point={tile.point}
-                  vote={tile.vote}
-                />
-              ))}
-            </Hidden>
-            <Hidden xsDown>
-              <Container maxWidth="lg">
-                <Grid container direction="row" alignItems="center" justify='center'spacing={3}>
-                  {tileData.map((tile) => (
-                   <Grid item xs={12} sm={6} md={4} lg={3} xl={3} >
-         
-                      <Course2
-                        data={tile.title}
-                        logo={tile.logo}
-                        int={tile.int}
-                        view={tile.view}
-                        point={tile.point}
-                        vote={tile.vote}
-                      />
-                    </Grid>
-                  ))}
+                <Grid item xs={12} sm={6} md={4} lg={3} xl={3}>
+                  <Course2
+                    data={tile.title}
+                    logo={tile.logo}
+                    int={tile.int}
+                    view={tile.view}
+                    point={tile.point}
+                    vote={tile.vote}
+                  />
                 </Grid>
-              </Container>
-            </Hidden>
-          </div>
- 
+              ))}
+            </Grid>
+          </Container>
+        </Hidden>
+      </div>
     </Box>
   )
 }

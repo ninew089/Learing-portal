@@ -27,7 +27,7 @@ export default function componentName() {
         <Route path="/learning-portal/login">
           <LoginRoutes />
         </Route>
-        <Route path="/learning-portal/sign">
+        <Route path="/learning-portal/signup">
           <SignupRoutes />
         </Route>
         <Route path="/learning-portal/history">
@@ -36,7 +36,7 @@ export default function componentName() {
         <Route path="/learning-portal/reset">
           <ResetRoutes />
         </Route>
-     
+
         <Route path="/learning-portal/course">
           <CourseRoutes></CourseRoutes>
         </Route>

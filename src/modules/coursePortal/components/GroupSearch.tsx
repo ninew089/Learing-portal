@@ -6,6 +6,24 @@ import img from 'assets/logo/logo1.jpg'
 import img2 from 'assets/logo/logo2.png'
 import img3 from 'assets/logo/logo3.png'
 import img4 from 'assets/logo/logo4.png'
+import { makeStyles } from '@material-ui/core/styles'
+
+const useStyles = makeStyles((theme) => ({
+  inputRoot: {
+    color: '#132740',
+    fontWeight: 700,
+    '& .MuiOutlinedInput-notchedOutline': {
+      borderColor: '#f9b122',
+      borderWidth: '2px',
+    },
+    '&:hover .MuiOutlinedInput-notchedOutline': {
+      borderColor: '#92b6f9',
+    },
+    '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+      borderColor: '#92b6f9',
+    },
+  },
+}))
 export default function FixedTags({
   fixedOptions,
   value,
@@ -15,9 +33,11 @@ export default function FixedTags({
   value: any
   setValue: any
 }) {
+  const classes = useStyles()
   return (
     <>
       <Autocomplete
+        classes={classes}
         multiple
         id="fixed-tags-demo"
         value={value}

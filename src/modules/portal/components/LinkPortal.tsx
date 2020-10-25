@@ -23,12 +23,12 @@ const useStyles = makeStyles((theme) => ({
 export default function VariantAvatars() {
   const classes = useStyles()
   const [value, setValue] = React.useState(0)
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(false)
 
   const handleClickOpen = () => {
-    setOpen(true);
-  };
-  const handleChange = (event:any, newValue:any) => {
+    setOpen(true)
+  }
+  const handleChange = (event: any, newValue: any) => {
     setValue(newValue)
   }
   return (
@@ -41,43 +41,101 @@ export default function VariantAvatars() {
           scrollButtons="on"
           TabIndicatorProps={{
             style: {
-              background:'none',
-            }
+              background: 'none',
+            },
           }}
           indicatorColor={undefined}
           textColor="primary"
         >
           <Tab
-            icon={<Avatar alt="Chula" src={img} className={classes.rounded} onClick={handleClickOpen}/>}
+            icon={
+              <Avatar
+                alt="Chula"
+                src={img}
+                className={classes.rounded}
+                onClick={handleClickOpen}
+              />
+            }
           />
           <Tab
             icon={<Avatar className={classes.rounded} src={img2}></Avatar>}
-            onClick={handleClickOpen} />
+            onClick={handleClickOpen}
+          />
           <Tab
             icon={<Avatar src={img3} className={classes.rounded}></Avatar>}
-            onClick={handleClickOpen}/>
+            onClick={handleClickOpen}
+          />
           <Tab
             icon={<Avatar src={img4} className={classes.rounded}></Avatar>}
-            onClick={handleClickOpen} />
-          <Tab  icon={<Avatar className={classes.rounded}>1</Avatar>} onClick={handleClickOpen}/>
-          <Tab icon={<Avatar className={classes.rounded}>2</Avatar>} onClick={handleClickOpen}/>
-          <Tab icon={<Avatar className={classes.rounded}>3</Avatar>} onClick={handleClickOpen}/>
-          <Tab icon={<Avatar className={classes.rounded}>4</Avatar>} onClick={handleClickOpen}/>
-          <Tab icon={<Avatar className={classes.rounded}>5</Avatar>} onClick={handleClickOpen}/>
-          <Tab icon={<Avatar className={classes.rounded}>6</Avatar>} onClick={handleClickOpen}/>
-          <Tab icon={<Avatar className={classes.rounded}>7</Avatar>} onClick={handleClickOpen}/>
-          <Tab icon={<Avatar className={classes.rounded}>8</Avatar>} onClick={handleClickOpen}/>
-          <Tab icon={<Avatar className={classes.rounded}>9</Avatar>} onClick={handleClickOpen}/>
-          <Tab icon={<Avatar className={classes.rounded}>10</Avatar>} onClick={handleClickOpen}/>
-          <Tab icon={<Avatar className={classes.rounded}>11</Avatar>} onClick={handleClickOpen}/>
-          <Tab icon={<Avatar className={classes.rounded}>12</Avatar>} onClick={handleClickOpen}/>
-          <Tab icon={<Avatar className={classes.rounded}>13</Avatar>} onClick={handleClickOpen}/>
-          <Tab icon={<Avatar className={classes.rounded}>14</Avatar>} onClick={handleClickOpen}/>
-          <Tab icon={<Avatar className={classes.rounded}>15</Avatar>} onClick={handleClickOpen}/>
-          <Tab icon={<Avatar className={classes.rounded}>16</Avatar>} onClick={handleClickOpen}/>
+            onClick={handleClickOpen}
+          />
+          <Tab
+            icon={<Avatar className={classes.rounded}>1</Avatar>}
+            onClick={handleClickOpen}
+          />
+          <Tab
+            icon={<Avatar className={classes.rounded}>2</Avatar>}
+            onClick={handleClickOpen}
+          />
+          <Tab
+            icon={<Avatar className={classes.rounded}>3</Avatar>}
+            onClick={handleClickOpen}
+          />
+          <Tab
+            icon={<Avatar className={classes.rounded}>4</Avatar>}
+            onClick={handleClickOpen}
+          />
+          <Tab
+            icon={<Avatar className={classes.rounded}>5</Avatar>}
+            onClick={handleClickOpen}
+          />
+          <Tab
+            icon={<Avatar className={classes.rounded}>6</Avatar>}
+            onClick={handleClickOpen}
+          />
+          <Tab
+            icon={<Avatar className={classes.rounded}>7</Avatar>}
+            onClick={handleClickOpen}
+          />
+          <Tab
+            icon={<Avatar className={classes.rounded}>8</Avatar>}
+            onClick={handleClickOpen}
+          />
+          <Tab
+            icon={<Avatar className={classes.rounded}>9</Avatar>}
+            onClick={handleClickOpen}
+          />
+          <Tab
+            icon={<Avatar className={classes.rounded}>10</Avatar>}
+            onClick={handleClickOpen}
+          />
+          <Tab
+            icon={<Avatar className={classes.rounded}>11</Avatar>}
+            onClick={handleClickOpen}
+          />
+          <Tab
+            icon={<Avatar className={classes.rounded}>12</Avatar>}
+            onClick={handleClickOpen}
+          />
+          <Tab
+            icon={<Avatar className={classes.rounded}>13</Avatar>}
+            onClick={handleClickOpen}
+          />
+          <Tab
+            icon={<Avatar className={classes.rounded}>14</Avatar>}
+            onClick={handleClickOpen}
+          />
+          <Tab
+            icon={<Avatar className={classes.rounded}>15</Avatar>}
+            onClick={handleClickOpen}
+          />
+          <Tab
+            icon={<Avatar className={classes.rounded}>16</Avatar>}
+            onClick={handleClickOpen}
+          />
         </Tabs>
       </div>
-      <Dialog open={open} setOpen={setOpen}/>
+      <Dialog open={open} setOpen={setOpen} />
     </>
   )
 }

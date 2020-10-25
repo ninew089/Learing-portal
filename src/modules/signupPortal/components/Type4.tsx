@@ -1,40 +1,70 @@
 import React from 'react'
 
-import {
-  TextField,
-  InputLabel,
-  MenuItem,
-  FormControl,
-  FormHelperText,
-  Select,
-} from '@material-ui/core'
+import { TextField, MenuItem, FormControl } from '@material-ui/core'
 import { Controller } from 'react-hook-form'
 import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles((theme) => ({
-  formControlInfo: {
-    margin: theme.spacing(2),
-    paddingRight: theme.spacing(4),
+  input: {
+    color: '#0f1626',
+    fontWeight: 600,
+    '& .MuiInputBase-root.MuiOutlineInput-root': {
+      color: '#45A29E',
+      borderColor: '#757575',
+      fontWeight: 600,
+    },
   },
-  font: {
-    color: 'rgba(0, 0, 0, 0.54)',
-    fontWeight: 500,
-    paddingTop: 0,
-    marginTop: 0,
-    paddingBottom: 1,
-    marginBottom: 1,
+  selectInput: {
+    color: '#757575',
+    fontWeight: 600,
+    '& .MuiInputBase-root.MuiOutlineInput-root': {
+      color: '#45A29E',
+      borderColor: '#757575',
+      fontWeight: 600,
+    },
   },
-  marginDate: {
-    margin: theme.spacing(0),
-    paddingLeft: theme.spacing(2),
-    paddingTop: 0,
-    marginTop: 0,
-    paddingBottom: 4,
-    marginBottom: 4,
-  },
-  formControlDate: {
-    margin: theme.spacing(2),
-    paddingRight: theme.spacing(0),
+  textfield: {
+    marginTop: 10,
+    '& .MuiFormHelperText-root.Mui-error ': {
+      color: 'ff533d',
+      fontWeight: 600,
+      borderWidth: '1px',
+    },
+    '& .MuiInput-underline.Mui-error:after': {
+      borderColor: 'ff533d',
+      borderWidth: '1px',
+    },
+    '& label.MuiFormLabel-root': {
+      fontWeight: 600,
+      '&:after .Mui-error': {
+        borderColor: '#ff533d',
+        borderWidth: '1px',
+      },
+    },
+    '& label.Mui-focused': {
+      color: '#132740',
+    },
+    '& .MuiInput-underline:after': {
+      borderBottomColor: '#f9b122',
+    },
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: '#f9b122',
+        borderWidth: '1px',
+      },
+      '&:hover fieldset': {
+        borderColor: '#a8c6ff',
+        borderWidth: '3px',
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: '#a8c6ff',
+        borderWidth: '3px',
+      },
+      '&.Mui-error .MuiOutlinedInput-notchedOutline': {
+        borderColor: '#ff533d',
+        borderWidth: '1px',
+      },
+    },
   },
 }))
 
@@ -45,56 +75,69 @@ export default function SignIn(props: any) {
 
   return (
     <>
-      <FormControl className={classes.formControlInfo} fullWidth>
+      <FormControl fullWidth>
         <h4> บุคคลทั่วไป</h4>
-      </FormControl>
-
-      <FormControl
-        className={classes.formControlInfo}
-        fullWidth
-        error={Boolean(formProps.errors.OccupationId)}
-      >
-        <InputLabel>อาชีพ</InputLabel>
         <Controller
           as={
-            <Select>
+            <TextField
+              variant="outlined"
+              fullWidth
+              className={classes.textfield}
+              label="อาชีพ"
+              InputLabelProps={{
+                className: classes.selectInput,
+              }}
+              select
+              helperText={
+                formProps.errors.OccupationId &&
+                formProps.errors.OccupationId.message
+              }
+              error={!!formProps.errors.OccupationId}
+            >
+              {' '}
               <MenuItem value={'เอกชน'}>เอกชน</MenuItem>
               <MenuItem value={'ประชาชน'}>ประชาชน</MenuItem>
               <MenuItem value={'นิสิต'}>นิสิต</MenuItem>
-            </Select>
+            </TextField>
           }
           name="OccupationId"
           rules={{ required: 'กรุณาเลือกอาชีพ' }}
           control={formProps.control}
           defaultValue=""
         />
-        <FormHelperText>
-          {formProps.errors.OccupationId &&
-            formProps.errors.OccupationId.message}
-        </FormHelperText>
-      </FormControl>
 
-      <FormControl className={classes.formControlInfo} fullWidth>
-        <TextField
-          fullWidth
-          label="ตำแหน่ง"
-          name="jobTitle"
-          inputRef={formProps.register}
-          helperText={
-            formProps.errors.jobTitle && formProps.errors.jobTitle.message
-          }
-          error={!!formProps.errors.jobTitle}
-        />
-        <TextField
-          fullWidth
-          label="ชื่อหน่วยงาน"
-          name="workPlace"
-          inputRef={formProps.register}
-          helperText={
-            formProps.errors.workPlace && formProps.errors.workPlace.message
-          }
-          error={!!formProps.errors.workPlace}
-        />
+        <FormControl fullWidth>
+          <TextField
+            fullWidth
+            label="ตำแหน่ง"
+            name="jobTitle"
+            variant="outlined"
+            className={classes.textfield}
+            InputProps={{
+              className: classes.input,
+            }}
+            inputRef={formProps.register}
+            helperText={
+              formProps.errors.jobTitle && formProps.errors.jobTitle.message
+            }
+            error={!!formProps.errors.jobTitle}
+          />
+          <TextField
+            fullWidth
+            label="ชื่อหน่วยงาน"
+            name="workPlace"
+            inputRef={formProps.register}
+            variant="outlined"
+            className={classes.textfield}
+            InputProps={{
+              className: classes.input,
+            }}
+            helperText={
+              formProps.errors.workPlace && formProps.errors.workPlace.message
+            }
+            error={!!formProps.errors.workPlace}
+          />
+        </FormControl>
       </FormControl>
     </>
   )

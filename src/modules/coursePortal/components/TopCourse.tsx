@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
     display: '-webkit-box',
     textOverflow: 'ellipsis',
     fontSize: 10,
- 
+
     color: '#808080',
     WebkitLineClamp: 3,
     WebkitBoxOrient: 'vertical',

@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import configureStore from 'store/configureStore'
 import './assets/css/fonts/font.css'
+import 'assets/css/bg.css'
 export default function APP() {
   const theme = createMuiTheme({
     typography: {
@@ -26,7 +27,7 @@ export default function APP() {
   const store = configureStore()
 
   return (
-    <div>
+    <div style={{ background: '#f5f5f5' }}>
       <Provider store={store}>
         <Router>
           <Switch>
@@ -37,7 +38,7 @@ export default function APP() {
             </Route>
             <Route exact path="/learning-portal/admins">
               <ThemeProvider theme={theme}>
-                <Admin/>
+                <Admin />
               </ThemeProvider>
             </Route>
             <Route path="/learning-portal">
