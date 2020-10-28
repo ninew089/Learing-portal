@@ -9,8 +9,7 @@ import {
   IconButton,
   Avatar,
 } from '@material-ui/core'
-
-import Courses from './Courses'
+import Courses from './CategoryByTapCourses'
 import {
   createStyles,
   makeStyles,
@@ -72,6 +71,7 @@ export default function PointNavigationMenu() {
   const classes = useStyles()
   const [index, setIndex] = React.useState(0)
   const [open, setOpen] = React.useState(false)
+
   const handleClick = (i: any) => (e: React.SyntheticEvent) => {
     setIndex(i)
   }
@@ -298,7 +298,7 @@ export default function PointNavigationMenu() {
             alignItems="center"
             spacing={2}
           >
-            <Courses id={catagory[index]} />
+            <Courses id={index} />
           </Grid>
         </div>
       </Grid>

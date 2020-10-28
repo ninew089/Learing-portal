@@ -1,22 +1,20 @@
 import React from 'react'
-import {IconButton} from '@material-ui/core'
-import ClickAwayListener from '@material-ui/core/ClickAwayListener'
-import { Grow, Hidden } from '@material-ui/core'
-import Paper from '@material-ui/core/Paper'
-import Popper from '@material-ui/core/Popper'
+import { IconButton } from '@material-ui/core'
+import * as actions from 'modules/loginPortal/actions'
 import MenuItem from '@material-ui/core/MenuItem'
-import MenuList from '@material-ui/core/MenuList'
+
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles'
 import { useHistory } from 'react-router-dom'
-
+//@ts-ignore
+import SwitchToggle from '@mui-treasury/components/toggle/switch'
 import {
-  AiOutlineUp,
-  AiOutlineDown,
   AiOutlineFolderOpen,
   AiOutlineLogout,
   AiOutlineEdit,
 } from 'react-icons/ai'
 import { CgPassword } from 'react-icons/cg'
+import Menu from '@material-ui/core/Menu'
+import { useDispatch } from 'react-redux'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -27,7 +25,7 @@ const useStyles = makeStyles((theme: Theme) =>
       marginRight: theme.spacing(0),
     },
     icon: {
-padding:0,
+      padding: 0,
       color: '#FDFDFD',
     },
     popper: {
@@ -38,11 +36,18 @@ padding:0,
     },
   }),
 )
-
-export default function MenuListComposition() {
+export default function LongMenu() {
   const classes = useStyles()
-  const [open, setOpen] = React.useState(false)
-  const anchorRef = React.useRef<HTMLButtonElement>(null)
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
+  const open = Boolean(anchorEl)
+
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget)
+  }
+
+  const handleClose = () => {
+    setAnchorEl(null)
+  }
   const history = useHistory()
   const path = '/learning-portal'
   const navigatorToeditProfile = () => {
@@ -57,99 +62,52 @@ export default function MenuListComposition() {
   const navigatorTologout = () => {
     history.push(`${path}`)
   }
-  const handleToggle = () => {
-    setOpen((prevOpen) => !prevOpen)
+  const dispatch = useDispatch()
+  const onLogin = (loginInfo: object) => {
+    console.log(loginInfo)
+    const action = actions.setLogin(false)
+    dispatch(action)
+    navigatorTologout()
   }
-
-  const handleClose = (event: React.MouseEvent<EventTarget>) => {
-    if (
-      anchorRef.current &&
-      anchorRef.current.contains(event.target as HTMLElement)
-    ) {
-      return
-    }
-
-    setOpen(false)
-  }
-
-  function handleListKeyDown(event: React.KeyboardEvent) {
-    if (event.key === 'Tab') {
-      event.preventDefault()
-      setOpen(false)
-    }
-  }
-
-  // return focus to the button when we transitioned from !open -> open
-  const prevOpen = React.useRef(open)
-  React.useEffect(() => {
-    if (prevOpen.current === true && open === false) {
-      anchorRef.current!.focus()
-    }
-
-    prevOpen.current = open
-    
-  }, [open])
-
   return (
-    <div className={classes.root}>
-      <div>
-        <IconButton
-          ref={anchorRef}
-          aria-controls={open ? 'menu-list-grow' : undefined}
-          aria-haspopup="true"
-          onClick={handleToggle}
-        >
-          <AiOutlineDown size={16} className={classes.icon} />
-        </IconButton>
-        <Popper
-          open={open}
-          anchorEl={anchorRef.current}
-          role={undefined}
-          transition
-          disablePortal
-          className={classes.popper}
-        >
-          {({ TransitionProps, placement }) => (
-            <Grow
-              {...TransitionProps}
-              style={{
-                transformOrigin:
-                  placement === 'bottom' ? 'center top' : 'center bottom',
-              }}  
-            >
-                 
-              <Paper>
-                <ClickAwayListener onClickAway={handleClose}>
-                  <MenuList autoFocusItem={open} onKeyDown={handleListKeyDown}>
-                    <Hidden smUp>
-                      <MenuItem className={classes.icons}>
-                        อนุสรา จำปาดี 
-                      </MenuItem>
-                    </Hidden>
-
-                    <MenuItem onClick={navigatorToeditProfile}>
-                      <AiOutlineEdit className={classes.icons} />
-                      แก้ไขโปรไฟล์ 
-                    </MenuItem>
-                    <MenuItem onClick={navigatorToreset}>
-                      <CgPassword className={classes.icons} />
-                      เปลี่ยนรหัสผ่าน
-                    </MenuItem>
-                    <MenuItem onClick={navigatorTohistory}>
-                      <AiOutlineFolderOpen className={classes.icons} />
-                      ประกาศนียบัตร
-                    </MenuItem>
-                    <MenuItem onClick={navigatorTologout}>
-                      <AiOutlineLogout className={classes.icons} />
-                      ลงชื่อออก
-                    </MenuItem>
-                  </MenuList>
-                </ClickAwayListener>
-              </Paper>
-            </Grow>
-          )}
-        </Popper>
-      </div>
+    <div>
+      <IconButton
+        aria-label="more"
+        aria-controls={open ? 'menu-list-grow' : undefined}
+        aria-haspopup="true"
+        onClick={handleClick}
+      >
+        <SwitchToggle toggled={open} style={{ color: '#fdfdfd' }} />
+      </IconButton>
+      <Menu
+        id="long-menu"
+        anchorEl={anchorEl}
+        keepMounted
+        open={open}
+        onClose={handleClose}
+        PaperProps={{
+          style: {
+            marginTop: '2.8rem',
+          },
+        }}
+      >
+        <MenuItem onClick={navigatorToeditProfile}>
+          <AiOutlineEdit className={classes.icons} />
+          แก้ไขโปรไฟล์
+        </MenuItem>
+        <MenuItem onClick={navigatorToreset}>
+          <CgPassword className={classes.icons} />
+          เปลี่ยนรหัสผ่าน
+        </MenuItem>
+        <MenuItem onClick={navigatorTohistory}>
+          <AiOutlineFolderOpen className={classes.icons} />
+          ประกาศนียบัตร
+        </MenuItem>
+        <MenuItem onClick={onLogin}>
+          <AiOutlineLogout className={classes.icons} />
+          ลงชื่อออก
+        </MenuItem>
+      </Menu>
     </div>
   )
 }

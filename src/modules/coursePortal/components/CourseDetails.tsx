@@ -1,103 +1,80 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-
-import { BsLink } from 'react-icons/bs'
 import {
-  Card,
-  CardActionArea,
-  Button,
-  Avatar,
-  CardContent,
-  CardHeader,
   Typography,
   Grid,
+  Avatar,
   Box,
   Divider,
+  Button,
 } from '@material-ui/core'
-
-import Dialog from './Dialog'
-import Rating from './Rating'
-
+// /import { useHistory } from 'react-router-dom'
+import img from 'assets/images/11.jpg'
 import numberFormat from 'utils/numberFormat'
-import { AiFillEye } from 'react-icons/ai'
+import { BsLink } from 'react-icons/bs'
+import Rating from './Rating'
+import Dialog from './DialogCourse'
 
-import img from 'assets/images/01.jpg'
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    borderRadius: 14,
-    marginLeft: 8,
-    maxWidth: 224,
-    [theme.breakpoints.only('xs')]: {
-      '&:hover': {
-        transform: 'scale(1.01)',
-      },
-    },
-    height: 320,
+const useStyles = makeStyles(() => ({
+  card: {
+    width: '100%',
+    background: '#fdfdfd',
+    height: 400,
+    boxShadow: '4px 4px 4px 4px rgb(0 0 0 / 8%)',
+    borderRadius: '0.5rem',
+    transition: '0.4s',
     '&:hover': {
-      transform: 'scale(1.03)',
+      transform: 'translateY(-4px)',
     },
-    background: '#fafafa',
+  },
+  main: {
+    overflow: 'hidden',
+    borderTopLeftRadius: '0.5rem',
+    borderTopRightRadius: '0.5rem',
+    zIndex: 1,
   },
 
-  expand: {
-    transform: 'rotate(0deg)',
-    marginLeft: 'auto',
-    transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest,
-    }),
-  },
-  expandOpen: {
-    transform: 'rotate(180deg)',
-  },
   avatar: {
-    [theme.breakpoints.only('xs')]: {
-      width: 36,
-      height: 36,
-    },
+    width: 48,
+    height: 48,
   },
-  action: {
-    flexGrow: 2,
+  tag: {
+    display: 'inline-block',
+    fontFamily: "'Sen', sans-serif",
+    backgroundColor: '#ff5dac',
+    borderRadius: '0.5rem',
+    padding: '2px 0.5rem',
+    color: '#fff',
+    marginBottom: '0.5rem',
   },
-  content: {
-    margin: 0,
-    paddingTop: 4,
-    paddingBottom: 4,
-    paddingLeft: 16,
-    paddingRight: 16,
-  },
-  grid: {
-    margin: 0,
-    padding: 0,
-  },
-  cardHeader: {
+  title: {
+    overflow: 'hidden',
     textOverflow: 'ellipsis',
     whiteSpace: 'nowrap',
+    WebkitLineClamp: 1,
+    WebkitBoxOrient: 'vertical',
+    fontSize: '1.2rem',
+    fontWeight: 700,
+    color: '#132740',
+    paddingLeft: 8,
+    marginRight: 8,
+  },
+  author: {
     overflow: 'hidden',
-
-    maxWidth: 140,
-  },
-  icon: {
-    marginRight: '2px',
-    color: theme.palette.text.secondary,
-  },
-  header: {
-    margin: 2,
+    display: '-webkit-box',
+    textOverflow: 'ellipsis',
+    WebkitLineClamp: 1,
+    WebkitBoxOrient: 'vertical',
+    fontSize: '14px',
+    fontWeight: 700,
+    color: '#132740',
     padding: 8,
   },
-  cardHeaderText: {
-    textOverflow: 'ellipsis',
-    whiteSpace: 'nowrap',
-    overflow: 'hidden',
-    fontWeight: 700,
-    maxWidth: 140,
+  box: {
+    padding: 8,
   },
-  cardHeaderSecondaryText: {
-    textOverflow: 'ellipsis',
-    whiteSpace: 'nowrap',
-    overflow: 'hidden',
-    fontWeight: 500,
-    maxWidth: 140,
+  view: {
+    marginRight: 10,
   },
   dot: {
     height: '10px',
@@ -108,104 +85,97 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 10,
     marginRight: 4,
   },
+  rating: {
+    paddingLeft: 8,
+  },
+  logo: {
+    margin: 8,
+  },
+  caption: {
+    overflow: 'hidden',
+    display: '-webkit-box',
+    textOverflow: 'ellipsis',
+    WebkitLineClamp: 3,
+    WebkitBoxOrient: 'vertical',
+    fontSize: '10px',
+    color: '#434a54',
+    paddingLeft: 14,
+    paddingRight: 14,
+  },
 }))
 
-export default function RecipeReviewCard(props: any) {
+export default function IconBreadcrumbs(props: any) {
   const { data, logo, int, view, point, vote } = props
   const classes = useStyles()
-  const [open, setOpen] = useState(false)
-
+  //const history = useHistory()
+  const [open, setOpen] = React.useState<boolean>(false)
   const handleClickOpen = () => {
     setOpen(true)
   }
-
   return (
-    <div>
-      <Card className={classes.root}>
-        <CardActionArea onClick={handleClickOpen}>
-          <img alt="" src={img} width="100%" height="160px" />
-          <CardHeader
-            className={classes.header}
-            avatar={
-              <Avatar aria-label="recipe" src={logo} className={classes.avatar}>
-                R
-              </Avatar>
-            }
-            title={
-              <Typography
-                variant={'subtitle2'}
-                className={classes.cardHeaderText}
-                noWrap
-                gutterBottom
-              >
-                {data}
-              </Typography>
-            }
-            subheader={
-              <Typography
-                variant={'body2'}
-                noWrap
-                className={classes.cardHeaderSecondaryText}
-              >
-                {int}
-              </Typography>
-            }
-          />
-          <Grid
-            container
-            direction="row"
-            justify="flex-start"
-            alignItems="center"
-          >
-            <Grid item>
-              <div className={classes.dot} />
-            </Grid>
-            <Grid item>
-              <Box fontWeight={700}>สังคมศาสตร์</Box>
-            </Grid>
-          </Grid>
+    <div className={classes.card}>
+      <Grid container direction="row" justify="flex-start" alignItems="center">
+        <div className={classes.main} onClick={handleClickOpen}>
+          <img alt="" src={img} width="100%" height="200px" />
+        </div>
 
-          <Divider variant="middle" />
-        </CardActionArea>
-        <CardContent className={classes.content}>
-          <Grid
-            container
-            className={classes.grid}
-            direction="row"
-            justify="space-between"
-            alignItems="center"
-          >
-            <Grid item xs={9}>
-              <Rating vote={vote} point={point} />
-            </Grid>
-            <Grid item xs={3}>
-              <Button
-                color="primary"
-                href="/learning-portal/catalog/12321"
-                style={{ padding: 0 }}
-              >
-                <BsLink size={24} />
-              </Button>
-            </Grid>
-          </Grid>
+        <Typography variant={'h2'} className={classes.title}>
+          {data}
+        </Typography>
+
+        <Grid
+          container
+          direction="row"
+          justify="flex-start"
+          alignItems="center"
+        >
+          <div className={classes.dot} />
+          <Box fontWeight={500}>สังคมศาสตร์</Box>
+
+          <div>
+            <Box fontWeight={400} className={classes.caption}>
+              &nbsp;&nbsp;&nbsp;เรียนรู้ที่จะพูดภาษาอังกฤษกับหลักสูตรที่พิสูจน์แล้วว่าได้ผล
+              เรียนที่ไหน เมื่อไหร่ก็ได้ ได้เรียนภาษาอังกฤษกับอ.ผู้เชียวชาญ
+              พร้อมที่ปรึกษาส่วนตัว และเรายังการันตีผลลัพท์ที่ได้ Native level
+              Teachers Engaging TV series Small Classes
+            </Box>
+          </div>
+        </Grid>
+
+        <div className={classes.logo}>
+          <Avatar className={classes.avatar} src={logo} />
+        </div>
+        <div>
+          <div className={classes.author}>{int}</div>
+          <div className={classes.rating}>
+            <Rating vote={vote} point={point} />
+          </div>
           <Grid
             container
             direction="row"
             justify="flex-start"
-            alignItems="center"
+            alignItems="flex-start"
+            className={classes.box}
           >
-            <AiFillEye size={12} className={classes.icon} />
             <Typography
               variant="caption"
               align="left"
               component="p"
               color={'textSecondary'}
             >
-              {numberFormat(view)} ครั้ง
+              การดู {numberFormat(view)} ครั้ง
             </Typography>
           </Grid>
-        </CardContent>
-      </Card>
+        </div>
+      </Grid>
+      <Divider />
+      <Button
+        color="primary"
+        href="/learning-portal/catalog/12321"
+        style={{ padding: 0, float: 'right', margin: 4 }}
+      >
+        <BsLink size={24} />
+      </Button>
       <Dialog open={open} setOpen={setOpen} />
     </div>
   )

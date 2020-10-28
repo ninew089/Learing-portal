@@ -1,5 +1,5 @@
 import React from 'react'
-
+import Snackbar from './Snackbar'
 import { Container, Button } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import Account from './Account'
@@ -280,7 +280,9 @@ export default function SignIn() {
 
   const onSubmitData = (data: any) => {
     console.log(data)
+    setOpen(true)
   }
+  const [open, setOpen] = React.useState(false)
 
   return (
     <>
@@ -293,6 +295,7 @@ export default function SignIn() {
             <Button type="submit" fullWidth className={classes.submit}>
               ส่งข้อมูล
             </Button>
+            <Snackbar open={open} setOpen={setOpen} />
           </Container>
         </Container>
       </form>

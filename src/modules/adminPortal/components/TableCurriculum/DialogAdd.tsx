@@ -23,6 +23,7 @@ import {
   Dialog,
   Button,
 } from '@material-ui/core'
+import { openProps } from './tyscript'
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -79,7 +80,6 @@ const useStyles = makeStyles((theme: Theme) =>
 export interface DialogTitleProps extends WithStyles<typeof styles> {
   id: string
   children: React.ReactNode
-
   onClose: () => void
 }
 
@@ -114,13 +114,8 @@ const MuiDialogActions = withStyles((theme) => ({
   },
 }))(DialogActions)
 
-export default function CustomizedDialogs({
-  open,
-  setOpen,
-}: {
-  open: any
-  setOpen: any
-}) {
+export default function CustomizedDialogs({ open, setOpen }: openProps) {
+  console.log(typeof setOpen)
   const handleClose = () => {
     setOpen(false)
   }

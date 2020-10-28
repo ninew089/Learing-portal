@@ -1,5 +1,5 @@
 import React from 'react'
-import Course2 from './CourseDetails-v2'
+import Course2 from './CourseDetails'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 import {
   GridList,
@@ -11,7 +11,7 @@ import {
   Divider,
   Typography,
 } from '@material-ui/core'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useRouteMatch } from 'react-router-dom'
 import LoadingBar from 'react-top-loading-bar'
 
 import Course from './CourseDetails'
@@ -356,9 +356,13 @@ export default function SingleLineGridList(props: any) {
     }
   }
   const history = useHistory()
+  const { path } = useRouteMatch()
+  const filterCoursebyCategory = (title: string) => {
+    history.push(`${path}/course?category=${title}`)
+  }
   const Next = () => {
     setProgress(100)
-    setTimeout(() => history.push(`/learning-portal/course/${title}`), 1000)
+    setTimeout(() => filterCoursebyCategory(title), 1000)
   }
   return (
     <>

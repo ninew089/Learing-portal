@@ -64,6 +64,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignIn() {
   const classes = useStyles()
+  // eslint-disable-next-line
   const [types, setType] = React.useState<string>('')
   const accountForm = useForm({
     mode: 'onChange',

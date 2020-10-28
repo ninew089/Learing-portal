@@ -2,8 +2,8 @@ import React from 'react'
 import Course from './Course'
 
 import { Route, Switch } from 'react-router-dom'
+import GroupCourse from './CategoryByCourse'
 import Page404 from 'modules/404page/component/404'
-import GroupCourse from './GroupCourse'
 
 export default function Routes() {
   return (
@@ -13,7 +13,7 @@ export default function Routes() {
           <GroupCourse />
         </Route>
         <Route path="/learning-portal/course">
-          <Course />
+          <GroupCourse />
         </Route>
         <Route exact path="/learning-portal">
           <Course />

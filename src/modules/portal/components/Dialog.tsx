@@ -24,20 +24,20 @@ export default function AlertDialog(props: any) {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {"Use Google's location service?"}
+          {'กำลังเข้าสู่ www.example.com ?'}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Let Google help apps determine location. This means sending
-            anonymous location data to Google, even when no apps are running.
+            คุณกำลังเข้าสู่ เว็บ example.com หากต้องการเข้าสู่เว็บไซต์นี้กดตกลง
+            หากไม่ต้องการกดกลับ
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
-            Disagree
+            กลับ
           </Button>
           <Button onClick={handleAgree} color="primary" autoFocus>
-            Agree
+            ตกลง
           </Button>
         </DialogActions>
       </Dialog>

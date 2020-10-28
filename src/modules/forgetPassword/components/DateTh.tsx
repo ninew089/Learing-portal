@@ -86,7 +86,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 function DateFnsLocalizationExample(props: any) {
-  const { title, register, name } = props
+  const { title, register, name, errors } = props
   var date = new Date()
   const [selectedDate, handleDateChange] = useState(date)
 

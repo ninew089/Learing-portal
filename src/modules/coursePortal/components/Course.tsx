@@ -5,7 +5,7 @@ import Portal from 'modules/portal/components/LinkPortal'
 import Relation from 'modules/relationPortal/components/Relation'
 import Facebook from 'modules/facebook/components/FaceBook'
 import { SocialCardDemo } from './CardRecomment'
-import CourseDetail from './CourseDetails-v2'
+import CourseDetail from './CourseDetails'
 import GroupSearch from './GroupSearch'
 import TapsCourse from './TapsCourse'
 export default function Course() {
@@ -37,7 +37,28 @@ export default function Course() {
           </Grid>
           <Grid container direction="row" justify="center" alignItems="center">
             {value.length === 0 ? (
-              ''
+              <Grid
+                container
+                direction="row"
+                justify="flex-start"
+                alignItems="flex-start"
+                spacing={3}
+              >
+                <Grid item xs={12} sm={6} md={6} lg={6}>
+                  <SocialCardDemo title={'อันดับยอดฮิต'} />
+                </Grid>
+                <Grid item xs={12} sm={6} md={6} lg={6}>
+                  <SocialCardDemo title={'รายการแนะนำ'} />
+                </Grid>
+
+                <Grid item xs={12} sm={12} md={12} lg={12}>
+                  <TapsCourse />
+                </Grid>
+
+                <CourseList title={'หลักสูตร'} name={''} type={2} />
+
+                <Facebook />
+              </Grid>
             ) : (
               <Grid
                 container
@@ -48,52 +69,20 @@ export default function Course() {
                 <h2>ผลการค้นหา</h2>
               </Grid>
             )}
-
-            {value.map((number: number, i: number) => (
-              <Grid
-                container
-                justify="center"
-                alignItems="center"
-                xs={12}
-                sm={6}
-                md={3}
-                lg={3}
-                style={{ margin: 4 }}
-              >
-                <CourseDetail
-                  data={value[i].title}
-                  logo={value[i].logo}
-                  int={value[i].int}
-                  view={value[i].view}
-                  point={value[i].point}
-                  vote={value[i].vote}
-                />
-              </Grid>
-            ))}
-          </Grid>
-          {/* รายการยอดฮิต แบะ recomment */}
-
-          <Grid
-            container
-            direction="row"
-            justify="flex-start"
-            alignItems="flex-start"
-            spacing={3}
-          >
-            <Grid item xs={12} sm={6} md={6} lg={6}>
-              <SocialCardDemo title={'อันดับยอดฮิต'} />
+            <Grid container justify="center" alignItems="center" spacing={2}>
+              {value.map((number: number, i: number) => (
+                <Grid item xs={12} sm={6} md={3} lg={3}>
+                  <CourseDetail
+                    data={value[i].title}
+                    logo={value[i].logo}
+                    int={value[i].int}
+                    view={value[i].view}
+                    point={value[i].point}
+                    vote={value[i].vote}
+                  />
+                </Grid>
+              ))}
             </Grid>
-            <Grid item xs={12} sm={6} md={6} lg={6}>
-              <SocialCardDemo title={'รายการแนะนำ'} />
-            </Grid>
-
-            <Grid item xs={12} sm={12} md={12} lg={12}>
-              <TapsCourse />
-            </Grid>
-
-            <CourseList title={'หลักสูตร'} name={''} type={2} />
-
-            <Facebook />
           </Grid>
         </Container>
       </Box>

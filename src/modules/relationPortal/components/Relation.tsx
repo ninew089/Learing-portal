@@ -3,18 +3,19 @@ import React from 'react'
 import { autoPlay } from 'react-swipeable-views-utils'
 //@ts-ignore
 import SwipeableViews from 'react-swipeable-views'
-import { makeStyles, useTheme } from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/core/styles'
 //@ts-ignore
 import ParallaxSlide from '@mui-treasury/components/slide/parallax'
 //@ts-ignore
 import cx from 'clsx'
-import { Button, useMediaQuery } from '@material-ui/core'
+import { Button } from '@material-ui/core'
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight'
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft'
 //@ts-ignore
 import DotIndicator from '@mui-treasury/components/indicator/dot'
 import img from 'assets/images/03.jpg'
 import img2 from 'assets/images/04.jpg'
+import img1 from 'assets/images/02.jpg'
 import { NavLink } from 'react-router-dom'
 //@ts-ignore
 
@@ -41,7 +42,7 @@ const data = [
     subtitle: 'Deluxe',
     image:
       // eslint-disable-next-line max-len
-      'https://material-ui.com/static/images/grid-list/morning.jpg',
+      img1,
   },
 ]
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews)
@@ -64,16 +65,16 @@ const useStyles = makeStyles(({ palette, breakpoints, spacing }) => ({
     position: 'relative',
     zIndex: 2,
     [breakpoints.up('xs')]: {
-      height: '180px',
+      height: '120px',
     },
     [breakpoints.up('sm')]: {
-      height: '200px',
-    },
-    [breakpoints.up('md')]: {
       height: '240px',
     },
-    [breakpoints.up('lg')]: {
+    [breakpoints.up('md')]: {
       height: '320px',
+    },
+    [breakpoints.up('lg')]: {
+      height: '460px',
     },
 
     paddingBottom: '10.25%',
@@ -142,29 +143,7 @@ const useStyles = makeStyles(({ palette, breakpoints, spacing }) => ({
 
 const ParallaxCarousel = () => {
   const classes = useStyles()
-  const theme = useTheme()
-  const xs = useMediaQuery(theme.breakpoints.down('xs'))
-  const sm = useMediaQuery(theme.breakpoints.down('sm'))
-  const md = useMediaQuery(theme.breakpoints.down('md'))
-  const lg = useMediaQuery(theme.breakpoints.down('lg'))
-  const xl = useMediaQuery(theme.breakpoints.down('xl'))
-  function findScreen() {
-    if (xs) {
-      return 180
-    }
-    if (sm) {
-      return 220
-    }
-    if (md) {
-      return 220
-    }
-    if (lg) {
-      return 320
-    }
-    if (xl) {
-      return 320
-    }
-  }
+
   const [index, onChangeIndex] = React.useState<number>(0)
   const renderElements = () => (
     <>
@@ -205,23 +184,12 @@ const ParallaxCarousel = () => {
     <AutoPlaySwipeableViews index={index} onChangeIndex={onChangeIndex}>
       {data.map(({ id, title, subtitle, image }, i) => (
         <div key={id} className={classes.slide}>
-          <div
-            className={classes.imageContainer}
-            style={{
-              background: `#fffff`,
-              backgroundSize: ` ${window.screen.width}px ${findScreen()}px`,
-            }}
-          >
+          <div className={classes.imageContainer}>
             <NavLink
               to="/learning-portal/login"
               style={{ color: 'inherit', textDecoration: 'inherit' }}
             >
-              <img
-                src={image}
-                alt=""
-                width={'100%'}
-                height={`${findScreen()}px`}
-              />
+              <img src={image} alt="" width={'100%'} />
             </NavLink>
             <div style={{ position: 'fixed', bottom: 0, right: 0 }}></div>
           </div>

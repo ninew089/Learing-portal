@@ -8,6 +8,7 @@ import { Provider } from 'react-redux'
 import configureStore from 'store/configureStore'
 import './assets/css/fonts/font.css'
 import 'assets/css/bg.css'
+import Scroll from 'Scroll'
 export default function APP() {
   const theme = createMuiTheme({
     typography: {
@@ -30,6 +31,7 @@ export default function APP() {
     <div style={{ background: '#f5f5f5' }}>
       <Provider store={store}>
         <Router>
+          <Scroll />
           <Switch>
             <Route path="/learning-portal/admins/main">
               <ThemeProvider theme={theme}>

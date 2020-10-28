@@ -5,11 +5,8 @@ import {
   withStyles,
   WithStyles,
 } from '@material-ui/core/styles'
-
 import CloseIcon from '@material-ui/icons/Close'
-
 import {
-  Grid,
   IconButton,
   Typography,
   DialogActions,
@@ -18,7 +15,6 @@ import {
   Dialog,
   Button,
 } from '@material-ui/core'
-
 import { BsLink } from 'react-icons/bs'
 
 const styles = (theme: Theme) =>
@@ -26,12 +22,17 @@ const styles = (theme: Theme) =>
     root: {
       margin: 0,
       padding: theme.spacing(2),
+      background: '#182437',
+      color: '#ced1d5',
     },
     closeButton: {
       position: 'absolute',
       right: theme.spacing(1),
       top: theme.spacing(1),
       color: theme.palette.grey[500],
+    },
+    subtitle: {
+      color: '#90a0aa',
     },
   })
 
@@ -62,6 +63,8 @@ const MuiDialogTitle = withStyles(styles)((props: DialogTitleProps) => {
 const MuiDialogContent = withStyles((theme) => ({
   root: {
     padding: theme.spacing(2),
+    background: '#182437',
+    color: '#ced1d5',
   },
 }))(DialogContent)
 
@@ -69,6 +72,8 @@ const MuiDialogActions = withStyles((theme) => ({
   root: {
     margin: 0,
     padding: theme.spacing(1),
+    background: '#182437',
+    color: '#ced1d5',
   },
 }))(DialogActions)
 
@@ -98,12 +103,9 @@ export default function CustomizedDialogs({
           <Typography variant="h6">ชื่อคอร์สเรียน</Typography>
         </MuiDialogTitle>
         <MuiDialogContent dividers>
-          <Grid container dir="row">
-            <Grid item xs={12}></Grid>
-          </Grid>
           <h3>เป้าหมายการเรียนรู้</h3>
 
-          <Typography gutterBottom>
+          <Typography gutterBottom className={`color:'#90a0aa',fontWeigth:300`}>
             เข้าใจหลักการต่างๆของระบบ โครงสร้าง เเละการบริหารจัดการ
             เพื่อเพิ่มประสิทฑิภาพการทำงานเเละ การจัดระบบทรัพยากร และ
             เพื่อเสริมสร้างความรู้ความเข้าใจให้เกิดประโยชน์สูงสุดให้เท่าทันยุคสมัยปัจจุบัน
@@ -125,8 +127,8 @@ export default function CustomizedDialogs({
           </Typography>
         </MuiDialogContent>
         <MuiDialogActions>
-          <Button autoFocus onClick={handleClose} color="primary">
-            <BsLink size={24} />
+          <Button autoFocus onClick={handleClose}>
+            <BsLink size={24} style={{ color: 'white' }} />
           </Button>
         </MuiDialogActions>
       </Dialog>

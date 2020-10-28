@@ -1,26 +1,44 @@
-import React, { useEffect } from 'react'
-import { Grid, Divider, Box, Hidden, Container } from '@material-ui/core'
-//import Course from './CourseDetails'
-import Course2 from './CourseDetails-v2'
-import { useParams } from 'react-router-dom'
+import React from 'react'
+import { Grid, Divider, Box, Hidden, Button } from '@material-ui/core'
+import Course2 from './CourseDetails'
 import img from 'assets/logo/logo1.jpg'
 import img2 from 'assets/logo/logo2.png'
 import img3 from 'assets/logo/logo3.png'
 import img4 from 'assets/logo/logo4.png'
-import Listitems from './Listitems'
-
+import Listitems from './CourseForXs'
+import { useHistory, useRouteMatch } from 'react-router-dom'
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
+import categoryFormat from 'utils/categoryFormat'
 export default function SingleLineGridList(props: any) {
-  interface ParamTypes {
-    id: string
-  }
+  const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+      line: {
+        display: 'inline-block',
+        borderBottom: '3px solid #f9b122',
+        paddingBottom: '2px',
+      },
+      button: {
+        float: 'right',
+      },
+      box: {
+        borderRadius: '0 0 10px 10px',
+        paddingRight: 8,
+        paddingLeft: 8,
+        marginBottom: 10,
+        paddingBottom: 10,
+        width: '100%',
+        marginTop: 10,
+      },
+    }),
+  )
 
-  const { id } = useParams<ParamTypes>()
+  const { id } = props
   const tileData = [
     {
       img: 'https://material-ui.com/static/images/grid-list/breakfast.jpg',
       title: 'แนวคิดและปรัชญาเศรษฐกิจพอเพียง',
       logo: img,
-      int: 'Chulalonhkorn',
+      int: 'จุฬาลงกรณ์มหาวิทยาลัย',
       view: '103293',
       point: 4,
       vote: 200,
@@ -29,7 +47,7 @@ export default function SingleLineGridList(props: any) {
       img: 'https://material-ui.com/static/images/grid-list/burgers.jpg',
       logo: img2,
       title: 'แนวคิดและปรัชญาของการบริหารทรัพยากรมนุษย์',
-      int: 'OCSC',
+      int: 'สำนักงาน ก.พ.',
       view: '1213',
       author: 'director90',
       point: 4.5,
@@ -38,7 +56,7 @@ export default function SingleLineGridList(props: any) {
     {
       img: 'https://material-ui.com/static/images/grid-list/camera.jpg',
       logo: img3,
-      int: 'Thamasat',
+      int: 'มหาลัยธรรมสาสตร์',
       title: 'ภาษาจีนชีวิตประจำวัน',
       view: '45833',
       author: 'Danson67',
@@ -48,7 +66,7 @@ export default function SingleLineGridList(props: any) {
     {
       img: 'https://material-ui.com/static/images/grid-list/morning.jpg',
       logo: img4,
-      int: 'SPU',
+      int: 'มหาวิทยาลัยกรุงเทพ',
       title: 'การเขียนรายงานอย่างถูกต้อง',
       view: '86942',
       point: 4.7,
@@ -57,7 +75,7 @@ export default function SingleLineGridList(props: any) {
     {
       img: 'https://material-ui.com/static/images/grid-list/hats.jpg',
       logo: img,
-      int: 'Chulalonhkorn',
+      int: 'จุฬาลงกรณ์มหาวิทยาลัย',
       title: 'การเขียนรายงานอย่างถูกต้อง(2)',
       view: '324898',
       point: 4,
@@ -66,7 +84,7 @@ export default function SingleLineGridList(props: any) {
     {
       img: 'https://material-ui.com/static/images/grid-list/honey.jpg',
       logo: img2,
-      int: 'OCSC',
+      int: 'สำนักงาน ก.พ.',
       view: '548976',
       title: 'เรียนรู้ประวัติศาสตร์โลก',
 
@@ -76,7 +94,7 @@ export default function SingleLineGridList(props: any) {
     {
       img: 'https://material-ui.com/static/images/grid-list/vegetables.jpg',
       logo: img2,
-      int: 'OCSC',
+      int: 'สำนักงาน ก.พ.',
       view: '103',
       title: 'หลักการและแนวคิดแบบขงจื้อ',
       point: 4.1,
@@ -85,7 +103,7 @@ export default function SingleLineGridList(props: any) {
     {
       img: 'https://material-ui.com/static/images/grid-list/plant.jpg',
       logo: img,
-      int: 'Chulalonhkorn',
+      int: 'จุฬาลงกรณ์มหาวิทยาลัย',
       view: '345435',
       title: 'เรียนรู้อารยธรรมกรีก',
       point: 4,
@@ -94,7 +112,7 @@ export default function SingleLineGridList(props: any) {
     {
       img: 'https://material-ui.com/static/images/grid-list/mushroom.jpg',
       logo: img3,
-      int: 'OCSC',
+      int: 'สำนักงาน ก.พ.',
       view: '94293',
       title: 'ปลุกผักด้วยเทคโนโลยี',
       point: 4,
@@ -112,7 +130,7 @@ export default function SingleLineGridList(props: any) {
     {
       img: 'https://material-ui.com/static/images/grid-list/star.jpg',
       logo: img2,
-      int: 'OCSC',
+      int: 'สำนักงาน ก.พ.',
       view: '8945',
       title: 'เรียนรู้เท่าทันโลกสมัยใหม่',
       point: 4,
@@ -121,63 +139,67 @@ export default function SingleLineGridList(props: any) {
     {
       img: 'https://material-ui.com/static/images/grid-list/bike.jpg',
       logo: img2,
-      int: 'OCSC',
+      int: 'สำนักงาน ก.พ.',
       view: '97850',
       title: 'การนำเสนอรายงาน',
       point: 4,
       vote: 200,
     },
   ]
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
 
+  const history = useHistory()
+  const { path } = useRouteMatch()
+  const filterCoursebyCategory = (title: string) => {
+    history.push(`${path}/course?category=${title}`)
+  }
+  const Next = () => {
+    setTimeout(() => filterCoursebyCategory(id), 1000)
+  }
+  const classes = useStyles()
   return (
-    <Box p={2}>
-      <div>
-        <Grid container direction="row" alignItems="center">
-          <Grid item xs={7}>
-            <h2>{id}</h2>
-          </Grid>
-        </Grid>
-        <Divider style={{ marginBottom: 20 }} />
-        <Hidden smUp>
+    <Box className={classes.box}>
+      <Grid
+        container
+        direction="row"
+        alignItems="center"
+        justify="space-between"
+        zeroMinWidth
+      >
+        <h3 className={classes.line}>{categoryFormat(id)}</h3>{' '}
+        <Button onClick={Next} style={{ color: '#0f1626' }}>
+          {' '}
+          ดูเพิ่มเติม
+        </Button>
+      </Grid>
+      <Divider style={{ marginBottom: 20 }} />
+      <Hidden smUp>
+        {tileData.map((tile) => (
+          <Listitems
+            data={tile.title}
+            logo={tile.logo}
+            int={tile.int}
+            view={tile.view}
+            point={tile.point}
+            vote={tile.vote}
+          />
+        ))}
+      </Hidden>
+      <Hidden xsDown>
+        <Grid container direction="row" alignItems="center" spacing={4}>
           {tileData.map((tile) => (
-            <Listitems
-              data={tile.title}
-              logo={tile.logo}
-              int={tile.int}
-              view={tile.view}
-              point={tile.point}
-              vote={tile.vote}
-            />
-          ))}
-        </Hidden>
-        <Hidden xsDown>
-          <Container maxWidth="lg">
-            <Grid
-              container
-              direction="row"
-              alignItems="center"
-              justify="center"
-              spacing={3}
-            >
-              {tileData.map((tile) => (
-                <Grid item xs={12} sm={6} md={4} lg={3} xl={3}>
-                  <Course2
-                    data={tile.title}
-                    logo={tile.logo}
-                    int={tile.int}
-                    view={tile.view}
-                    point={tile.point}
-                    vote={tile.vote}
-                  />
-                </Grid>
-              ))}
+            <Grid item xs={12} sm={6} md={4} lg={3} xl={3}>
+              <Course2
+                data={tile.title}
+                logo={tile.logo}
+                int={tile.int}
+                view={tile.view}
+                point={tile.point}
+                vote={tile.vote}
+              />
             </Grid>
-          </Container>
-        </Hidden>
-      </div>
+          ))}
+        </Grid>
+      </Hidden>
     </Box>
   )
 }

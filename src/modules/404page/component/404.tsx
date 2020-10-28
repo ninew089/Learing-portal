@@ -2,7 +2,6 @@ import React from 'react'
 import Avatar from '@material-ui/core/Avatar'
 import Button from '@material-ui/core/Button'
 import CssBaseline from '@material-ui/core/CssBaseline'
-
 import { NavLink } from 'react-router-dom'
 
 import Typography from '@material-ui/core/Typography'
@@ -43,6 +42,7 @@ export default function SignIn() {
       maxWidth="xs"
       style={{ background: 'white', borderRadius: '10px', padding: '10px' }}
     >
+
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>

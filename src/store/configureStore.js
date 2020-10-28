@@ -1,7 +1,6 @@
 import { createStore, applyMiddleware } from 'redux'
-import reduxThunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
-
+import reduxThunk from 'redux-thunk'
 import rootReducer from 'modules/reducers'
 
 function configureStore(initialState) {
@@ -10,7 +9,7 @@ function configureStore(initialState) {
   const store = createStore(
     rootReducer,
     initialState,
-    composeWithDevTools(applyMiddleware(...middleware))
+    composeWithDevTools(applyMiddleware(...middleware)),
   )
 
   return store

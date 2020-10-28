@@ -1,6 +1,6 @@
 import React from 'react'
 import clsx from 'clsx'
-import { makeStyles } from '@material-ui/core/styles'
+import { makeStyles, useTheme } from '@material-ui/core/styles'
 import {
   CssBaseline,
   AppBar,
@@ -11,7 +11,11 @@ import {
   Box,
   Container,
   Avatar,
+  useMediaQuery,
+  Button,
 } from '@material-ui/core'
+import { useHistory, useRouteMatch } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import MenuList from './MenuList'
 import banner from 'assets/images/OCSC-banner.png'
 import { NavLink } from 'react-router-dom'
@@ -101,6 +105,10 @@ const useStyles = makeStyles((theme) => ({
   main: {
     fontWeight: 700,
     fontSize: 16,
+    [theme.breakpoints.down('sm')]: {
+      fontWeight: 700,
+      fontSize: 12,
+    },
   },
   line: {
     display: 'inline-block',
@@ -111,7 +119,14 @@ const useStyles = makeStyles((theme) => ({
 
 export default function PersistentDrawerLeft(props: any) {
   const classes = useStyles()
-
+  const theme = useTheme()
+  const history = useHistory()
+  const { path } = useRouteMatch()
+  const navigatorToLogin = () => {
+    history.push(`${path}/login`)
+  }
+  const login = useSelector((state: any) => state.login.Login)
+  const matches = useMediaQuery(theme.breakpoints.down('sm'))
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -128,7 +143,7 @@ export default function PersistentDrawerLeft(props: any) {
                 to="/learning-portal"
                 style={{ color: 'inherit', textDecoration: 'inherit' }}
               >
-                <img alt="" src={banner} width={140} />
+                <img alt="" src={banner} width={matches ? 100 : 140} />
               </NavLink>
 
               <Hidden smDown>
@@ -138,31 +153,42 @@ export default function PersistentDrawerLeft(props: any) {
               </Hidden>
             </Grid>
           </div>
+          {login ? (
+            <>
+              <NavLink
+                to="/learning-portal"
+                style={{
+                  color: 'inherit',
+                  textDecoration: 'inherit',
+                  marginLeft: 10,
+                }}
+              >
+                <div className={classes.line}>
+                  <Box className={classes.main}>หน้าหลัก</Box>
+                </div>
+              </NavLink>
 
-          <NavLink
-            to="/learning-portal"
-            style={{ color: 'inherit', textDecoration: 'inherit' }}
-          >
-            <div className={classes.line}>
-              <Box className={classes.main}>หน้าหลัก</Box>
-            </div>
-          </NavLink>
+              <Typography
+                style={{
+                  borderRight: '0.1em solid white',
+                  padding: '1em',
+                  marginRight: 10,
+                  paddingLeft: 0,
+                  marginLeft: 0,
+                }}
+              />
+              <Avatar alt="Remy Sharp" src={avatar} />
+              <Hidden xsDown>
+                <Box className={classes.name}>อนุสรา</Box>
+              </Hidden>
 
-          <Typography
-            style={{
-              borderRight: '0.1em solid white',
-              padding: '1em',
-              marginRight: 10,
-              paddingLeft: 0,
-              marginLeft: 0,
-            }}
-          />
-          <Avatar alt="Remy Sharp" src={avatar} />
-          <Hidden xsDown>
-            <Box className={classes.name}>อนุสรา</Box>
-          </Hidden>
-
-          <MenuList />
+              <MenuList />
+            </>
+          ) : (
+            <Button style={{ color: '#fdfdfd' }} onClick={navigatorToLogin}>
+              ลงชื่อเข้าสู่ระบบ
+            </Button>
+          )}
         </Toolbar>
       </AppBar>
 

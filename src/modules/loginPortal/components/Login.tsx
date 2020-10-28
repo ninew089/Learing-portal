@@ -1,6 +1,12 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
+import { useDispatch } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles'
+import { AiOutlineUser } from 'react-icons/ai'
+import { RiLockPasswordLine } from 'react-icons/ri'
+import { useHistory, useRouteMatch } from 'react-router-dom'
+import img from 'assets/images/OCSC-banner.png'
+
 import {
   Container,
   InputAdornment,
@@ -11,11 +17,9 @@ import {
   Link,
   Typography,
 } from '@material-ui/core'
-
 import { NavLink } from 'react-router-dom'
-import { AiOutlineUser } from 'react-icons/ai'
-import { RiLockPasswordLine } from 'react-icons/ri'
-import img from 'assets/images/OCSC-banner.png'
+import * as actions from '../actions'
+
 import * as yup from 'yup'
 
 const useStyles = makeStyles((theme) => ({
@@ -152,24 +156,45 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignIn() {
   const classes = useStyles()
+  const dispatch = useDispatch()
+  const history = useHistory()
+  const { path } = useRouteMatch()
+  //const { isLoading, users: user } = useSelector((state: any) => state.login)
   const { register, handleSubmit, errors } = useForm({
-    mode: 'onBlur',
+    mode: 'onSubmit',
     validationSchema: yup.object().shape({
-      user: yup.string().required(),
+      user: yup
+        .string()
+        .required('กรุณากรอกเลขบัตรประจำตัวประชาชน')
+        .matches(/^[0-9]{13}$/, 'กรุณากรอกเป็นตัวเลข 13 หลัก')
+        .test(
+          'ตรวจสอบรหัสบัตรประชาชน',
+          'กรอกเลขบัตรประชาชนผิด กรุณากรอกใหม่',
+
+          function (item: any) {
+            var i, sum
+            for (i = 0, sum = 0; i < 12; i++)
+              sum += parseFloat(item.charAt(i)) * (13 - i)
+            if ((11 - (sum % 11)) % 10 !== parseFloat(item.charAt(12))) {
+              return false
+            }
+            return true
+          },
+        ),
       password: yup.string().required(),
     }),
   })
-  const submit = (loginInfo: object) => {
+
+  const onLogin = (loginInfo: object) => {
     console.log(loginInfo)
+    const action = actions.setLogin(true)
+    dispatch(action)
+    history.push(`/learning-portal`)
   }
 
   return (
     <Container component="main" maxWidth="xs">
-      <form
-        onSubmit={handleSubmit(submit)}
-        autoComplete="off"
-        className={classes.form}
-      >
+      <form autoComplete="off" className={classes.form}>
         <CssBaseline />
         <div className={classes.paper}>
           <img alt="banner" src={img} className={classes.image} />
@@ -178,6 +203,9 @@ export default function SignIn() {
           </Typography>
           <form className={classes.form} noValidate>
             <TextField
+              label="เลขประจำตัวประชาชน"
+              name="user"
+              inputRef={register}
               variant="outlined"
               className={classes.textfield}
               InputProps={{
@@ -189,21 +217,17 @@ export default function SignIn() {
                 ),
               }}
               fullWidth
-              label="เลขประจำตัวประชาชน"
-              inputRef={register}
-              name="user"
-              helperText={errors.user ? 'กรุณากรอกเลขประจำตัวประชาชน' : ''}
+              helperText={errors.user ? 'กรุณากรอกรหัสผู้ใช้' : ''}
               error={!!errors.user}
             />
             <TextField
               className={classes.textfield}
-              variant="outlined"
-              fullWidth
-              id="input-with-icon-textfield"
               label="รหัสผ่าน"
               type="password"
-              inputRef={register}
               name="password"
+              inputRef={register}
+              fullWidth
+              variant="outlined"
               helperText={errors.password ? 'กรุณากรอกรหัสผ่าน' : ''}
               error={!!errors.password}
               InputProps={{
@@ -216,7 +240,12 @@ export default function SignIn() {
               }}
             />
 
-            <Button type="submit" fullWidth className={classes.submit}>
+            <Button
+              type="submit"
+              fullWidth
+              className={classes.submit}
+              onClick={handleSubmit(onLogin)}
+            >
               เข้าสู่ระบบ
             </Button>
 
@@ -240,7 +269,7 @@ export default function SignIn() {
               <div className={classes.border} />
             </div>
 
-            <Button type="submit" fullWidth className={classes.etda}>
+            <Button fullWidth className={classes.etda}>
               LOGIN WITH ETDA CONNECT
             </Button>
           </form>

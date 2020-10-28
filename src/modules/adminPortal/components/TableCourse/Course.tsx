@@ -19,7 +19,7 @@ import Search from '@material-ui/icons/Search'
 import ViewColumn from '@material-ui/icons/ViewColumn'
 import DialogAdd from './DialogAdd'
 import DialogEdit from './DialogEdit'
-export default function MaterialTableDemo(props: any) {
+export default function MaterialTableDemo() {
   const tableIcons = {
     Add: forwardRef<SVGSVGElement>((props, ref) => (
       <AddBox {...props} ref={ref} />

@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { openProps } from './tyscript'
 import {
   createStyles,
   Theme,
@@ -114,15 +114,7 @@ const MuiDialogActions = withStyles((theme) => ({
   },
 }))(DialogActions)
 
-export interface CustomizedDialogsProps {
-  open: boolean
-  setOpen: any
-}
-
-export default function CustomizedDialogs({
-  open,
-  setOpen,
-}: CustomizedDialogsProps) {
+export default function CustomizedDialogs({ open, setOpen }: openProps) {
   const handleClose = () => {
     setOpen(false)
   }

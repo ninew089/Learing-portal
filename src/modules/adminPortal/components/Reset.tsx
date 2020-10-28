@@ -8,7 +8,7 @@ import {
   Container,
   InputAdornment,
 } from '@material-ui/core'
-
+import { resetPasswordProps } from '../tyscript'
 import { makeStyles } from '@material-ui/core/styles'
 import { RiLockPasswordLine } from 'react-icons/ri'
 import { FcReadingEbook } from 'react-icons/fc'
@@ -38,10 +38,9 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(1),
   },
 }))
-
 export default function SignIn() {
   const classes = useStyles()
-  const { register, handleSubmit, errors } = useForm({
+  const { register, handleSubmit, errors } = useForm<resetPasswordProps>({
     mode: 'onChange',
     validationSchema: yup.object().shape({
       pwd: yup.string().required(),
@@ -53,9 +52,9 @@ export default function SignIn() {
         .required('กรุณากรอกรหัสผ่าน ( 2 )'),
     }),
   })
-  const onSubmitData = (data: any) => {
-    console.log(data)
-  }
+  const onSubmitData = handleSubmit(({ pwd, pwd1, pwd2 }) => {
+    console.log(pwd, pwd1, pwd2)
+  })
 
   return (
     <Container
@@ -71,7 +70,7 @@ export default function SignIn() {
         <Typography component="h1" variant="h5">
           เปลี่ยนรหัสผ่าน
         </Typography>
-        <form className={classes.form} onSubmit={handleSubmit(onSubmitData)}>
+        <form className={classes.form} onSubmit={onSubmitData}>
           <TextField
             className={classes.margin}
             fullWidth

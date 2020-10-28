@@ -20,7 +20,7 @@ import {
   SystemUpdateAlt,
 } from '@material-ui/icons'
 
-export default function MaterialTableDemo(props: any) {
+export default function MaterialTableDemo() {
   const tableIcons = {
     Add: forwardRef<SVGSVGElement>((props, ref) => (
       <AddBox {...props} ref={ref} />
@@ -80,14 +80,6 @@ export default function MaterialTableDemo(props: any) {
     { name: 'Mehmet', surname: 'Baran', birthYear: 1987, id: 63 },
     { name: 'Zerya Betül', surname: 'Baran', birthYear: 2017, id: 34 },
   ])
-  type Table = { columns: Column[]; data: Data[] }
-  type Column = { title: string; field: string; type?: any; lookup?: any }
-  type Data = {
-    name: string
-    surname: string
-    birthYear: number
-    birthCity: number
-  }
 
   return (
     <MaterialTable
