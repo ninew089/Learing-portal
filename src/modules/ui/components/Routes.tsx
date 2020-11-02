@@ -15,6 +15,7 @@ import createHistory from 'history/createBrowserHistory'
 export const history = createHistory()
 
 export default function componentName() {
+  //check user cookie have return true
   const login = true
   return (
     <>
