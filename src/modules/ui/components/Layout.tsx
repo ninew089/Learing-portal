@@ -2,7 +2,6 @@ import React from 'react'
 import clsx from 'clsx'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 import {
-  CssBaseline,
   AppBar,
   Toolbar,
   Grid,
@@ -14,13 +13,17 @@ import {
   useMediaQuery,
   Button,
 } from '@material-ui/core'
+import Drawer from './Drawer'
 import { useHistory, useRouteMatch } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import * as actions from '../actions'
 import MenuList from './MenuList'
 import banner from 'assets/images/OCSC-banner.png'
 import { NavLink } from 'react-router-dom'
 import Routes from './Routes'
 import avatar from 'assets/images/user.svg'
+import ScrollTo from 'react-scroll-into-view'
+import { useLocation } from 'react-router-dom'
 
 const drawerWidth = 240
 
@@ -68,10 +71,10 @@ const useStyles = makeStyles((theme) => ({
     background: '#f5f5f5',
   },
   push: {
-    height: '90px',
+    height: '120px',
   },
   footer: {
-    height: '90px',
+    height: '60px',
     background: '#0f1626', //transparent
     color: '#f3f3fb',
     backdropFilter: 'blur(6px)',
@@ -87,14 +90,14 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 700,
     fontSize: 14,
     [theme.breakpoints.down('sm')]: {
-      fontSize: 6,
+      fontSize: 8,
     },
   },
   color1: {
     fontWeight: 700,
     fontSize: 14,
     [theme.breakpoints.down('sm')]: {
-      fontSize: 6,
+      fontSize: 8,
     },
   },
   name: {
@@ -125,11 +128,12 @@ export default function PersistentDrawerLeft(props: any) {
   const navigatorToLogin = () => {
     history.push(`${path}/login`)
   }
+  const { pathname } = useLocation()
   const login = useSelector((state: any) => state.login.Login)
   const matches = useMediaQuery(theme.breakpoints.down('sm'))
+
   return (
     <div className={classes.root}>
-      <CssBaseline />
       <AppBar position="fixed" className={clsx(classes.appBar)} elevation={0}>
         <Toolbar>
           <div className={classes.title}>
@@ -153,41 +157,84 @@ export default function PersistentDrawerLeft(props: any) {
               </Hidden>
             </Grid>
           </div>
-          {login ? (
+
+          <Hidden smDown>
+            <NavLink
+              to="/learning-portal"
+              style={{
+                color: 'inherit',
+                textDecoration: 'inherit',
+                marginLeft: 10,
+              }}
+            >
+              <div className={classes.line}>
+                <Box className={classes.main}>หน้าหลัก</Box>
+              </div>
+            </NavLink>
+          </Hidden>
+          {pathname === '/learning-portal' ? (
+            <>
+              <ScrollTo selector={`#หมวดหมู่`}>
+                <Button style={{ color: '#fdfdfd' }}>หมวดหมู่</Button>
+              </ScrollTo>
+              <ScrollTo selector={`#หลักสูตร`}>
+                <Button style={{ color: '#fdfdfd' }}>หลักสูตร</Button>
+              </ScrollTo>
+            </>
+          ) : (
             <>
               <NavLink
                 to="/learning-portal"
                 style={{
                   color: 'inherit',
                   textDecoration: 'inherit',
-                  marginLeft: 10,
                 }}
               >
-                <div className={classes.line}>
-                  <Box className={classes.main}>หน้าหลัก</Box>
-                </div>
+                <Button style={{ color: '#fdfdfd' }}>หมวดหมู่</Button>
               </NavLink>
-
-              <Typography
+              <NavLink
+                to="/learning-portal"
                 style={{
-                  borderRight: '0.1em solid white',
-                  padding: '1em',
-                  marginRight: 10,
-                  paddingLeft: 0,
-                  marginLeft: 0,
+                  color: 'inherit',
+                  textDecoration: 'inherit',
                 }}
-              />
-              <Avatar alt="Remy Sharp" src={avatar} />
-              <Hidden xsDown>
-                <Box className={classes.name}>อนุสรา</Box>
-              </Hidden>
+              >
+                <Button style={{ color: '#fdfdfd' }}>หลักสูตร</Button>
+              </NavLink>
+            </>
+          )}
 
-              <MenuList />
+          <Hidden smUp>
+            <Drawer />
+          </Hidden>
+          {login ? (
+            <>
+              <Hidden xsDown>
+                <Typography
+                  style={{
+                    borderRight: '0.1em solid white',
+                    padding: '1em',
+                    marginRight: 10,
+                    paddingLeft: 0,
+                    marginLeft: 0,
+                  }}
+                />
+                <Avatar alt="Remy Sharp" src={avatar} />
+                <Hidden xsDown>
+                  <Box className={classes.name}>อนุสรา</Box>
+                </Hidden>
+
+                <MenuList />
+              </Hidden>
             </>
           ) : (
-            <Button style={{ color: '#fdfdfd' }} onClick={navigatorToLogin}>
-              ลงชื่อเข้าสู่ระบบ
-            </Button>
+            <>
+              <Hidden xsDown>
+                <Button style={{ color: '#fdfdfd' }} onClick={navigatorToLogin}>
+                  ลงชื่อเข้าสู่ระบบ
+                </Button>
+              </Hidden>
+            </>
           )}
         </Toolbar>
       </AppBar>
@@ -202,6 +249,7 @@ export default function PersistentDrawerLeft(props: any) {
           <Typography
             variant="button"
             display="block"
+            align="center"
             gutterBottom
             className={classes.color1}
           >
@@ -210,6 +258,7 @@ export default function PersistentDrawerLeft(props: any) {
           <Typography
             variant="button"
             display="block"
+            align="center"
             gutterBottom
             className={classes.color}
           >

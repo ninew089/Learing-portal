@@ -1,17 +1,17 @@
-export const TOGGLE_DARK_MODE = 'app/ui/TOGGLE_DARK_MODE'
-export const SET_DARK_MODE = 'app/ui/SET_DARK_MODE'
+export const SCROLL_TO_REF = 'app/ui/SCROLL_TO_REF'
+export const SET_SCROLL_TO_REF = 'app/ui/SET_SCROLL_TO_REF'
 
-export function toggleDarkMode(event: any) {
+export function selectScroll(event: any) {
   return {
-    type: TOGGLE_DARK_MODE,
+    type: SCROLL_TO_REF,
   }
 }
 
-export function setDarkMode(darkMode: any) {
+export function setScroll(scroll: any) {
   return {
-    type: SET_DARK_MODE,
+    type: SET_SCROLL_TO_REF,
     payload: {
-      darkMode,
+      scroll,
     },
   }
 }

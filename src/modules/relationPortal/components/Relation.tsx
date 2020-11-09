@@ -62,22 +62,23 @@ const useStyles = makeStyles(({ palette, breakpoints, spacing }) => ({
   },
   imageContainer: {
     display: 'block',
+    borderRadius: '0.4rem',
     position: 'relative',
     zIndex: 2,
     [breakpoints.up('xs')]: {
-      height: '120px',
+      height: '100px',
     },
-    [breakpoints.up('sm')]: {
-      height: '240px',
+    [breakpoints.up(700)]: {
+      height: '200px',
     },
     [breakpoints.up('md')]: {
       height: '320px',
     },
     [breakpoints.up('lg')]: {
-      height: '460px',
+      height: '380px',
     },
 
-    paddingBottom: '10.25%',
+    paddingBottom: '4.25%',
   },
   image: {
     display: 'block',
@@ -86,7 +87,6 @@ const useStyles = makeStyles(({ palette, breakpoints, spacing }) => ({
     width: '100%',
     height: '100%',
     objectFit: 'cover',
-
     [breakpoints.up('md')]: {
       backgroundSize: `220px ${window.screen.width}px`,
     },
@@ -97,7 +97,7 @@ const useStyles = makeStyles(({ palette, breakpoints, spacing }) => ({
   arrow: {
     display: 'inline-flex',
     position: 'absolute',
-    top: '50%',
+    top: '40%',
     transform: 'translateY(-50%)',
     [breakpoints.up('sm')]: {
       display: 'inline-flex',
@@ -138,6 +138,7 @@ const useStyles = makeStyles(({ palette, breakpoints, spacing }) => ({
   },
   indicatorContainer: {
     textAlign: 'center',
+    marginBottom: 10,
   },
 }))
 
@@ -187,9 +188,17 @@ const ParallaxCarousel = () => {
           <div className={classes.imageContainer}>
             <NavLink
               to="/learning-portal/login"
-              style={{ color: 'inherit', textDecoration: 'inherit' }}
+              style={{
+                color: 'inherit',
+                textDecoration: 'inherit',
+              }}
             >
-              <img src={image} alt="" width={'100%'} />
+              <img
+                src={image}
+                alt=""
+                width={'100%'}
+                style={{ borderRadius: '0.4rem' }}
+              />
             </NavLink>
             <div style={{ position: 'fixed', bottom: 0, right: 0 }}></div>
           </div>

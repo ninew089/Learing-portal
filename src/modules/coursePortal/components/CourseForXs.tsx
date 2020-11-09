@@ -76,6 +76,10 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: 8,
     paddingBottom: 4,
   },
+  bslink: {
+    padding: 0,
+    float: 'right',
+  },
 }))
 export default function PopularListItemDemo(props: any) {
   const classes = useStyles()
@@ -129,7 +133,7 @@ export default function PopularListItemDemo(props: any) {
           <Button
             color="primary"
             href="/learning-portal/catalog/12321"
-            style={{ padding: 0, float: 'right' }}
+            className={classes.bslink}
           >
             <BsLink size={16} />
           </Button>

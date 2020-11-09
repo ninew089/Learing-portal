@@ -74,6 +74,11 @@ const useStyles = makeStyles((theme: Theme) =>
       margin: theme.spacing(2),
       paddingRight: theme.spacing(4),
     },
+    container: {
+      background: 'white',
+      borderRadius: '10px',
+      padding: '10px',
+    },
   }),
 )
 
@@ -136,11 +141,7 @@ export default function CustomizedDialogs({ open, setOpen }: openProps) {
           <Container
             component="main"
             maxWidth="lg"
-            style={{
-              background: 'white',
-              borderRadius: '10px',
-              padding: '10px',
-            }}
+            className={classes.container}
           >
             <CssBaseline />
             <div className={classes.paper}>

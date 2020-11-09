@@ -11,9 +11,11 @@ import { makeStyles } from '@material-ui/core/styles'
 const useStyles = makeStyles((theme) => ({
   inputRoot: {
     color: '#132740',
+    background: '#ffffff',
     fontWeight: 700,
+    borderRadius: 128,
     '& .MuiOutlinedInput-notchedOutline': {
-      borderColor: '#f9b122',
+      borderColor: '#ffffff',
       borderWidth: '2px',
     },
     '&:hover .MuiOutlinedInput-notchedOutline': {
@@ -22,6 +24,10 @@ const useStyles = makeStyles((theme) => ({
     '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
       borderColor: '#92b6f9',
     },
+  },
+  autoRoot: {
+    width: 400,
+    maxWidth: 500,
   },
 }))
 export default function FixedTags({
@@ -52,14 +58,14 @@ export default function FixedTags({
         renderTags={(tagValue, getTagProps) =>
           tagValue.map((option, index) => (
             <Chip
-              style={{ maxWidth: 200, overflowX: 'hidden' }}
+              style={{ maxWidth: 100, overflowX: 'hidden' }}
               label={option.title}
               {...getTagProps({ index })}
               disabled={fixedOptions.indexOf(option) !== -1}
             />
           ))
         }
-        style={{ width: 400, maxWidth: 500 }}
+        className={classes.autoRoot}
         renderInput={(params) => (
           <TextField
             {...params}

@@ -19,7 +19,7 @@ const useStyles = makeStyles(() => ({
   card: {
     width: '100%',
     background: '#fdfdfd',
-    height: 400,
+    height: '100%',
     boxShadow: '4px 4px 4px 4px rgb(0 0 0 / 8%)',
     borderRadius: '0.5rem',
     transition: '0.4s',
@@ -58,6 +58,7 @@ const useStyles = makeStyles(() => ({
     color: '#132740',
     paddingLeft: 8,
     marginRight: 8,
+    marginBottom: 10,
   },
   author: {
     overflow: 'hidden',
@@ -97,10 +98,18 @@ const useStyles = makeStyles(() => ({
     textOverflow: 'ellipsis',
     WebkitLineClamp: 3,
     WebkitBoxOrient: 'vertical',
-    fontSize: '10px',
+    fontSize: '12px',
     color: '#434a54',
     paddingLeft: 14,
     paddingRight: 14,
+  },
+  detail: {
+    marginBottom: 30,
+  },
+  submit: {
+    padding: 0,
+    float: 'right',
+    margin: 4,
   },
 }))
 
@@ -116,7 +125,7 @@ export default function IconBreadcrumbs(props: any) {
     <div className={classes.card}>
       <Grid container direction="row" justify="flex-start" alignItems="center">
         <div className={classes.main} onClick={handleClickOpen}>
-          <img alt="" src={img} width="100%" height="200px" />
+          <img alt="" src={img} width="100%" height="100%" />
         </div>
 
         <Typography variant={'h2'} className={classes.title}>
@@ -128,6 +137,7 @@ export default function IconBreadcrumbs(props: any) {
           direction="row"
           justify="flex-start"
           alignItems="center"
+          className={classes.detail}
         >
           <div className={classes.dot} />
           <Box fontWeight={500}>สังคมศาสตร์</Box>
@@ -169,13 +179,16 @@ export default function IconBreadcrumbs(props: any) {
         </div>
       </Grid>
       <Divider />
-      <Button
-        color="primary"
-        href="/learning-portal/catalog/12321"
-        style={{ padding: 0, float: 'right', margin: 4 }}
-      >
-        <BsLink size={24} />
-      </Button>
+      <Grid container direction="row" justify="flex-end" alignItems="center">
+        <Button
+          color="primary"
+          href="/learning-portal/catalog/12321"
+          className={classes.submit}
+        >
+          <BsLink size={24} />
+        </Button>
+      </Grid>
+
       <Dialog open={open} setOpen={setOpen} />
     </div>
   )

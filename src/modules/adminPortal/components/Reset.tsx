@@ -30,12 +30,19 @@ const useStyles = makeStyles((theme) => ({
     width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing(1),
   },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
+
   margin: {
     margin: theme.spacing(1),
     padding: theme.spacing(1),
+  },
+  container: {
+    background: 'white',
+    borderRadius: '10px',
+    padding: '10px',
+  },
+  submit: {
+    marginTop: '10px',
+    background: 'lavender',
   },
 }))
 export default function SignIn() {
@@ -57,11 +64,7 @@ export default function SignIn() {
   })
 
   return (
-    <Container
-      component="main"
-      maxWidth="xs"
-      style={{ background: 'white', borderRadius: '10px', padding: '10px' }}
-    >
+    <Container component="main" maxWidth="xs" className={classes.container}>
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
@@ -126,11 +129,7 @@ export default function SignIn() {
             }}
           />
 
-          <Button
-            type="submit"
-            fullWidth
-            style={{ marginTop: '10px', background: 'lavender' }}
-          >
+          <Button type="submit" fullWidth className={classes.submit}>
             ส่งข้อมลู
           </Button>
         </form>

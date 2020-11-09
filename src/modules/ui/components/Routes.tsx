@@ -8,7 +8,7 @@ import ForgetRoutes from 'modules/forgetPassword/components/Forget'
 import Edit from 'modules/editProfile/components/editProfile'
 import Page404 from 'modules/404page/component/404'
 import { Route, Switch } from 'react-router-dom'
-
+import Scroll from './Scroll'
 import createHistory from 'history/createBrowserHistory'
 //@ts-ignore
 
@@ -19,6 +19,7 @@ export default function componentName() {
   const login = true
   return (
     <>
+      <Scroll />
       <Switch>
         <Route path="/learning-portal/login">
           <LoginRoutes />

@@ -2,7 +2,7 @@ import React from 'react'
 import Course from './Course'
 
 import { Route, Switch } from 'react-router-dom'
-import GroupCourse from './CategoryByCourse'
+import GroupCourse from './GroupCourse'
 import Page404 from 'modules/404page/component/404'
 
 export default function Routes() {

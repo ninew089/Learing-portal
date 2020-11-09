@@ -24,12 +24,22 @@ const useStyles = makeStyles((theme) => ({
     width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing(1),
   },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
   margin: {
     margin: theme.spacing(1),
     padding: theme.spacing(1),
+  },
+  container: {
+    background: 'white',
+    borderRadius: '10px',
+    padding: '10px',
+  },
+  navlink: {
+    color: 'inherit',
+    textDecoration: 'inherit',
+  },
+  submit: {
+    marginTop: '10px',
+    background: 'lavender',
   },
 }))
 
@@ -37,12 +47,7 @@ export default function SignIn() {
   const classes = useStyles()
 
   return (
-    <Container
-      component="main"
-      maxWidth="xs"
-      style={{ background: 'white', borderRadius: '10px', padding: '10px' }}
-    >
-
+    <Container component="main" maxWidth="xs" className={classes.container}>
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
@@ -60,15 +65,8 @@ export default function SignIn() {
           the wrong URL
         </Typography>
         <form className={classes.form} noValidate>
-          <NavLink
-            to="/learning-portal"
-            style={{ color: 'inherit', textDecoration: 'inherit' }}
-          >
-            <Button
-              type="submit"
-              fullWidth
-              style={{ marginTop: '10px', background: 'lavender' }}
-            >
+          <NavLink to="/learning-portal" className={classes.navlink}>
+            <Button type="submit" fullWidth className={classes.submit}>
               กลับสู่หน้าหลัก
             </Button>
           </NavLink>
