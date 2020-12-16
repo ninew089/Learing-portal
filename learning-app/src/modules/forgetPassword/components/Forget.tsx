@@ -179,7 +179,7 @@ export default function SignIn() {
           />
 
           <Button type="submit" fullWidth className={classes.submit}>
-            ยืนยันรหัสผ่าน
+            ขอรหัสผ่านใหม่
           </Button>
         </div>
       </form>

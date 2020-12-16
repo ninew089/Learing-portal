@@ -1,13 +1,12 @@
 import React from 'react'
 import { Grid, Divider, Box, Button } from '@material-ui/core'
-import Course2 from './CourseDetails'
+import Course2 from './CirculumDetail'
 import img from 'assets/logo/logo1.jpg'
 import img2 from 'assets/logo/logo2.png'
 import img3 from 'assets/logo/logo3.png'
 import img4 from 'assets/logo/logo4.png'
 import { useHistory, useRouteMatch } from 'react-router-dom'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
-import categoryCirculumFormat from 'utils/categoryCirculumFormat'
 import { useTheme } from '@material-ui/core/styles'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 
@@ -80,10 +79,10 @@ export default function SingleLineGridList(props: any) {
   const history = useHistory()
   const { path } = useRouteMatch()
   const filterCoursebyCategory = (title: string) => {
-    history.push(`${path}/course?category=${title}`)
+    history.push(`${path}/circulum?category=${title}`)
   }
   const Next = () => {
-    setTimeout(() => filterCoursebyCategory(categoryCirculumFormat(id)), 1000)
+    setTimeout(() => filterCoursebyCategory('หลักสูตร'), 1000)
   }
   const classes = useStyles()
   return (

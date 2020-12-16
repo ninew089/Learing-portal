@@ -17,7 +17,9 @@ import img from 'assets/images/03.jpg'
 import img2 from 'assets/images/04.jpg'
 import img1 from 'assets/images/02.jpg'
 import { NavLink } from 'react-router-dom'
+import { Grid, Box, Divider } from '@material-ui/core'
 //@ts-ignore
+import 'assets/css/relation.css'
 
 const data = [
   {
@@ -58,40 +60,29 @@ const useStyles = makeStyles(({ palette, breakpoints, spacing }) => ({
     // relative is a must if you want to create overlapping layers in children
     position: 'relative',
 
-    height: '100%',
+
   },
   imageContainer: {
     display: 'block',
     borderRadius: '0.4rem',
     position: 'relative',
     zIndex: 2,
-    [breakpoints.up('xs')]: {
-      height: '100px',
-    },
-    [breakpoints.up(700)]: {
-      height: '200px',
-    },
-    [breakpoints.up('md')]: {
-      height: '320px',
-    },
-    [breakpoints.up('lg')]: {
-      height: '380px',
-    },
-
+    height: '100%',
     paddingBottom: '4.25%',
   },
   image: {
     display: 'block',
     position: 'absolute',
     zIndex: 10,
-    width: '100%',
+    ObjectFit:'cover',
+    width: '100vw',
     height: '100%',
-    objectFit: 'cover',
+    overflowY:'hidden',
     [breakpoints.up('md')]: {
-      backgroundSize: `220px ${window.screen.width}px`,
+      backgroundSize: `100vh 100vw`,
     },
     [breakpoints.up('lg')]: {
-      backgroundSize: `320px ${window.screen.width}px`,
+      backgroundSize: `100vh 100vw`,
     },
   },
   arrow: {
@@ -122,24 +113,36 @@ const useStyles = makeStyles(({ palette, breakpoints, spacing }) => ({
 
   text: {
     // shared style for text-top and text-bottom
-    fontFamily: 'Poppins, san-serif',
-    fontWeight: 700,
-    position: 'absolute',
-    color: palette.common.white,
-    padding: '0 8px',
-    transform: 'rotateY(45deg)',
-    lineHeight: 1.2,
-    [breakpoints.up('sm')]: {
-      padding: '0 16px',
+    [breakpoints.down('xs')]: {
+
+      fontSize:8
+    },
+    [breakpoints.only('sm')]: {
+
+      fontSize:10
     },
     [breakpoints.up('md')]: {
-      padding: '0 24px',
+fontSize:24
+    },
+  },subtitle: {
+    // shared style for text-top and text-bottom
+    [breakpoints.down('xs')]: {
+
+      fontSize:6
+    },
+    [breakpoints.only('sm')]: {
+
+      fontSize:8
+    },
+    [breakpoints.up('md')]: {
+fontSize:20
     },
   },
   indicatorContainer: {
     textAlign: 'center',
     marginBottom: 10,
   },
+  
 }))
 
 const ParallaxCarousel = () => {
@@ -193,14 +196,29 @@ const ParallaxCarousel = () => {
                 textDecoration: 'inherit',
               }}
             >
-              <img
+  <div className="container">
+  <img
+                className="bg"
                 src={image}
-                alt=""
+                  alt=""
                 width={'100%'}
-                style={{ borderRadius: '0.4rem' }}
-              />
+      
+              />      
+<div className="content">
+
+                  <Box className={classes.text }fontWeight={500} paddingTop={ 16}> 
+Welcome to Learning-Portal
+</Box>
+<Box  fontWeight={400} className={classes.subtitle } width={ '60%'} > 
+ การเรียนรู้ไม่มีวันสิ้นสุด เราเชื่อมั่นในศักยภาพการเรียนรู้
+</Box>
+
+</div>
+</div>
+             
             </NavLink>
-            <div style={{ position: 'fixed', bottom: 0, right: 0 }}></div>
+   
+            
           </div>
         </div>
       ))}

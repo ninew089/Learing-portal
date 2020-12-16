@@ -151,7 +151,7 @@ export default function SignIn(props: any) {
                 เจ้าหน้าที่ของรัฐในส่วนราชการต่าง ๆ
               </MenuItem>
               <MenuItem value={'พนักงานรัฐวิสาหกิจ'}>
-                พนักงานรัฐวิสาหกิจ ๆ
+                พนักงานรัฐวิสาหกิจ 
               </MenuItem>
               <MenuItem value={'บุคคลทั่วไป'}>บุคคลทั่วไป</MenuItem>
             </TextField>

@@ -1,15 +1,15 @@
 import React from 'react'
 import { Grid, Box, Container, Button } from '@material-ui/core'
-import Circulum from './CategoryByCirculum'
+import Circulum from './Circulum/CategoryByCirculum'
 import Portal from 'modules/portal/components/LinkPortal'
 import Relation from 'modules/relationPortal/components/Relation'
 import Facebook from 'modules/facebook/components/FaceBook'
 import { SocialCardDemo } from './CardRecomment'
 import animation from 'assets/images/animation.gif'
 import animation1 from 'assets/images/animation00.gif'
-import CourseDetail from './CourseDetails'
+import CourseDetail from './Course/CourseDetails'
 import GroupSearch from './GroupSearch'
-import TapsCourse from './TapsCourse'
+import TapsCourse from './Course/TapsCourse'
 import { useTheme } from '@material-ui/core/styles'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import 'assets/css/styles.css'
@@ -47,10 +47,11 @@ export default function Course() {
 
   return (
     <div>
+
+        <Relation />
+
       <Box p={2}>
-        <Container fixed>
-          <Relation />
-        </Container>
+   
         <div
           style={{
             background: '#f5f5f5',
@@ -63,7 +64,7 @@ export default function Course() {
             zIndex: 5,
           }}
         >
-          <Grid container direction="row" justify="center" alignItems="center">
+          <Grid container direction="row" justify="center" alignItems="center" style={{padding:10}}>
             <GroupSearch
               value={value}
               fixedOptions={fixedOptions}

@@ -5,22 +5,22 @@ import {
   Grid,
   Avatar,
   Box,
-  Divider,
   Button,
 } from '@material-ui/core'
 // /import { useHistory } from 'react-router-dom'
 import img from 'assets/images/11.jpg'
 import numberFormat from 'utils/numberFormat'
 import { BsLink } from 'react-icons/bs'
-import Rating from './Rating'
-import Dialog from './DialogCourse'
+import Rating from '../Rating'
+import Dialog from '../DialogCourse'
+
 
 const useStyles = makeStyles(() => ({
   card: {
     width: '100%',
-    background: '#fdfdfd',
+   // background: '#fdfdfd',
     height: '100%',
-    boxShadow: '4px 4px 4px 4px rgb(0 0 0 / 8%)',
+    //boxShadow: '4px 4px 4px 4px rgb(0 0 0 / 8%)',
     borderRadius: '0.5rem',
     transition: '0.4s',
     '&:hover': {
@@ -80,7 +80,7 @@ const useStyles = makeStyles(() => ({
   dot: {
     height: '10px',
     width: '10px',
-    backgroundColor: '#cfcde6',
+    backgroundColor: '#f9b122',
     borderRadius: '50%',
     display: 'inline-block',
     marginLeft: 10,
@@ -109,8 +109,14 @@ const useStyles = makeStyles(() => ({
   submit: {
     padding: 0,
     float: 'right',
-    margin: 4,
-  },
+    margin: 0,
+  }, boxshadow: {
+   //Horizontal Lengthpx,Vertical Lengt,Blur Radiuspx,Spread //6px -65px 2px -35px  #999999
+    boxShadow:'1px -24px 1px -14px #aaaaaa,4px -46px 3px -25px  #7f7f7f',
+    marginTop: 30,
+    borderRadius: 10,
+
+  }
 }))
 
 export default function IconBreadcrumbs(props: any) {
@@ -124,8 +130,12 @@ export default function IconBreadcrumbs(props: any) {
   return (
     <div className={classes.card}>
       <Grid container direction="row" justify="flex-start" alignItems="center">
-        <div className={classes.main} onClick={handleClickOpen}>
-          <img alt="" src={img} width="100%" height="100%" />
+        <div onClick={handleClickOpen}>
+          <div className={classes.boxshadow}>
+            <img alt="" src={img} width="100%" height="280" style={{ borderRadius: 8,
+    objectFit: 'cover'}}/>
+          </div>
+          
         </div>
 
         <Typography variant={'h2'} className={classes.title}>
@@ -140,7 +150,7 @@ export default function IconBreadcrumbs(props: any) {
           className={classes.detail}
         >
           <div className={classes.dot} />
-          <Box fontWeight={500}>สังคมศาสตร์</Box>
+          <Box fontWeight={500}>หลักสูตร</Box>
 
           <div>
             <Box fontWeight={400} className={classes.caption}>
@@ -151,7 +161,8 @@ export default function IconBreadcrumbs(props: any) {
             </Box>
           </div>
         </Grid>
-
+        <Grid container direction='column' justify="space-around" alignItems="center">
+          <Grid container direction='row' justify="flex-start" alignItems="center">
         <div className={classes.logo}>
           <Avatar className={classes.avatar} src={logo} />
         </div>
@@ -176,11 +187,10 @@ export default function IconBreadcrumbs(props: any) {
               การดู {numberFormat(view)} ครั้ง
             </Typography>
           </Grid>
-        </div>
-      </Grid>
-      <Divider />
-      <Grid container direction="row" justify="flex-end" alignItems="center">
-        <Button
+       
+            </div>
+            <Grid item>
+      <Button
           color="primary"
           href="/learning-portal/catalog/12321"
           className={classes.submit}
@@ -188,6 +198,11 @@ export default function IconBreadcrumbs(props: any) {
           <BsLink size={24} />
         </Button>
       </Grid>
+          </Grid>
+       
+        </Grid>
+      </Grid>
+   
 
       <Dialog open={open} setOpen={setOpen} />
     </div>

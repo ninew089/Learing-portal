@@ -134,7 +134,7 @@ export default function SignIn(props: any) {
           <TextField
             fullWidth
             id="input-with-icon-textfield"
-            label="เลขที่บัตรประชาชน"
+            label="เลขประจำตัวประชาชน"
             name="userid"
             inputRef={formProps.register}
             helperText={
@@ -200,7 +200,7 @@ export default function SignIn(props: any) {
           />
 
           <Button fullWidth className={classes.submit}>
-            เช็ครหัสผู้ใช้
+           ตรวจสอบว่ามีผู้ใช้หรือไม่
           </Button>
         </FormControl>
       </form>

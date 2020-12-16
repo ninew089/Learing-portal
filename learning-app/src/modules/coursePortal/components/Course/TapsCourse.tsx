@@ -3,6 +3,13 @@ import { Box, Grid, IconButton, Avatar, Hidden } from '@material-ui/core'
 import { useHistory, useRouteMatch } from 'react-router-dom'
 import Courses from './CategoryByTapCourses'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
+import logo1 from 'assets/images/category/1.png'
+import logo2 from 'assets/images/category/2.png'
+import logo3 from 'assets/images/category/3.png'
+import logo4 from 'assets/images/category/4.png'
+import logo5 from 'assets/images/category/5.png'
+import logo6 from 'assets/images/category/6.png'
+import logo7 from 'assets/images/category/7.png'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -27,8 +34,12 @@ const useStyles = makeStyles((theme: Theme) =>
       },
     },
     large: {
-      width: theme.spacing(6),
-      height: theme.spacing(6),
+      width: theme.spacing(10),
+      height: theme.spacing(10),
+      [theme.breakpoints.only('xs')]: {
+        width: theme.spacing(6),
+        height: theme.spacing(6),
+      },
     },
     text: {
       overflow: 'hidden',
@@ -71,14 +82,16 @@ export default function PointNavigationMenu({ title }: { title: string }) {
     setIndex(i)
   }
   const catagory = [
-    'การบริหารงาน ก.พ.',
-    'การบริหารทรัพยากรบุคคล',
-    'กฎหมายและระเบียบราชการ',
-    'การเขียนหนังสือราชการ',
-    'สังคม (Soft Skill)',
-    'ดิจิทัล',
-    'ภาษา',
+    { title: 'การบริหารงาน ก.พ.', img: logo1 },
+    { title: 'การบริหารทรัพยากรบุคคล', img: logo2 },
+    { title: 'กฎหมายและระเบียบราชการ', img: logo3 },
+    { title: 'การเขียนหนังสือราชการ', img: logo4 },
+    { title: 'สังคม (Soft Skill)', img: logo5 },
+    { title: 'ดิจิทัล', img: logo6},
+    { title: 'ภาษา', img: logo7 },
   ]
+  
+
 
   const Select = (number: number) => {
     if (number === index) {
@@ -118,8 +131,8 @@ export default function PointNavigationMenu({ title }: { title: string }) {
                   justify="center"
                 >
                   <Avatar
-                    alt={name}
-                    src="/static/images/avatar/1.jpg"
+                    alt={name.title}
+                    src={name.img}
                     className={classes.large}
                   />
                 </Grid>
@@ -130,7 +143,7 @@ export default function PointNavigationMenu({ title }: { title: string }) {
                     fontWeight: SelectWeight(i),
                   }}
                 >
-                  {name}
+                  {name.title}
                 </Grid>
               </Grid>
             </IconButton>
@@ -165,8 +178,8 @@ export default function PointNavigationMenu({ title }: { title: string }) {
                     justify="center"
                   >
                     <Avatar
-                      alt={name}
-                      src="/static/images/avatar/1.jpg"
+                      alt={name.title}
+                      src={name.img}
                       className={classes.large}
                     />
                   </Grid>
@@ -177,7 +190,7 @@ export default function PointNavigationMenu({ title }: { title: string }) {
                       fontWeight: SelectWeight(i),
                     }}
                   >
-                    {name}
+                    {name.title}
                   </Grid>
                 </Grid>
               </IconButton>

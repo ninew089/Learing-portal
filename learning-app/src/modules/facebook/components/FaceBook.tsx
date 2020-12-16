@@ -33,7 +33,7 @@ class FacebookComponent extends Component {
         </FacebookProvider>
         <FacebookProvider appId="324263845303507">
           <Comments
-            href="https://cubioinfo.com/course/plugins/comments#configurator"
+            href="https://cubioinfo.com/course/community/plugins/comments#configurator"
             width="100%"
             className="fb_iframe_widget_fluid_desktop"
             data-width="100%"

@@ -67,14 +67,14 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     flexGrow: 1,
-    minHeight: ` ${window.screen.height - 180}px`,
+    minHeight: `100vh`,
     background: '#f5f5f5',
   },
   push: {
     height: '120px',
   },
   footer: {
-    height: '60px',
+    height: '12vh',
     background: '#0f1626', //transparent
     color: '#f3f3fb',
     backdropFilter: 'blur(6px)',
@@ -131,7 +131,7 @@ export default function PersistentDrawerLeft(props: any) {
   const { pathname } = useLocation()
   const login = useSelector((state: any) => state.login.Login)
   const matches = useMediaQuery(theme.breakpoints.down('sm'))
-
+  const matchesIspad = useMediaQuery(theme.breakpoints.down('md'))
   return (
     <div className={classes.root}>
       <AppBar position="fixed" className={clsx(classes.appBar)} elevation={0}>
@@ -147,7 +147,7 @@ export default function PersistentDrawerLeft(props: any) {
                 to="/learning-portal"
                 style={{ color: 'inherit', textDecoration: 'inherit' }}
               >
-                <img alt="" src={banner} width={matches ? 100 : 140} />
+                <img alt="" src={banner} width={matchesIspad ? 100 : 140} />
               </NavLink>
 
               <Hidden smDown>

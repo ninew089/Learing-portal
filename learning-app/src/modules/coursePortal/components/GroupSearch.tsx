@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 700,
     borderRadius: 128,
     '& .MuiOutlinedInput-notchedOutline': {
-      borderColor: '#ffffff',
+      borderColor: '#ffaf0b',
       borderWidth: '2px',
     },
     '&:hover .MuiOutlinedInput-notchedOutline': {

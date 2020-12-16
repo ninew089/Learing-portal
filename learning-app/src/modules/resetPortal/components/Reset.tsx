@@ -100,7 +100,7 @@ export default function SignIn() {
         .string()
         .required()
         .oneOf([yup.ref('password1')], 'กรุณากรอกรหัสให้เหมือนกัน')
-        .required('กรุณากรอกรหัสผ่าน ( 2 )'),
+        .required('กรุณากรอกรหัสผ่านใหม่'),
     }),
   })
   const onSubmitData = (data: any) => {
@@ -139,7 +139,7 @@ export default function SignIn() {
             variant="outlined"
             className={classes.textfield}
             fullWidth
-            label="รหัสผ่าน (1)"
+            label="รหัสผ่านใหม่"
             name="pwd1"
             inputRef={register}
             helperText={errors.pwd1 ? 'กรอกรหัสผ่าน' : ''}
@@ -160,7 +160,7 @@ export default function SignIn() {
             className={classes.textfield}
             fullWidth
             id="input-with-icon-textfield"
-            label="รหัสผ่าน (2)"
+            label="รหัสผ่านใหม่"
             name="pwd2"
             inputRef={register}
             helperText={errors.pwd2 ? 'กรอกรหัสผ่าน' : ''}
