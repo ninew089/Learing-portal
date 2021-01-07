@@ -1,8 +1,212 @@
-const initialState = {}
+import {
+  LOAD_COURSESCATEGORY_REQUEST,
+  LOAD_COURSESCATEGORY_SUCCESS,
+  LOAD_COURSESCATEGORY_FAILURE,
+  LOAD_COURSESCATEGORIES_REQUEST,
+  LOAD_COURSESCATEGORIES_SUCCESS,
+  LOAD_COURSESCATEGORIES_FAILURE,
+  LOAD_COURSE_REQUEST,
+  LOAD_COURSE_SUCCESS,
+  LOAD_COURSE_FAILURE,
+  LOAD_COURSES_REQUEST,
+  LOAD_COURSES_SUCCESS,
+  LOAD_COURSES_FAILURE,
+  LOAD_COURSEVIEW_REQUEST,
+  LOAD_COURSEVIEW_SUCCESS,
+  LOAD_COURSEVIEW_FAILURE,
+  LOAD_CURRICULUM_REQUEST,
+  LOAD_CURRICULUM_SUCCESS,
+  LOAD_CURRICULUM_FAILURE,
+  LOAD_CURRICULUMVIEW_REQUEST,
+  LOAD_CURRICULUMVIEW_SUCCESS,
+  LOAD_CURRICULUMVIEW_FAILURE,
+  LOAD_CURRICULUMCOURSE_REQUEST,
+  LOAD_CURRICULUMCOURSE_SUCCESS,
+  LOAD_CURRICULUMCOURSE_FAILURE,
+  LOAD_TOPRATE_REQUEST,
+  LOAD_TOPRATE_SUCCESS,
+  LOAD_TOPRATE_FAILURE,
+  LOAD_RECOMMENDED_REQUEST,
+  LOAD_RECOMMENDED_SUCCESS,
+  LOAD_RECOMMENDED_FAILURE,
+  LOAD_CURRICULUMS_REQUEST,
+  LOAD_CURRICULUMS_SUCCESS,
+  LOAD_CURRICULUMS_FAILURE,
+} from "./actions";
+
+const initialState = {
+  isLoading: false,
+  isLoadingCourse: false,
+  isLoadingCourses: false,
+  isLoadingCurriculum: false,
+  isLoadingCurriculums: false,
+  isLoadingToprate: false,
+  isLoadingRecommemded: false,
+  isLoadingCourseCategories: false,
+  isError: false,
+  courseCategories: [],
+  categories: [],
+  course: [],
+  courses: [],
+  curriculums: [],
+  curriculum: [],
+  curriculumscourse: [],
+  toprate: [],
+  recommemded: [],
+};
 
 export default function (state = initialState, action: any) {
   switch (action.type) {
+    case LOAD_RECOMMENDED_REQUEST:
+      return { ...state, isLoadingRecommemded: true, recommemded: [] };
+    case LOAD_RECOMMENDED_SUCCESS:
+      return {
+        ...state,
+        isLoadingRecommemded: false,
+        recommemded: action.payload.recommemded,
+        isError: true,
+      };
+    case LOAD_RECOMMENDED_FAILURE:
+      return { ...state, isLoadingRecommemded: false, isError: false };
+
+    case LOAD_TOPRATE_REQUEST:
+      return { ...state, isLoadingToprate: true, toprate: [] };
+    case LOAD_TOPRATE_SUCCESS:
+      return {
+        ...state,
+        isLoadingToprate: false,
+        toprate: action.payload.toprate,
+        isError: true,
+      };
+    case LOAD_TOPRATE_FAILURE:
+      return { ...state, isLoadingToprate: false, isError: false };
+
+    case LOAD_COURSESCATEGORY_REQUEST:
+      return { ...state, isLoading: true, categories: [] };
+    case LOAD_COURSESCATEGORY_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        categories: action.payload.categories,
+        isError: true,
+      };
+    case LOAD_COURSESCATEGORY_FAILURE:
+      return { ...state, isLoading: false, isError: false };
+
+    case LOAD_COURSESCATEGORIES_REQUEST:
+      return {
+        ...state,
+        isLoadingCourseCategories: true,
+        courseCategories: [],
+
+      };
+    case LOAD_COURSESCATEGORIES_SUCCESS:
+      return {
+        ...state,
+        isLoadingCourseCategories: false,
+        courseCategories: action.payload.courseCategories,
+        isError: true,
+      };
+
+    case LOAD_COURSESCATEGORIES_FAILURE:
+      return { ...state, isLoadingCourseCategories: false, isError: false };
+
+    case LOAD_COURSE_REQUEST:
+      return { ...state, isLoadingCourse: true, course: [] };
+    case LOAD_COURSE_SUCCESS:
+      return {
+        ...state,
+        isLoadingCourse: false,
+        course: action.payload.course,
+        isError: true,
+      };
+    case LOAD_COURSE_FAILURE:
+      return { ...state, isLoadingCourse: false, isError: false };
+
+    case LOAD_COURSES_REQUEST:
+      return { ...state, isLoadingCourses: true, courses: [] };
+    case LOAD_COURSES_SUCCESS:
+      return {
+        ...state,
+        isLoadingCourses: false,
+        courses: action.payload.courses,
+        isError: true,
+      };
+    case LOAD_COURSES_FAILURE:
+      return { ...state, isLoadingCourses: false, isError: false };
+    case LOAD_COURSEVIEW_REQUEST:
+      return {
+        ...state,
+        isLoading: true,
+        courseCategories: [],
+
+      };
+    case LOAD_COURSEVIEW_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+      };
+    case LOAD_COURSEVIEW_FAILURE:
+      return { ...state, isLoading: false, isError: false };
+
+    case LOAD_CURRICULUM_REQUEST:
+      return { ...state, isLoadingCurriculum: true, curriculum: [] };
+    case LOAD_CURRICULUM_SUCCESS:
+      return {
+        ...state,
+        isLoadingCurriculum: false,
+        curriculum: action.payload.curriculum,
+        isError: true,
+      };
+    case LOAD_CURRICULUM_FAILURE:
+      return { ...state, isLoadingCurriculum: false };
+    case LOAD_CURRICULUMS_REQUEST:
+      return { ...state, isLoadingCurriculums: true, curriculums: [] };
+    case LOAD_CURRICULUMS_SUCCESS:
+      return {
+        ...state,
+        isLoadingCurriculums: false,
+        curriculums: action.payload.curriculums,
+        isError: true,
+      };
+    case LOAD_CURRICULUMS_FAILURE:
+      return { ...state, isLoadingCurriculums: false, isError: false };
+
+    case LOAD_CURRICULUMCOURSE_REQUEST:
+      return {
+        ...state,
+        isLoading: true,
+        curriculumscourse: [],
+
+      };
+    case LOAD_CURRICULUMCOURSE_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        curriculumscourse: action.payload.curriculumscourse,
+        isError: true,
+      };
+    case LOAD_CURRICULUMCOURSE_FAILURE:
+      return { ...state, isLoading: false, isError: false };
+
+    case LOAD_CURRICULUMVIEW_REQUEST:
+      return {
+        ...state,
+        isLoading: true,
+        courseCategories: [],
+
+      };
+    case LOAD_CURRICULUMVIEW_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+      };
+    case LOAD_CURRICULUMVIEW_FAILURE:
+      return { ...state, isLoading: false, isError: false };
+
     default:
-      return state
+      return state;
   }
 }

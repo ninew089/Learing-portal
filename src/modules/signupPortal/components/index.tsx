@@ -1,292 +1,318 @@
-import React from 'react'
-import Snackbar from './Snackbar'
-import { Container, Button } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
-import Account from './Account'
-import Information from './Information'
-import TypeSelect from './TypeSelect'
-import { useForm } from 'react-hook-form'
-import * as yup from 'yup'
-
+import React from "react";
+import Snackbar from "shared/SnackBar/SnackBar"
+import { Container, Button } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import Account from "./Account";
+import Information from "./Information";
+import TypeSelect from "./TypeSelect";
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
+import * as actions from "../actions";
+import { useDispatch, useSelector } from "react-redux";
+import info from "utils/formatInfomation"
 const useStyles = makeStyles((theme) => ({
   paper: {
-    background: 'white',
-    borderRadius: ' 10px',
-    padding: '10px',
+    background: "white",
+    borderRadius: " 10px",
+    padding: "10px",
     marginTop: theme.spacing(4),
   },
   submit: {
-    marginTop: '10px',
+    marginTop: "10px",
     borderRadius: 20,
     padding: 10,
-    background: '#ff533d',
-    color: '#fdfdfd',
-    '&:hover': {
-      background: '#ff533d',
-      color: '#fdfdfd',
+    background: "#ff533d",
+    color: "#fdfdfd",
+    "&:hover": {
+      background: "#ff533d",
+      color: "#fdfdfd",
     },
   },
-}))
+}));
 
 export default function SignIn() {
-  const classes = useStyles()
+  const classes = useStyles();
+
   // eslint-disable-next-line
-  const [type, setType] = React.useState<string>('')
+  const [type, setType] = React.useState<string>("");
+  // eslint-disable-next-line
+  const [mistry, setMistry] = React.useState<string>("");
+
   const accountForm = useForm({
-    mode: 'onChange',
+    mode: "onChange",
     validationSchema: yup.object().shape({
-      userid: yup
+      id: yup
         .string()
-        .required('กรุณากรอกเลขบัตรประจำตัวประชาชน')
-        .matches(/^[0-9]{13}$/, 'กรุณากรอกเป็นตัวเลข 13 หลัก')
+        .required("กรุณากรอกเลขบัตรประจำตัวประชาชน")
+        .matches(/^[0-9]{13}$/, "กรุณากรอกเป็นตัวเลข 13 หลัก")
         .test(
-          'ตรวจสอบรหัสบัตรประชาชน',
-          'กรอกเลขบัตรประชาชนผิด กรุณากรอกใหม่',
+          "ตรวจสอบรหัสบัตรประชาชน",
+          "กรอกเลขบัตรประชาชนผิด กรุณากรอกใหม่",
 
           function (item: any) {
-            var i, sum
+            var i, sum;
             for (i = 0, sum = 0; i < 12; i++)
-              sum += parseFloat(item.charAt(i)) * (13 - i)
+              sum += parseFloat(item.charAt(i)) * (13 - i);
             if ((11 - (sum % 11)) % 10 !== parseFloat(item.charAt(12))) {
-              return false
+              return false;
             }
-            return true
-          },
+            return true;
+          }
         ),
       password: yup
         .string()
-        .required('กรุณากรอกรหัสผ่าน ( 1 )')
-        .min(8, 'รหัสต้องมีอย่างน้อย 8 ตัวอักษร'),
+        .required("กรุณากรอกรหัสผ่าน ( 1 )")
+        .min(8, "รหัสต้องมีอย่างน้อย 8 ตัวอักษร"),
       comfirmpassword: yup
         .string()
-        .oneOf([yup.ref('password')], 'กรุณากรอกรหัสให้เหมือนกัน')
-        .required('กรุณากรอกรหัสผ่าน ( 2 )'),
-      title: yup.string().required('กรุณากรอกคำนำหน้า'),
-      name: yup.string().required('กรุณากรอกชื่อ'),
-      surename: yup.string().required('กรุณากรอกนามสกุล'),
-      ybd: yup.string().required(),
-      sex: yup.string().required('กรุณาเลือกเพศ'),
-      edu: yup.string().required('กรุณาเลือกระดับการศึกษา'),
+        .oneOf([yup.ref("password")], "กรุณากรอกรหัสให้เหมือนกัน")
+        .required("กรุณากรอกรหัสผ่าน ( 2 )"),
+      title: yup.string().required("กรุณากรอกคำนำหน้า"),
+      name: yup.string().required("กรุณากรอกชื่อ"),
+      lastname: yup.string().required("กรุณากรอกนามสกุล"),
+      birthyear: yup.string().required(),
+      gender: yup.string().required("กรุณาเลือกเพศ"),
+      educationid: yup.string().required("กรุณาเลือกระดับการศึกษา"),
       email: yup
         .string()
-        .required('กรุณากรอกอีเมล')
-        .email('กรุณากรอกอีเมลให้ถูกต้อง'),
+        .required("กรุณากรอกอีเมล")
+        .email("กรุณากรอกอีเมลให้ถูกต้อง"),
 
-      type: yup.string().required('กรุณาเลือกประเภท'),
+      usertypeid: yup.string().required("กรุณาเลือกประเภท"),
 
-      jobtypeId: yup.string().when('type', {
-        is: (type) => {
-          setType(type)
-          switch (type) {
-            case 'ข้าราชการพลเรือน':
-              return true
-            case 'ข้าราชการประเภทอื่น':
-              return true
-            case 'เจ้าหน้าที่ของรัฐในส่วนราชการต่าง':
-              return true
-            case 'บุคคลทั่วไป':
-              return false
-            case 'พนักงานรัฐวิสาหกิจ':
-              return false
+      jobtypeId: yup.string().when("usertypeid", {
+        is: (usertypeid) => {
+          setType(usertypeid);
+          switch (usertypeid) {
+            case "1":
+              return true;
+            case "2":
+              return true;
+            case "3":
+              return true;
+            case "5":
+              return false;
+            case "4":
+              return false;
           }
         },
-        then: yup.string().required('กรุณาเลือกประเภทตำแหน่ง'),
+        then: yup.string().required("กรุณาเลือกประเภทตำแหน่ง"),
         otherwise: yup.string().nullable(),
       }),
-      jobTitle: yup.string().when('type', {
-        is: (type) => {
-          switch (type) {
-            case 'ข้าราชการพลเรือน':
-              return true
-            case 'ข้าราชการประเภทอื่น':
-              return true
-            case 'เจ้าหน้าที่ของรัฐในส่วนราชการต่าง':
-              return true
-            case 'บุคคลทั่วไป':
-              return true
-            case 'พนักงานรัฐวิสาหกิจ':
-              return true
+      jobTitle: yup.string().when("usertypeid", {
+        is: (usertypeid) => {
+          switch (usertypeid) {
+            case "1":
+              return true;
+            case "2":
+              return true;
+            case "3":
+              return true;
+            case "5":
+              return true;
+            case "4":
+              return true;
           }
         },
-        then: yup.string().required('กรุณากรอกตำแหน่ง'),
+        then: yup.string().required("กรุณากรอกตำแหน่ง"),
         otherwise: yup.string().nullable(),
       }),
-      jobtypeLevelid: yup.string().when('type', {
-        is: (type) => {
-          switch (type) {
-            case 'ข้าราชการพลเรือน':
-              return true
-            case 'ข้าราชการประเภทอื่น':
-              return false
-            case 'เจ้าหน้าที่ของรัฐในส่วนราชการต่าง':
-              return false
-            case 'บุคคลทั่วไป':
-              return false
-            case 'พนักงานรัฐวิสาหกิจ':
-              return false
+      jobLevelid: yup.string().when("usertypeid", {
+        is: (usertypeid) => {
+          switch (usertypeid) {
+            case "1":
+              return true;
+            case "2":
+              return false;
+            case "3":
+              return false;
+            case "5":
+              return false;
+            case "4":
+              return false;
           }
         },
-        then: yup.string().required('กรุณาเลือกระดับ'),
-        otherwise: yup.string().nullable(),
-      }),
-
-      jobLevel: yup.string().when('type', {
-        is: (type) => {
-          switch (type) {
-            case 'ข้าราชการพลเรือน':
-              return false
-            case 'ข้าราชการประเภทอื่น':
-              return true
-            case 'เจ้าหน้าที่ของรัฐในส่วนราชการต่าง':
-              return true
-            case 'บุคคลทั่วไป':
-              return false
-            case 'พนักงานรัฐวิสาหกิจ':
-              return false
-          }
-        },
-        then: yup.string().required('กรุณาเลือกประเภท'),
+        then: yup.string().required("กรุณาเลือกระดับ"),
         otherwise: yup.string().nullable(),
       }),
 
-      jobDate: yup.string().when('type', {
-        is: (type) => {
-          switch (type) {
-            case 'ข้าราชการพลเรือน':
-              return true
-            case 'ข้าราชการประเภทอื่น':
-              return true
-            case 'เจ้าหน้าที่ของรัฐในส่วนราชการต่าง':
-              return true
-            case 'บุคคลทั่วไป':
-              return false
-            case 'พนักงานรัฐวิสาหกิจ':
-              return true
+      jobLevel: yup.string().when("usertypeid", {
+        is: (usertypeid) => {
+          switch (usertypeid) {
+            case "1":
+              return false;
+            case "2":
+              return true;
+            case "3":
+              return true;
+            case "5":
+              return false;
+            case "4":
+              return false;
           }
         },
-        then: yup.string().required('กรุณาเลือกปี'),
+        then: yup.string().required("กรุณาเลือกประเภท"),
         otherwise: yup.string().nullable(),
       }),
 
-      MinistryId: yup.string().when('type', {
-        is: (type) => {
-          switch (type) {
-            case 'ข้าราชการพลเรือน':
-              return true
-            case 'ข้าราชการประเภทอื่น':
-              return true
-            case 'เจ้าหน้าที่ของรัฐในส่วนราชการต่าง':
-              return true
-            case 'บุคคลทั่วไป':
-              return false
-            case 'พนักงานรัฐวิสาหกิจ':
-              return false
+      jobStartDate: yup.string().when("usertypeid", {
+        is: (usertypeid) => {
+          switch (usertypeid) {
+            case "1":
+              return true;
+            case "2":
+              return true;
+            case "3":
+              return true;
+            case "5":
+              return false;
+            case "4":
+              return true;
           }
         },
-        then: yup.string().required('กรุณาเลือกกระทรวงที่สังกัด'),
+        then: yup.string().required("กรุณาเลือกปี"),
         otherwise: yup.string().nullable(),
       }),
 
-      DepartmentId: yup.string().when('type', {
-        is: (type) => {
-          switch (type) {
-            case 'ข้าราชการพลเรือน':
-              return true
-            case 'ข้าราชการประเภทอื่น':
-              return true
-            case 'เจ้าหน้าที่ของรัฐในส่วนราชการต่าง':
-              return true
-            case 'บุคคลทั่วไป':
-              return false
-            case 'พนักงานรัฐวิสาหกิจ':
-              return false
+      MinistryId: yup.string().when("usertypeid", {
+        is: (usertypeid) => {
+          switch (usertypeid) {
+            case "1":
+              return true;
+            case "2":
+              return true;
+            case "3":
+              return true;
+            case "5":
+              return false;
+            case "4":
+              return false;
           }
         },
-        then: yup.string().required('กรุณาเลือกกรมที่สังกัด'),
+        then: yup.string().required("กรุณาเลือกกระทรวงที่สังกัด"),
         otherwise: yup.string().nullable(),
       }),
-      Division: yup.string().when('type', {
-        is: (type) => {
-          switch (type) {
-            case 'ข้าราชการพลเรือน':
-              return true
-            case 'ข้าราชการประเภทอื่น':
-              return true
-            case 'เจ้าหน้าที่ของรัฐในส่วนราชการต่าง':
-              return true
-            case 'พนักงานรัฐวิสาหกิจ':
-              return false
+      DepartmentId: yup
+        .string()
+        .when(["usertypeid", "MinistryId"], {
+          is: (usertypeid, MinistryId) => {
+            setMistry(MinistryId);
+            switch (usertypeid) {
+              case "1":
+                return true;
+              case "2":
+                return true;
+              case "3":
+                return true;
+              case "5":
+                return false;
+              case "4":
+                return false;
+            }
+          },
+          then: yup.string().required("กรุณาเลือกกรมที่สังกัด"),
+          otherwise: yup.string().nullable(),
+        }),
+      Division: yup.string().when("usertypeid", {
+        is: (usertypeid) => {
+          switch (usertypeid) {
+            case "1":
+              return true;
+            case "2":
+              return true;
+            case "3":
+              return true;
+            case "4":
+              return false;
+            case "5":
+              return false;
           }
         },
-        then: yup.string().required('กรุณากรอกชื่อส่วนราชการที่สังกัด'),
+        then: yup.string().required("กรุณากรอกชื่อส่วนราชการที่สังกัด"),
         otherwise: yup.string().nullable(),
       }),
-      OccupationId: yup.string().when('type', {
-        is: (type) => {
-          switch (type) {
-            case 'ข้าราชการพลเรือน':
-              return false
-            case 'ข้าราชการประเภทอื่น':
-              return false
-            case 'เจ้าหน้าที่ของรัฐในส่วนราชการต่าง':
-              return false
-            case 'บุคคลทั่วไป':
-              return true
-            case 'พนักงานรัฐวิสาหกิจ':
-              return false
+      OccupationId: yup.string().when(["usertypeid", "MinistryId"], {
+        is: (usertypeid) => {
+          switch (usertypeid) {
+            case "1":
+              return false;
+            case "2":
+              return false;
+            case "3":
+              return false;
+            case "5":
+              return true;
+            case "4":
+              return false;
           }
         },
-        then: yup.string().required('กรุณากรอกเลือกอาชีพ'),
+        then: yup.string().required("กรุณากรอกเลือกอาชีพ"),
         otherwise: yup.string().nullable(),
       }),
-      workPlace: yup.string().when('type', {
-        is: (type) => {
-          switch (type) {
-            case 'ข้าราชการพลเรือน':
-              return false
-            case 'ข้าราชการประเภทอื่น':
-              return false
-            case 'เจ้าหน้าที่ของรัฐในส่วนราชการต่าง':
-              return false
-            case 'บุคคลทั่วไป':
-              return true
-            case 'พนักงานรัฐวิสาหกิจ':
-              return false
+      workPlace: yup.string().when("usertypeid", {
+        is: (usertypeid) => {
+          switch (usertypeid) {
+            case "1":
+              return false;
+            case "2":
+              return false;
+            case "3":
+              return false;
+            case "5":
+              return true;
+            case "4":
+              return false;
           }
         },
-        then: yup.string().required('กรุณากรอกเลือกอาชีพ'),
+        then: yup.string().required("กรุณากรอกเลือกอาชีพ"),
         otherwise: yup.string().nullable(),
       }),
-      stateEnterprised: yup.string().when('type', {
-        is: (type) => {
-          switch (type) {
-            case 'ข้าราชการพลเรือน':
-              return false
-            case 'ข้าราชการประเภทอื่น':
-              return false
-            case 'เจ้าหน้าที่ของรัฐในส่วนราชการต่าง':
-              return false
-            case 'บุคคลทั่วไป':
-              return false
-            case 'พนักงานรัฐวิสาหกิจ':
-              return true
+      stateEnterprisid: yup.string().when("usertypeid", {
+        is: (usertypeid) => {
+          switch (usertypeid) {
+            case "1":
+              return false;
+            case "2":
+              return false;
+            case "3":
+              return false;
+            case "5":
+              return false;
+            case "4":
+              return true;
           }
         },
-        then: yup.string().required('กรุณากรอกเลือกอาชีพ'),
+        then: yup.string().required("กรุณากรอกเลือกอาชีพ"),
         otherwise: yup.string().nullable(),
       }),
     }),
-  })
+  });
+
+  const dispatch = useDispatch();
+
+
+
 
   const onSubmitData = (data: any) => {
-    console.log(data)
-    setOpen(true)
-  }
-  const [open, setOpen] = React.useState(false)
+    const preinfo = info(data);
+    const action = actions.loadSignUp(preinfo);
+    dispatch(action);
+  };
+
+  const { message, severity } = useSelector((state: any) => state.infomation);
+
 
   return (
     <>
+      {message !== null && <Snackbar
+        message={message
+        }
+        open={message !== null ? true : false}
+        severity={severity}
+      />
+      }
       <form onSubmit={accountForm.handleSubmit(onSubmitData)}>
+
         <Container component="main" maxWidth="xs" className={classes.paper}>
           <Account formProps={accountForm} />
           <Information formProps={accountForm} />
@@ -295,10 +321,10 @@ export default function SignIn() {
             <Button type="submit" fullWidth className={classes.submit}>
               ส่งข้อมูล
             </Button>
-            <Snackbar open={open} setOpen={setOpen} />
+
           </Container>
         </Container>
       </form>
     </>
-  )
+  );
 }

@@ -1,0 +1,6 @@
+import React from 'react';
+import { storiesOf } from '@storybook/react';
+import GmailButton from './GmailButton';
+storiesOf('mui-components|Button', module).add('gmail', function () {
+  return /*#__PURE__*/React.createElement(GmailButton, null);
+});

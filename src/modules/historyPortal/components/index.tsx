@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
-import MaterialTable from 'material-table'
-import { forwardRef } from 'react'
-import { CssBaseline } from '@material-ui/core'
+import React, { useEffect } from "react";
+import MaterialTable from "material-table";
+import { forwardRef } from "react";
+import { CssBaseline, Toolbar } from "@material-ui/core";
 import {
   AddBox,
   ArrowDownward,
@@ -18,11 +18,15 @@ import {
   SaveAlt,
   Search,
   ViewColumn,
-} from '@material-ui/icons'
-//import axios from "axios"
 
+} from "@material-ui/icons";
+
+import { useDispatch, useSelector } from 'react-redux'
+import * as  actions from '../actions'
+
+import { formatDatetoThai } from "utils/dateFormat"
 export default function MaterialTableDemo(props: any) {
-  const tableRef = React.createRef()
+  const tableRef = React.createRef();
   const tableIcons = {
     Add: forwardRef<SVGSVGElement>((props, ref) => (
       <AddBox {...props} ref={ref} />
@@ -75,152 +79,74 @@ export default function MaterialTableDemo(props: any) {
     ViewColumn: forwardRef<SVGSVGElement>((props, ref) => (
       <ViewColumn {...props} ref={ref} />
     )),
-  }
+  };
 
-  // eslint-disable-next-line
-  const [data, setData] = useState([
-    {
-      id: 'A00',
-      course: 'การวางแผนกลยุทธ์',
 
-      idcard: '1234567891235',
-      title: 'นาย',
-      name: 'กกกกก',
-      Lname: 'ขขขขข',
-      date: '20 ม.ค. 2563',
-      dateend: '20 ก.ค. 2563',
-      grade: 'A',
-      time: '30',
-      complete: 'สำนักงาน ก.พ.',
-    },
-    {
-      id: 'A01',
-      course: 'การวางแผนกลยุทธ์',
 
-      idcard: '1234567891235',
-      title: 'นาย',
-      name: 'กกกกก',
-      Lname: 'ขขขขข',
-      date: '1 มี.ค. 2563',
-      dateend: '20 ก.ค. 2563',
-      grade: 'A',
-      time: '30',
-      complete: 'สำนักงาน ก.พ.',
-    },
-    {
-      id: 'A02',
-      course: 'การวางแผนกลยุทธ์',
+  const dispatch = useDispatch();
 
-      idcard: '1234567891235',
-      title: 'นาย',
-      name: 'กกกกก',
-      Lname: 'ขขขขข',
-      date: '1 มี.ค. 2563',
-      dateend: '20 ก.ค. 2563',
-      grade: 'A',
-      time: '30',
-      complete: 'สำนักงาน ก.พ.',
-    },
-  ])
-  // eslint-disable-next-line
-  const [data_course, setDatas] = useState([
-    {
-      id: 'C01',
-      course_id: 230124,
-      course: 'ฝึกอบรมข้าราชการบรรจุใหม่',
-      idcard: '1234567891235',
-      title: 'นาย',
-      name: 'กกกกก',
-      Lname: 'ขขขขข',
-      date: '1 มี.ค. 2563',
-      dateend: '20 ก.ค. 2563',
-      grade: 'A',
-      time: '30',
-      complete: 'สำนักงาน ก.พ.',
-    },
-    {
-      id: 'C02',
-      course_id: 230123,
-      course: 'ฝึกอบรมข้าราชการบรรจุใหม่',
-      idcard: '1234567891235',
-      title: 'นาย',
-      name: 'กกกกก',
-      Lname: 'ขขขขข',
-      date: '1 มี.ค. 2563',
-      dateend: '20 ก.ค. 2563',
-      grade: 'A',
-      time: '30',
-      complete: 'สำนักงาน ก.พ.',
-    },
-  ])
-
-  /*
-
-      useEffect(() => {
-    let newArr = [...data_course]
-    let num = data_course.length
-    for (let i = 0; i < data_cs.length; i++) {
-      newArr[num + i] = data_cs[i]
-    }
-    setDatas(newArr)
-    // Should not ever set state during rendering, so do this in useEffect instead.
+  useEffect(() => {
+    const action = actions.loadCourseCertificates()
+    dispatch(action)
+    const actionCurriculums = actions.loadCurriculumCertificates()
+    dispatch(actionCurriculums)
     // eslint-disable-next-line
   }, [])
 
-
-  useEffect(()=>{
-      const  fetchPost=async()=>{
-          const {data} =await axios.get("/history")
-          setData(data)
-      }
-      fetchPost()
-  },[])
-  
-   */
+  const { coursecertificate, curriculumcertificate } = useSelector((state: any) => state.certificate);
+  const predata = [...coursecertificate]
+  const predata1 = [...curriculumcertificate]
 
   return (
     <div>
       <CssBaseline />
-
+      <Toolbar />
       <MaterialTable
         icons={tableIcons}
         title="รายวิชา"
         tableRef={tableRef}
         columns={[
-          { title: 'รหัสรายวิชา', field: 'id', type: 'numeric' },
-          { title: 'ชื่อรายวิชา', field: 'course', type: 'numeric' },
-
-          { title: ' หน่วยงานที่ให้ประกาศนียบัตร', field: 'complete' },
+          { title: "รหัสรายวิชา", field: "courseId", type: "numeric" },
+          { title: "ชื่อรายวิชา", field: "course", type: "numeric" },
+          { title: " หน่วยงานที่ให้ประกาศนียบัตร", field: "complete" },
         ]}
-        data={data}
+        data={predata}
         detailPanel={(rowData) => {
           return (
             <div>
               <h4>
-                &nbsp;&nbsp;&nbsp;&nbsp; เลขประจำตัวประชาชน: {rowData.idcard}{' '}
+                &nbsp;&nbsp;&nbsp;&nbsp; เลขประจำตัวประชาชน: {rowData.userId}{" "}
               </h4>
 
               <h4>
-                {' '}
+                {" "}
                 &nbsp;&nbsp;&nbsp;&nbsp; ชื่อ: {rowData.title}
-                {rowData.name} {rowData.Lname}
+                {rowData.firstName} {rowData.lastname}
               </h4>
 
-              <h4> &nbsp;&nbsp;&nbsp;&nbsp;วันเปิดเรียน: {rowData.date}</h4>
-
+              <h4> &nbsp;&nbsp;&nbsp;&nbsp;วันเปิดเรียน: {formatDatetoThai(rowData.createDate)}</h4>
               <h4>
-                {' '}
-                &nbsp;&nbsp;&nbsp;&nbsp;วันที่สำเร็จการศึกษา: {rowData.dateend}
+                {" "}
+                &nbsp;&nbsp;&nbsp;&nbsp;วันที่เริ่มเรียน: {formatDatetoThai(rowData.startDate)}
               </h4>
 
               <h4>
-                {' '}
-                &nbsp;&nbsp;&nbsp;&nbsp;จำนวนชั่วโมงที่เข้าเรียน: {rowData.time}
+                {" "}
+                &nbsp;&nbsp;&nbsp;&nbsp;วันที่สำเร็จการศึกษา: {formatDatetoThai(rowData.endDate)}
+              </h4>
+
+              <h4>
+                {" "}
+                &nbsp;&nbsp;&nbsp;&nbsp;จำนวนชั่วโมงที่เข้าเรียน: {rowData.hour}
+              </h4>
+              <h4>
+                {" "}
+                &nbsp;&nbsp;&nbsp;&nbsp;คะแนนความพึงพอใจ: {rowData.satisfactionScore}
               </h4>
 
               <h4> &nbsp;&nbsp;&nbsp;&nbsp;เกรด: {rowData.grade}</h4>
             </div>
-          )
+          );
         }}
         onRowClick={(event, rowData, togglePanel: any) => togglePanel()}
       />
@@ -230,43 +156,51 @@ export default function MaterialTableDemo(props: any) {
         title="หลักสูตร"
         tableRef={tableRef}
         columns={[
-          { title: 'รหัสหลักสูตร', field: 'id', type: 'numeric' },
-          { title: 'ชื่อหลักสูตร', field: 'course', type: 'numeric' },
+          { title: "รหัสหลักสูตร", field: "curriculumId", type: "numeric" },
+          { title: "ชื่อหลักสูตร", field: "curriculum", type: "numeric" },
 
-          { title: ' หน่วยงานที่ให้ประกาศนียบัตร', field: 'complete' },
+          { title: " หน่วยงานที่ให้ประกาศนียบัตร", field: "complete" },
         ]}
-        data={data_course}
+        data={predata1}
         detailPanel={(rowData) => {
           return (
             <div>
               <h4>
-                &nbsp;&nbsp;&nbsp;&nbsp; เลขประจำตัวประชาชน: {rowData.idcard}{' '}
+                &nbsp;&nbsp;&nbsp;&nbsp; เลขประจำตัวประชาชน: {rowData.userId}{" "}
               </h4>
 
               <h4>
-                {' '}
+                {" "}
                 &nbsp;&nbsp;&nbsp;&nbsp; ชื่อ: {rowData.title}
-                {rowData.name} {rowData.Lname}
+                {rowData.firstName} {rowData.lastname}
               </h4>
 
-              <h4> &nbsp;&nbsp;&nbsp;&nbsp;วันเปิดเรียน: {rowData.date}</h4>
-
+              <h4> &nbsp;&nbsp;&nbsp;&nbsp;วันเปิดเรียน: {formatDatetoThai(rowData.createDate)}</h4>
               <h4>
-                {' '}
-                &nbsp;&nbsp;&nbsp;&nbsp;วันที่สำเร็จการศึกษา: {rowData.dateend}
+                {" "}
+                &nbsp;&nbsp;&nbsp;&nbsp;วันที่เริ่มเรียน: {formatDatetoThai(rowData.startDate)}
               </h4>
 
               <h4>
-                {' '}
-                &nbsp;&nbsp;&nbsp;&nbsp;จำนวนชั่วโมงที่เข้าเรียน: {rowData.time}
+                {" "}
+                &nbsp;&nbsp;&nbsp;&nbsp;วันที่สำเร็จการศึกษา: {formatDatetoThai(rowData.endDate)}
+              </h4>
+
+              <h4>
+                {" "}
+                &nbsp;&nbsp;&nbsp;&nbsp;จำนวนชั่วโมงที่เข้าเรียน: {rowData.hour}
+              </h4>
+              <h4>
+                {" "}
+                &nbsp;&nbsp;&nbsp;&nbsp;คะแนนความพึงพอใจ: {rowData.satisfactionScore}
               </h4>
 
               <h4> &nbsp;&nbsp;&nbsp;&nbsp;เกรด: {rowData.grade}</h4>
             </div>
-          )
+          );
         }}
         onRowClick={(event, rowData, togglePanel: any) => togglePanel()}
       />
     </div>
-  )
+  );
 }

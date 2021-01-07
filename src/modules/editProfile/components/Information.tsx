@@ -1,24 +1,26 @@
-import React from 'react'
+import React, { useEffect } from "react";
 
-import Date from './DatePicker'
-import { Controller } from 'react-hook-form'
+import Date from "./DatePicker";
+import { Controller } from "react-hook-form";
 import {
   Typography,
   MenuItem,
   FormControl,
   CssBaseline,
   TextField,
-} from '@material-ui/core'
 
-import { makeStyles } from '@material-ui/core/styles'
+} from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import * as actions from "modules/infomation/actions";
+import { useDispatch, useSelector } from "react-redux";
+
 const useStyles = makeStyles((theme) => ({
-  
   margin: {
     margin: theme.spacing(1),
     padding: theme.spacing(1),
   },
   button: {
-    display: 'block',
+    display: "block",
     marginTop: theme.spacing(2),
   },
   formControl: {
@@ -33,10 +35,9 @@ const useStyles = makeStyles((theme) => ({
   },
   formControlDate: {
     margin: theme.spacing(2),
-
   },
   font: {
-    color: 'rgba(0, 0, 0, 0.54)',
+    color: "rgba(0, 0, 0, 0.54)",
     fontWeight: 500,
     paddingTop: 0,
     marginTop: 0,
@@ -53,224 +54,231 @@ const useStyles = makeStyles((theme) => ({
   },
   selectInput: {
     color: "#757575",
-    fontWeight:600,
-    '& .MuiInputBase-root.MuiOutlineInput-root': {
-      color: '#45A29E',
-      borderColor: '#757575',
-      fontWeight:600
-    }
+    fontWeight: 600,
+    "& .MuiInputBase-root.MuiOutlineInput-root": {
+      color: "#45A29E",
+      borderColor: "#757575",
+      fontWeight: 600,
+    },
   },
-    input: {
-      color: "#0f1626",
-      fontWeight:600,
-      '& .MuiInputBase-root.MuiOutlineInput-root': {
-        color: '#45A29E',
-        borderColor: '#757575',
-        fontWeight:600
+  input: {
+    color: "#0f1626",
+    fontWeight: 600,
+    "& .MuiInputBase-root.MuiOutlineInput-root": {
+      color: "#45A29E",
+      borderColor: "#757575",
+      fontWeight: 600,
+    },
+  },
+  textfield: {
+    marginTop: 10,
+    "& .MuiFormHelperText-root.Mui-error ": {
+      color: "ff533d",
+      fontWeight: 600,
+      borderWidth: "1px",
+    },
+    "& .MuiInput-underline.Mui-error:after": {
+      borderColor: "ff533d",
+      borderWidth: "1px",
+    },
+    "& label.MuiFormLabel-root": {
+      fontWeight: 600,
+      "&:after .Mui-error": {
+        borderColor: "#ff533d",
+        borderWidth: "1px",
       },
     },
-    textfield: {
-      marginTop:10,
-      '& .MuiFormHelperText-root.Mui-error ':{
-        color: 'ff533d',
-        fontWeight:600,
-        borderWidth:'1px'
+    "& label.Mui-focused": {
+      color: "#132740",
+    },
+    "& .MuiInput-underline:after": {
+      borderBottomColor: theme.palette.secondary.main,
+    },
+    "& .MuiOutlinedInput-root": {
+      "& fieldset": {
+        borderColor: theme.palette.secondary.main,
+        borderWidth: "1px",
       },
-        '& .MuiInput-underline.Mui-error:after':{
-          borderColor: 'ff533d',
-          borderWidth:'1px'
-         
-        },
-      '& label.MuiFormLabel-root': {
-        fontWeight:600,
-        '&:after .Mui-error': {
-          borderColor: '#ff533d',
-          borderWidth:'1px'
-        }
-  
+      "&:hover fieldset": {
+        borderColor: "#a8c6ff",
+        borderWidth: "3px",
       },
-      '& label.Mui-focused': {
-        color: '#132740',
-    
+      "&.Mui-focused fieldset": {
+        borderColor: "#a8c6ff",
+        borderWidth: "3px",
       },
-      '& .MuiInput-underline:after': {
-        borderBottomColor: '#f9b122',
-      },
-      '& .MuiOutlinedInput-root': {
-  
-        '& fieldset': {
-          borderColor: '#f9b122',
-          borderWidth:'1px'
-        },
-        '&:hover fieldset': {
-          borderColor: '#a8c6ff',
-          borderWidth:'3px'
-        },
-        '&.Mui-focused fieldset': {
-          borderColor: '#a8c6ff',
-          borderWidth:'3px'
-        },'&.Mui-error .MuiOutlinedInput-notchedOutline': {
-          borderColor: '#ff533d',
-          borderWidth:'1px'
-        }
-        
+      "&.Mui-error .MuiOutlinedInput-notchedOutline": {
+        borderColor: "#ff533d",
+        borderWidth: "1px",
       },
     },
-    form: {
-      marginTop: theme.spacing(4),
-      width: '100%', // Fix IE 11 issue.
-  
-    },
-
-   
-}))
+  },
+  form: {
+    marginTop: theme.spacing(4),
+    width: "100%", // Fix IE 11 issue.
+  },
+}));
 
 export default function SignIn(props: any) {
-  const classes = useStyles()
+  const classes = useStyles();
 
-  const { formProps } = props
+  const { formProps } = props;
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const action = actions.loadEducation();
+    dispatch(action);
+    // eslint-disable-next-line
+  }, []);
+
+  const { educations } = useSelector((state: any) => state.infomation);
 
   return (
     <>
-     
-        <CssBaseline />
+      <CssBaseline />
 
-   
-          <form className={classes.form} noValidate>
-          <Typography component="h1" variant="h5" align='center'>
-            ข้อมูลส่วนบุคคล
-          </Typography>
-            <FormControl className={classes.formControlInfo} fullWidth>
-              <TextField
-                fullWidth
-                label="คำนำหน้าชื่อ"
-                name="title"
-                variant='outlined'
-                className={classes.textfield}
-    InputProps={{
-      className: classes.input,
+      <form className={classes.form} noValidate >
 
-      }}
-                inputRef={formProps.register}
-                helperText={
-                  formProps.errors.title && formProps.errors.title.message
-                }
-                error={!!formProps.errors.title}
-              />
-              <TextField
-                fullWidth
-                label="ชื่อ"
-                name="name"
-                inputRef={formProps.register}
-                variant='outlined'
-                className={classes.textfield}
-    InputProps={{
-      className: classes.input,
+        <Typography component="h1" variant="h5" align="center">
+          ข้อมูลส่วนบุคคล
+        </Typography>
+        <FormControl className={classes.formControlInfo} fullWidth>
 
-      }}
-                helperText={
-                  formProps.errors.name && formProps.errors.name.message
-                }
-                error={!!formProps.errors.name}
-              />
-              <TextField
-                fullWidth
-                label="นามสกุล"
-                name="surename"
-                inputRef={formProps.register}
-                variant='outlined'
-                className={classes.textfield}
-                InputProps={{className: classes.input}}
-                helperText={
-                  formProps.errors.surename && formProps.errors.surename.message
-                }
-                error={!!formProps.errors.surename}
-              />
-            </FormControl>
+          <TextField
+            fullWidth
+            label="คำนำหน้าชื่อ"
+            name="title"
+            variant="outlined"
+            className={classes.textfield}
+            InputProps={{
+              className: classes.input,
+            }}
+            inputRef={formProps.register}
+            helperText={
+              formProps.errors.title && formProps.errors.title.message
+            }
+            error={!!formProps.errors.title}
+          />
 
-            <div className={classes.formControlDate}>
-              <Date
-                title={'ปีเกิด'}
-                register={formProps.register}
-                name={'ybd'}
-              />
-            </div>
-            {/*@ts-ignore*/}
-            <div className={classes.formControlDate}>
-            <Controller
+          <TextField
+            fullWidth
+            label="ชื่อ"
+            name="name"
+            inputRef={formProps.register}
+            variant="outlined"
+            className={classes.textfield}
+            InputProps={{
+              className: classes.input,
+            }}
+            helperText={formProps.errors.name && formProps.errors.name.message}
+            error={!!formProps.errors.name}
+          />
+          <TextField
+            fullWidth
+            label="นามสกุล"
+            name="lastname"
+            inputRef={formProps.register}
+            variant="outlined"
+            className={classes.textfield}
+            InputProps={{
+              className: classes.input,
+            }}
+            helperText={
+              formProps.errors.lastname && formProps.errors.lastname.message
+            }
+            error={!!formProps.errors.lastname}
+          />
+        </FormControl>
+
+        <div className={classes.formControlDate}>
+          <Date
+            title={"ปีเกิด"}
+            register={formProps.register}
+            name={"birthyear"}
+          />
+        </div>
+        {/*@ts-ignore*/}
+        <div className={classes.formControlDate}>
+          <Controller
             as={
-              <TextField  variant='outlined'
-              fullWidth
-              className={classes.textfield}
-              label='เพศ'
-              InputLabelProps={{
-    className: classes.selectInput,
-    
-    }}
-    select
-    helperText={formProps.errors.sex && formProps.errors.sex.message}
-    error={!!formProps.errors.sex}
-    >          <MenuItem value={'ชาย'}>ชาย</MenuItem>
-    <MenuItem value={'หญิง'}>หญิง</MenuItem>
+              <TextField
+                variant="outlined"
+                fullWidth
+                className={classes.textfield}
+                label="เพศ"
+                InputLabelProps={{
+                  className: classes.selectInput,
+                }}
+                select
+                helperText={
+                  formProps.errors.gender && formProps.errors.gender.message
+                }
+                error={!!formProps.errors.gender}
+              >
+                {" "}
+                <MenuItem value={"m"}>ชาย</MenuItem>
+                <MenuItem value={"f"}>หญิง</MenuItem>
               </TextField>
             }
-            name="sex"
-            rules={{ required: 'กรุณาเลือกเพศ' }}
+            name="gender"
+            rules={{ required: "กรุณาเลือกเพศ" }}
             control={formProps.control}
             defaultValue=""
           />
-              </div>
-              <div className={classes.formControlDate}>
-            <Controller
+        </div>
+        <div className={classes.formControlDate}>
+          <Controller
             as={
-              <TextField  variant='outlined'
-              fullWidth
-              className={classes.textfield}
-              label='ระดับการศึกษา'
-              InputLabelProps={{
-    className: classes.selectInput,
-    
-    }}
-    select
-    helperText={formProps.errors.edu && formProps.errors.edu.message}
-    error={!!formProps.errors.edu}
-    >           <MenuItem value={'ปริญญาตรี'}>ปริญญาตรี</MenuItem>
-    <MenuItem value={'ปริญญาโท'}>ปริญญาโท</MenuItem>
-    <MenuItem value={'ปริญญาเอก'}>ปริญญาเอก</MenuItem>
+              <TextField
+                variant="outlined"
+                fullWidth
+                className={classes.textfield}
+                label="ระดับการศึกษา"
+
+                InputLabelProps={{
+                  className: classes.selectInput,
+                }}
+                select
+                helperText={
+                  formProps.errors.educationid &&
+                  formProps.errors.educationid.message
+                }
+                error={!!formProps.errors.educationid}
+              >
+                {educations.map((education: any, index: number) => (
+                  <MenuItem key={index} value={education.id}>
+                    {education.name}
+                  </MenuItem>
+                ))}
               </TextField>
             }
-            name="edu"
-            rules={{ required: 'กรุณาเลือกระดับการศึกษา' }}
+            name="educationid"
+            rules={{ required: "กรุณาเลือกระดับการศึกษา" }}
             control={formProps.control}
             defaultValue=""
           />
-              </div>
-         
+        </div>
 
-           
+        <FormControl className={classes.formControlInfo} fullWidth>
+          <TextField
+            fullWidth
+            label="อีเมล"
+            name="email"
+            inputRef={formProps.register}
+            variant="outlined"
+            className={classes.textfield}
+            InputProps={{
+              className: classes.input,
+            }}
+            helperText={
+              formProps.errors.email && formProps.errors.email.message
+            }
+            error={!!formProps.errors.email}
+          />
+        </FormControl>
+      </form>
 
-            <FormControl className={classes.formControlInfo} fullWidth>
-              <TextField
-                fullWidth
-
-                label="อีเมล"
-                name="email"
-
-                inputRef={formProps.register}
-                variant='outlined'
-                className={classes.textfield}
-    InputProps={{
-      className: classes.input,
-
-      }}
-                helperText={
-                  formProps.errors.email && formProps.errors.email.message
-                }
-                error={!!formProps.errors.email}
-              />
-            </FormControl>
-          </form>
-       
     </>
-  )
+  );
 }

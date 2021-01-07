@@ -1,21 +1,58 @@
-import React from 'react'
-import { Grid, Divider, Box, Container } from '@material-ui/core'
-import Course2 from './CurriculumDetail'
-import queryString from 'query-string'
-import {data} from 'data/couredetail'
+import React, { useEffect, Suspense, lazy } from "react";
+import { Grid, Divider, Container, } from "@material-ui/core";
+import queryString from "query-string";
+import { useDispatch, useSelector } from 'react-redux'
+import * as actions from "../../actions"
+import { useLocation } from "react-router-dom";
+import Header from "../../share/Header"
+import SelectCategory from "../../share/SelectCategory"
+import { makeStyles } from "@material-ui/core/styles";
 
-import { useLocation } from 'react-router-dom'
+
+const CourseDetail = lazy(() => import('./CurriculumDetail'));
+
+const useStyles = makeStyles((theme) => ({
+  content: {
+    paddingRight: "8vw",
+    paddingLeft: "8vw",
+  },
+  divider: {
+    marginBottom: 20
+  },
+
+}));
+
 export default function SingleLineGridList(props: any) {
+  const { search } = useLocation();
+  const { category } = queryString.parse(search);
+  const dispatch = useDispatch();
+  const classes = useStyles()
+  const { curriculums, isLoadingCurriculums } = useSelector((state: any) => state.course);
 
-  const { search } = useLocation()
-  const { category } = queryString.parse(search)
+
+  useEffect(() => {
+    const action = actions.loadCurriculums("all")
+    dispatch(action)
+    // eslint-disable-next-line
+  }, [search])
+
+
+  const renderLoader = () =>
+    <div></div>
+
+
   return (
-    <Box p={2}>
+    < Suspense fallback={renderLoader()} >
+      <Header text={"หลักสูตร"} />
       <div>
         <Grid container direction="row" alignItems="center">
-          <Container maxWidth="lg">
+
+          <Grid container className={classes.content} direction="row" alignItems="center" justify={"space-between"} >
+
             <h2>{category}</h2>
-          </Container>
+            <SelectCategory />
+
+          </Grid>
         </Grid>
         <Divider style={{ marginBottom: 20 }} />
 
@@ -24,24 +61,34 @@ export default function SingleLineGridList(props: any) {
             container
             direction="row"
             alignItems="center"
-            justify="center"
+            justify={isLoadingCurriculums ? "center" : "flex-start"}
             spacing={3}
           >
-            {data.map((tile) => (
-              <Grid item xs={12} sm={6} md={4} lg={3} xl={3}>
-                <Course2
-                  data={tile.title}
-                  logo={tile.logo}
-                  int={tile.int}
-                  view={tile.view}
-                  point={tile.point}
-                  vote={tile.vote}
-                />
-              </Grid>
-            ))}
+            {
+              curriculums.map((item: any, index: number) => (
+                <Grid item xs={12} sm={6} md={4} lg={3} xl={3} key={index}>
+                  <CourseDetail
+                    key={index}
+                    id={item.id}
+                    assessment={item.assessment}
+                    targetGroup={item.targetGroup}
+                    learningTopic={item.learningTopic}
+                    learningObjective={item.learningObjective}
+                    courseCategoryId={item.courseCategoryId}
+                    thumbnail={item.thumbnail}
+                    viewCount={item.viewCount}
+                    point={(item.satisfactionSum) / item.satisfactionCount}
+                    satisfactionCount={item.satisfactionCount}
+                    link={item.link}
+                    code={item.code}
+                    name={item.name}
+                    platformId={item.platformId}
+                  />
+                </Grid>
+              ))}
           </Grid>
         </Container>
       </div>
-    </Box>
-  )
+    </ Suspense>
+  );
 }

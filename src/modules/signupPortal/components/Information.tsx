@@ -1,15 +1,17 @@
-import React from 'react'
+import React, { useEffect } from "react";
 
-import Date from './DatePicker'
-import { Controller } from 'react-hook-form'
+import Date from "./DatePicker";
+import { Controller } from "react-hook-form";
 import {
   Typography,
   MenuItem,
   FormControl,
   CssBaseline,
   TextField,
-} from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
+} from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import * as actions from "modules/infomation/actions";
+import { useDispatch, useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -17,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(1),
   },
   button: {
-    display: 'block',
+    display: "block",
     marginTop: theme.spacing(2),
   },
   formControl: {
@@ -34,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(2),
   },
   font: {
-    color: 'rgba(0, 0, 0, 0.54)',
+    color: "rgba(0, 0, 0, 0.54)",
     fontWeight: 500,
     paddingTop: 0,
     marginTop: 0,
@@ -50,76 +52,85 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: 4,
   },
   selectInput: {
-    color: '#757575',
+    color: "#757575",
     fontWeight: 600,
-    '& .MuiInputBase-root.MuiOutlineInput-root': {
-      color: '#45A29E',
-      borderColor: '#757575',
+    "& .MuiInputBase-root.MuiOutlineInput-root": {
+      color: "#45A29E",
+      borderColor: "#757575",
       fontWeight: 600,
     },
   },
   input: {
-    color: '#0f1626',
+    color: "#0f1626",
     fontWeight: 600,
-    '& .MuiInputBase-root.MuiOutlineInput-root': {
-      color: '#45A29E',
-      borderColor: '#757575',
+    "& .MuiInputBase-root.MuiOutlineInput-root": {
+      color: "#45A29E",
+      borderColor: "#757575",
       fontWeight: 600,
     },
   },
   textfield: {
     marginTop: 10,
-    '& .MuiFormHelperText-root.Mui-error ': {
-      color: 'ff533d',
+    "& .MuiFormHelperText-root.Mui-error ": {
+      color: "ff533d",
       fontWeight: 600,
-      borderWidth: '1px',
+      borderWidth: "1px",
     },
-    '& .MuiInput-underline.Mui-error:after': {
-      borderColor: 'ff533d',
-      borderWidth: '1px',
+    "& .MuiInput-underline.Mui-error:after": {
+      borderColor: "ff533d",
+      borderWidth: "1px",
     },
-    '& label.MuiFormLabel-root': {
+    "& label.MuiFormLabel-root": {
       fontWeight: 600,
-      '&:after .Mui-error': {
-        borderColor: '#ff533d',
-        borderWidth: '1px',
+      "&:after .Mui-error": {
+        borderColor: "#ff533d",
+        borderWidth: "1px",
       },
     },
-    '& label.Mui-focused': {
-      color: '#132740',
+    "& label.Mui-focused": {
+      color: "#132740",
     },
-    '& .MuiInput-underline:after': {
-      borderBottomColor: '#f9b122',
+    "& .MuiInput-underline:after": {
+      borderBottomColor: theme.palette.secondary.main,
     },
-    '& .MuiOutlinedInput-root': {
-      '& fieldset': {
-        borderColor: '#f9b122',
-        borderWidth: '1px',
+    "& .MuiOutlinedInput-root": {
+      "& fieldset": {
+        borderColor: theme.palette.secondary.main,
+        borderWidth: "1px",
       },
-      '&:hover fieldset': {
-        borderColor: '#a8c6ff',
-        borderWidth: '3px',
+      "&:hover fieldset": {
+        borderColor: "#a8c6ff",
+        borderWidth: "3px",
       },
-      '&.Mui-focused fieldset': {
-        borderColor: '#a8c6ff',
-        borderWidth: '3px',
+      "&.Mui-focused fieldset": {
+        borderColor: "#a8c6ff",
+        borderWidth: "3px",
       },
-      '&.Mui-error .MuiOutlinedInput-notchedOutline': {
-        borderColor: '#ff533d',
-        borderWidth: '1px',
+      "&.Mui-error .MuiOutlinedInput-notchedOutline": {
+        borderColor: "#ff533d",
+        borderWidth: "1px",
       },
     },
   },
   form: {
     marginTop: theme.spacing(4),
-    width: '100%', // Fix IE 11 issue.
+    width: "100%", // Fix IE 11 issue.
   },
-}))
+}));
 
 export default function SignIn(props: any) {
-  const classes = useStyles()
+  const classes = useStyles();
 
-  const { formProps } = props
+  const { formProps } = props;
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const action = actions.loadEducation();
+    dispatch(action);
+    // eslint-disable-next-line
+  }, []);
+  const { educations } = useSelector((state: any) => state.infomation);
 
   return (
     <>
@@ -161,7 +172,7 @@ export default function SignIn(props: any) {
           <TextField
             fullWidth
             label="นามสกุล"
-            name="surename"
+            name="lastname"
             inputRef={formProps.register}
             variant="outlined"
             className={classes.textfield}
@@ -169,14 +180,18 @@ export default function SignIn(props: any) {
               className: classes.input,
             }}
             helperText={
-              formProps.errors.surename && formProps.errors.surename.message
+              formProps.errors.lastname && formProps.errors.lastname.message
             }
-            error={!!formProps.errors.surename}
+            error={!!formProps.errors.lastname}
           />
         </FormControl>
 
         <div className={classes.formControlDate}>
-          <Date title={'ปีเกิด'} register={formProps.register} name={'ybd'} />
+          <Date
+            title={"ปีเกิด"}
+            register={formProps.register}
+            name={"birthyear"}
+          />
         </div>
         {/*@ts-ignore*/}
         <div className={classes.formControlDate}>
@@ -192,17 +207,17 @@ export default function SignIn(props: any) {
                 }}
                 select
                 helperText={
-                  formProps.errors.sex && formProps.errors.sex.message
+                  formProps.errors.gender && formProps.errors.gender.message
                 }
-                error={!!formProps.errors.sex}
+                error={!!formProps.errors.gender}
               >
-                {' '}
-                <MenuItem value={'ชาย'}>ชาย</MenuItem>
-                <MenuItem value={'หญิง'}>หญิง</MenuItem>
+                {" "}
+                <MenuItem value={"m"}>ชาย</MenuItem>
+                <MenuItem value={"f"}>หญิง</MenuItem>
               </TextField>
             }
-            name="sex"
-            rules={{ required: 'กรุณาเลือกเพศ' }}
+            name="gender"
+            rules={{ required: "กรุณาเลือกเพศ" }}
             control={formProps.control}
             defaultValue=""
           />
@@ -220,18 +235,20 @@ export default function SignIn(props: any) {
                 }}
                 select
                 helperText={
-                  formProps.errors.edu && formProps.errors.edu.message
+                  formProps.errors.educationid &&
+                  formProps.errors.educationid.message
                 }
-                error={!!formProps.errors.edu}
+                error={!!formProps.errors.educationid}
               >
-                {' '}
-                <MenuItem value={'ปริญญาตรี'}>ปริญญาตรี</MenuItem>
-                <MenuItem value={'ปริญญาโท'}>ปริญญาโท</MenuItem>
-                <MenuItem value={'ปริญญาเอก'}>ปริญญาเอก</MenuItem>
+                {educations.map((education: any, index: number) => (
+                  <MenuItem key={index} value={education.id}>
+                    {education.name}
+                  </MenuItem>
+                ))}
               </TextField>
             }
-            name="edu"
-            rules={{ required: 'กรุณาเลือกระดับการศึกษา' }}
+            name="educationid"
+            rules={{ required: "กรุณาเลือกระดับการศึกษา" }}
             control={formProps.control}
             defaultValue=""
           />
@@ -256,5 +273,5 @@ export default function SignIn(props: any) {
         </FormControl>
       </form>
     </>
-  )
+  );
 }

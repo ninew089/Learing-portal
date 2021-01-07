@@ -1,0 +1,96 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+var _color = _interopRequireDefault(require("color"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+var _default = function _default() {
+  return {
+    root: {
+      display: 'flex',
+      width: '100%',
+      justifyContent: 'flex-start',
+      borderTopRightRadius: 20,
+      borderBottomRightRadius: 20,
+      minHeight: 32,
+      transition: '0.2s',
+      '-webkit-font-smoothing': 'antialiased',
+      padding: '0 12px 0 26px',
+      fontSize: 14,
+      '&:hover, &$focusVisible': {
+        backgroundColor: 'rgba(0,0,0,0.04)'
+      },
+      '& .GmailSidebarItem-startIcon': {
+        display: 'inline-flex',
+        opacity: 0.72,
+        marginRight: 18,
+        '& > *': {
+          fontSize: 20
+        }
+      },
+      '& .GmailSidebarItem-amount': {
+        fontSize: '0.75rem',
+        letterSpacing: 0.3,
+        marginLeft: 'auto',
+        paddingLeft: 16
+      }
+    },
+    selected: function selected(_ref) {
+      var color = _ref.color;
+      return {
+        fontWeight: 'bold',
+        color: color,
+        backgroundColor: "".concat((0, _color["default"])(color || 'rgba(0,0,0,0.08)').saturate(0.5).lighten(0.9).toString(), " !important"),
+        '& .GmailSidebarItem-startIcon': {
+          opacity: 1
+        }
+      };
+    },
+    collapsed: function collapsed(_ref2) {
+      var color = _ref2.color;
+      return {
+        padding: '0 6px',
+        width: 32,
+        borderRadius: 20,
+        marginLeft: 20,
+        '& .GmailSidebarItem-label': {
+          display: 'none'
+        },
+        '& .GmailSidebarItem-amount': {
+          position: 'absolute',
+          top: 0,
+          right: -8,
+          backgroundColor: color,
+          color: '#fff',
+          padding: '0 4px',
+          borderRadius: 10,
+          fontWeight: 'normal'
+        }
+      };
+    },
+    dot: {
+      '& .GmailSidebarItem-amount': {
+        display: 'none'
+      },
+      '&:after': {
+        display: 'block',
+        content: '""',
+        position: 'absolute',
+        width: 8,
+        height: 8,
+        backgroundColor: '#da3125',
+        top: 4,
+        right: -2,
+        borderRadius: '50%'
+      }
+    },
+    focusVisible: {}
+  };
+};
+
+exports["default"] = _default;

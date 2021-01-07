@@ -1,6 +1,6 @@
-import React from 'react'
-import clsx from 'clsx'
-import { makeStyles, useTheme } from '@material-ui/core/styles'
+import React, { useEffect } from "react";
+import clsx from "clsx";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 
 import {
   Drawer,
@@ -10,23 +10,24 @@ import {
   Typography,
   Divider,
   IconButton,
-} from '@material-ui/core'
-import { Menu, ChevronLeft, ChevronRight } from '@material-ui/icons'
+} from "@material-ui/core";
+import { Menu, ChevronLeft, ChevronRight } from "@material-ui/icons";
+import { useDispatch } from 'react-redux'
 
-import Routes from './Routes'
+import * as actions from "../actions"
+import Routes from "./Routes";
+import ListMenu from "./ListAdmin";
 
-import ListMenu from './ListAdmin'
-
-const drawerWidth = 240
+const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'flex',
-    background: '#f5f5f5',
+    display: "flex",
+    background: theme.palette.primary.light,
   },
   appBar: {
-    background: '#ab987a',
-    transition: theme.transitions.create(['margin', 'width'], {
+    background: "#ab987a",
+    transition: theme.transitions.create(["margin", "width"], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
@@ -34,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
     marginLeft: drawerWidth,
-    transition: theme.transitions.create(['margin', 'width'], {
+    transition: theme.transitions.create(["margin", "width"], {
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,
     }),
@@ -43,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
   },
   hide: {
-    display: 'none',
+    display: "none",
   },
   drawer: {
     width: drawerWidth,
@@ -53,42 +54,50 @@ const useStyles = makeStyles((theme) => ({
     width: drawerWidth,
   },
   drawerHeader: {
-    display: 'flex',
-    alignItems: 'center',
+    display: "flex",
+    alignItems: "center",
     padding: theme.spacing(0, 1),
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
-    justifyContent: 'flex-end',
+    justifyContent: "flex-end",
   },
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
-    transition: theme.transitions.create('margin', {
+    transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
     marginLeft: -drawerWidth,
   },
   contentShift: {
-    transition: theme.transitions.create('margin', {
+    transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.easeOut,
     }),
     marginLeft: 0,
   },
-}))
+}));
 
 export default function PersistentDrawerLeft() {
-  const classes = useStyles()
-  const theme = useTheme()
-  const [open, setOpen] = React.useState(false)
+  const classes = useStyles();
+  const theme = useTheme();
+  const [open, setOpen] = React.useState(false);
 
   const handleDrawerOpen = () => {
-    setOpen(true)
-  }
+    setOpen(true);
+  };
 
   const handleDrawerClose = () => {
-    setOpen(false)
-  }
+    setOpen(false);
+  };
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const action = actions.loadGetProfile()
+    dispatch(action)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
 
   return (
     <div className={classes.root}>
@@ -124,7 +133,7 @@ export default function PersistentDrawerLeft() {
       >
         <div className={classes.drawerHeader}>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'ltr' ? <ChevronLeft /> : <ChevronRight />}
+            {theme.direction === "ltr" ? <ChevronLeft /> : <ChevronRight />}
           </IconButton>
         </div>
         <Divider />
@@ -139,5 +148,5 @@ export default function PersistentDrawerLeft() {
         <Routes />
       </main>
     </div>
-  )
+  );
 }

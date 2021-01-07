@@ -1,50 +1,69 @@
-import axios from 'axios'
+import axios from "axios";
+import { push } from 'connected-react-router'
+import { setCookie } from 'cookie/cookie'
+const LOAD_LOGIN_REQUEST = "learning-portal/src/login/LOAD_LOGIN_REQUEST";
+const LOAD_LOGIN_SUCCESS = "learning-portal/src/login/LOAD_LOGIN_SUCCESS";
+const LOAD_LOGIN_FAILURE = "learning-portal/src/login/LOAD_LOGIN_FAILURE";
+const CLEAR_MESSAGE_LOGIN = "learning-portal/src/login/CLEAR_MESSAGE_LOGIN";
 
-const LOAD_LOGIN_REQUEST = 'learning-portal/src/ui/LOAD_LOGIN_REQUEST'
-const LOAD_LOGIN_SUCCESS = 'learning-portal/src/ui/LOAD_LOGIN_SUCCESS'
-const LOAD_LOGIN_FAILURE = 'learning-portal/src/ui/LOAD_LOGIN_REQUEST'
-const LOGIN_CHECK = 'learning-portal/src/ui/LOGIN_CHECK'
-const SET_LOGIN = 'learning-portal/src/ui/SET_LOGIN'
 
-function loadLogin(user: any) {
+
+function clearMessageLogin() {
+  return {
+    type: CLEAR_MESSAGE_LOGIN,
+  }
+}
+function loadLogin(userInfo: any) {
   return async (dispatch: any) => {
-    dispatch({ type: LOAD_LOGIN_REQUEST })
+    dispatch({ type: LOAD_LOGIN_REQUEST });
     try {
-      const { data } = await axios.post(`/login/${user.id}`)
+      const result = await axios.post(`/Tokens`, userInfo);
       dispatch({
         type: LOAD_LOGIN_SUCCESS,
         payload: {
-          user: data,
+          user: result.data,
+          status: result.status,
+          messageLogin: null
         },
-      })
+      });
+      setCookie('id', userInfo.userId, 3)
+      setCookie('role', userInfo.role, 3)
+      setCookie('token', result.data.token, 3)
+      dispatch(push('/learning-portal'))
     } catch (err) {
-      dispatch({ type: LOAD_LOGIN_FAILURE })
+      if (err.response.status === 401) {
+        dispatch({
+          type: LOAD_LOGIN_FAILURE,
+          payload: {
+            status: err.response.status,
+            messageLogin: `รหัสผ่านไม่ถูกต้อง`
+          },
+        });
+
+      }
+      if (err.response.status === 404) {
+        dispatch({
+          type: LOAD_LOGIN_FAILURE,
+          payload: {
+            status: err.response.status,
+            messageLogin: `รหัสผู้ใช้ผิด`
+          },
+        });
+
+      }
+
     }
-  }
+  };
 }
 
-function toggleLogin(event: any) {
-  return {
-    type: LOGIN_CHECK,
-  }
-}
 
-function setLogin(login: any) {
-  return {
-    type: SET_LOGIN,
-    payload: {
-      login,
-    },
-  }
-}
 
 export {
   LOAD_LOGIN_REQUEST,
   LOAD_LOGIN_SUCCESS,
   LOAD_LOGIN_FAILURE,
-  LOGIN_CHECK,
-  SET_LOGIN,
+  CLEAR_MESSAGE_LOGIN,
   loadLogin,
-  toggleLogin,
-  setLogin,
-}
+  clearMessageLogin
+
+};

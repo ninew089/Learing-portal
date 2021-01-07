@@ -1,19 +1,23 @@
-import React from 'react'
-import Button from '@material-ui/core/Button'
-import Dialog from '@material-ui/core/Dialog'
-import DialogActions from '@material-ui/core/DialogActions'
-import DialogContent from '@material-ui/core/DialogContent'
-import DialogContentText from '@material-ui/core/DialogContentText'
-import DialogTitle from '@material-ui/core/DialogTitle'
-
+import React from "react";
+import Button from "@material-ui/core/Button";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
 export default function AlertDialog(props: any) {
-  const { open, setOpen } = props
+  const { open, setOpen, data } = props;
   const handleClose = () => {
-    setOpen(false)
-  }
+    setOpen(false);
+  };
   const handleAgree = () => {
-    window.location.replace('http://www.google.com')
-  }
+    if (data !== null) {
+      window.location.replace(`${data.link}`);
+    }
+
+  };
+
+
 
   return (
     <div>
@@ -24,12 +28,11 @@ export default function AlertDialog(props: any) {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {'กำลังเข้าสู่ www.example.com ?'}
+          {`กำลังเข้าสู่ ${data ? data.officialName : "กำลังโหลดข้อมูล"}`}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            คุณกำลังเข้าสู่ เว็บ example.com หากต้องการเข้าสู่เว็บไซต์นี้กดตกลง
-            หากไม่ต้องการกดกลับ
+            {`คุณกำลังเข้าสู่ เว็บ ${data ? data.link : ""}หากต้องการเข้าสู่เว็บไซต์นี้กดตกลงหากไม่ต้องการกดกลับ`}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -42,5 +45,5 @@ export default function AlertDialog(props: any) {
         </DialogActions>
       </Dialog>
     </div>
-  )
+  );
 }

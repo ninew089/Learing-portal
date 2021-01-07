@@ -1,32 +1,31 @@
-import React from 'react'
-import { IconButton } from '@material-ui/core'
-import * as actions from 'modules/loginPortal/actions'
-import MenuItem from '@material-ui/core/MenuItem'
-
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles'
-import { useHistory } from 'react-router-dom'
+import React from "react";
+import { IconButton } from "@material-ui/core";
+import MenuItem from "@material-ui/core/MenuItem";
+import { eraseCookie } from "cookie/cookie"
+import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
+import { useHistory } from "react-router-dom";
 //@ts-ignore
-import SwitchToggle from '@mui-treasury/components/toggle/switch'
+import SwitchToggle from "@mui-treasury/components/toggle/switch";
 import {
   AiOutlineFolderOpen,
   AiOutlineLogout,
   AiOutlineEdit,
-} from 'react-icons/ai'
-import { CgPassword } from 'react-icons/cg'
-import Menu from '@material-ui/core/Menu'
-import { useDispatch } from 'react-redux'
+} from "react-icons/ai";
+import { CgPassword } from "react-icons/cg";
+import Menu from "@material-ui/core/Menu";
+
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      display: 'flex',
+      display: "flex",
     },
     paper: {
       marginRight: theme.spacing(0),
     },
     icon: {
       padding: 0,
-      color: '#FDFDFD',
+      color: "#FDFDFD",
     },
     popper: {
       marginTop: 20,
@@ -34,50 +33,50 @@ const useStyles = makeStyles((theme: Theme) =>
     icons: {
       marginRight: 18,
     },
-  }),
-)
+  })
+);
 export default function LongMenu() {
-  const classes = useStyles()
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
-  const open = Boolean(anchorEl)
+  const classes = useStyles();
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget)
-  }
+    setAnchorEl(event.currentTarget);
+  };
 
   const handleClose = () => {
-    setAnchorEl(null)
-  }
-  const history = useHistory()
-  const path = '/learning-portal'
+    setAnchorEl(null);
+  };
+  const history = useHistory();
+  const path = "/learning-portal";
   const navigatorToeditProfile = () => {
-    history.push(`${path}/edit`)
-  }
+    history.push(`${path}/edit`);
+  };
   const navigatorToreset = () => {
-    history.push(`${path}/reset`)
-  }
+    history.push(`${path}/reset`);
+  };
   const navigatorTohistory = () => {
-    history.push(`${path}/history`)
-  }
+    history.push(`${path}/history`);
+  };
   const navigatorTologout = () => {
-    history.push(`${path}`)
-  }
-  const dispatch = useDispatch()
-  const onLogin = (loginInfo: object) => {
-    console.log(loginInfo)
-    const action = actions.setLogin(false)
-    dispatch(action)
-    navigatorTologout()
-  }
+    history.push(`${path}`);
+  };
+  const onLogout = () => {
+    eraseCookie("role")
+    eraseCookie("id")
+    eraseCookie("token")
+    navigatorTologout();
+    window.location.reload();
+  };
   return (
     <div>
       <IconButton
         aria-label="more"
-        aria-controls={open ? 'menu-list-grow' : undefined}
+        aria-controls={open ? "menu-list-grow" : undefined}
         aria-haspopup="true"
         onClick={handleClick}
       >
-        <SwitchToggle toggled={open} style={{ color: '#fdfdfd' }} />
+        <SwitchToggle toggled={open} style={{ color: "#fdfdfd" }} />
       </IconButton>
       <Menu
         id="long-menu"
@@ -87,7 +86,7 @@ export default function LongMenu() {
         onClose={handleClose}
         PaperProps={{
           style: {
-            marginTop: '2.8rem',
+            marginTop: "2.8rem",
           },
         }}
       >
@@ -103,11 +102,11 @@ export default function LongMenu() {
           <AiOutlineFolderOpen className={classes.icons} />
           ประกาศนียบัตร
         </MenuItem>
-        <MenuItem onClick={onLogin}>
+        <MenuItem onClick={onLogout}>
           <AiOutlineLogout className={classes.icons} />
           ลงชื่อออก
         </MenuItem>
       </Menu>
     </div>
-  )
+  );
 }

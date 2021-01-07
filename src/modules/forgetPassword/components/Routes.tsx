@@ -1,10 +1,10 @@
-import React from 'react'
-import Forget from './index'
+import React from "react";
+import Forget from "./index";
 
-import { Route, Switch, useRouteMatch } from 'react-router-dom'
+import { Route, Switch, useRouteMatch } from "react-router-dom";
 
 export default function Routes() {
-  const { path } = useRouteMatch()
+  const { path } = useRouteMatch();
   return (
     <>
       <Switch>
@@ -13,5 +13,5 @@ export default function Routes() {
         </Route>
       </Switch>
     </>
-  )
+  );
 }

@@ -1,14 +1,14 @@
-import React, { Component } from 'react'
-import { facebookProps } from './tyscript'
+import React, { Component } from "react";
+import { facebookProps } from "./tyscript";
 // @ts-ignore
-import { FacebookProvider, Comments, Login } from 'react-facebook'
-import { Button } from '@material-ui/core'
-import { FaFacebookSquare } from 'react-icons/fa'
-import 'assets/css/facebook.css'
+import { FacebookProvider, Comments, Login } from "react-facebook";
+import { Button } from "@material-ui/core";
+import { FaFacebookSquare } from "react-icons/fa";
+import "assets/css/facebook.css";
 class FacebookComponent extends Component {
   handleError = (error: any) => {
-    this.setState({ error })
-  }
+    this.setState({ error });
+  };
 
   render() {
     return (
@@ -20,20 +20,20 @@ class FacebookComponent extends Component {
             {({ loading, handleClick, error, data }: facebookProps) => (
               <span onClick={handleClick}>
                 {data === undefined ? (
-                  <Button style={{ background: '#3b5998', color: '#f5f5f5' }}>
+                  <Button style={{ background: "#3b5998", color: "#f5f5f5" }}>
                     <FaFacebookSquare size={24} style={{ marginRight: 10 }} />
-                    {loading ? <span>Loading...</span> : 'Login with Facebook'}
+                    {loading ? <span>Loading...</span> : "Login with Facebook"}
                   </Button>
                 ) : (
-                  ''
-                )}
+                    ""
+                  )}
               </span>
             )}
           </Login>
         </FacebookProvider>
         <FacebookProvider appId="324263845303507">
           <Comments
-            href="https://cubioinfo.com/course/community/plugins/comments#configurator"
+            href="https://learn.ocsc.info/learning-portal/community/plugins/comments#configurator"
             width="100%"
             className="fb_iframe_widget_fluid_desktop"
             data-width="100%"
@@ -42,8 +42,8 @@ class FacebookComponent extends Component {
           />
         </FacebookProvider>
       </div>
-    )
+    );
   }
 }
 
-export default FacebookComponent
+export default FacebookComponent;

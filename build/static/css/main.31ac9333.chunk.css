@@ -1,0 +1,2 @@
+@import url(https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap);.fade-in-section{opacity:0;transform:translateY(20vh);visibility:hidden;transition:opacity 2s ease-out,transform .8s ease-out,visibility 2s ease-out;will-change:opacity,transform,visibility}.fade-in-section.is-visible{opacity:1;transform:none;visibility:visible}*{font-family:"Prompt",sans-serif}body,html{background:#f5f5f5;margin:0;padding:0;box-sizing:border-box}
+/*# sourceMappingURL=main.31ac9333.chunk.css.map */

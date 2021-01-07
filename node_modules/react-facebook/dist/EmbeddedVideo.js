@@ -1,0 +1,68 @@
+"use strict";
+
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _Parser = _interopRequireDefault(require("./Parser"));
+
+class EmbeddedVideo extends _react.PureComponent {
+  componentDidUpdate() {
+    const {
+      handleParse
+    } = this.props;
+    handleParse();
+  }
+
+  render() {
+    const {
+      href,
+      width,
+      showText,
+      allowFullScreen,
+      autoPlay,
+      showCaptions,
+      children
+    } = this.props;
+    return _react.default.createElement("div", {
+      className: "fb-video",
+      "data-href": href,
+      "data-width": width,
+      "data-show-text": showText,
+      "data-show-captions": showCaptions,
+      "data-autoplay": autoPlay,
+      "data-allowfullscreen": allowFullScreen
+    }, children);
+  }
+
+}
+
+(0, _defineProperty2.default)(EmbeddedVideo, "defaultProps", {
+  width: undefined,
+  showText: undefined,
+  allowFullScreen: undefined,
+  autoPlay: undefined,
+  showCaptions: undefined,
+  children: undefined
+});
+
+var _default = (0, _react.forwardRef)((props, ref) => _react.default.createElement(_Parser.default, null, ({
+  handleParse
+}) => _react.default.createElement(EmbeddedVideo, (0, _extends2.default)({}, props, {
+  handleParse: handleParse,
+  ref: ref
+}))));
+
+exports.default = _default;
+//# sourceMappingURL=EmbeddedVideo.js.map

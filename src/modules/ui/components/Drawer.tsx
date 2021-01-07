@@ -1,144 +1,164 @@
-import React from 'react'
-import clsx from 'clsx'
-import { makeStyles } from '@material-ui/core/styles'
-import Drawer from '@material-ui/core/Drawer'
-import Button from '@material-ui/core/Button'
-import List from '@material-ui/core/List'
-import Divider from '@material-ui/core/Divider'
-import { ListItem, Avatar } from '@material-ui/core'
-import ListItemIcon from '@material-ui/core/ListItemIcon'
-import ListItemText from '@material-ui/core/ListItemText'
-import { NavLink } from 'react-router-dom'
-import { AiOutlineMenu } from 'react-icons/ai'
-import {  useRouteMatch } from 'react-router-dom'
-import { useSelector } from 'react-redux'
-import avatar from 'assets/images/user.svg'
+import React from "react";
+import clsx from "clsx";
+import { makeStyles } from "@material-ui/core/styles";
+import Drawer from "@material-ui/core/Drawer";
+import Button from "@material-ui/core/Button";
+import List from "@material-ui/core/List";
+import Divider from "@material-ui/core/Divider";
+import { ListItem, Avatar } from "@material-ui/core";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import { NavLink } from "react-router-dom";
+import { AiOutlineMenu } from "react-icons/ai";
+import { useRouteMatch } from "react-router-dom";
+import { useSelector } from "react-redux";
+import avatar from "assets/images/user.svg";
+import { getCookie } from 'cookie/cookie'
+import { parseJwt } from "utils/getDataJWT"
+import { eraseCookie } from "cookie/cookie"
 
-
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
-    background: '#0f1726',
-    color: '#fdfdfd',
-    width: '100%',
+    background: "#0f1726",
+    color: "#fdfdfd",
+    width: "100%",
   },
   list: {
     width: 250,
   },
   fullList: {
-    width: 'auto',
-    background: '#0f1726',
+    width: "auto",
+    background: "#0f1726",
   },
   navLink: {
-    color: 'inherit',
-    textDecoration: 'inherit',
+    color: "inherit",
+    textDecoration: "inherit",
   },
   button: {
-    color: '#fdfdfd',
+    color: "#fdfdfd",
   },
-})
+}));
 
-type Anchor = 'right' | 'top' | 'bottom'
+type Anchor = "right" | "top" | "bottom";
 
 export default function TemporaryDrawer() {
-  const classes = useStyles()
+  const classes = useStyles();
   const [state, setState] = React.useState({
     right: false,
-  })
+  });
 
   const toggleDrawer = (anchor: Anchor, open: boolean) => (
-    event: React.KeyboardEvent | React.MouseEvent,
+    event: React.KeyboardEvent | React.MouseEvent
   ) => {
     if (
-      event.type === 'keydown' &&
-      ((event as React.KeyboardEvent).key === 'Tab' ||
-        (event as React.KeyboardEvent).key === 'Shift')
+      event.type === "keydown" &&
+      ((event as React.KeyboardEvent).key === "Tab" ||
+        (event as React.KeyboardEvent).key === "Shift")
     ) {
-      return
+      return;
     }
 
-    setState({ ...state, [anchor]: open })
+    setState({ ...state, [anchor]: open });
+  };
+
+  const { path } = useRouteMatch();
+
+  const login = () => {
+    const token = getCookie('token');
+    if (token === null) {
+      return false
+    }
+    if ((token !== "" || token !== undefined) && parseJwt(token).role === "user") {
+      return true
+    }
+
+    return false
+
   }
+  const onLogout = () => {
+    eraseCookie("role")
+    eraseCookie("id")
+    eraseCookie("token")
+    window.location.reload();
 
-  const { path } = useRouteMatch()
-
-  const login = useSelector((state: any) => state.login.Login)
-
+  }
+  const { data } = useSelector((state: any) => state.edit);
   const list = (anchor: Anchor) => (
     <div
       className={clsx(classes.list, {
-        [classes.fullList]: anchor === 'top' || anchor === 'bottom',
+        [classes.fullList]: anchor === "top" || anchor === "bottom",
       })}
       role="presentation"
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {login ? (
+        {login() ? (
           <>
             <NavLink to={`${path}/login`} className={classes.navLink}>
-              <ListItem button>
+              <ListItem button dense>
                 <ListItemIcon>
                   <Avatar alt="Remy Sharp" src={avatar} />
                 </ListItemIcon>
-                <ListItemText primary={'นางสาวอนุสรา'} />
+                <ListItemText primary={`${data.title}${data.firstName} ${data.lastName}`} />
               </ListItem>
             </NavLink>
             <NavLink to={`${path}/edit`} className={classes.navLink}>
               <ListItem button>
-                <ListItemText primary={'แก้ไขโปรไฟล์'} />
+                <ListItemText primary={"แก้ไขโปรไฟล์"} />
               </ListItem>
             </NavLink>
             <NavLink to={`${path}/reset`} className={classes.navLink}>
               <ListItem button>
-                <ListItemText primary={'เปลี่ยนรหัสผ่าน'} />
+                <ListItemText primary={"เปลี่ยนรหัสผ่าน"} />
               </ListItem>
             </NavLink>
             <NavLink to={`${path}/history`} className={classes.navLink}>
               <ListItem button>
-                <ListItemText primary={'ประกาศนียบัตร'} />
+                <ListItemText primary={"ประกาศนียบัตร"} />
               </ListItem>
             </NavLink>
             <Divider />
           </>
         ) : (
-          <NavLink to={`${path}/login`} className={classes.navLink}>
-            <ListItem button>
-              <ListItemText primary={'เข้าสู่ระบบ'} />
-            </ListItem>
-          </NavLink>
-        )}
+            <NavLink to={`${path}/login`} className={classes.navLink}>
+              <ListItem button>
+                <ListItemText primary={"เข้าสู่ระบบ"} />
+              </ListItem>
+            </NavLink>
+          )}
 
         <NavLink to={`${path}`} className={classes.navLink}>
           <ListItem button>
-            <ListItemText primary={'หน้าหลัก'} />
+            <ListItemText primary={"หน้าหลัก"} />
           </ListItem>
         </NavLink>
         <Divider />
-        {login ? (
+        {login() ? (
           <NavLink to={`${path}`} className={classes.navLink}>
-            <ListItem button>
-              <ListItemText primary={'ลงชื่อออก'} />
+            <ListItem button onClick={onLogout}>
+              <ListItemText primary={"ลงชื่อออก"} />
             </ListItem>
           </NavLink>
         ) : (
-          ''
-        )}
+            ""
+          )}
       </List>
     </div>
-  )
+  );
 
   return (
     <div>
-      <Button onClick={toggleDrawer('right', true)} className={classes.button}>
+      <Button onClick={toggleDrawer("right", true)} className={classes.button}>
         <AiOutlineMenu />
       </Button>
       <Drawer
-        anchor={'right'}
-        open={state['right']}
-        onClose={toggleDrawer('right', false)}
+        anchor={"right"}
+        open={state["right"]}
+        onClose={toggleDrawer("right", false)}
       >
-        {list('right')}
+        {list("right")}
       </Drawer>
     </div>
-  )
+  );
 }

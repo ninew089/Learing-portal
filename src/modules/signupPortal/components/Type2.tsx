@@ -1,81 +1,100 @@
-import React from 'react'
+import React, { useEffect } from "react";
 
-import { TextField, MenuItem, FormControl } from '@material-ui/core'
-import { Controller } from 'react-hook-form'
-import { makeStyles } from '@material-ui/core/styles'
+import { TextField, MenuItem, FormControl } from "@material-ui/core";
+import { Controller } from "react-hook-form";
+import { makeStyles } from "@material-ui/core/styles";
+
+import * as actions from "modules/infomation/actions";
+import { useDispatch, useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   input: {
-    color: '#0f1626',
+    color: "#0f1626",
 
-    '& .MuiInputBase-root.MuiOutlineInput-root': {
-      color: '#45A29E',
-      borderColor: '#757575',
+    "& .MuiInputBase-root.MuiOutlineInput-root": {
+      color: "#45A29E",
+      borderColor: "#757575",
       fontWeight: 600,
     },
   },
   selectInput: {
-    color: '#757575',
+    color: "#757575",
     fontWeight: 600,
-    '& .MuiInputBase-root.MuiOutlineInput-root': {
-      color: '#45A29E',
-      borderColor: '#757575',
+    "& .MuiInputBase-root.MuiOutlineInput-root": {
+      color: "#45A29E",
+      borderColor: "#757575",
       fontWeight: 600,
     },
   },
   textfield: {
     marginTop: 10,
-    '& .MuiFormHelperText-root.Mui-error ': {
-      color: 'ff533d',
+    "& .MuiFormHelperText-root.Mui-error ": {
+      color: "ff533d",
       fontWeight: 600,
-      borderWidth: '1px',
+      borderWidth: "1px",
     },
-    '& .MuiInput-underline.Mui-error:after': {
-      borderColor: 'ff533d',
-      borderWidth: '1px',
+    "& .MuiInput-underline.Mui-error:after": {
+      borderColor: "ff533d",
+      borderWidth: "1px",
     },
-    '& label.MuiFormLabel-root': {
+    "& label.MuiFormLabel-root": {
       fontWeight: 600,
-      '&:after .Mui-error': {
-        borderColor: '#ff533d',
-        borderWidth: '1px',
+      "&:after .Mui-error": {
+        borderColor: "#ff533d",
+        borderWidth: "1px",
       },
     },
-    '& label.Mui-focused': {
-      color: '#132740',
+    "& label.Mui-focused": {
+      color: "#132740",
     },
-    '& .MuiInput-underline:after': {
-      borderBottomColor: '#f9b122',
+    "& .MuiInput-underline:after": {
+      borderBottomColor: theme.palette.secondary.main,
     },
-    '& .MuiOutlinedInput-root': {
-      '& fieldset': {
-        borderColor: '#f9b122',
-        borderWidth: '1px',
+    "& .MuiOutlinedInput-root": {
+      "& fieldset": {
+        borderColor: theme.palette.secondary.main,
+        borderWidth: "1px",
       },
-      '&:hover fieldset': {
-        borderColor: '#a8c6ff',
-        borderWidth: '3px',
+      "&:hover fieldset": {
+        borderColor: "#a8c6ff",
+        borderWidth: "3px",
       },
-      '&.Mui-focused fieldset': {
-        borderColor: '#a8c6ff',
-        borderWidth: '3px',
+      "&.Mui-focused fieldset": {
+        borderColor: "#a8c6ff",
+        borderWidth: "3px",
       },
-      '&.Mui-error .MuiOutlinedInput-notchedOutline': {
-        borderColor: '#ff533d',
-        borderWidth: '1px',
+      "&.Mui-error .MuiOutlinedInput-notchedOutline": {
+        borderColor: "#ff533d",
+        borderWidth: "1px",
       },
     },
   },
-}))
+  menu: {
+    fontSize: 12,
+    whiteSpace: "normal",
+    [theme.breakpoints.up("sm")]: {
+      fontSize: 14,
+    },
+  },
+}));
 
 export default function SignIn(props: any) {
-  const { formProps } = props
-  const classes = useStyles()
+  const { formProps, name } = props;
+  const classes = useStyles();
+  const dispatch = useDispatch();
+
+  const { jobTypes2 } = useSelector((state: any) => state.infomation);
+
+  useEffect(() => {
+    const action = actions.loadJobType2();
+    dispatch(action);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
       <FormControl fullWidth>
-        <h4> ข้าราชการประเภทอื่น</h4>
+        <h4> {name}</h4>
 
         <Controller
           as={
@@ -92,13 +111,19 @@ export default function SignIn(props: any) {
               }
               error={!!formProps.errors.jobtypeId}
             >
-              <MenuItem value={'ข้าราชการทหาร'}>ข้าราชการทหาร</MenuItem>
-              <MenuItem value={'ข้าราชการฝ่ายตุลา'}>ข้าราชการฝ่ายตุลา</MenuItem>
-              <MenuItem value={'ข้าราชการตำรวจ'}>ข้าราชการตำรวจ</MenuItem>
+              {jobTypes2.map((jobType2: any, index: number) => (
+                <MenuItem
+                  className={classes.menu}
+                  key={index}
+                  value={jobType2.id}
+                >
+                  {jobType2.name}
+                </MenuItem>
+              ))}
             </TextField>
           }
           name="jobtypeId"
-          rules={{ required: 'กรุณาเลือกประเภทตำแหน่ง' }}
+          rules={{ required: "กรุณาเลือกประเภทตำแหน่ง" }}
           control={formProps.control}
           defaultValue=""
         />
@@ -136,5 +161,5 @@ export default function SignIn(props: any) {
         />
       </FormControl>
     </>
-  )
+  );
 }

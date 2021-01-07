@@ -1,81 +1,94 @@
-import React from 'react'
-import { Controller } from 'react-hook-form'
-import { TextField, MenuItem, FormControl } from '@material-ui/core'
-
-import { makeStyles } from '@material-ui/core/styles'
+import React, { useEffect } from "react";
+import { Controller } from "react-hook-form";
+import { TextField, MenuItem, FormControl } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import * as actions from "modules/infomation/actions";
+import { useDispatch, useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   input: {
-    color: '#0f1626',
+    color: "#0f1626",
     fontWeight: 600,
-    '& .MuiInputBase-root.MuiOutlineInput-root': {
-      color: '#45A29E',
-      borderColor: '#757575',
+    "& .MuiInputBase-root.MuiOutlineInput-root": {
+      color: "#45A29E",
+      borderColor: "#757575",
       fontWeight: 600,
     },
   },
   selectInput: {
-    color: '#757575',
+    color: "#757575",
     fontWeight: 600,
-    '& .MuiInputBase-root.MuiOutlineInput-root': {
-      color: '#45A29E',
-      borderColor: '#757575',
+    "& .MuiInputBase-root.MuiOutlineInput-root": {
+      color: "#45A29E",
+      borderColor: "#757575",
       fontWeight: 600,
     },
   },
   textfield: {
     marginTop: 10,
-    '& .MuiFormHelperText-root.Mui-error ': {
-      color: 'ff533d',
+    "& .MuiFormHelperText-root.Mui-error ": {
+      color: "ff533d",
       fontWeight: 600,
-      borderWidth: '1px',
+      borderWidth: "1px",
     },
-    '& .MuiInput-underline.Mui-error:after': {
-      borderColor: 'ff533d',
-      borderWidth: '1px',
+    "& .MuiInput-underline.Mui-error:after": {
+      borderColor: "ff533d",
+      borderWidth: "1px",
     },
-    '& label.MuiFormLabel-root': {
+    "& label.MuiFormLabel-root": {
       fontWeight: 600,
-      '&:after .Mui-error': {
-        borderColor: '#ff533d',
-        borderWidth: '1px',
+      "&:after .Mui-error": {
+        borderColor: "#ff533d",
+        borderWidth: "1px",
       },
     },
-    '& label.Mui-focused': {
-      color: '#132740',
+    "& label.Mui-focused": {
+      color: "#132740",
     },
-    '& .MuiInput-underline:after': {
-      borderBottomColor: '#f9b122',
+    "& .MuiInput-underline:after": {
+      borderBottomColor: theme.palette.secondary.main,
     },
-    '& .MuiOutlinedInput-root': {
-      '& fieldset': {
-        borderColor: '#f9b122',
-        borderWidth: '1px',
+    "& .MuiOutlinedInput-root": {
+      "& fieldset": {
+        borderColor: theme.palette.secondary.main,
+        borderWidth: "1px",
       },
-      '&:hover fieldset': {
-        borderColor: '#a8c6ff',
-        borderWidth: '3px',
+      "&:hover fieldset": {
+        borderColor: "#a8c6ff",
+        borderWidth: "3px",
       },
-      '&.Mui-focused fieldset': {
-        borderColor: '#a8c6ff',
-        borderWidth: '3px',
+      "&.Mui-focused fieldset": {
+        borderColor: "#a8c6ff",
+        borderWidth: "3px",
       },
-      '&.Mui-error .MuiOutlinedInput-notchedOutline': {
-        borderColor: '#ff533d',
-        borderWidth: '1px',
+      "&.Mui-error .MuiOutlinedInput-notchedOutline": {
+        borderColor: "#ff533d",
+        borderWidth: "1px",
       },
     },
   },
-}))
+}));
 
-export default function SignIn(props: any) {
-  const classes = useStyles()
-  const { formProps } = props
+export default function Type1(props: any) {
+  const classes = useStyles();
+  const { formProps, name } = props;
+  const dispatch = useDispatch();
+  const { jobTypes1, jobLevels } = useSelector(
+    (state: any) => state.infomation
+  );
+
+  useEffect(() => {
+    const action = actions.loadJobType1();
+    dispatch(action);
+    const actionJobLevel = actions.loadJobLevel();
+    dispatch(actionJobLevel);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
       <FormControl fullWidth>
-        <h4> ข้าราชการพลเรือน</h4>
+        <h4> {name}</h4>
 
         <Controller
           as={
@@ -93,17 +106,21 @@ export default function SignIn(props: any) {
               }
               error={!!formProps.errors.jobtypeId}
             >
-              {' '}
-              <MenuItem value={'วิชาการ'}>วิชาการ</MenuItem>
-              <MenuItem value={'อำนวย'}>อำนวย</MenuItem>
-              <MenuItem value={'บริหาร'}>บริหาร</MenuItem>
+              {jobTypes1.map((jobType1: any, index: number) => (
+                < MenuItem key={index} value={jobType1.id}>
+                  {jobType1.name}
+                </MenuItem>
+              ))}
+
             </TextField>
           }
           name="jobtypeId"
-          rules={{ required: 'กรุณาเลือกประเภทตำแหน่ง' }}
+          rules={{ required: "กรุณาเลือกประเภทตำแหน่ง" }}
           control={formProps.control}
           defaultValue=""
         />
+
+
 
         <TextField
           fullWidth
@@ -133,22 +150,24 @@ export default function SignIn(props: any) {
               }}
               select
               helperText={
-                formProps.errors.jobtypeLevelid &&
-                formProps.errors.jobtypeLevelid.message
+                formProps.errors.jobLevelid &&
+                formProps.errors.jobLevelid.message
               }
-              error={!!formProps.errors.jobtypeLevelid}
+              error={!!formProps.errors.jobLevel}
             >
-              {' '}
-              <MenuItem value={'ชำนาญงาน'}>ชำนาญงาน</MenuItem>
-              <MenuItem value={'อาวุโส'}>อาวุโส</MenuItem>
+              {jobLevels.map((jobLevel: any, index: number) => (
+                <MenuItem key={index} value={jobLevel.id}>
+                  {jobLevel.name}
+                </MenuItem>
+              ))}
             </TextField>
           }
-          name="jobtypeLevelid"
-          rules={{ required: 'กรุณาเลือกระดับ' }}
+          name="jobLevelid"
+          rules={{ required: "กรุณาเลือกระดับ" }}
           control={formProps.control}
           defaultValue=""
         />
       </FormControl>
     </>
-  )
+  );
 }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
 
 import {
   createStyles,
@@ -6,14 +6,15 @@ import {
   withStyles,
   WithStyles,
   makeStyles,
-} from '@material-ui/core/styles'
+} from "@material-ui/core/styles";
 
-import CloseIcon from '@material-ui/icons/Close'
+import CloseIcon from "@material-ui/icons/Close";
+
+import Search from "./SearchCourse"
 
 import {
   Container,
   CssBaseline,
-  FormControl,
   IconButton,
   Typography,
   DialogActions,
@@ -21,8 +22,14 @@ import {
   DialogTitle,
   Dialog,
   Button,
-} from '@material-ui/core'
-import SelectGroupCourse from './SelectGroupCourse'
+
+} from "@material-ui/core";
+
+
+import { useDispatch } from 'react-redux'
+import * as actions from "modules/coursePortal/actions"
+import * as actionsCourse from "../../actions"
+
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -31,27 +38,27 @@ const styles = (theme: Theme) =>
       padding: theme.spacing(2),
     },
     closeButton: {
-      position: 'absolute',
+      position: "absolute",
       right: theme.spacing(1),
       top: theme.spacing(1),
       color: theme.palette.grey[500],
     },
-  })
+  });
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     paper: {
       marginTop: theme.spacing(8),
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
     },
     avatar: {
       margin: theme.spacing(1),
       backgroundColor: theme.palette.secondary.main,
     },
     form: {
-      width: '100%', // Fix IE 11 issue.
+      width: "100%", // Fix IE 11 issue.
       marginTop: theme.spacing(1),
     },
     submit: {
@@ -62,7 +69,7 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: theme.spacing(1),
     },
     button: {
-      display: 'block',
+      display: "block",
       marginTop: theme.spacing(2),
     },
     formControl: {
@@ -74,22 +81,22 @@ const useStyles = makeStyles((theme: Theme) =>
       paddingRight: theme.spacing(4),
     },
     container: {
-      background: 'white',
-      borderRadius: '10px',
-      padding: '10px',
+      background: "white",
+      borderRadius: "10px",
+      padding: "10px",
     },
-  }),
-)
+  })
+);
 
 export interface DialogTitleProps extends WithStyles<typeof styles> {
-  id: string
-  children: React.ReactNode
+  id: string;
+  children: React.ReactNode;
 
-  onClose: () => void
+  onClose: () => void;
 }
 
 const MuiDialogTitle = withStyles(styles)((props: DialogTitleProps) => {
-  const { children, classes, onClose, ...other } = props
+  const { children, classes, onClose, ...other } = props;
   return (
     <DialogTitle disableTypography className={classes.root} {...other}>
       <Typography variant="h6">{children}</Typography>
@@ -103,33 +110,61 @@ const MuiDialogTitle = withStyles(styles)((props: DialogTitleProps) => {
         </IconButton>
       ) : null}
     </DialogTitle>
-  )
-})
+  );
+});
 
 const MuiDialogContent = withStyles((theme) => ({
   root: {
     padding: theme.spacing(2),
   },
-}))(DialogContent)
+}))(DialogContent);
 
 const MuiDialogActions = withStyles((theme) => ({
   root: {
     margin: 0,
     padding: theme.spacing(1),
   },
-}))(DialogActions)
+}))(DialogActions);
 
 export default function CustomizedDialogs({
   open,
   setOpen,
+  valueCurriculun
+
 }: {
-  open: any
-  setOpen: any
+  open: any;
+  setOpen: any;
+  valueCurriculun: any
+
 }) {
   const handleClose = () => {
-    setOpen(false)
-  }
-  const classes = useStyles()
+    setOpen(false);
+  };
+  const classes = useStyles();
+
+
+
+
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+
+    const action = actions.loadCourseCategory()
+    dispatch(action)
+
+    // eslint-disable-next-line
+  }, [])
+
+  const [value, setValue] = useState()
+  const onSubmitData = () => {
+
+    const actionCourse = actionsCourse.loadAddSubCurriculums(valueCurriculun, value)
+    dispatch(actionCourse)
+
+
+
+  };
   return (
     <div>
       <Dialog
@@ -140,7 +175,7 @@ export default function CustomizedDialogs({
         open={open}
       >
         <MuiDialogTitle id="customized-dialog-title" onClose={handleClose}>
-          <Typography variant="h6">เพิ่มรายวิชา</Typography>
+          <Typography variant="h6">เพิ่มรายวิชาในหลักสูตร</Typography>
         </MuiDialogTitle>
         <MuiDialogContent dividers>
           <Container
@@ -153,20 +188,19 @@ export default function CustomizedDialogs({
               <Typography component="h1" variant="h5">
                 ข้อมูลรายวิชา
               </Typography>
-              <form className={classes.form} noValidate>
-                <FormControl className={classes.formControlInfo} fullWidth>
-                  <SelectGroupCourse />
-                </FormControl>
-              </form>
+              <Search setValue={setValue} />
             </div>
           </Container>
         </MuiDialogContent>
         <MuiDialogActions>
-          <Button color="primary" fullWidth>
-            ส่งข้อมูล
+          {value !== undefined &&
+            <Button color="primary" fullWidth onClick={onSubmitData}>
+              ส่งข้อมูล
           </Button>
+          }
         </MuiDialogActions>
+
       </Dialog>
     </div>
-  )
+  );
 }

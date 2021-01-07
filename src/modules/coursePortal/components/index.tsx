@@ -1,83 +1,111 @@
-import React from 'react'
-import { Grid, Box, Container } from '@material-ui/core'
-import Curriculum from './Curriculum/CategoryByCurriculum'
-import Portal from 'modules/portal/components/LinkPortal'
-import Relation from 'modules/relationPortal/components/Relation'
-import Facebook from 'modules/facebook/components/FaceBook'
-import { SocialCardDemo } from './CardRecomment'
-import animation from 'assets/images/animation.gif'
-import animation1 from 'assets/images/animation00.gif'
-import CourseDetail from './Course/CourseDetails'
-import GroupSearch from './GroupSearch'
-import TapsCourse from './Course/TapsCourse'
-import { useTheme } from '@material-ui/core/styles'
+import React, { useEffect, lazy, Suspense } from "react";
+import { Grid, Box, Container } from "@material-ui/core";
+import { useTheme } from "@material-ui/core/styles";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { useDispatch, useSelector } from 'react-redux'
+import * as actions from "../actions";
+import animation from "assets/gif/animation.gif"
+import animation00 from "assets/gif/animation00.gif"
 
-import useMediaQuery from '@material-ui/core/useMediaQuery'
-import 'assets/css/styles.css'
+
+import "assets/css/styles.css";
+
+
+const Relation = lazy(() => import('modules/relationPortal/components/Relation'));
+const Portal = lazy(() => import('modules/portal/components/LinkPortal'));
+const TapsCourse = lazy(() => import('./Course/TapsCourse'));
+const AllCourse = lazy(() => import('./Course/AllCourse'));
+const SocialCardDemo = lazy(() => import('./CardRecomment'));
+const GroupSearch = lazy(() => import('./Search'));
+const Curriculum = lazy(() => import('./Curriculum/CategoryByCurriculum'));
+const Facebook = lazy(() => import('modules/facebook/components/FaceBook'));
+
+
 
 function FadeInSection(props: any) {
-  const [isVisible, setVisible] = React.useState(false)
-  const domRef = React.useRef<any>()
+  const [isVisible, setVisible] = React.useState(false);
+  const domRef = React.useRef<any>();
 
-  React.useEffect(() => {
+
+  useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => setVisible(entry.isIntersecting))
-    })
-    observer.observe(domRef.current)
-  }, [])
+      entries.forEach((entry) => setVisible(entry.isIntersecting));
+    });
+    observer.observe(domRef.current);
+  }, []);
+
+
   return (
     <div
-      className={`fade-in-section ${isVisible ? 'is-visible' : ''}`}
+      className={`fade-in-section ${isVisible ? "is-visible" : ""}`}
       ref={domRef}
     >
       {props.children}
     </div>
-  )
+  );
 }
 
 export default function Course() {
   //const [search, setSearch] = React.useState('')
-  const fixedOptions: any[] = []
-  const [value, setValue] = React.useState([...fixedOptions])
-  const theme = useTheme()
-  const matches = useMediaQuery(theme.breakpoints.only('xs'))
+  //const fixedOptions: any[] = [];
+  // const [value, setValue] = React.useState([...fixedOptions]);
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.only("xs"));
 
-  const scrollOnTop = () => {
-    window.scrollTo(0, 220)
-  }
+
+  useEffect(() => {
+
+    const actionRecommend = actions.loadRecommended()
+    dispatch(actionRecommend)
+    const actionTopRate = actions.loadTopRate()
+    dispatch(actionTopRate)
+
+    // eslint-disable-next-line
+  }, [])
+
+  const dispatch = useDispatch();
+  const { recommemded, toprate } = useSelector((state: any) => state.course);
+
+
+
+
+
+  const renderLoader = () =>
+    <div></div>
 
   return (
     <div>
 
+      <Suspense fallback={renderLoader()}>
         <Relation />
+        <Box p={2}>
+          <div
+            style={{
+              position: "sticky",
+              top: 56,
+              bottom: 20,
+              paddingTop: "8px",
+              paddingLeft: 4,
+              width: "100%",
+              zIndex: 5,
+            }}
+          >
+            <Grid
+              container
+              direction="row"
+              justify="center"
+              alignItems="center"
+              style={{ padding: 10 }}
+            >
+              <GroupSearch
 
-      <Box p={2}>
-   
-        <div
-          style={{
-            background: '#f5f5f5',
-            position: 'sticky',
-            top: 56,
-            bottom: 20,
-            paddingTop: '8px',
-            paddingLeft: 4,
-            width: '100%',
-            zIndex: 5,
-          }}
-        >
-          <Grid container direction="row" justify="center" alignItems="center" style={{padding:10}}>
-            <GroupSearch
-              value={value}
-              fixedOptions={fixedOptions}
-              setValue={setValue}
-            />
-          </Grid>
-        </div>
-        <Container>
-          <Grid container direction="row" justify="center" alignItems="center">
-            <Portal />
+              />
+            </Grid>
+          </div>
 
-            {value.length === 0 ? (
+          <Container>
+            <Grid container direction="row" justify="center" alignItems="center">
+              <Portal />
               <Grid
                 container
                 direction="row"
@@ -85,10 +113,11 @@ export default function Course() {
                 alignItems="center"
               >
                 <Grid item xs={12} sm={6} md={6} lg={6}>
-                  <SocialCardDemo title={'อันดับยอดฮิต'} />
+                  <SocialCardDemo title={"อันดับยอดฮิต"} data={toprate} />
+
                 </Grid>
                 <Grid item xs={12} sm={6} md={6} lg={6}>
-                  <SocialCardDemo title={'รายการแนะนำ'} />
+                  <SocialCardDemo title={"รายการแนะนำ"} data={recommemded} />
                 </Grid>
                 <Grid
                   container
@@ -103,11 +132,11 @@ export default function Course() {
                       justify="center"
                       alignItems="center"
                     >
-                      <FadeInSection key={'หมวด'}>
+                      <FadeInSection key={"หมวด"}>
                         <Box
                           fontWeight={600}
                           textAlign="center"
-                          color={'#efab22'}
+                          color={"#efab22"}
                           fontSize={matches ? 18 : 24}
                         >
                           OCSC Learning Portal
@@ -123,20 +152,19 @@ export default function Course() {
                       </FadeInSection>
                     </Grid>
                   </Grid>
+
                   <Grid item xs={12} sm={4} md={4} lg={4}>
-                    <FadeInSection key={'img'}>
-                      <img
-                        src={animation}
-                        alt="animation"
-                        width={'100%'}
-                        style={{ marginTop: 14 }}
-                      />
+                    <FadeInSection key={"img"}>
+                      <img src={animation} alt="" width="100%" height="100%" />
                     </FadeInSection>
+                  </Grid>
+                  <Grid item xs={12} sm={12} md={12} lg={12}>
+                    <AllCourse />
                   </Grid>
                 </Grid>
                 <div id="หมวดหมู่" />
                 <Grid item xs={12} sm={12} md={12} lg={12}>
-                  <TapsCourse title={'หมวดหมู่'} />
+                  <TapsCourse title={"หมวดหมู่"} />
                 </Grid>
 
                 <Grid
@@ -146,8 +174,9 @@ export default function Course() {
                   alignItems="center"
                 >
                   <Grid item xs={12} sm={4} md={4} lg={4}>
-                    <FadeInSection key={'image'}>
-                      <img src={animation1} alt="animation" width={'100%'} />
+                    <FadeInSection key={"image"}>
+                      <img src={animation00} alt="" width="100%" height="100%" />
+
                     </FadeInSection>
                   </Grid>
 
@@ -158,7 +187,7 @@ export default function Course() {
                       justify="center"
                       alignItems="center"
                     >
-                      <FadeInSection key={'หมวดหมู่'}>
+                      <FadeInSection key={"หมวดหมู่"}>
                         <Box
                           fontWeight={600}
                           textAlign="center"
@@ -180,44 +209,18 @@ export default function Course() {
                 </Grid>
                 <div id="หลักสูตร" />
                 <Grid item xs={12} sm={12} md={12} lg={12}>
-   
-                       <Curriculum title={'หลักสูตร'} />
-                  
-   
-               
+                  <Curriculum title={"หลักสูตร"} />
                 </Grid>
 
                 <Facebook />
               </Grid>
-            ) : (
-              <Grid
-                container
-                direction="row"
-                justify="center"
-                alignItems="center"
-              >
-                {scrollOnTop()}
-
-                <h2>ผลการค้นหา</h2>
-              </Grid>
-            )}
-            <Grid container justify="center" alignItems="center" spacing={2}>
-              {value.map((number: number, i: number) => (
-                <Grid item xs={12} sm={6} md={3} lg={3}>
-                  <CourseDetail
-                    data={value[i].title}
-                    logo={value[i].logo}
-                    int={value[i].int}
-                    view={value[i].view}
-                    point={value[i].point}
-                    vote={value[i].vote}
-                  />
-                </Grid>
-              ))}
             </Grid>
-          </Grid>
-        </Container>
-      </Box>
+          </Container>
+
+
+        </Box>
+s
+      </Suspense>
     </div>
-  )
+  );
 }

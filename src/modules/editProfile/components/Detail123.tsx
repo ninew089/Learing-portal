@@ -1,16 +1,18 @@
-import React from 'react'
+import React, { useEffect } from "react";
+import { TextField, MenuItem, FormControl } from "@material-ui/core";
+import { Controller } from "react-hook-form";
+import { makeStyles } from "@material-ui/core/styles";
+import Date from "./DatePickerJob";
+import * as actions from "modules/infomation/actions";
+import { useDispatch, useSelector } from "react-redux";
 
-import { TextField, MenuItem, FormControl } from '@material-ui/core'
-import { Controller } from 'react-hook-form'
-import { makeStyles } from '@material-ui/core/styles'
-import Date from './DatePickerJob'
 const useStyles = makeStyles((theme) => ({
   margin: {
     margin: theme.spacing(1),
     padding: theme.spacing(1),
   },
   button: {
-    display: 'block',
+    display: "block",
     marginTop: theme.spacing(2),
   },
   formControl: {
@@ -27,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(2),
   },
   font: {
-    color: 'rgba(0, 0, 0, 0.54)',
+    color: "rgba(0, 0, 0, 0.54)",
     fontWeight: 500,
     paddingTop: 0,
     marginTop: 0,
@@ -43,76 +45,103 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: 4,
   },
   selectInput: {
-    color: '#757575',
+    color: "#757575",
     fontWeight: 600,
-    '& .MuiInputBase-root.MuiOutlineInput-root': {
-      color: '#45A29E',
-      borderColor: '#757575',
+    "& .MuiInputBase-root.MuiOutlineInput-root": {
+      color: "#45A29E",
+      borderColor: "#757575",
       fontWeight: 600,
     },
   },
   input: {
-    color: '#0f1626',
+    color: "#0f1626",
     fontWeight: 600,
-    '& .MuiInputBase-root.MuiOutlineInput-root': {
-      color: '#45A29E',
-      borderColor: '#757575',
+    "& .MuiInputBase-root.MuiOutlineInput-root": {
+      color: "#45A29E",
+      borderColor: "#757575",
       fontWeight: 600,
     },
   },
   textfield: {
     marginTop: 10,
-    '& .MuiFormHelperText-root.Mui-error ': {
-      color: 'ff533d',
+    "& .MuiFormHelperText-root.Mui-error ": {
+      color: "ff533d",
       fontWeight: 600,
-      borderWidth: '1px',
+      borderWidth: "1px",
     },
-    '& .MuiInput-underline.Mui-error:after': {
-      borderColor: 'ff533d',
-      borderWidth: '1px',
+    "& .MuiInput-underline.Mui-error:after": {
+      borderColor: "ff533d",
+      borderWidth: "1px",
     },
-    '& label.MuiFormLabel-root': {
+    "& label.MuiFormLabel-root": {
       fontWeight: 600,
-      '&:after .Mui-error': {
-        borderColor: '#ff533d',
-        borderWidth: '1px',
+      "&:after .Mui-error": {
+        borderColor: "#ff533d",
+        borderWidth: "1px",
       },
     },
-    '& label.Mui-focused': {
-      color: '#132740',
+    "& label.Mui-focused": {
+      color: "#132740",
     },
-    '& .MuiInput-underline:after': {
-      borderBottomColor: '#f9b122',
+    "& .MuiInput-underline:after": {
+      borderBottomColor: theme.palette.secondary.main,
     },
-    '& .MuiOutlinedInput-root': {
-      '& fieldset': {
-        borderColor: '#f9b122',
-        borderWidth: '1px',
+    "& .MuiOutlinedInput-root": {
+      "& fieldset": {
+        borderColor: theme.palette.secondary.main,
+        borderWidth: "1px",
       },
-      '&:hover fieldset': {
-        borderColor: '#a8c6ff',
-        borderWidth: '3px',
+      "&:hover fieldset": {
+        borderColor: "#a8c6ff",
+        borderWidth: "3px",
       },
-      '&.Mui-focused fieldset': {
-        borderColor: '#a8c6ff',
-        borderWidth: '3px',
+      "&.Mui-focused fieldset": {
+        borderColor: "#a8c6ff",
+        borderWidth: "3px",
       },
-      '&.Mui-error .MuiOutlinedInput-notchedOutline': {
-        borderColor: '#ff533d',
-        borderWidth: '1px',
+      "&.Mui-error .MuiOutlinedInput-notchedOutline": {
+        borderColor: "#ff533d",
+        borderWidth: "1px",
       },
     },
   },
   form: {
     marginTop: theme.spacing(4),
-    width: '100%', // Fix IE 11 issue.
+    width: "100%", // Fix IE 11 issue.
   },
-}))
+  menu: {
+    fontSize: 12,
+    whiteSpace: "normal",
+    [theme.breakpoints.up("sm")]: {
+      fontSize: 14,
+    },
+  },
+}));
 
 export default function SignIn(props: any) {
-  const classes = useStyles()
+  const classes = useStyles();
+  const dispatch = useDispatch();
+  const { formProps } = props;
 
-  const { formProps } = props
+  useEffect(() => {
+    const action = actions.loadMinistries();
+    dispatch(action);
+    // eslint-disable-next-line
+  }, []);
+
+
+  const value = formProps.getValues("MinistryId");
+
+  useEffect(() => {
+
+    const actionDepartments = actions.loadDepartments(value);
+    dispatch(actionDepartments);
+    // eslint-disable-next-line
+  }, [value]);
+
+  const { Ministries, Departments } = useSelector(
+    (state: any) => state.infomation
+  );
 
   return (
     <>
@@ -124,9 +153,9 @@ export default function SignIn(props: any) {
       </FormControl>
 
       <Date
-        title={'วันที่รับราชการ'}
+        title={"วันที่รับราชการ"}
         register={formProps.register}
-        name={'jobDate'}
+        name={"jobStartDate"}
       />
 
       <Controller
@@ -145,17 +174,23 @@ export default function SignIn(props: any) {
             }
             error={!!formProps.errors.MinistryId}
           >
-            <MenuItem value={'ข้าราชการทหาร'}>ข้าราชการทหาร</MenuItem>
-            <MenuItem value={'ข้าราชการฝ่ายตุลา'}>ข้าราชการฝ่ายตุลา</MenuItem>
-            <MenuItem value={'ข้าราชการตำรวจ'}>ข้าราชการตำรวจ</MenuItem>
+            {Ministries.map((ministry: any, index: number) => (
+              <MenuItem
+                className={classes.menu}
+                key={index}
+                value={ministry.id}
+
+              >
+                {ministry.name}
+              </MenuItem>
+            ))}
           </TextField>
         }
         name="MinistryId"
-        rules={{ required: 'กรุณาเลือกประเภทตำแหน่ง' }}
+        rules={{ required: "กรุณาเลือกประเภทตำแหน่ง" }}
         control={formProps.control}
         defaultValue=""
       />
-
       <Controller
         as={
           <TextField
@@ -168,22 +203,28 @@ export default function SignIn(props: any) {
             }}
             select
             helperText={
-              formProps.errors.DepartmentId &&
-              formProps.errors.DepartmentId.message
+              formProps.errors.DepartmentId && formProps.errors.DepartmentId.message
             }
-            error={!!formProps.errors.MinistryId}
+            error={!!formProps.errors.DepartmentId}
           >
-            {' '}
-            <MenuItem value={'กรม1'}>กรม1</MenuItem>
-            <MenuItem value={'กรม2'}>กรม2</MenuItem>
-            <MenuItem value={'กรม3'}>กรม3</MenuItem>
+
+            {Departments.map((department: any, index: number) => (
+              <MenuItem className={classes.menu}
+                key={index}
+                value={department.id}
+              >
+                {department.name}
+              </MenuItem>
+            ))}
           </TextField>
         }
         name="DepartmentId"
-        rules={{ required: 'กรุณาเลือกกรมที่สังกัด' }}
+        rules={{ required: "กรุณาเลือกกรมที่สังกัด" }}
         control={formProps.control}
-        defaultValue=""
+
       />
+
+
 
       <TextField
         fullWidth
@@ -196,10 +237,10 @@ export default function SignIn(props: any) {
         }}
         inputRef={formProps.register}
         helperText={
-          formProps.errors.Division ? formProps.errors.Division.message : ''
+          formProps.errors.Division ? formProps.errors.Division.message : ""
         }
         error={!!formProps.errors.Division}
       />
     </>
-  )
+  );
 }

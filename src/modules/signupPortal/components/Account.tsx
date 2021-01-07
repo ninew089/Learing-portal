@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import {
   Typography,
   InputAdornment,
@@ -6,10 +6,12 @@ import {
   CssBaseline,
   TextField,
   FormControl,
-} from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
-import { RiLockPasswordLine } from 'react-icons/ri'
-import { AiOutlineIdcard } from 'react-icons/ai'
+} from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import { RiLockPasswordLine } from "react-icons/ri";
+import { AiOutlineIdcard } from "react-icons/ai";
+import * as actions from "modules/infomation/actions";
+import { useDispatch } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -17,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(1),
   },
   button: {
-    display: 'block',
+    display: "block",
     marginTop: theme.spacing(2),
   },
   formControl: {
@@ -34,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(2),
   },
   font: {
-    color: 'rgba(0, 0, 0, 0.54)',
+    color: "rgba(0, 0, 0, 0.54)",
     fontWeight: 500,
     paddingTop: 0,
     marginTop: 0,
@@ -50,82 +52,98 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: 4,
   },
   input: {
-    color: '#0f1626',
+    color: "#0f1626",
     fontWeight: 600,
-    '& .MuiInputBase-root.MuiOutlineInput-root': {
-      color: '#45A29E',
-      borderColor: '#757575',
+    "& .MuiInputBase-root.MuiOutlineInput-root": {
+      color: "#45A29E",
+      borderColor: "#757575",
       fontWeight: 600,
     },
   },
   textfield: {
     marginTop: 10,
-    '& .MuiFormHelperText-root.Mui-error ': {
-      color: 'ff533d',
+    "& .MuiFormHelperText-root.Mui-error ": {
+      color: "ff533d",
       fontWeight: 600,
-      borderWidth: '1px',
+      borderWidth: "1px",
     },
-    '& .MuiInput-underline.Mui-error:after': {
-      borderColor: 'ff533d',
-      borderWidth: '1px',
+    "& .MuiInput-underline.Mui-error:after": {
+      borderColor: "ff533d",
+      borderWidth: "1px",
     },
-    '& label.MuiFormLabel-root': {
+    "& label.MuiFormLabel-root": {
       fontWeight: 600,
-      '&:after .Mui-error': {
-        borderColor: '#ff533d',
-        borderWidth: '1px',
+      "&:after .Mui-error": {
+        borderColor: "#ff533d",
+        borderWidth: "1px",
       },
     },
-    '& label.Mui-focused': {
-      color: '#132740',
+    "& label.Mui-focused": {
+      color: "#132740",
     },
-    '& .MuiInput-underline:after': {
-      borderBottomColor: '#f9b122',
+    "& .MuiInput-underline:after": {
+      borderBottomColor: theme.palette.secondary.main,
     },
-    '& .MuiOutlinedInput-root': {
-      '& fieldset': {
-        borderColor: '#f9b122',
-        borderWidth: '1px',
+    "& .MuiOutlinedInput-root": {
+      "& fieldset": {
+        borderColor: theme.palette.secondary.main,
+        borderWidth: "1px",
       },
-      '&:hover fieldset': {
-        borderColor: '#a8c6ff',
-        borderWidth: '3px',
+      "&:hover fieldset": {
+        borderColor: "#a8c6ff",
+        borderWidth: "3px",
       },
-      '&.Mui-focused fieldset': {
-        borderColor: '#a8c6ff',
-        borderWidth: '3px',
+      "&.Mui-focused fieldset": {
+        borderColor: "#a8c6ff",
+        borderWidth: "3px",
       },
-      '&.Mui-error .MuiOutlinedInput-notchedOutline': {
-        borderColor: '#ff533d',
-        borderWidth: '1px',
+      "&.Mui-error .MuiOutlinedInput-notchedOutline": {
+        borderColor: "#ff533d",
+        borderWidth: "1px",
       },
     },
   },
   form: {
     marginTop: theme.spacing(4),
-    width: '100%', // Fix IE 11 issue.
+    width: "100%", // Fix IE 11 issue.
   },
   submit: {
-    marginTop: '10px',
-    background: '#f9b122',
+    marginTop: "10px",
+    background: theme.palette.secondary.main,
     borderRadius: 20,
     padding: 8,
-    color: '#fdfdfd',
-    '&:hover': {
-      background: '#f9b122ab',
+    color: "#fdfdfd",
+    "&:hover": {
+      background: "#f9b122ab",
     },
   },
-}))
+}));
 
 export default function SignIn(props: any) {
-  const classes = useStyles()
+  const classes = useStyles();
+  const dispatch = useDispatch();
+  //const [open, setOpen] = useState(false);
+  const { formProps } = props;
 
-  const { formProps } = props
+  //const { message, severity } = useSelector((state: any) => state.infomation);
+  const onPresence = () => {
+    const value = formProps.getValues("id");
+    const action = actions.loadPresence(value);
+    dispatch(action);
+  };
 
   return (
     <>
       <CssBaseline />
-
+      {/*
+      {message !== null && <Snackbar
+        message={message
+        }
+        open={message !== null ? true : false}
+        setOpen={setOpen}
+        severity={severity}
+      />}
+*/}
       <form className={classes.form} noValidate>
         <FormControl className={classes.formControlInfo} fullWidth>
           <Typography component="h1" variant="h5" align="center">
@@ -135,12 +153,10 @@ export default function SignIn(props: any) {
             fullWidth
             id="input-with-icon-textfield"
             label="เลขประจำตัวประชาชน"
-            name="userid"
+            name="id"
             inputRef={formProps.register}
-            helperText={
-              formProps.errors.userid ? formProps.errors.userid.message : ''
-            }
-            error={!!formProps.errors.userid}
+            helperText={formProps.errors.id ? formProps.errors.id.message : ""}
+            error={!!formProps.errors.id}
             variant="outlined"
             className={classes.textfield}
             InputProps={{
@@ -159,7 +175,7 @@ export default function SignIn(props: any) {
             name="password"
             inputRef={formProps.register}
             helperText={
-              formProps.errors.password ? formProps.errors.password.message : ''
+              formProps.errors.password ? formProps.errors.password.message : ""
             }
             error={!!formProps.errors.password}
             type="password"
@@ -183,7 +199,7 @@ export default function SignIn(props: any) {
             helperText={
               formProps.errors.comfirmpassword
                 ? formProps.errors.comfirmpassword.message
-                : ''
+                : ""
             }
             error={!!formProps.errors.comfirmpassword}
             type="password"
@@ -199,11 +215,11 @@ export default function SignIn(props: any) {
             }}
           />
 
-          <Button fullWidth className={classes.submit}>
-           ตรวจสอบว่ามีผู้ใช้หรือไม่
+          <Button fullWidth className={classes.submit} onClick={onPresence}>
+            ตรวจสอบว่ามีผู้ใช้หรือไม่
           </Button>
         </FormControl>
       </form>
     </>
-  )
+  );
 }

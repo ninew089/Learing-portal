@@ -1,6 +1,6 @@
-import React from 'react'
-import clsx from 'clsx'
-import { makeStyles, useTheme } from '@material-ui/core/styles'
+import React, { useState, useEffect } from "react";
+import clsx from "clsx";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 import {
   AppBar,
   Toolbar,
@@ -8,49 +8,51 @@ import {
   Typography,
   Hidden,
   Box,
-  Container,
   Avatar,
   useMediaQuery,
   Button,
-} from '@material-ui/core'
-import Drawer from './Drawer'
-import { useHistory, useRouteMatch } from 'react-router-dom'
-import {  useSelector } from 'react-redux'
-//import * as actions from '../actions'
-import MenuList from './MenuList'
-import banner from 'assets/images/OCSC-banner.png'
-import { NavLink } from 'react-router-dom'
-import Routes from './Routes'
-import avatar from 'assets/images/user.svg'
-import ScrollTo from 'react-scroll-into-view'
-import { useLocation } from 'react-router-dom'
+} from "@material-ui/core";
+import Drawer from "./Drawer";
+import { useHistory, useRouteMatch } from "react-router-dom";
+import MenuList from "./MenuList";
+import banner from "assets/images/OCSC-banner.png";
+import { NavLink } from "react-router-dom";
+import Routes from "./Routes";
+import avatar from "assets/images/user.svg";
+import ScrollTo from "react-scroll-into-view";
+import { useLocation } from "react-router-dom";
+import { getCookie } from 'cookie/cookie'
+import { parseJwt } from "utils/getDataJWT"
+import * as actionsEdit from "modules/editProfile/actions";
+import { useDispatch, useSelector } from 'react-redux'
 
-const drawerWidth = 240
+const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'block',
-    background: '#f5f5f5',
-    width: '100%',
-    overflowX: "hidden"
+    display: "block",
+    background: theme.palette.primary.light,
+    width: "100%",
+    overflowX: "hidden",
   },
   title: {
     fontWeight: 700,
     flexGrow: 1,
-    display: 'flex',
+    display: "flex",
     marginLeft: 10,
   },
   appBar: {
-    background: '#0f1626',
-    color: '#f3f3fb',
-    backdropFilter: 'blur(6px)',
+    background: "#0f1626",
+    color: "#f3f3fb",
+    backdropFilter: "blur(6px)",
+    filter: "opacity(0.9)",
   },
 
   menuButton: {
     marginRight: theme.spacing(2),
   },
   hide: {
-    display: 'none',
+    display: "none",
   },
   drawer: {
     width: drawerWidth,
@@ -60,78 +62,132 @@ const useStyles = makeStyles((theme) => ({
     width: drawerWidth,
   },
   drawerHeader: {
-    display: 'flex',
-    alignItems: 'center',
+    display: "flex",
+    alignItems: "center",
     padding: theme.spacing(0, 3),
     ...theme.mixins.toolbar,
-    justifyContent: 'flex-end',
+    justifyContent: "flex-end",
   },
   content: {
     flexGrow: 1,
     minHeight: `100vh`,
-    background: '#f5f5f5',
+    background: theme.palette.primary.light,
   },
   push: {
-    height: '120px',
+    height: "120px",
   },
   footer: {
-
-    background: '#0f1626', //transparent
-    color: '#f3f3fb',
-    backdropFilter: 'blur(6px)',
+    background: "#0f1626", //transparent
+    color: "#f3f3fb",
+    backdropFilter: "blur(6px)",
   },
   contentShift: {
-    transition: theme.transitions.create('margin', {
+    transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.easeOut,
     }),
     marginLeft: 0,
   },
   color: {
-    color: '#f5f5f5',
+
+    color: theme.palette.secondary.light,
     fontWeight: 700,
     fontSize: 14,
-    [theme.breakpoints.down('sm')]: {
-      fontSize: 8,
-    },
+    [theme.breakpoints.down("sm")]: {
+      textAlign: "center",
+      fontSize: 10,
+    }
   },
   color1: {
     fontWeight: 700,
     fontSize: 14,
-    [theme.breakpoints.down('sm')]: {
-      fontSize: 8,
-    },
+    color: theme.palette.primary.light,
+    [theme.breakpoints.down("sm")]: {
+      textAlign: "center",
+      fontSize: 10,
+    }
   },
   name: {
     fontWeight: 700,
     fontSize: 16,
     marginLeft: 10,
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    maxWidth: "75ch"
   },
   main: {
     fontWeight: 700,
     fontSize: 16,
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down("sm")]: {
       fontWeight: 700,
       fontSize: 12,
     },
+    "&:hover": {
+      color: theme.palette.secondary.main,
+    },
   },
   line: {
-    display: 'inline-block',
-    borderBottom: '3px solid #f9b122',
-    paddingBottom: '2px',
+    display: "inline-block",
+    borderBottom: `3px solid ${theme.palette.secondary.main}`,
+    paddingBottom: "2px",
   },
-}))
-
+  button: {
+    color: "#fdfdfd",
+    "&:hover": {
+      color: theme.palette.secondary.main,
+    },
+  },
+  selected: {
+    color: theme.palette.secondary.main,
+  },
+  selectedMain: {
+    fontWeight: 700,
+    fontSize: 16,
+    [theme.breakpoints.down("sm")]: {
+      fontWeight: 700,
+      fontSize: 12,
+    },
+    color: theme.palette.secondary.main,
+  },
+}));
+interface NavProps {
+  onClick: () => void;
+}
 export default function PersistentDrawerLeft(props: any) {
-  const classes = useStyles()
-  const theme = useTheme()
-  const history = useHistory()
-  const { path } = useRouteMatch()
+  const classes = useStyles();
+  const theme = useTheme();
+  const history = useHistory();
+  const { path } = useRouteMatch();
   const navigatorToLogin = () => {
-    history.push(`${path}/login`)
+    setActive(3);
+    history.push(`${path}/login`);
+  };
+  const { pathname } = useLocation();
+  const login = () => {
+    const token = getCookie('token');
+    if (token === null) {
+      return false
+    }
+    if ((token !== "" || token !== undefined) && parseJwt(token).role === "user") {
+      return true
+    }
+
+    return false
+
   }
-  const { pathname } = useLocation()
-  const login = useSelector((state: any) => state.login.Login)
-  const matchesIspad = useMediaQuery(theme.breakpoints.down('md'))
+  const matchesIspad = useMediaQuery(theme.breakpoints.down("md"));
+  const [active, setActive] = useState<number>(0);
+
+  const dispatch = useDispatch();
+  const id = getCookie('id')
+  useEffect(() => {
+    const actionProfile = actionsEdit.loadGetProfile()
+    dispatch(actionProfile)
+    // eslint-disable-next-line
+  }, [id])
+
+  const { data } = useSelector((state: any) => state.edit);
+
   return (
     <div className={classes.root}>
       <AppBar position="fixed" className={clsx(classes.appBar)} elevation={0}>
@@ -145,7 +201,7 @@ export default function PersistentDrawerLeft(props: any) {
             >
               <NavLink
                 to="/learning-portal"
-                style={{ color: 'inherit', textDecoration: 'inherit' }}
+                style={{ color: "inherit", textDecoration: "inherit" }}
               >
                 <img alt="" src={banner} width={matchesIspad ? 100 : 140} />
               </NavLink>
@@ -162,58 +218,54 @@ export default function PersistentDrawerLeft(props: any) {
             <NavLink
               to="/learning-portal"
               style={{
-                color: 'inherit',
-                textDecoration: 'inherit',
+                color: "inherit",
+                textDecoration: "inherit",
                 marginLeft: 10,
               }}
             >
               <div className={classes.line}>
-                <Box className={classes.main}>หน้าหลัก</Box>
+                <Box
+                  className={active === 0 ? classes.selectedMain : classes.main}
+                  onClick={() => setActive(0)}
+                >
+                  หน้าหลัก
+                </Box>
               </div>
             </NavLink>
           </Hidden>
-          {pathname === '/learning-portal' ? (
+          {pathname === "/learning-portal" ? (
             <>
               <ScrollTo selector={`#หมวดหมู่`}>
-                <Button style={{ color: '#fdfdfd' }}>หมวดหมู่</Button>
+                <Button
+                  className={active === 1 ? classes.selected : classes.button}
+                  onClick={() => setActive(1)}
+                >
+                  หมวดหมู่
+                </Button>
               </ScrollTo>
               <ScrollTo selector={`#หลักสูตร`}>
-                <Button style={{ color: '#fdfdfd' }}>หลักสูตร</Button>
+                <Button
+                  className={active === 2 ? classes.selected : classes.button}
+                  onClick={() => setActive(2)}
+                >
+                  หลักสูตร
+                </Button>
               </ScrollTo>
             </>
-          ) : (
-            <>
-              <NavLink
-                to="/learning-portal"
-                style={{
-                  color: 'inherit',
-                  textDecoration: 'inherit',
-                }}
-              >
-                <Button style={{ color: '#fdfdfd' }}>หมวดหมู่</Button>
-              </NavLink>
-              <NavLink
-                to="/learning-portal"
-                style={{
-                  color: 'inherit',
-                  textDecoration: 'inherit',
-                }}
-              >
-                <Button style={{ color: '#fdfdfd' }}>หลักสูตร</Button>
-              </NavLink>
-            </>
-          )}
+          ) :
+            ""
+          }
 
           <Hidden smUp>
             <Drawer />
           </Hidden>
-          {login ? (
+          {login() ? (
             <>
               <Hidden xsDown>
                 <Typography
                   style={{
-                    borderRight: '0.1em solid white',
-                    padding: '1em',
+                    borderRight: "0.1em solid white",
+                    padding: "1em",
                     marginRight: 10,
                     paddingLeft: 0,
                     marginLeft: 0,
@@ -221,51 +273,87 @@ export default function PersistentDrawerLeft(props: any) {
                 />
                 <Avatar alt="Remy Sharp" src={avatar} />
                 <Hidden xsDown>
-                  <Box className={classes.name}>อนุสรา</Box>
+                  <Box className={classes.name}>{data.firstName}</Box>
                 </Hidden>
 
                 <MenuList />
               </Hidden>
             </>
           ) : (
-            <>
-              <Hidden xsDown>
-                <Button style={{ color: '#fdfdfd' }} onClick={navigatorToLogin}>
-                  ลงชื่อเข้าสู่ระบบ
+              <>
+                <Hidden xsDown>
+                  <Button
+                    className={active === 3 ? classes.selected : classes.button}
+                    onClick={navigatorToLogin}
+                  >
+                    ลงชื่อเข้าสู่ระบบ
                 </Button>
-              </Hidden>
-            </>
-          )}
+                </Hidden>
+              </>
+            )}
         </Toolbar>
       </AppBar>
 
       <Grid className={clsx(classes.content)}>
-        <Toolbar />
         <Routes />
+
+
       </Grid>
       <div className={classes.push} />
       <Box p={3} className={classes.footer}>
-        <Container>
+        <Grid container direction="row" justify="space-around" alignItems="center">
+
           <Typography
             variant="button"
             display="block"
-            align="center"
+            align="justify"
             gutterBottom
             className={classes.color1}
           >
             สำนักงานคณะกรรมการข้าราชการพลเรือน (สำนักงาน ก.พ.)
+                   <Typography
+              variant="button"
+              display="block"
+              align="justify"
+              gutterBottom
+              className={classes.color}
+            >
+              Copyright © office of the Civil Service Commission (OCSC) 2020
+          </Typography>
           </Typography>
           <Typography
             variant="button"
             display="block"
-            align="center"
+            align="justify"
             gutterBottom
-            className={classes.color}
+            className={classes.color1}
           >
-            Copyright © office of the Civil Service Commission (OCSC) 2020
+            47/111 หมู่ 4 ถนนติวานนท์ ตำบลตลาดขวัญ อำเภอเมือง จังหวัดนนทบุรี 11000
+                  <Typography
+              variant="button"
+              display="block"
+              align="justify"
+              gutterBottom
+              className={classes.color}
+            >
+              E-mail: ocsc.hrd@gmail.com
           </Typography>
-        </Container>
+
+            <Typography
+              variant="button"
+              display="block"
+              align="justify"
+              gutterBottom
+              className={classes.color1}
+            >
+              โทร. 02-547-1795 , 02-547-1807 (ภายในเวลาราชการ)
+          </Typography>
+
+
+
+          </Typography>
+        </Grid>
       </Box>
     </div>
-  )
+  );
 }
