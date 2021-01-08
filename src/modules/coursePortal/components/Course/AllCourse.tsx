@@ -6,6 +6,7 @@ import { useRouteMatch, useHistory } from "react-router-dom"
 
 const Carousel = lazy(() => import('shared/Carousel/Carousel'));
 
+
 export default function GroupCourse(props: any) {
 
     const { path } = useRouteMatch()

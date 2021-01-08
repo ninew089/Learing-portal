@@ -192,7 +192,7 @@ export default function IconBreadcrumbs(props: CardProps) {
                 }}
                 image={thumbnail}
                 className={classes.cardMedia}
-                title="Contemplative Reptile"
+                title={name}
                 onClick={onOpen}
               />
 
@@ -224,7 +224,7 @@ export default function IconBreadcrumbs(props: CardProps) {
 
 
                       <Box fontWeight={400} className={classes.caption}>
-                        &nbsp;&nbsp;&nbsp;{learningTopic}
+                        {learningTopic}
                       </Box>
                     </div>
                   </Grid>

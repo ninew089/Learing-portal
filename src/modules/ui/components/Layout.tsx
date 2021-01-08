@@ -90,16 +90,16 @@ const useStyles = makeStyles((theme) => ({
   color: {
 
     color: theme.palette.secondary.light,
-    fontWeight: 700,
-    fontSize: 14,
+    fontWeight: 400,
+    fontSize: 16,
     [theme.breakpoints.down("sm")]: {
       textAlign: "center",
       fontSize: 10,
     }
   },
   color1: {
-    fontWeight: 700,
-    fontSize: 14,
+    fontWeight: 400,
+    fontSize: 16,
     color: theme.palette.primary.light,
     [theme.breakpoints.down("sm")]: {
       textAlign: "center",
@@ -322,25 +322,25 @@ export default function PersistentDrawerLeft(props: any) {
           </Typography>
           </Typography>
           <Typography
-            variant="button"
+
             display="block"
             align="justify"
-            gutterBottom
+
             className={classes.color1}
           >
             47/111 หมู่ 4 ถนนติวานนท์ ตำบลตลาดขวัญ อำเภอเมือง จังหวัดนนทบุรี 11000
                   <Typography
-              variant="button"
+
               display="block"
               align="justify"
-              gutterBottom
+
               className={classes.color}
             >
-              E-mail: ocsc.hrd@gmail.com
+              E-mail : ocsc.hrd@gmail.com
           </Typography>
 
             <Typography
-              variant="button"
+
               display="block"
               align="justify"
               gutterBottom

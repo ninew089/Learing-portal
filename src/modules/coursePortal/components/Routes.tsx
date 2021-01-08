@@ -5,6 +5,7 @@ import { Route, Switch } from "react-router-dom";
 import GroupCourse from "./Course/GroupCourse";
 import Page404 from "modules/404page/component/404";
 import GroupAllCourse from "./Course/GroupAllCourse"
+import Search from "./Search/index"
 
 export default function Routes() {
   return (
@@ -12,7 +13,9 @@ export default function Routes() {
 
       <Switch>
 
-
+        <Route path={`/learning-portal/search`}>
+          <Search />
+        </Route>
         <Route path={`/learning-portal/curriculum`}>
           <GroupCurriculum />
         </Route>

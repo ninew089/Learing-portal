@@ -1,5 +1,5 @@
-import React, { useEffect, Suspense, lazy } from "react";
-import { Grid, Divider, Container } from "@material-ui/core";
+import React, { useEffect, Suspense, lazy, useState } from "react";
+import { Grid, Divider, Container, CircularProgress, Button } from "@material-ui/core";
 import queryString from "query-string";
 import categoryFormat from "utils/categoryFormat"
 import { useLocation } from "react-router-dom";
@@ -22,6 +22,14 @@ const useStyles = makeStyles((theme) => ({
   divider: {
     marginBottom: 20
   },
+  circular: {
+    marginTop: 20
+  }, button: {
+    background: theme.palette.primary.main,
+    borderRadius: 40,
+    padding: '15px 30px 15px 30px',
+    margin: 10
+  }
 
 }));
 
@@ -33,14 +41,33 @@ export default function GroupCourse(props: any) {
   const parsed = queryString.parse(search)
   const { courseCategories, isLoadingCourseCategories } = useSelector((state: any) => state.course);
   const classes = useStyles()
+  const postsPerPage = 8;
+  const [postsToShow, setPostsToShow] = useState<any>([]);
+  const [next, setNext] = useState(8);
+  const loopWithSlice = (start: any, end: any) => {
+    const slicedPosts = courseCategories.slice(start, end);
+    setPostsToShow([...postsToShow, ...slicedPosts]);
+  };
 
+  useEffect(() => {
+    loopWithSlice(0, postsPerPage);
+    // eslint-disable-next-line
+  }, [isLoadingCourseCategories]);
+
+  const handleShowMorePosts = () => {
+    loopWithSlice(next, next + postsPerPage);
+    setNext(next + postsPerPage);
+  }
 
   const renderLoader = () =>
     <div></div>
 
   useEffect(() => {
+    setPostsToShow([])
     const action = actions.loadCourseCategories(parsed.category === undefined ? 1 : parsed.category)
     dispatch(action)
+
+
     // eslint-disable-next-line
   }, [parsed.category])
 
@@ -67,7 +94,8 @@ export default function GroupCourse(props: any) {
             justify={isLoadingCourseCategories ? "center" : "flex-start"}
             spacing={3}
           >
-            {courseCategories.map((item: any, index: number) => (
+            {isLoadingCourseCategories && <CircularProgress color="secondary" className={classes.circular} />}
+            {postsToShow.map((item: any, index: number) => (
               <Grid item xs={12} sm={6} md={4} lg={3} xl={3}>
                 <CourseDetail
                   key={index}
@@ -89,6 +117,17 @@ export default function GroupCourse(props: any) {
               </Grid>
             ))}
           </Grid>
+          {!isLoadingCourseCategories && next < courseCategories.length &&
+            <Grid
+              container
+              direction="row"
+              alignItems="center"
+              justify={"center"}
+              spacing={3}
+            >
+
+              <Button onClick={handleShowMorePosts} color="secondary" className={classes.button}>ดูเพิ่มเติม</Button>
+            </Grid>}
         </Container>
       </div>
     </Suspense>

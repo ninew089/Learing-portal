@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
     Grid,
     TextField,
     IconButton
 } from "@material-ui/core";
+import { useHistory } from "react-router-dom"
 
 import { Search } from '@material-ui/icons'
 const useStyles = makeStyles((theme) => ({
@@ -65,21 +66,14 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignIn() {
     const classes = useStyles();
-    /*
-          <div className={classes.search}>
-                    <div className={classes.searchIcon}>
-                        <SearchIcon />
-                    </div>
-                    <InputBase
-                        placeholder="Search…"
-                        classes={{
-                            root: classes.inputRoot,
-                            input: classes.inputInput,
-                        }}
-                        inputProps={{ 'aria-label': 'search' }}
-                    />
-                </div>
-    */
+    const history = useHistory();
+    const [value, setValue] = useState('')
+    const handlerSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setValue(e.target.value)
+    }
+    const navToSearch = () => {
+        history.push(`/learning-portal/search?q=${value}`)
+    }
     return (
         <Grid container direction="row" justify="center" alignItems="center">
 
@@ -88,9 +82,11 @@ export default function SignIn() {
                 name="userId"
                 variant="outlined"
                 className={classes.textfield}
+                value={value}
+                onChange={handlerSearch}
                 InputProps={{
                     className: classes.input,
-                    endAdornment: <IconButton color="secondary" aria-label="add" >
+                    endAdornment: <IconButton color="secondary" aria-label="search" onClick={navToSearch} >
                         <Search />
                     </IconButton>
                 }}

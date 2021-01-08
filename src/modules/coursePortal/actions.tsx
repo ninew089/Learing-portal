@@ -114,7 +114,7 @@ function loadCurriculumsView(id: number) {
   };
 }
 
-function loadCurriculums(text:string) {
+function loadCurriculums(text: string) {
   return async (dispatch: any) => {
     dispatch({ type: LOAD_CURRICULUMS_REQUEST });
     try {
@@ -193,7 +193,7 @@ function loadCourses(text: string) {
     }
   };
 }
-function loadCourse(id: number) {
+function loadCourse(id: any) {
   return async (dispatch: any) => {
     dispatch({ type: LOAD_COURSE_REQUEST });
     try {

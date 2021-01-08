@@ -1,5 +1,5 @@
-import React, { useEffect, Suspense, lazy } from "react";
-import { Grid, Divider, Container, } from "@material-ui/core";
+import React, { useEffect, Suspense, lazy, useState } from "react";
+import { Grid, Divider, Container, CircularProgress, Button } from "@material-ui/core";
 import queryString from "query-string";
 import { useDispatch, useSelector } from 'react-redux'
 import * as actions from "../../actions"
@@ -18,7 +18,14 @@ const useStyles = makeStyles((theme) => ({
   },
   divider: {
     marginBottom: 20
-  },
+  }, circular: {
+    marginTop: 20
+  }, button: {
+    background: theme.palette.primary.main,
+    borderRadius: 40,
+    padding: '15px 30px 15px 30px',
+    margin: 10
+  }
 
 }));
 
@@ -29,8 +36,25 @@ export default function SingleLineGridList(props: any) {
   const classes = useStyles()
   const { curriculums, isLoadingCurriculums } = useSelector((state: any) => state.course);
 
+  const postsPerPage = 8;
+  const [postsToShow, setPostsToShow] = useState<any>([]);
+  const [next, setNext] = useState(8);
+  const loopWithSlice = (start: any, end: any) => {
+    const slicedPosts = curriculums.slice(start, end);
+    setPostsToShow([...postsToShow, ...slicedPosts]);
+  };
 
   useEffect(() => {
+    loopWithSlice(0, postsPerPage);
+    // eslint-disable-next-line
+  }, [isLoadingCurriculums]);
+
+  const handleShowMorePosts = () => {
+    loopWithSlice(next, next + postsPerPage);
+    setNext(next + postsPerPage);
+  };
+  useEffect(() => {
+    setPostsToShow([])
     const action = actions.loadCurriculums("all")
     dispatch(action)
     // eslint-disable-next-line
@@ -64,8 +88,9 @@ export default function SingleLineGridList(props: any) {
             justify={isLoadingCurriculums ? "center" : "flex-start"}
             spacing={3}
           >
+            {isLoadingCurriculums && <CircularProgress color="secondary" className={classes.circular} />}
             {
-              curriculums.map((item: any, index: number) => (
+              postsToShow.map((item: any, index: number) => (
                 <Grid item xs={12} sm={6} md={4} lg={3} xl={3} key={index}>
                   <CourseDetail
                     key={index}
@@ -87,6 +112,17 @@ export default function SingleLineGridList(props: any) {
                 </Grid>
               ))}
           </Grid>
+          {!isLoadingCurriculums && next < curriculums.length &&
+            <Grid
+              container
+              direction="row"
+              alignItems="center"
+              justify={"center"}
+              spacing={3}
+            >
+
+              <Button onClick={handleShowMorePosts} color="secondary" className={classes.button}>ดูเพิ่มเติม</Button>
+            </Grid>}
         </Container>
       </div>
     </ Suspense>

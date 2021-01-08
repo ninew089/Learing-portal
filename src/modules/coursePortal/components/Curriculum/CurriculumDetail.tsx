@@ -194,7 +194,7 @@ export default function CurriculumDetailCard(props: any) {
                   }}
                   image={thumbnail}
                   className={classes.cardMedia}
-                  title="Contemplative Reptile"
+                  title={name}
                   onClick={onOpen}
                 />
 
@@ -221,7 +221,7 @@ export default function CurriculumDetailCard(props: any) {
 
                   <Grid item xs={12}>
                     <Box fontWeight={400} className={classes.caption}>
-                      &nbsp;&nbsp;&nbsp;{learningTopic}
+                      {learningTopic}
                     </Box>
                   </Grid>
                 </Grid>
