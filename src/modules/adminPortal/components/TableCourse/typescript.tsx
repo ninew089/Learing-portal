@@ -35,3 +35,21 @@ export interface DialogEditProps {
     setOpen: (someting: boolean) => void
     data?: CourseDetailProps[] | any
 }
+export interface couresProps {
+    code: string;
+    name: string;
+    learningTopic: string;
+    learningObjective: string;
+    assessment: string;
+    targetGroup: string;
+    thumbnail: string;
+    courseCategoryId: string;
+    link: string;
+    isShown: string;
+
+};
+export interface categoryProps {
+    id: number;
+    name: string;
+}
+

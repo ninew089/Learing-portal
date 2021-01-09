@@ -10,7 +10,7 @@ import * as actions from "../../actions";
 
 const CurriculumCarousel = lazy(() => import('shared/Carousel/Carousel'));
 
-export default function SingleLineGridList(props: any) {
+export default function SingleLineGridList(props: { title: string }) {
   const useStyles = makeStyles((theme: Theme) =>
     createStyles({
       line: {

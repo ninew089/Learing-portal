@@ -15,7 +15,7 @@ const Relation = lazy(() => import('modules/relationPortal/components/Relation')
 const Portal = lazy(() => import('modules/portal/components/LinkPortal'));
 const TapsCourse = lazy(() => import('./Course/TapsCourse'));
 const AllCourse = lazy(() => import('./Course/AllCourse'));
-const SocialCardDemo = lazy(() => import('./CardRecomment'));
+const SocialCardDemo = lazy(() => import('./CardRecomment/CardRecomment'));
 const GroupSearch = lazy(() => import('./Search'));
 const Curriculum = lazy(() => import('./Curriculum/CategoryByCurriculum'));
 const Facebook = lazy(() => import('modules/facebook/components/FaceBook'));
@@ -46,9 +46,7 @@ function FadeInSection(props: any) {
 }
 
 export default function Course() {
-  //const [search, setSearch] = React.useState('')
-  //const fixedOptions: any[] = [];
-  // const [value, setValue] = React.useState([...fixedOptions]);
+
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.only("xs"));
 

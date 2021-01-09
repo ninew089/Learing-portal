@@ -12,7 +12,7 @@ import * as actions from "../../actions"
 
 const CourseCarousel = lazy(() => import('shared/Carousel/Carousel'));
 
-export default function SingleLineGridList(props: any) {
+export default function SingleLineGridList(props: { id: number }) {
   const useStyles = makeStyles((theme: Theme) =>
     createStyles({
       line: {
@@ -83,7 +83,7 @@ export default function SingleLineGridList(props: any) {
       <Divider style={{ marginBottom: 20 }} />
       <Grid container direction="row" alignItems="center" justify={"center"}>
         <Suspense fallback={renderLoader()}>
-          {isLoadingCourseCategories ? <CircularProgress color="primary" style={{ margin: 10 }} variant="determinate" value={isLoadingCourseCategories ? 100 : 50} /> :
+          {isLoadingCourseCategories ? <CircularProgress color="secondary" style={{ margin: 20 }} /> :
             <CourseCarousel isCurriculum={false} detail={courseCategories} />}
         </Suspense>
       </Grid>

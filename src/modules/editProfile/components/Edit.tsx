@@ -18,7 +18,7 @@ import * as yup from "yup";
 import * as actions from "../actions";
 import { useDispatch, useSelector } from "react-redux";
 import Snackbar from "shared/SnackBar/SnackBar"
-import info from "utils/formatInfomation"
+import { infoEdit } from "utils/formatInfomation"
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -331,7 +331,7 @@ export default function Edit(props: any) {
 
 
   const onSubmitData = (data: any) => {
-    const preinfo = info(data);
+    const preinfo = infoEdit(data);
 
     const action = actions.loadEdit(preinfo);
     dispatch(action);

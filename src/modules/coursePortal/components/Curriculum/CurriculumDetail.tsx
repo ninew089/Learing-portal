@@ -8,7 +8,7 @@ import platformFormat from 'utils/platformFormat'
 import * as actions from "../../actions"
 import { useDispatch } from 'react-redux'
 import CardMedia from '@material-ui/core/CardMedia';
-
+import { CardProps } from "./tyscript"
 
 const Dialog = lazy(() => import('../../share/DialogCourse'));
 
@@ -160,7 +160,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 }));
 
-export default function CurriculumDetailCard(props: any) {
+export default function CurriculumDetailCard(props: CardProps) {
   const { platformId, learningTopic, viewCount, point, satisfactionCount, code, link, thumbnail, name, id } = props;
   const classes = useStyles();
   const dispatch = useDispatch();

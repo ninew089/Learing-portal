@@ -15,4 +15,5 @@ export interface CardProps {
     point?: number
     key?: number
 
+
 }

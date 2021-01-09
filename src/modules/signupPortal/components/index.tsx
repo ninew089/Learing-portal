@@ -9,7 +9,7 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import * as actions from "../actions";
 import { useDispatch, useSelector } from "react-redux";
-import info from "utils/formatInfomation"
+import { info } from "utils/formatInfomation"
 const useStyles = makeStyles((theme) => ({
   paper: {
     background: "white",

@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function GroupCourse(props: any) {
+export default function GroupCourse() {
   const { search } = useLocation();
   const { category } = queryString.parse(search);
   const dispatch = useDispatch();

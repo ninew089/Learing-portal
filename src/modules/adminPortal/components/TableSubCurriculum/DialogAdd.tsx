@@ -4,7 +4,6 @@ import {
   createStyles,
   Theme,
   withStyles,
-  WithStyles,
   makeStyles,
 } from "@material-ui/core/styles";
 
@@ -29,7 +28,7 @@ import {
 import { useDispatch } from 'react-redux'
 import * as actions from "modules/coursePortal/actions"
 import * as actionsCourse from "../../actions"
-
+import { openProps, DialogTitleProps } from "./typescript"
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -88,12 +87,6 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export interface DialogTitleProps extends WithStyles<typeof styles> {
-  id: string;
-  children: React.ReactNode;
-
-  onClose: () => void;
-}
 
 const MuiDialogTitle = withStyles(styles)((props: DialogTitleProps) => {
   const { children, classes, onClose, ...other } = props;
@@ -131,20 +124,11 @@ export default function CustomizedDialogs({
   setOpen,
   valueCurriculun
 
-}: {
-  open: any;
-  setOpen: any;
-  valueCurriculun: any
-
-}) {
+}: openProps) {
   const handleClose = () => {
     setOpen(false);
   };
   const classes = useStyles();
-
-
-
-
 
   const dispatch = useDispatch();
 

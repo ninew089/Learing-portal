@@ -5,7 +5,7 @@ import { Grid, Divider, Container, CircularProgress, Button } from "@material-ui
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from 'react-redux'
 import * as actions from "../../actions"
-
+import { CardProps } from "./tyscript"
 const CourseDetail = lazy(() => import('./CourseDetails'));
 const Header = lazy(() => import('../../share/Header'));
 const SelectCategory = lazy(() => import('../../share/SelectCategory'));
@@ -32,12 +32,12 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-export default function GroupCourse(props: any) {
+export default function GroupCourse() {
     const dispatch = useDispatch();
     const { courses, isLoadingCourses } = useSelector((state: any) => state.course);
     const classes = useStyles()
     const postsPerPage = 8;
-    const [postsToShow, setPostsToShow] = useState<any>([]);
+    const [postsToShow, setPostsToShow] = useState<CardProps[]>([]);
     const [next, setNext] = useState(8);
     const loopWithSlice = (start: any, end: any) => {
         const slicedPosts = courses.slice(start, end);

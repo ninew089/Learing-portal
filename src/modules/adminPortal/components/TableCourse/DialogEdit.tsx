@@ -28,7 +28,7 @@ import * as yup from "yup";
 import { useSelector, useDispatch } from 'react-redux'
 import * as actions from "modules/coursePortal/actions"
 import * as actionsCourse from "../../actions"
-import { DialogTitleProps, DialogEditProps } from "./typescript"
+import { DialogTitleProps, DialogEditProps, couresProps, categoryProps } from "./typescript"
 
 
 const styles = (theme: Theme) =>
@@ -133,7 +133,7 @@ export default function CustomizedDialogs({
 
 
 
-  const { register, handleSubmit, errors, control } = useForm<any>({
+  const { register, handleSubmit, errors, control } = useForm<couresProps>({
     mode: "onChange",
     validationSchema: yup.object().shape({
       code: yup.string().required(),
@@ -235,7 +235,7 @@ export default function CustomizedDialogs({
                         }
                         error={!!errors.courseCategoryId}
                       >
-                        {categories.map((categorie: any, index: number) => (
+                        {categories.map((categorie: categoryProps, index: number) => (
                           <MenuItem
                             key={index}
                             value={categorie.id}

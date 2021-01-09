@@ -235,7 +235,7 @@ export default function PersistentDrawerLeft(props: any) {
           </Hidden>
           {pathname === "/learning-portal" ? (
             <>
-              <ScrollTo selector={`#หมวดหมู่`}>
+              <ScrollTo selector={`#หมวดหมู่`} smooth >
                 <Button
                   className={active === 1 ? classes.selected : classes.button}
                   onClick={() => setActive(1)}
@@ -243,7 +243,7 @@ export default function PersistentDrawerLeft(props: any) {
                   หมวดหมู่
                 </Button>
               </ScrollTo>
-              <ScrollTo selector={`#หลักสูตร`}>
+              <ScrollTo selector={`#หลักสูตร`} smooth>
                 <Button
                   className={active === 2 ? classes.selected : classes.button}
                   onClick={() => setActive(2)}

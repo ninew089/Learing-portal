@@ -104,15 +104,11 @@ export default function PointNavigationMenu({ title }: { title: string }) {
   useEffect(() => {
     const action = actions.loadCourseCategory()
     dispatch(action)
-    console.log(categoryIndex.category)
     if (categoryIndex.category !== null) {
       setIndex(parseInt(`${categoryIndex.category}`) - 1)
     } if (categoryIndex.category === undefined) {
       setIndex(0)
     }
-
-
-
     // eslint-disable-next-line
   }, [])
 
