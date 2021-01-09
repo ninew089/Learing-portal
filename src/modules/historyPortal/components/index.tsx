@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import MaterialTable from "material-table";
 import { forwardRef } from "react";
-import { CssBaseline, Toolbar } from "@material-ui/core";
+import { CssBaseline } from "@material-ui/core";
 import {
   AddBox,
   ArrowDownward,
@@ -23,8 +23,8 @@ import {
 
 import { useDispatch, useSelector } from 'react-redux'
 import * as  actions from '../actions'
-
-import { formatDatetoThai } from "utils/dateFormat"
+import Header from "modules/coursePortal/share/Header"
+import { formatDatetoThaiTest } from "utils/dateFormat"
 export default function MaterialTableDemo(props: any) {
   const tableRef = React.createRef();
   const tableIcons = {
@@ -100,51 +100,53 @@ export default function MaterialTableDemo(props: any) {
   return (
     <div>
       <CssBaseline />
-      <Toolbar />
+      <Header text={"ประกาศนียบัตร"} />
+
       <MaterialTable
         icons={tableIcons}
         title="รายวิชา"
         tableRef={tableRef}
         columns={[
-          { title: "รหัสรายวิชา", field: "courseId", type: "numeric" },
-          { title: "ชื่อรายวิชา", field: "course", type: "numeric" },
-          { title: " หน่วยงานที่ให้ประกาศนียบัตร", field: "complete" },
+
+          { title: "รหัสรายวิชา", field: "courseid" },
+          { title: "ชื่อรายวิชา", field: "course" },
+          { title: " หน่วยงานที่ให้ประกาศนียบัตร", field: "platform" },
         ]}
         data={predata}
         detailPanel={(rowData) => {
           return (
             <div>
               <h4>
-                &nbsp;&nbsp;&nbsp;&nbsp; เลขประจำตัวประชาชน: {rowData.userId}{" "}
+                &nbsp;&nbsp;&nbsp;&nbsp; เลขประจำตัวประชาชน: {rowData.coursecertificate.userId}{" "}
               </h4>
 
               <h4>
                 {" "}
-                &nbsp;&nbsp;&nbsp;&nbsp; ชื่อ: {rowData.title}
-                {rowData.firstName} {rowData.lastname}
+                &nbsp;&nbsp;&nbsp;&nbsp; ชื่อ: {rowData.coursecertificate.title}
+                {rowData.coursecertificate.firstName} {rowData.coursecertificate.lastname}
               </h4>
 
-              <h4> &nbsp;&nbsp;&nbsp;&nbsp;วันเปิดเรียน: {formatDatetoThai(rowData.createDate)}</h4>
+              <h4> &nbsp;&nbsp;&nbsp;&nbsp;วันเปิดเรียน: {formatDatetoThaiTest(rowData.coursecertificate.createDate)}</h4>
               <h4>
                 {" "}
-                &nbsp;&nbsp;&nbsp;&nbsp;วันที่เริ่มเรียน: {formatDatetoThai(rowData.startDate)}
-              </h4>
-
-              <h4>
-                {" "}
-                &nbsp;&nbsp;&nbsp;&nbsp;วันที่สำเร็จการศึกษา: {formatDatetoThai(rowData.endDate)}
+                &nbsp;&nbsp;&nbsp;&nbsp;วันที่เริ่มเรียน: {formatDatetoThaiTest(rowData.coursecertificate.startDate)}
               </h4>
 
               <h4>
                 {" "}
-                &nbsp;&nbsp;&nbsp;&nbsp;จำนวนชั่วโมงที่เข้าเรียน: {rowData.hour}
+                &nbsp;&nbsp;&nbsp;&nbsp;วันที่สำเร็จการศึกษา: {formatDatetoThaiTest(rowData.coursecertificate.endDate)}
+              </h4>
+
+              <h4>
+                {" "}
+                &nbsp;&nbsp;&nbsp;&nbsp;จำนวนชั่วโมงที่เข้าเรียน: {rowData.coursecertificate.hour}
               </h4>
               <h4>
                 {" "}
-                &nbsp;&nbsp;&nbsp;&nbsp;คะแนนความพึงพอใจ: {rowData.satisfactionScore}
+                &nbsp;&nbsp;&nbsp;&nbsp;คะแนนความพึงพอใจ: {rowData.coursecertificate.satisfactionScore}
               </h4>
 
-              <h4> &nbsp;&nbsp;&nbsp;&nbsp;เกรด: {rowData.grade}</h4>
+              <h4> &nbsp;&nbsp;&nbsp;&nbsp;เกรด: {rowData.coursecertificate.grade}</h4>
             </div>
           );
         }}
@@ -156,46 +158,48 @@ export default function MaterialTableDemo(props: any) {
         title="หลักสูตร"
         tableRef={tableRef}
         columns={[
-          { title: "รหัสหลักสูตร", field: "curriculumId", type: "numeric" },
-          { title: "ชื่อหลักสูตร", field: "curriculum", type: "numeric" },
+          { title: "รหัสหลักสูตร", field: "curriculumid" },
+          { title: "ชื่อหลักสูตร", field: "curriculum" },
 
-          { title: " หน่วยงานที่ให้ประกาศนียบัตร", field: "complete" },
+          { title: " หน่วยงานที่ให้ประกาศนียบัตร", field: "platform" },
         ]}
         data={predata1}
         detailPanel={(rowData) => {
           return (
             <div>
               <h4>
-                &nbsp;&nbsp;&nbsp;&nbsp; เลขประจำตัวประชาชน: {rowData.userId}{" "}
+                &nbsp;&nbsp;&nbsp;&nbsp; เลขประจำตัวประชาชน: {rowData.curriculumcertificate.userId}{" "}
               </h4>
 
               <h4>
                 {" "}
-                &nbsp;&nbsp;&nbsp;&nbsp; ชื่อ: {rowData.title}
-                {rowData.firstName} {rowData.lastname}
+                &nbsp;&nbsp;&nbsp;&nbsp; ชื่อ: {rowData.curriculumcertificate.title}
+                {rowData.curriculumcertificate.firstName} {rowData.curriculumcertificate.lastname}
               </h4>
 
-              <h4> &nbsp;&nbsp;&nbsp;&nbsp;วันเปิดเรียน: {formatDatetoThai(rowData.createDate)}</h4>
-              <h4>
-                {" "}
-                &nbsp;&nbsp;&nbsp;&nbsp;วันที่เริ่มเรียน: {formatDatetoThai(rowData.startDate)}
-              </h4>
+              <h4> &nbsp;&nbsp;&nbsp;&nbsp;วันเปิดเรียน: {formatDatetoThaiTest(rowData.curriculumcertificate.createDate)}
 
+              </h4>
               <h4>
                 {" "}
-                &nbsp;&nbsp;&nbsp;&nbsp;วันที่สำเร็จการศึกษา: {formatDatetoThai(rowData.endDate)}
+                &nbsp;&nbsp;&nbsp;&nbsp;วันที่เริ่มเรียน: {formatDatetoThaiTest(rowData.curriculumcertificate.startDate)}
               </h4>
 
               <h4>
                 {" "}
-                &nbsp;&nbsp;&nbsp;&nbsp;จำนวนชั่วโมงที่เข้าเรียน: {rowData.hour}
+                &nbsp;&nbsp;&nbsp;&nbsp;วันที่สำเร็จการศึกษา: {formatDatetoThaiTest(rowData.curriculumcertificate.endDate)}
+              </h4>
+
+              <h4>
+                {" "}
+                &nbsp;&nbsp;&nbsp;&nbsp;จำนวนชั่วโมงที่เข้าเรียน: {rowData.curriculumcertificate.hour}
               </h4>
               <h4>
                 {" "}
-                &nbsp;&nbsp;&nbsp;&nbsp;คะแนนความพึงพอใจ: {rowData.satisfactionScore}
+                &nbsp;&nbsp;&nbsp;&nbsp;คะแนนความพึงพอใจ: {rowData.curriculumcertificate.satisfactionScore}
               </h4>
 
-              <h4> &nbsp;&nbsp;&nbsp;&nbsp;เกรด: {rowData.grade}</h4>
+              <h4> &nbsp;&nbsp;&nbsp;&nbsp;เกรด: {rowData.curriculumcertificate.grade}</h4>
             </div>
           );
         }}

@@ -92,6 +92,7 @@ export default function ReportTable() {
         setEntries([response.data])
       } catch (err) {
         console.log(err)
+        setEntries([])
       }
 
     }
@@ -129,6 +130,7 @@ export default function ReportTable() {
                 resolve()
                 const data = [...entries]
                 data[oldData.tableData.id] = newData
+
                 axios
                   .put(
                     `/Platforms/${platformid}`,

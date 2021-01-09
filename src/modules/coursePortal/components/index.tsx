@@ -217,7 +217,7 @@ export default function Course() {
 
 
         </Box>
-s
+
       </Suspense>
     </div>
   );

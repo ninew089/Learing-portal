@@ -71,7 +71,7 @@ const useStyles = makeStyles((theme) => ({
   content: {
     flexGrow: 1,
     minHeight: `100vh`,
-    background: theme.palette.primary.light,
+
   },
   push: {
     height: "120px",

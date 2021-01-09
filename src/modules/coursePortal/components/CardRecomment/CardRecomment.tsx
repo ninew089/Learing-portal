@@ -116,7 +116,7 @@ export default function SocialCard(props: CardRecommentProps) {
                     }}
                     image={item.thumbnail}
                     className={classes.cardMedia}
-                    title="Contemplative Reptile"
+                    title={item.name}
 
                   />
 

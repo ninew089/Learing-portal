@@ -104,3 +104,26 @@ export  function formatDatetoThai(date) {
     
     return newDate2;
   }
+
+export  function formatDatetoThaiTest(date) {
+  const res = date.split("-");
+  const m = [
+    "มกราคม",
+    "กุมภาพันธ์",
+    "มีนาคม",
+    "เมษายน",
+    "พฤษภาคม",
+    "มิถุนายน",
+    "กรกฎาคม",
+    "สิงหาคม",
+    "กันยายน",
+    "ตุลาคม",
+    "พฤศจิกายน",
+    "ธันวาคม",
+  ];
+  const mm = parseInt(res[1])
+  const yy = parseInt(res[0]) + 543;
+  const day =res[2].split("T00:00:00")
+  const newDate = `${day[0]} ${m[mm - 1]} พ.ศ.${yy}`;
+  return newDate;
+}

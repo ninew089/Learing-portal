@@ -15,14 +15,17 @@ import {
   ViewColumn,
   ArrowUpward,
 } from "@material-ui/icons";
+import RefreshIcon from '@material-ui/icons/Refresh';
 import { getCookie } from "cookie/cookie"
 import MaterialTable from 'material-table'
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-
+import Snackbar from "shared/SnackBar/SnackBar"
 import { curriculumCertificateProps, courseCertificateProps } from './typescript'
 import { forwardRef } from 'react';
 import { formatDatetoApi } from "utils/dateFormat"
+import * as actions from "../../actions"
+import { useDispatch, useSelector } from "react-redux"
 
 export default function ReportTable() {
   const tableIcons = {
@@ -78,6 +81,7 @@ export default function ReportTable() {
       <ViewColumn {...props} ref={ref} />
     )),
   }
+  const dispatch = useDispatch();
   const [entries, setEntries] = useState<courseCertificateProps | any>()
   const [entriesCurriculum, setEntriesCurriculum] = useState<curriculumCertificateProps | any>()
   const im = entries !== undefined && entries.length
@@ -94,6 +98,7 @@ export default function ReportTable() {
         setEntries(response.data)
 
       } catch (err) {
+        setEntries([])
         console.log(err)
       }
     }
@@ -107,6 +112,7 @@ export default function ReportTable() {
         const response = await axios.get(`/Platforms/${platformid}/CurriculumCertificates?max=10000`)
         setEntriesCurriculum(response.data)
       } catch (err) {
+        setEntries([])
         console.log(err)
       }
     }
@@ -114,10 +120,27 @@ export default function ReportTable() {
     // eslint-disable-next-line
   }, [im2])
 
+  const { message, severity } = useSelector((state: any) => state.admin);
+  const onSubmitCourseCirtificate = async () => {
+    const response = await axios.get(`/Platforms/${platformid}/CourseCertificates?max=10000`)
+    setEntries(response.data)
+  }
+  const onSubmitCurriculumCirtificate = async () => {
+    const response = await axios.get(`/Platforms/${platformid}/CurriculumCertificates?max=10000`)
+    setEntriesCurriculum(response.data)
 
+  }
 
   return (
     <>
+      {
+        message !== null && <Snackbar
+          message={message
+          }
+          open={message !== null ? true : false}
+          severity={severity}
+        />
+      }
       <MaterialTable
         icons={tableIcons}
         title="ประกาศนีบัตร รายวิชา"
@@ -125,6 +148,14 @@ export default function ReportTable() {
           pageSize: 20,
           pageSizeOptions: [20, 50, 100]
         }}
+        actions={[
+          {
+            icon: () => <RefreshIcon />,
+            tooltip: "รีเฟลส",
+            isFreeAction: true,
+            onClick: onSubmitCourseCirtificate,
+          },]}
+
         columns={[
           { title: "เลขประจำตัวบัตรประชาชน", field: "userId", type: "string" },
           { title: "คำนำหน้าชื่อ", field: "title" },
@@ -143,18 +174,25 @@ export default function ReportTable() {
         editable={{
           //update
           onRowAdd: (newData: courseCertificateProps) =>
+
             new Promise((resolve) => {
+
               setTimeout(() => {
                 //@ts-ignore
                 resolve()
-                const data = [...entries]
-                data[data.length] = newData
+                const data = entries === undefined ? [] : [...entries]
+                data[entries === undefined ? 0 : data.length] = newData
                 axios
                   .post(
                     `/Platforms/${platformid}/CourseCertificates`,
                     { courseId: newData.courseId, grade: newData.grade, userId: newData.userId, title: newData.title, firstName: newData.firstName, lastName: newData.lastname, startDate: formatDatetoApi(newData.startDate), endDate: formatDatetoApi(newData.endDate), hour: newData.hour, satisfactionScore: newData.satisfactionScore },
                     { headers }
-                  )
+                  ).catch((error) => {
+                    const action = actions.loadMessage(` เกิดข้อผิดพลาด${error.response.status}`, "error")
+                    dispatch(action)
+
+                  })
+
 
                 setEntries(data)
               }, 600)
@@ -164,6 +202,7 @@ export default function ReportTable() {
               setTimeout(() => {
                 //@ts-ignore
                 resolve()
+
                 const data = [...entries]
                 data[oldData.tableData.id] = newData
                 console.log(newData)
@@ -172,7 +211,11 @@ export default function ReportTable() {
                     `/Platforms/${platformid}/CourseCertificates/${newData.id}`,
                     { courseId: newData.courseId, grade: newData.grade, userId: newData.userId, title: newData.title, firstName: newData.firstName, lastName: newData.lastname, startDate: formatDatetoApi(newData.startDate), endDate: formatDatetoApi(newData.endDate), hour: newData.hour, satisfactionScore: newData.satisfactionScore },
                     { headers }
-                  )
+                  ).catch((error) => {
+                    const action = actions.loadMessage(` เกิดข้อผิดพลาด${error.response.status}`, "error")
+                    dispatch(action)
+
+                  })
 
                 setEntries([...data])
               }, 600)
@@ -183,9 +226,16 @@ export default function ReportTable() {
                 //@ts-ignore
                 resolve()
                 const data = [...entries]
+                console.log(data.splice(data.indexOf(oldData), 1))
                 data.splice(data.indexOf(oldData), 1)
                 axios
                   .delete(`/Platforms/${platformid}/CourseCertificates/${oldData.id}`, { headers })
+                  .catch((error) => {
+                    const action = actions.loadMessage(` เกิดข้อผิดพลาด${error.response.status}`, "error")
+                    dispatch(action)
+
+                  })
+
 
                 setEntries(data)
               }, 600)
@@ -215,6 +265,14 @@ export default function ReportTable() {
           { title: "ผลการอนุมัติ", field: "approved", editable: "never" },
         ]}
         data={entriesCurriculum}
+        actions={[
+          {
+            icon: () => <RefreshIcon />,
+            tooltip: "รีเฟลส",
+            isFreeAction: true,
+            onClick: onSubmitCurriculumCirtificate,
+          },]}
+
         editable={{
           //update
           onRowAdd: (newData: curriculumCertificateProps) =>
@@ -222,14 +280,21 @@ export default function ReportTable() {
               setTimeout(() => {
                 //@ts-ignore
                 resolve()
-                const data = [...entriesCurriculum]
-                data[data.length] = newData
+                const data = entriesCurriculum === undefined ? [] : [...entriesCurriculum]
+                data[entriesCurriculum === undefined ? 0 : data.length] = newData
+
                 axios
                   .post(
                     `/Platforms/${platformid}/CurriculumCertificates`,
                     { curriculumId: newData.curriculumId, grade: newData.grade, userId: newData.userId, title: newData.title, firstName: newData.firstName, lastName: newData.lastname, startDate: formatDatetoApi(newData.startDate), endDate: formatDatetoApi(newData.endDate), hour: newData.hour, satisfactionScore: newData.satisfactionScore },
                     { headers }
                   )
+                  .catch((error) => {
+                    const action = actions.loadMessage(` เกิดข้อผิดพลาด${error.response.status}`, "error")
+                    dispatch(action)
+
+                  })
+
 
                 setEntriesCurriculum(data)
               }, 600)
@@ -248,6 +313,12 @@ export default function ReportTable() {
                     { curriculumId: newData.curriculumId, grade: newData.grade, userId: newData.userId, title: newData.title, firstName: newData.firstName, lastName: newData.lastname, startDate: formatDatetoApi(newData.startDate), endDate: formatDatetoApi(newData.endDate), hour: newData.hour, satisfactionScore: newData.satisfactionScore },
                     { headers }
                   )
+                  .catch((error) => {
+                    const action = actions.loadMessage(` เกิดข้อผิดพลาด${error.response.status}`, "error")
+                    dispatch(action)
+
+                  })
+
 
                 setEntriesCurriculum([...data])
               }, 600)
@@ -258,9 +329,16 @@ export default function ReportTable() {
                 //@ts-ignore
                 resolve()
                 const data = [...entriesCurriculum]
+
                 data.splice(data.indexOf(oldData), 1)
                 axios
                   .delete(`/Platforms/${platformid}/CurriculumCertificates/${oldData.id}`, { headers })
+                  .catch((error) => {
+                    const action = actions.loadMessage(` เกิดข้อผิดพลาด${error.response.status}`, "error")
+                    dispatch(action)
+
+                  })
+
 
                 setEntriesCurriculum(data)
               }, 600)

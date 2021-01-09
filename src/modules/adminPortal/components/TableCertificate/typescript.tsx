@@ -15,6 +15,7 @@ export interface curriculumCertificateProps {
     salt: null
     userId: string
     title: string
+
 }
 
 export interface courseCertificateProps {
@@ -33,4 +34,5 @@ export interface courseCertificateProps {
     salt: null
     userId: string
     title: string
+
 }

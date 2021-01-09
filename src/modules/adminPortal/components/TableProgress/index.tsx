@@ -15,13 +15,16 @@ import {
   ViewColumn,
   ArrowUpward,
 } from "@material-ui/icons";
+import RefreshIcon from '@material-ui/icons/Refresh';
 import { getCookie } from "cookie/cookie"
 import MaterialTable from 'material-table'
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 //import { tableProps, DataProps } from '../tyscript'
 import { forwardRef } from 'react';
-
+import * as actions from "../../actions"
+import { useDispatch, useSelector } from "react-redux"
+import Snackbar from "shared/SnackBar/SnackBar"
 
 export default function ReportTable() {
   const tableIcons = {
@@ -95,6 +98,7 @@ export default function ReportTable() {
 
 
       } catch (err) {
+        setEntries([])
         console.log(err)
       }
 
@@ -110,6 +114,7 @@ export default function ReportTable() {
 
       } catch (err) {
         console.log(err)
+        setEntriesCurriculum([])
       }
 
     }
@@ -117,10 +122,31 @@ export default function ReportTable() {
     // eslint-disable-next-line
   }, [entriesCurriculum.length])
 
+  const dispatch = useDispatch();
+  const { message, severity } = useSelector((state: any) => state.admin);
+  const onSubmitCourse = async () => {
+    const response = await axios.get(`/Platforms/${platformid}/CourseProgresses?max=10000`)
 
+    setEntries(response.data)
+
+  }
+
+  const onSubmitCurriculum = async () => {
+    const responseCurriculum = await axios.get(`/Platforms/${platformid}/CurriculumProgresses?max=10000`)
+    setEntriesCurriculum(responseCurriculum.data)
+
+  }
 
   return (
     <>
+      {
+        message !== null && <Snackbar
+          message={message
+          }
+          open={message !== null ? true : false}
+          severity={severity}
+        />
+      }
 
 
       <MaterialTable
@@ -129,6 +155,7 @@ export default function ReportTable() {
         options={{
           pageSize: 20,
           pageSizeOptions: [20, 50, 100]
+
         }}
         columns={[
           { title: "เลขประจำตัวบัตรประชาชน", field: "userId", type: "string" },
@@ -142,7 +169,15 @@ export default function ReportTable() {
 
         ]}
         data={entries}
+        actions={[
+          {
+            icon: () => <RefreshIcon />,
+            tooltip: "รีเฟลส",
+            isFreeAction: true,
+            onClick: onSubmitCourse,
+          },]}
         editable={{
+
           //update
           onRowAdd: (newData: any) =>
             new Promise((resolve) => {
@@ -150,15 +185,20 @@ export default function ReportTable() {
                 //@ts-ignore
 
                 resolve()
-                const data = [...entries]
-                data[entries.length] = newData
+
+                const data = entries === undefined ? [] : [...entries]
+                data[entries === undefined ? 0 : data.length] = newData
                 axios
                   .post(
                     `/Platforms/${platformid}/CourseProgresses`,
                     { courseId: newData.courseId, userId: newData.userId, title: newData.title, firstName: newData.firstName, lastName: newData.lastname, startDate: newData.startDate, percent: newData.percent },
                     { headers }
                   )
+                  .catch((error) => {
+                    const action = actions.loadMessage(` เกิดข้อผิดพลาด${error.response.status}`, "error")
+                    dispatch(action)
 
+                  })
                 setEntries(data)
 
               }, 600)
@@ -175,7 +215,11 @@ export default function ReportTable() {
                     `/Platforms/${platformid}/CourseProgresses/${newData.id}`,
                     { courseId: newData.courseId, userId: newData.userId, title: newData.title, firstName: newData.firstName, lastName: newData.lastname, startDate: newData.startDate, percent: newData.percent },
                     { headers }
-                  )
+                  ).catch((error) => {
+                    const action = actions.loadMessage(` เกิดข้อผิดพลาด${error.response.status}`, "error")
+                    dispatch(action)
+
+                  })
 
                 setEntries([...data])
               }, 600)
@@ -189,7 +233,11 @@ export default function ReportTable() {
                 data.splice(data.indexOf(oldData), 1)
                 axios
                   .delete(`/Platforms/${platformid}/CourseProgresses/${oldData.id}`, { headers })
+                  .catch((error) => {
+                    const action = actions.loadMessage(` เกิดข้อผิดพลาด${error.response.status}`, "error")
+                    dispatch(action)
 
+                  })
                 setEntries(data)
               }, 600)
             }),
@@ -199,6 +247,13 @@ export default function ReportTable() {
       <MaterialTable
         icons={tableIcons}
         title="ความก้าวหน้าผู้เรียน หลักสูตร"
+        actions={[
+          {
+            icon: () => <RefreshIcon />,
+            tooltip: "รีเฟลส",
+            isFreeAction: true,
+            onClick: onSubmitCurriculum,
+          },]}
         columns={[
           { title: "เลขประจำตัวบัตรประชาชน", field: "userId", type: "string" },
           { title: "คำนำหน้าชื่อ", field: "title" },
@@ -223,14 +278,20 @@ export default function ReportTable() {
               setTimeout(() => {
                 //@ts-ignore
                 resolve()
-                const data = [...entriesCurriculum]
-                data[entriesCurriculum.length] = newData
+
+                const data = entriesCurriculum === undefined ? [] : [...entriesCurriculum]
+                data[entriesCurriculum === undefined ? 0 : data.length] = newData
                 axios
                   .post(
                     `/Platforms/${platformid}/CurriculumProgresses`,
                     { curriculumId: newData.curriculumId, userId: newData.userId, title: newData.title, firstName: newData.firstName, lastName: newData.lastname, startDate: newData.startDate, percent: newData.percent },
                     { headers }
                   )
+                  .catch((error) => {
+                    const action = actions.loadMessage(` เกิดข้อผิดพลาด${error.response.status}`, "error")
+                    dispatch(action)
+
+                  })
 
                 setEntriesCurriculum(data)
               }, 600)
@@ -248,6 +309,11 @@ export default function ReportTable() {
                     { curriculumId: newData.curriculumId, userId: newData.userId, title: newData.title, firstName: newData.firstName, lastName: newData.lastname, startDate: newData.startDate, percent: newData.percent },
                     { headers }
                   )
+                  .catch((error) => {
+                    const action = actions.loadMessage(` เกิดข้อผิดพลาด${error.response.status}`, "error")
+                    dispatch(action)
+
+                  })
 
                 setEntriesCurriculum([...data])
               }, 600)
@@ -261,7 +327,11 @@ export default function ReportTable() {
                 data.splice(data.indexOf(oldData), 1)
                 axios
                   .delete(`/Platforms/${platformid}/CurriculumProgresses/${oldData.id}`, { headers })
+                  .catch((error) => {
+                    const action = actions.loadMessage(` เกิดข้อผิดพลาด${error.response.status}`, "error")
+                    dispatch(action)
 
+                  })
                 setEntriesCurriculum(data)
               }, 600)
             }),
