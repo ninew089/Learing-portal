@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import * as actions from "../../actions"
 import searchNotfound from "assets/gif/somethingbroken.gif"
 import Search from "../Search"
+import formatPlatform from "utils/platformFormat"
 const CourseDetail = lazy(() => import('../Course/CourseDetails'));
 const Header = lazy(() => import('../../share/Header'));
 const SelectCategory = lazy(() => import('../../share/SelectCategory'));
@@ -38,22 +39,47 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default function GroupCourse(props: any) {
     const dispatch = useDispatch();
-    const { course, isLoadingCourse } = useSelector((state: any) => state.course);
+    const { courses, isLoadingCourses } = useSelector((state: any) => state.course);
     const classes = useStyles()
     const { search } = useLocation()
     const { q } = parse(search)
     const postsPerPage = 8;
     const [postsToShow, setPostsToShow] = useState<any>([]);
     const [next, setNext] = useState(8);
+    const slicedPosts = courses.filter((item: any) => item.name.toLowerCase().includes(q)
+        ||
+        item.code.toLowerCase().includes(q)
+        ||
+        item.learningTopic.toLowerCase().includes(q)
+        ||
+        item.learningObjective.toLowerCase().includes(q)
+        ||
+        item.targetGroup.toLowerCase().includes(q)
+        ||
+        //@ts-ignore
+        (item.platformId !== null && formatPlatform(item.platformId).name.toLowerCase().includes(q))
+    )
     const loopWithSlice = (start: any, end: any) => {
-        const slicedPosts = course.slice(start, end);
+        const slicedPosts = courses.filter((item: any) => item.name.toLowerCase().includes(q)
+            ||
+            item.code.toLowerCase().includes(q)
+            ||
+            item.learningTopic.toLowerCase().includes(q)
+            ||
+            item.learningObjective.toLowerCase().includes(q)
+            ||
+            item.targetGroup.toLowerCase().includes(q)
+            ||
+            //@ts-ignore
+            (item.platformId !== null && formatPlatform(item.platformId).name.toLowerCase().includes(q))
+        ).slice(start, end);
         setPostsToShow([...postsToShow, ...slicedPosts]);
     };
 
     useEffect(() => {
         loopWithSlice(0, postsPerPage);
         // eslint-disable-next-line
-    }, [isLoadingCourse]);
+    }, [isLoadingCourses]);
 
     const handleShowMorePosts = () => {
         loopWithSlice(next, next + postsPerPage);
@@ -61,7 +87,7 @@ export default function GroupCourse(props: any) {
     }
     useEffect(() => {
         setPostsToShow([])
-        const action = actions.loadCourse(q)
+        const action = actions.loadCourses('all')
         dispatch(action)
         // eslint-disable-next-line
     }, [q])
@@ -93,12 +119,12 @@ export default function GroupCourse(props: any) {
                         container
                         direction="row"
                         alignItems="center"
-                        justify={isLoadingCourse ? "center" : "flex-start"}
+                        justify={isLoadingCourses ? "center" : "flex-start"}
                         spacing={3}
                     >
 
-                        {isLoadingCourse && <CircularProgress color="secondary" className={classes.circular} />}
-                        {course.length === 0 && !isLoadingCourse &&
+                        {isLoadingCourses && <CircularProgress color="secondary" className={classes.circular} />}
+                        {postsToShow.length === 0 && !isLoadingCourses &&
 
                             <Grid
                                 container
@@ -134,7 +160,7 @@ export default function GroupCourse(props: any) {
                         ))
                         }
                     </Grid>
-                    {!isLoadingCourse && next < course.length &&
+                    {!isLoadingCourses && next < slicedPosts.length &&
                         <Grid
                             container
                             direction="row"

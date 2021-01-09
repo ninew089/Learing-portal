@@ -72,7 +72,7 @@ export default function SignIn() {
         setValue(e.target.value)
     }
     const navToSearch = () => {
-        history.push(`/learning-portal/search?q=${value}`)
+        history.push(`/learning-portal/search?q=${value.toLowerCase()}`)
     }
     return (
         <Grid container direction="row" justify="center" alignItems="center">
