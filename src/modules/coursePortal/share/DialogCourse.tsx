@@ -14,10 +14,12 @@ import {
   DialogContent,
   DialogTitle,
   Dialog,
-  Button,
+  Button, Avatar, Grid
 } from "@material-ui/core";
 import { BsLink } from "react-icons/bs";
+import { amber } from "@material-ui/core/colors";
 
+import { LibraryBooksRounded, CreateRounded, FaceSharp, EqualizerRounded } from '@material-ui/icons';
 const useStyles = makeStyles((theme) => ({
   root: {
     "& .MuiPaper-root": {
@@ -25,6 +27,11 @@ const useStyles = makeStyles((theme) => ({
       backdropFilter: "blur(8px)",
       color: "#1b1a1a",
     },
+  },
+  avatar: {
+    color: theme.palette.getContrastText(amber[500]),
+    backgroundColor: amber[500],
+    marginRight: 10
   },
 }));
 const styles = (theme: Theme) =>
@@ -118,22 +125,53 @@ export default function CustomizedDialogs({
           <Typography variant="h6">{data.name}</Typography>
         </MuiDialogTitle>
         <MuiDialogContent dividers>
-          <h3>เป้าหมายการเรียนรู้</h3>
+          <Grid container direction="row" justify="flex-start" alignItems="center">
+            <Grid item>
+              <Avatar className={classes.avatar} ><LibraryBooksRounded /></Avatar>
+            </Grid>
+            <Grid item>
+              <h2 >เป้าหมายการเรียนรู้</h2>
+            </Grid>
+          </Grid>
+
 
           <Typography gutterBottom className={`color:'#90a0aa',fontWeigth:300`}>
             <div dangerouslySetInnerHTML={{ __html: data.learningTopic }} />
 
           </Typography>
-          <h3>ประเด็นการเรียนรู้</h3>
+          <Grid container direction="row" justify="flex-start" alignItems="center">
+            <Grid item>
+              <Avatar className={classes.avatar} ><CreateRounded /></Avatar>
+            </Grid>
+            <Grid item>
+              <h2 >ประเด็นการเรียนรู้</h2>
+            </Grid>
+          </Grid>
+
 
           <Typography gutterBottom>
             <div dangerouslySetInnerHTML={{ __html: data.learningObjective }} />
 
           </Typography>
-          <h3>กลุ่มเป้าหมาย</h3>
+          <Grid container direction="row" justify="flex-start" alignItems="center">
+            <Grid item>
+              <Avatar className={classes.avatar} ><FaceSharp /></Avatar>
+            </Grid>
+            <Grid item>
+              <h2 >กลุ่มเป้าหมาย</h2>
+            </Grid>
+          </Grid>
+
 
           <Typography gutterBottom>  <div dangerouslySetInnerHTML={{ __html: data.targetGroup }} /></Typography>
-          <h3>วิธีการประเมินผล</h3>
+          <Grid container direction="row" justify="flex-start" alignItems="center">
+            <Grid item>
+              <Avatar className={classes.avatar} ><EqualizerRounded /></Avatar>
+            </Grid>
+            <Grid item>
+              <h2 >วิธีการประเมินผล</h2>
+            </Grid>
+          </Grid>
 
           <Typography gutterBottom>
             <div dangerouslySetInnerHTML={{ __html: data.assessment }} />

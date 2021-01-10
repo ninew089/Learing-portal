@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { AiOutlineUser } from "react-icons/ai";
 import { RiLockPasswordLine } from "react-icons/ri";
-
 import img from "assets/images/OCSC-banner.png";
 
 import {
@@ -163,8 +162,6 @@ export default function SignIn() {
   const classes = useStyles();
   const dispatch = useDispatch();
 
-
-  //const { isLoading, users: user } = useSelector((state: any) => state.login)
   const { register, handleSubmit, errors } = useForm({
     mode: "onSubmit",
     validationSchema: yup.object().shape({

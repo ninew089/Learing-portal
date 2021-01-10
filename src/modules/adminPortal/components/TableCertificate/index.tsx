@@ -23,7 +23,6 @@ import axios from 'axios'
 import Snackbar from "shared/SnackBar/SnackBar"
 import { curriculumCertificateProps, courseCertificateProps } from './typescript'
 import { forwardRef } from 'react';
-import { formatDatetoApi } from "utils/dateFormat"
 import * as actions from "../../actions"
 import { useDispatch, useSelector } from "react-redux"
 
@@ -185,7 +184,7 @@ export default function ReportTable() {
                 axios
                   .post(
                     `/Platforms/${platformid}/CourseCertificates`,
-                    { courseId: newData.courseId, grade: newData.grade, userId: newData.userId, title: newData.title, firstName: newData.firstName, lastName: newData.lastname, startDate: formatDatetoApi(newData.startDate), endDate: formatDatetoApi(newData.endDate), hour: newData.hour, satisfactionScore: newData.satisfactionScore },
+                    { courseId: newData.courseId, grade: newData.grade, userId: newData.userId, title: newData.title, firstName: newData.firstName, lastName: newData.lastname, startDate: newData.startDate, endDate: newData.endDate, hour: newData.hour, satisfactionScore: newData.satisfactionScore },
                     { headers }
                   ).catch((error) => {
                     const action = actions.loadMessage(` เกิดข้อผิดพลาด${error.response.status}`, "error")
@@ -209,7 +208,7 @@ export default function ReportTable() {
                 axios
                   .put(
                     `/Platforms/${platformid}/CourseCertificates/${newData.id}`,
-                    { courseId: newData.courseId, grade: newData.grade, userId: newData.userId, title: newData.title, firstName: newData.firstName, lastName: newData.lastname, startDate: formatDatetoApi(newData.startDate), endDate: formatDatetoApi(newData.endDate), hour: newData.hour, satisfactionScore: newData.satisfactionScore },
+                    { courseId: newData.courseId, grade: newData.grade, userId: newData.userId, title: newData.title, firstName: newData.firstName, lastName: newData.lastname, startDate: newData.startDate, endDate: newData.endDate, hour: newData.hour, satisfactionScore: newData.satisfactionScore },
                     { headers }
                   ).catch((error) => {
                     const action = actions.loadMessage(` เกิดข้อผิดพลาด${error.response.status}`, "error")
@@ -286,7 +285,7 @@ export default function ReportTable() {
                 axios
                   .post(
                     `/Platforms/${platformid}/CurriculumCertificates`,
-                    { curriculumId: newData.curriculumId, grade: newData.grade, userId: newData.userId, title: newData.title, firstName: newData.firstName, lastName: newData.lastname, startDate: formatDatetoApi(newData.startDate), endDate: formatDatetoApi(newData.endDate), hour: newData.hour, satisfactionScore: newData.satisfactionScore },
+                    { curriculumId: newData.curriculumId, grade: newData.grade, userId: newData.userId, title: newData.title, firstName: newData.firstName, lastName: newData.lastname, startDate: newData.startDate, endDate: newData.endDate, hour: newData.hour, satisfactionScore: newData.satisfactionScore },
                     { headers }
                   )
                   .catch((error) => {
@@ -310,7 +309,7 @@ export default function ReportTable() {
                 axios
                   .put(
                     `/Platforms/${platformid}/CurriculumCertificates/${newData.id}`,
-                    { curriculumId: newData.curriculumId, grade: newData.grade, userId: newData.userId, title: newData.title, firstName: newData.firstName, lastName: newData.lastname, startDate: formatDatetoApi(newData.startDate), endDate: formatDatetoApi(newData.endDate), hour: newData.hour, satisfactionScore: newData.satisfactionScore },
+                    { curriculumId: newData.curriculumId, grade: newData.grade, userId: newData.userId, title: newData.title, firstName: newData.firstName, lastName: newData.lastname, startDate: newData.startDate, endDate: newData.endDate, hour: newData.hour, satisfactionScore: newData.satisfactionScore },
                     { headers }
                   )
                   .catch((error) => {

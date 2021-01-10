@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
         marginLeft: 10,
     },
     appBar: {
-        background: "#0f1626",
+        background: "#01000ef5",
         color: "#f3f3fb",
         backdropFilter: "blur(6px)",
         filter: "opacity(0.9)",

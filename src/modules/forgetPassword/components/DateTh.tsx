@@ -12,13 +12,13 @@ import {
 
 class LocalizedUtils extends DateFnsUtils {
   getDatePickerHeaderText(date: Date) {
-    return format(date, `dd MMM ${parseInt(formatDate(date, "YYYY")) + 543}`, {
+    return format(date, `${parseInt(formatDate(date, "YYYY")) + 543}`, {
       locale: this.locale,
     });
   }
 
   getCalendarHeaderText(date: Date) {
-    return format(date, ` MMMM  ${parseInt(formatDate(date, "YYYY")) + 543}`, {
+    return format(date, `  ${parseInt(formatDate(date, "YYYY")) + 543}`, {
       locale: this.locale,
     });
   }
@@ -29,7 +29,6 @@ class LocalizedUtils extends DateFnsUtils {
     });
   }
 }
-
 const useStyles = makeStyles((theme) => ({
   input: {
     color: "#0f1626",
@@ -62,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
       color: "#132740",
     },
     "& .MuiInput-underline:after": {
-      borderBottomColor: theme.palette.secondary.main,
+      borderBottomColor: "#",
     },
     "& .MuiOutlinedInput-root": {
       "& fieldset": {
@@ -84,10 +83,13 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
+
 function DateFnsLocalizationExample(props: any) {
   const { title, register, name } = props;
-  var date = new Date();
+  var date: Date = new Date();
+
   const [selectedDate, handleDateChange] = useState(date);
+
   const classes = useStyles();
 
   return (
@@ -101,10 +103,11 @@ function DateFnsLocalizationExample(props: any) {
           className: classes.input,
           readOnly: true,
         }}
+        views={["year"]}
         animateYearScrolling
         label={`${title}`}
         clearable
-        format={`dd MMMM ${parseInt(formatDate(selectedDate, "YYYY")) + 543}`}
+        format={`${parseInt(formatDate(selectedDate, "YYYY")) + 543}`}
         value={selectedDate}
         //@ts-ignore
         onChange={handleDateChange}

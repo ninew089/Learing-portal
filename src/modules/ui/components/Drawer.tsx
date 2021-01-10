@@ -16,7 +16,7 @@ import avatar from "assets/images/user.svg";
 import { getCookie } from 'cookie/cookie'
 import { parseJwt } from "utils/getDataJWT"
 import { eraseCookie } from "cookie/cookie"
-
+import { RecentActors, LockRounded, CardMembership, ExitToApp, Home, AccountCircle } from '@material-ui/icons';
 const useStyles = makeStyles((theme) => ({
   root: {
     background: "#0f1726",
@@ -98,38 +98,62 @@ export default function TemporaryDrawer() {
             <NavLink to={`${path}/login`} className={classes.navLink}>
               <ListItem button dense>
                 <ListItemIcon>
-                  <Avatar alt="Remy Sharp" src={avatar} />
+                  <Avatar alt="" src={avatar} />
                 </ListItemIcon>
                 <ListItemText primary={`${data.title}${data.firstName} ${data.lastName}`} />
               </ListItem>
             </NavLink>
+            <Divider />
             <NavLink to={`${path}/edit`} className={classes.navLink}>
               <ListItem button>
+                <ListItemIcon>
+
+                  <RecentActors />
+
+                </ListItemIcon>
                 <ListItemText primary={"แก้ไขโปรไฟล์"} />
               </ListItem>
             </NavLink>
             <NavLink to={`${path}/reset`} className={classes.navLink}>
+
               <ListItem button>
+                <ListItemIcon>
+                  <LockRounded />
+                </ListItemIcon>
                 <ListItemText primary={"เปลี่ยนรหัสผ่าน"} />
               </ListItem>
             </NavLink>
             <NavLink to={`${path}/history`} className={classes.navLink}>
               <ListItem button>
+                <ListItemIcon>
+                  <CardMembership />
+                </ListItemIcon>
                 <ListItemText primary={"ประกาศนียบัตร"} />
               </ListItem>
             </NavLink>
             <Divider />
           </>
         ) : (
-            <NavLink to={`${path}/login`} className={classes.navLink}>
+            <>
               <ListItem button>
-                <ListItemText primary={"เข้าสู่ระบบ"} />
+                <ListItemText primary={`Learning Portal`} />
               </ListItem>
-            </NavLink>
+              <NavLink to={`${path}/login`} className={classes.navLink}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <AccountCircle />
+                  </ListItemIcon>
+                  <ListItemText primary={"เข้าสู่ระบบ"} />
+                </ListItem>
+              </NavLink>
+            </>
           )}
 
         <NavLink to={`${path}`} className={classes.navLink}>
           <ListItem button>
+            <ListItemIcon>
+              <Home />
+            </ListItemIcon>
             <ListItemText primary={"หน้าหลัก"} />
           </ListItem>
         </NavLink>
@@ -137,6 +161,10 @@ export default function TemporaryDrawer() {
         {login() ? (
           <NavLink to={`${path}`} className={classes.navLink}>
             <ListItem button onClick={onLogout}>
+
+              <ListItemIcon>
+                <ExitToApp />
+              </ListItemIcon>
               <ListItemText primary={"ลงชื่อออก"} />
             </ListItem>
           </NavLink>

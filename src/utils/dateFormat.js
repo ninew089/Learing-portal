@@ -56,55 +56,6 @@ export  function formatDatetoThai(date) {
     const newDate = `${res[1]} ${m[mm - 1]} พ.ศ.${yy}`;
     return newDate;
 }
-  export  function formatDatetoApi(date) {
-    const datetime = new Date(date).toLocaleDateString()
-    const res = datetime.split("-");
-    const newDate = `${res[0]}/${res[1]}/${res[2]}`;
-    const res2 = newDate.split("/");
-    const dm = [
-      "01",
-      "02",
-      "03",
-      "04",
-      "05",
-      "06",
-      "07",
-      "08",
-      "09",
-      "10",
-      "11",
-      "12",
-    ];
-      const day = [
-      "01",
-      "02",
-      "03",
-      "04",
-      "05",
-      "06",
-      "07",
-      "08",
-      "09",
-      "10",
-      "11",
-        "12",
-        "13",
-        "14",
-        "15",
-        "16",
-        "17",
-        "18",
-        "19",
-        "20",
-        "21",
-      "22","23","24","25","26","27","28","29","30","31"
-    ];
-
-    const newDate2 = `${res2[2]}-${dm[res2[0]-1]}-${day[res2[1]-1]}`;
-    
-    return newDate2;
-  }
-
 export  function formatDatetoThaiTest(date) {
   const res = date.split("-");
   const m = [

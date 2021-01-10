@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import * as actions from "../actions";
 import { useDispatch, useSelector } from "react-redux";
-import { Toolbar } from '@material-ui/core'
+import { Toolbar, Grid, CircularProgress } from '@material-ui/core'
 import Edit from './Edit'
 
 import * as actionsInfo from "modules/infomation/actions";
@@ -26,7 +26,11 @@ export default function Page() {
                     < Toolbar />
                     <Edit data={data} />
                 </>
-                : "loading"}
+                :
+                <Grid container direction="row" justify="center" alignItems="center">
+                    <CircularProgress color="secondary" />
+                </Grid>
+            }
         </>
     );
 }

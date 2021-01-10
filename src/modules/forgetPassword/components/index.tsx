@@ -13,7 +13,6 @@ import { AiFillIdcard, AiOutlineMail } from "react-icons/ai";
 import Dateth from "./DateTh";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
-import { formatDate } from 'utils/dateFormat'
 import { useSelector, useDispatch } from 'react-redux'
 import * as actions from '../actions'
 const useStyles = makeStyles((theme) => ({
@@ -127,7 +126,8 @@ export default function SignIn() {
   });
   //const { message, status } = useSelector((state: any) => state.forgot);
   const onSubmitData = (data: any) => {
-    const predata = JSON.parse(`{"email":"${data.email}","dob":"${formatDate(data.dob)}"}`)
+    console.log(data.dob)
+    const predata = JSON.parse(`{"email":"${data.email}","dob":"${data.dob - 543}"}`)
     const action = actions.loadFORGOT(predata, data.userId)
     dispatch(action)
   };

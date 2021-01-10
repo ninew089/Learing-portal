@@ -5,10 +5,12 @@ import {
   Grid,
   Typography,
   Box,
+  Link,
+  useMediaQuery
 } from "@material-ui/core";
 import Routes from "./Routes";
 import Nav from "./Nav"
-
+import { useRouteMatch } from "react-router-dom"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,12 +25,30 @@ const useStyles = makeStyles((theme) => ({
 
   },
   push: {
-    height: "120px",
+    height: "60px",
   },
   footer: {
-    background: "#0f1626", //transparent
+    background: "#01000e", //transparent
     color: "#f3f3fb",
     backdropFilter: "blur(6px)",
+  },
+  question: {
+    color: theme.palette.primary.light,
+    fontWeight: 600,
+    fontSize: 16,
+    [theme.breakpoints.down("sm")]: {
+      textAlign: "center",
+      fontSize: 10,
+    }
+  },
+  ocsc: {
+    color: theme.palette.primary.light,
+    fontWeight: 400,
+    fontSize: 20,
+    [theme.breakpoints.down("sm")]: {
+      textAlign: "center",
+      fontSize: 14,
+    }
   },
 
   color: {
@@ -80,7 +100,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function PersistentDrawerLeft(props: any) {
   const classes = useStyles();
-
+  const { path } = useRouteMatch();
+  const matches = useMediaQuery('(min-width:1060px)');
 
   return (
     <div className={classes.root}>
@@ -92,39 +113,49 @@ export default function PersistentDrawerLeft(props: any) {
 
       </Grid>
       <div className={classes.push} />
-      <Box p={3} className={classes.footer}>
-        <Grid container direction="row" justify="space-around" alignItems="center">
+      <Box p={5} className={classes.footer}>
+        <Grid container direction="row" justify={matches ? "space-around" : "center"} alignItems="center">
 
           <Typography
-            variant="button"
+
             display="block"
-            align="justify"
+            align="center"
             gutterBottom
-            className={classes.color1}
+            className={classes.ocsc}
           >
             สำนักงานคณะกรรมการข้าราชการพลเรือน (สำนักงาน ก.พ.)
                    <Typography
-              variant="button"
+
               display="block"
-              align="justify"
+              align="center"
               gutterBottom
               className={classes.color}
             >
-              Copyright © office of the Civil Service Commission (OCSC) 2020
+              Copyright © office of the Civil Service Commission (OCSC) 2021
           </Typography>
+            <Link href={`${path}/FAQ`}>
+              <Typography
+
+                display="block"
+                align="center"
+                gutterBottom
+                className={classes.question}
+              >
+                คำถามที่พบบ่อย: FAQ
+          </Typography>
+            </Link>
           </Typography>
           <Typography
 
             display="block"
-            align="justify"
-
+            align="center"
             className={classes.color1}
           >
             47/111 หมู่ 4 ถนนติวานนท์ ตำบลตลาดขวัญ อำเภอเมือง จังหวัดนนทบุรี 11000
                   <Typography
 
               display="block"
-              align="justify"
+              align="center"
 
               className={classes.color}
             >
@@ -134,7 +165,7 @@ export default function PersistentDrawerLeft(props: any) {
             <Typography
 
               display="block"
-              align="justify"
+              align="center"
               gutterBottom
               className={classes.color1}
             >
