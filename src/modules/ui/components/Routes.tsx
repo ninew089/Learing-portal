@@ -6,7 +6,7 @@ import ResetRoutes from "modules/resetPortal/components/index";
 import HistoryRoutes from "modules/historyPortal/components/index";
 import ForgetRoutes from "modules/forgetPassword/components/index";
 import Edit from "modules/editProfile/components/index";
-import FAQ from "modules/Q&A/FAQ"
+import FAQ from "modules/F&A/FAQ"
 import Page404 from "modules/404page/component/404";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
 import Scroll from "./Scroll";

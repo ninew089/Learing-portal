@@ -5,12 +5,10 @@ import {
   Grid,
   Typography,
   Box,
-  Link,
   useMediaQuery
 } from "@material-ui/core";
 import Routes from "./Routes";
 import Nav from "./Nav"
-import { useRouteMatch } from "react-router-dom"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -100,7 +98,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function PersistentDrawerLeft(props: any) {
   const classes = useStyles();
-  const { path } = useRouteMatch();
   const matches = useMediaQuery('(min-width:1060px)');
 
   return (
@@ -115,16 +112,17 @@ export default function PersistentDrawerLeft(props: any) {
       <div className={classes.push} />
       <Box p={5} className={classes.footer}>
         <Grid container direction="row" justify={matches ? "space-around" : "center"} alignItems="center">
+          <Grid item xs={12} lg={6} >
+            <Typography
 
-          <Typography
-
-            display="block"
-            align="center"
-            gutterBottom
-            className={classes.ocsc}
-          >
-            สำนักงานคณะกรรมการข้าราชการพลเรือน (สำนักงาน ก.พ.)
-                   <Typography
+              display="block"
+              align="center"
+              gutterBottom
+              className={classes.ocsc}
+            >
+              สำนักงานคณะกรรมการข้าราชการพลเรือน (สำนักงาน ก.พ.)
+            </Typography>
+            <Typography
 
               display="block"
               align="center"
@@ -133,18 +131,8 @@ export default function PersistentDrawerLeft(props: any) {
             >
               Copyright © office of the Civil Service Commission (OCSC) 2021
           </Typography>
-            <Link href={`${path}/FAQ`}>
-              <Typography
+          </Grid>
 
-                display="block"
-                align="center"
-                gutterBottom
-                className={classes.question}
-              >
-                คำถามที่พบบ่อย: FAQ
-          </Typography>
-            </Link>
-          </Typography>
           <Typography
 
             display="block"

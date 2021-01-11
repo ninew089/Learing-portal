@@ -16,7 +16,7 @@ import avatar from "assets/images/user.svg";
 import { getCookie } from 'cookie/cookie'
 import { parseJwt } from "utils/getDataJWT"
 import { eraseCookie } from "cookie/cookie"
-import { RecentActors, LockRounded, CardMembership, ExitToApp, Home, AccountCircle } from '@material-ui/icons';
+import { RecentActors, LockRounded, CardMembership, ExitToApp, Home, AccountCircle, Help } from '@material-ui/icons';
 const useStyles = makeStyles((theme) => ({
   root: {
     background: "#0f1726",
@@ -155,6 +155,14 @@ export default function TemporaryDrawer() {
               <Home />
             </ListItemIcon>
             <ListItemText primary={"หน้าหลัก"} />
+          </ListItem>
+        </NavLink>
+        <NavLink to={`${path}/FAQ`} className={classes.navLink}>
+          <ListItem button>
+            <ListItemIcon>
+              <Help />
+            </ListItemIcon>
+            <ListItemText primary={"คำถามที่พบบ่อย"} />
           </ListItem>
         </NavLink>
         <Divider />

@@ -83,7 +83,18 @@ const useStyles = makeStyles((theme) => ({
             fontSize: 12,
         },
         color: theme.palette.secondary.main,
-    },
+    }, hide: {
+        display: "inline-block",
+        borderBottom: `0px solid ${theme.palette.secondary.main}`,
+        paddingBottom: "2px",
+        transition: "0.1s",
+        "&:hover": {
+            borderBottom: `3px solid ${theme.palette.secondary.main}`,
+
+
+        }
+
+    }
 }));
 interface NavProps {
     onClick: () => void;
@@ -161,7 +172,7 @@ export default function PersistentDrawerLeft(props: any) {
                                     marginLeft: 10,
                                 }}
                             >
-                                <div className={classes.line}>
+                                <div className={active === 0 ? classes.line : classes.hide}>
                                     <Box
                                         className={active === 0 ? classes.selectedMain : classes.main}
                                         onClick={() => setActive(0)}
@@ -170,6 +181,8 @@ export default function PersistentDrawerLeft(props: any) {
                 </Box>
                                 </div>
                             </NavLink>
+
+
                         </Hidden>
                         <ScrollTo selector={`#หมวดหมู่`} smooth >
                             <Button
@@ -187,28 +200,73 @@ export default function PersistentDrawerLeft(props: any) {
                                 หลักสูตร
                 </Button>
                         </ScrollTo>
+                        <Hidden smDown>
+                            <NavLink
+                                to="/learning-portal/FAQ"
+                                style={{
+                                    color: "inherit",
+                                    textDecoration: "inherit",
+                                    marginLeft: 10,
+                                }}
+                            >
+                                <div className={active === 4 ? classes.line : classes.hide}>
+                                    <Box
+                                        className={active === 4 ? classes.selected : classes.button}
+                                        onClick={() => setActive(4)}
+                                    >
+                                        คำถามที่พบบ่อย
+              </Box>
+
+                                </div>
+
+
+                            </NavLink>
+                        </Hidden>
                     </>
                 ) :
-
-                    <NavLink
-                        to="/learning-portal"
-                        style={{
-                            color: "inherit",
-                            textDecoration: "inherit",
-                            marginLeft: 10,
-                        }}
-                    >
-                        <div className={classes.line}>
-                            <Box
-                                className={classes.main}
-                                onClick={() => setActive(0)}
-                            >
-                                หน้าหลัก
+                    <>
+                        <NavLink
+                            to="/learning-portal"
+                            style={{
+                                color: "inherit",
+                                textDecoration: "inherit",
+                                marginLeft: 10,
+                            }}
+                        >
+                            <div className={active === 0 ? classes.line : classes.hide}>
+                                <Box
+                                    className={active === 0 ? classes.selected : classes.button}
+                                    onClick={() => setActive(0)}
+                                >
+                                    หน้าหลัก
               </Box>
-                        </div>
-                    </NavLink>
+
+                            </div>
 
 
+                        </NavLink>
+                        <NavLink
+                            to="/learning-portal/FAQ"
+                            style={{
+                                color: "inherit",
+                                textDecoration: "inherit",
+                                marginLeft: 10,
+                            }}
+                        >
+                            <div className={active === 4 ? classes.line : classes.hide}>
+                                <Box
+                                    className={active === 4 ? classes.selected : classes.button}
+                                    onClick={() => setActive(4)}
+                                >
+                                    คำถามที่พบบ่อย
+              </Box>
+
+                            </div>
+
+
+                        </NavLink>
+
+                    </>
                 }
 
                 <Hidden smUp>
