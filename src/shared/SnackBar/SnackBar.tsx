@@ -6,6 +6,7 @@ import { makeStyles, Theme } from "@material-ui/core/styles";
 import { useDispatch } from 'react-redux'
 import * as infoactions from 'modules/infomation/actions'
 import * as actionClears from "modules/adminPortal/actions"
+import { SnackBarProps } from "./typescript"
 function Alert(props: AlertProps) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
@@ -19,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
 }));
 
-export default function CustomizedSnackbars(props: any) {
+export default function CustomizedSnackbars(props: SnackBarProps) {
     const { open, severity, message } = props;
     const classes = useStyles();
     const dispatch = useDispatch();

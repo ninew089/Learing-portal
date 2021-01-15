@@ -4,7 +4,7 @@ import { TextField, MenuItem, FormControl } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import * as actions from "modules/infomation/actions";
 import { useDispatch, useSelector } from "react-redux";
-
+import { jobTypes1Props, jobLevelProps, typeProps } from "../typescript"
 const useStyles = makeStyles((theme) => ({
   input: {
     color: "#0f1626",
@@ -69,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Type1(props: any) {
+export default function Type1(props: typeProps) {
   const classes = useStyles();
   const { formProps, name } = props;
   const dispatch = useDispatch();
@@ -107,7 +107,7 @@ export default function Type1(props: any) {
               error={!!formProps.errors.jobtypeId}
             >
               {" "}
-              {jobTypes1.map((jobType1: any, index: number) => (
+              {jobTypes1.map((jobType1: jobTypes1Props, index: number) => (
                 <MenuItem key={index} value={jobType1.id}>
                   {jobType1.name}
                 </MenuItem>
@@ -153,7 +153,7 @@ export default function Type1(props: any) {
               }
               error={!!formProps.errors.jobLevel}
             >
-              {jobLevels.map((jobLevel: any, index: number) => (
+              {jobLevels.map((jobLevel: jobLevelProps, index: number) => (
                 <MenuItem key={index} value={jobLevel.id}>
                   {jobLevel.name}
                 </MenuItem>

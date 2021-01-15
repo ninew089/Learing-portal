@@ -10,6 +10,7 @@ import * as yup from "yup";
 import * as actions from "../actions";
 import { useDispatch, useSelector } from "react-redux";
 import { info } from "utils/formatInfomation"
+import { accountFormProps } from "../typescript"
 const useStyles = makeStyles((theme) => ({
   paper: {
     background: "white",
@@ -38,7 +39,8 @@ export default function SignIn() {
   // eslint-disable-next-line
   const [mistry, setMistry] = React.useState<string>("");
 
-  const accountForm = useForm({
+
+  const accountForm = useForm<accountFormProps>({
     mode: "onChange",
     validationSchema: yup.object().shape({
       id: yup

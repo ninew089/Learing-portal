@@ -6,6 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import * as actions from "modules/infomation/actions";
 import { useDispatch, useSelector } from "react-redux";
+import { jobTypes2Props, typeProps } from "../typescript"
 
 const useStyles = makeStyles((theme) => ({
   input: {
@@ -78,7 +79,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn(props: any) {
+export default function SignIn(props: typeProps) {
   const { formProps, name } = props;
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -111,7 +112,7 @@ export default function SignIn(props: any) {
               }
               error={!!formProps.errors.jobtypeId}
             >
-              {jobTypes2.map((jobType2: any, index: number) => (
+              {jobTypes2.map((jobType2: jobTypes2Props, index: number) => (
                 <MenuItem
                   className={classes.menu}
                   key={index}

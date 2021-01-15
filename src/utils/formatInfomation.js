@@ -111,7 +111,7 @@ import {getCookie} from "cookie/cookie"
           "user5": {
               "id":"${signUpInfo.id}",
              "occupationid": ${parseInt(signUpInfo.OccupationId)},
-              "jobtitle": "${signUpInfo.jobTitlejobTitle}",
+              "jobtitle": "${signUpInfo.jobTitle}",
               "workplace": "${signUpInfo.workPlace}"
           }
         }`);
@@ -233,7 +233,7 @@ export  function infoEdit(signUpInfo) {
         "user5": {
             "id":"${id}",
            "occupationid": ${parseInt(signUpInfo.OccupationId)},
-            "jobtitle": "${signUpInfo.jobTitlejobTitle}",
+            "jobtitle": "${signUpInfo.jobTitle}",
             "workplace": "${signUpInfo.workPlace}"
         }
       }`);

@@ -11,6 +11,8 @@ import Page404 from "modules/404page/component/404";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
 import Scroll from "./Scroll";
 import PrivateRoute from 'auth/PrivateRouter'
+import PublicLoginRouter from 'auth/PublicLoginRouter'
+
 import { Toolbar } from '@material-ui/core'
 export default function Router() {
   const { path } = useRouteMatch();
@@ -19,10 +21,7 @@ export default function Router() {
     <>
       <Scroll />
       <Switch>
-        <Route path={`${path}/login`}>
-          <Toolbar />
-          <LoginRoutes />
-        </Route>
+  
         <Route path={`${path}/FAQ`}>
           <Toolbar />
           <FAQ />
@@ -34,10 +33,8 @@ export default function Router() {
           <Toolbar />
           <SignupRoutes />
         </Route>
-        <Route path={`${path}/login`}>
-          <Toolbar />
-          <LoginRoutes />
-        </Route>
+        <PublicLoginRouter path={`${path}/login`} component={LoginRoutes} />
+
         <Route path={`${path}/forget`}>
           <Toolbar />
           <ForgetRoutes />

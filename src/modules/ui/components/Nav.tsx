@@ -152,7 +152,7 @@ export default function PersistentDrawerLeft(props: any) {
                             <img alt="" src={banner} width={matchesIspad ? 100 : 140} />
                         </NavLink>
 
-                        <Hidden smDown>
+                        <Hidden mdDown>
                             <Typography variant="h6" noWrap className={classes.title}>
                                 ศูนย์รวมหลักสูตร/รายวิชาที่เรียนรู้ทางสื่ออิเล็กทรอนิกส์
                 </Typography>
@@ -163,7 +163,7 @@ export default function PersistentDrawerLeft(props: any) {
 
                 {pathname === "/learning-portal" ? (
                     <>
-                        <Hidden smDown>
+                        <Hidden xsDown>
                             <NavLink
                                 to="/learning-portal"
                                 style={{
@@ -200,7 +200,7 @@ export default function PersistentDrawerLeft(props: any) {
                                 หลักสูตร
                 </Button>
                         </ScrollTo>
-                        <Hidden smDown>
+                        <Hidden xsDown>
                             <NavLink
                                 to="/learning-portal/FAQ"
                                 style={{

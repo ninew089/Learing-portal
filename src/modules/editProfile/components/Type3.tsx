@@ -4,7 +4,7 @@ import { Controller } from "react-hook-form";
 import { makeStyles } from "@material-ui/core/styles";
 import * as actions from "modules/infomation/actions";
 import { useDispatch, useSelector } from "react-redux";
-
+import { jobTypes3Props, typeProps } from "../typescript"
 const useStyles = makeStyles((theme) => ({
   input: {
     color: "#0f1626",
@@ -68,7 +68,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-export default function SignIn(props: any) {
+export default function SignIn(props: typeProps) {
   const { formProps, name } = props;
   const dispatch = useDispatch();
   const classes = useStyles();
@@ -100,7 +100,7 @@ export default function SignIn(props: any) {
               }
               error={!!formProps.errors.jobtypeId}
             >
-              {jobTypes3.map((jobType3: any, index: number) => (
+              {jobTypes3.map((jobType3: jobTypes3Props, index: number) => (
                 <MenuItem key={index} value={jobType3.id}>
                   {jobType3.name}
                 </MenuItem>

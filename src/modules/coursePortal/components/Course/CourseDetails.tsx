@@ -90,7 +90,8 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "14px",
     fontWeight: 700,
     color: "#132740",
-    padding: 8,
+    padding: 3,
+    width: 200
   },
   box: {
     padding: 8,

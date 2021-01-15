@@ -19,7 +19,7 @@ import * as actions from "../actions";
 import { useDispatch, useSelector } from "react-redux";
 import Snackbar from "shared/SnackBar/SnackBar"
 import { infoEdit } from "utils/formatInfomation"
-
+import { accountFormProps } from "../typescript"
 const useStyles = makeStyles((theme) => ({
   paper: {
     background: "white",
@@ -73,10 +73,7 @@ export default function Edit(props: any) {
   // eslint-disable-next-line
   const [mistry, setMistry] = React.useState<string>("");
 
-
-
-
-  const accountForm = useForm({
+  const accountForm = useForm<accountFormProps>({
     mode: "onChange",
     defaultValues: {
       title: data.title,

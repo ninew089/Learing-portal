@@ -29,7 +29,10 @@ function loadLogin(userInfo: any) {
       setCookie('id', userInfo.userId, 3)
       setCookie('role', userInfo.role, 3)
       setCookie('token', result.data.token, 3)
+
       dispatch(push('/learning-portal'))
+
+
     } catch (err) {
       if (err.response.status === 401) {
         dispatch({

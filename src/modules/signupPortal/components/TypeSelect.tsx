@@ -17,7 +17,7 @@ import { Controller } from "react-hook-form";
 
 import * as actions from "modules/infomation/actions";
 import { useDispatch, useSelector } from "react-redux";
-
+import { userTypeProps, typeUserProps } from "../typescript"
 const useStyles = makeStyles((theme) => ({
   form: {
     marginTop: theme.spacing(4),
@@ -87,7 +87,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn(props: any) {
+export default function SignIn(props: typeUserProps) {
   const { formProps } = props;
   const classes = useStyles();
 
@@ -156,8 +156,7 @@ export default function SignIn(props: any) {
               }
               error={!!formProps.errors.usertypeid}
             >
-              {" "}
-              {userTypes.map((userType: any, index: number) => (
+              {userTypes.map((userType: userTypeProps, index: number) => (
                 <MenuItem key={index} value={userType.id}>{userType.name}</MenuItem>
               ))}
             </TextField>

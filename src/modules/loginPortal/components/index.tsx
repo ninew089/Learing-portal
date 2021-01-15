@@ -14,7 +14,7 @@ import {
   TextField,
   Grid,
   Link,
-  Typography, FormHelperText
+  Typography, FormHelperText, Toolbar
 } from "@material-ui/core";
 import { NavLink } from "react-router-dom";
 import * as actions from "../actions";
@@ -197,6 +197,7 @@ export default function SignIn() {
   };
   return (
     <Container component="main" maxWidth="xs">
+      <Toolbar />
       <form autoComplete="off" className={classes.form}>
         <CssBaseline />
         <div className={classes.paper}>

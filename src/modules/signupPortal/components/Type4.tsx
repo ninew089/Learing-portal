@@ -5,6 +5,7 @@ import { Controller } from "react-hook-form";
 import { makeStyles } from "@material-ui/core/styles";
 import * as actions from "modules/infomation/actions";
 import { useDispatch, useSelector } from "react-redux";
+import { OccupationsProps, typeProps } from "../typescript"
 
 const useStyles = makeStyles((theme) => ({
   input: {
@@ -70,7 +71,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn(props: any) {
+export default function SignIn(props: typeProps) {
   const classes = useStyles();
 
   const { formProps, name } = props;
@@ -105,7 +106,7 @@ export default function SignIn(props: any) {
               }
               error={!!formProps.errors.OccupationId}
             >
-              {Occupations.map((Occupation: any, index: number) => (
+              {Occupations.map((Occupation: OccupationsProps, index: number) => (
                 <MenuItem key={index} value={Occupation.id}>{Occupation.name}</MenuItem>
               ))}
             </TextField>
