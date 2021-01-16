@@ -163,6 +163,7 @@ export default function PointNavigationMenu({ title }: { title: string }) {
         ))}
       </Grid>
       <Suspense fallback={renderLoader()}>
+
         <Courses id={index} />
 
 

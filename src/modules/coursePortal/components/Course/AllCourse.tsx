@@ -33,7 +33,7 @@ export default function GroupCourse() {
 
             <Grid container direction="row" alignItems="center" justify="space-between">
 
-                <h2>คอร์สเรียนทั้งหมด</h2>
+                <h2>รายวิชาทั้งหมด</h2>
                 <Button onClick={handlerSeeAll}>ดูทั้งหมด</Button>
 
             </Grid>
@@ -47,6 +47,7 @@ export default function GroupCourse() {
                 justify="center"
 
             >
+
                 {isLoadingCourses && <CircularProgress color="secondary" style={{ margin: 20 }} />}
                 <Suspense fallback={renderLoader()}>
 

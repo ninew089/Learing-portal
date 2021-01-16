@@ -1,9 +1,9 @@
 import React, { useState, lazy, Suspense } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Typography, Grid, Box, Link } from "@material-ui/core";
+import { Typography, Grid, Box } from "@material-ui/core";
 import numberFormat from "utils/numberFormat";
-import * as actions from "../../actions"
-import { useDispatch } from 'react-redux'
+
+
 import categoryFormat from "utils/categoryFormat"
 import platformFormat from 'utils/platformFormat'
 import { CardProps } from "./tyscript"
@@ -91,7 +91,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 700,
     color: "#132740",
     padding: 3,
-    width: 200
+    width: 190
   },
   box: {
     padding: 8,
@@ -160,24 +160,23 @@ const useStyles = makeStyles((theme) => ({
 
 export default function IconBreadcrumbs(props: CardProps) {
 
-  const { platformId, learningTopic, viewCount, point, satisfactionCount, code, link, thumbnail, courseCategoryId, name, id } = props;
+  const { platformId, learningObjective, viewCount, point, satisfactionCount, code, thumbnail, courseCategoryId, name } = props;
   const classes = useStyles();
-  const dispatch = useDispatch();
+
   const renderLoader = () => <div></div>
-  const countView = () => {
-    const action = actions.loadCourseView(id)
-    dispatch(action)
-  }
+
   const [open, setOpen] = useState<boolean>(false)
   const onOpen = () => {
     setOpen(true)
+
+
   }
 
   return (
 
     <Suspense fallback={renderLoader()}>
       <div className={classes.root} >
-        <div className={classes.card}>
+        <div className={classes.card} onClick={onOpen}>
           <Grid
             container
             direction="column"
@@ -194,81 +193,81 @@ export default function IconBreadcrumbs(props: CardProps) {
                 image={thumbnail}
                 className={classes.cardMedia}
                 title={name}
-                onClick={onOpen}
+
               />
 
 
 
 
-              <Link href={link} target="_blank" rel="noopener" underline="none" onClick={countView}  >
-                <Typography variant={"h2"} className={classes.title}>
-                  {name}
-                </Typography>
-                <Typography variant={"h4"} className={classes.subtitle}>
-                  {code}
-                </Typography>
-                <Grid
-                  container
-                  direction="row"
-                  justify="flex-start"
-                  alignItems="center"
-                  className={classes.detail}
-                >
 
-                  <div className={classes.dot} style={{ background: colorCategory(courseCategoryId) }} />
-                  <Box fontWeight={500} className={classes.category}>{categoryFormat(courseCategoryId)}</Box>
+              <Typography variant={"h2"} className={classes.title}>
+                {name}
+              </Typography>
+              <Typography variant={"h4"} className={classes.subtitle}>
+                {code}
+              </Typography>
+              <Grid
+                container
+                direction="row"
+                justify="flex-start"
+                alignItems="center"
+                className={classes.detail}
+              >
 
-
-                  <Grid item xs={12}>
-                    <div>
+                <div className={classes.dot} style={{ background: colorCategory(courseCategoryId) }} />
+                <Box fontWeight={500} className={classes.category}>{categoryFormat(courseCategoryId)}</Box>
 
 
-
-                      <Box fontWeight={400} className={classes.caption}>
-                        {learningTopic}
-                      </Box>
-                    </div>
-                  </Grid>
-                </Grid>
-
-                <Grid
-                  container
-                  direction="row"
-                  justify="flex-start"
-                  alignItems="center"
-                >
-                  <div className={classes.logo}>
-                    < div style={{
-                      background: `url('${platformFormat(platformId).logo}`,
-                      backgroundSize: "cover",
-
-                      padding: "30px"
-                    }} />
-                  </div>
+                <Grid item xs={12}>
                   <div>
-                    <div className={classes.author}>{platformFormat(platformId).name}</div>
-                    <div className={classes.rating}>
-                      <Rating vote={satisfactionCount} point={point} />
-                    </div>
-                    <Grid
-                      container
-                      direction="row"
-                      justify="flex-start"
-                      alignItems="flex-start"
-                      className={classes.box}
-                    >
-                      <Typography
-                        variant="caption"
-                        align="left"
-                        component="p"
-                        color={"textSecondary"}
-                      >
-                        การดู {numberFormat(viewCount)} ครั้ง
-                  </Typography>
-                    </Grid>
+
+
+
+                    <Box fontWeight={400} className={classes.caption}>
+                      {learningObjective}
+                    </Box>
                   </div>
                 </Grid>
-              </Link>
+              </Grid>
+
+              <Grid
+                container
+                direction="row"
+                justify="flex-start"
+                alignItems="center"
+              >
+                <div className={classes.logo}>
+                  < div style={{
+                    background: `url('${platformFormat(platformId).logo}`,
+                    backgroundSize: "cover",
+
+                    padding: "30px"
+                  }} />
+                </div>
+                <div>
+                  <div className={classes.author}>{platformFormat(platformId).name}</div>
+                  <div className={classes.rating}>
+                    <Rating vote={satisfactionCount} point={point} />
+                  </div>
+                  <Grid
+                    container
+                    direction="row"
+                    justify="flex-start"
+                    alignItems="flex-start"
+                    className={classes.box}
+                  >
+                    <Typography
+                      variant="caption"
+                      align="left"
+                      component="p"
+                      color={"textSecondary"}
+                    >
+                      การดู {numberFormat(viewCount)} ครั้ง
+                  </Typography>
+                  </Grid>
+                </div>
+              </Grid>
+
             </div>
           </Grid>
 

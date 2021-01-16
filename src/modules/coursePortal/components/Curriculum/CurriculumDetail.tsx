@@ -1,12 +1,12 @@
 import React, { useState, lazy, Suspense } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Typography, Grid, Box, Link } from "@material-ui/core";
+import { Typography, Grid, Box } from "@material-ui/core";
 import numberFormat from "utils/numberFormat";
 import Rating from "../../share/Rating";
 import { Theme } from "@material-ui/core/styles";
 import platformFormat from 'utils/platformFormat'
-import * as actions from "../../actions"
-import { useDispatch } from 'react-redux'
+
+
 import CardMedia from '@material-ui/core/CardMedia';
 import { CardProps } from "./tyscript"
 
@@ -81,7 +81,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontWeight: 700,
     color: "#132740",
     padding: 3,
-    width: 200
+    width: 190
   },
   subtitle: {
     overflow: "hidden",
@@ -162,16 +162,14 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 export default function CurriculumDetailCard(props: CardProps) {
-  const { platformId, learningTopic, viewCount, point, satisfactionCount, code, link, thumbnail, name, id } = props;
+  const { platformId, learningObjective, viewCount, point, satisfactionCount, code, thumbnail, name } = props;
   const classes = useStyles();
-  const dispatch = useDispatch();
-  const countView = () => {
-    const action = actions.loadCurriculumsView(id)
-    dispatch(action)
-  }
+
+
   const [open, setOpen] = useState<boolean>(false)
   const onOpen = () => {
     setOpen(true)
+
   }
   const renderLoader = () =>
     <div></div>
@@ -184,7 +182,7 @@ export default function CurriculumDetailCard(props: CardProps) {
             container
             direction="column"
             justify="flex-start"
-
+            onClick={onOpen}
           >
             <div style={{ display: "block" }}>
               <div className={classes.boxshadow}>
@@ -196,81 +194,81 @@ export default function CurriculumDetailCard(props: CardProps) {
                   image={thumbnail}
                   className={classes.cardMedia}
                   title={name}
-                  onClick={onOpen}
+
                 />
 
 
               </div>
-              <Link href={link} target="_blank" underline="none" rel="noopener" onClick={countView}>
 
-                <Typography variant={"h2"} className={classes.title}>
-                  {name}
-                </Typography>
 
-                <Typography variant={"h4"} className={classes.subtitle}>
-                  {code}
-                </Typography>
+              <Typography variant={"h2"} className={classes.title}>
+                {name}
+              </Typography>
+
+              <Typography variant={"h4"} className={classes.subtitle}>
+                {code}
+              </Typography>
+              <Grid
+                container
+                direction="row"
+                justify="flex-start"
+                alignItems="center"
+                className={classes.detail}
+              >
+                <div className={classes.dot} />
+                <Box fontWeight={500}>หลักสูตร</Box>
+
+                <Grid item xs={12}>
+                  <Box fontWeight={400} className={classes.caption}>
+                    {learningObjective}
+                  </Box>
+                </Grid>
+              </Grid>
+              <Grid
+                container
+                direction="column"
+                justify="space-around"
+                alignItems="center"
+              >
                 <Grid
                   container
                   direction="row"
                   justify="flex-start"
                   alignItems="center"
-                  className={classes.detail}
                 >
-                  <div className={classes.dot} />
-                  <Box fontWeight={500}>หลักสูตร</Box>
-
-                  <Grid item xs={12}>
-                    <Box fontWeight={400} className={classes.caption}>
-                      {learningTopic}
-                    </Box>
-                  </Grid>
-                </Grid>
-                <Grid
-                  container
-                  direction="column"
-                  justify="space-around"
-                  alignItems="center"
-                >
-                  <Grid
-                    container
-                    direction="row"
-                    justify="flex-start"
-                    alignItems="center"
-                  >
-                    <div className={classes.logo}>
-                      < div style={{
-                        background: `url('${platformFormat(platformId).logo}`,
-                        backgroundSize: "cover",
-                        padding: "30px"
-                      }} />
+                  <div className={classes.logo}>
+                    < div style={{
+                      background: `url('${platformFormat(platformId).logo}`,
+                      backgroundSize: "cover",
+                      padding: "30px"
+                    }} />
+                  </div>
+                  <div>
+                    <div className={classes.author}>{platformFormat(platformId).name}</div>
+                    <div className={classes.rating}>
+                      <Rating vote={satisfactionCount} point={point} />
                     </div>
-                    <div>
-                      <div className={classes.author}>{platformFormat(platformId).name}</div>
-                      <div className={classes.rating}>
-                        <Rating vote={satisfactionCount} point={point} />
-                      </div>
-                      <Grid
-                        container
-                        direction="row"
-                        justify="flex-start"
-                        alignItems="flex-start"
-                        className={classes.box}
+                    <Grid
+                      container
+                      direction="row"
+                      justify="flex-start"
+                      alignItems="flex-start"
+                      className={classes.box}
+                    >
+                      <Typography
+                        variant="caption"
+                        align="left"
+                        component="p"
+                        color={"textSecondary"}
                       >
-                        <Typography
-                          variant="caption"
-                          align="left"
-                          component="p"
-                          color={"textSecondary"}
-                        >
-                          การดู {numberFormat(viewCount)} ครั้ง
+                        การดู {numberFormat(viewCount)} ครั้ง
                   </Typography>
-                      </Grid>
-                    </div>
+                    </Grid>
+                  </div>
 
-                  </Grid>
                 </Grid>
-              </Link>
+              </Grid>
+
             </div>
           </Grid>
 

@@ -147,7 +147,7 @@ export default function SignIn() {
           />
 
           <Button type="submit" fullWidth className={classes.submit}>
-            ส่งข้อมลู
+            ส่งข้อมูล
           </Button>
         </form>
       </div>

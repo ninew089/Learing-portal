@@ -119,7 +119,7 @@ export default function CourseCarousel() {
 
 
 
-                  <Link href={targetUrl} underline="none">
+                  <Link href={targetUrl} underline="none" target="_blank">
                     <div style={{ backgroundImage: `url(${imageUrl})`, backgroundSize: "cover", backgroundPosition: "center center" }} >
                       <div style={{ position: "relative", width: "100vw", minHeight: "400px" }}>
                         <div style={{ position: "absolute", top: "70%", transform: "translate(-50%, -50%)", left: "50%", marginRight: "-50%", margin: 0, textShadow: "0px 3px 3px rgba(0, 0, 0, 0.4)", color: "white", fontSize: "24px", textAlign: "center" }}>

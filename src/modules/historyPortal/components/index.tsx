@@ -23,7 +23,6 @@ import {
 
 import { useDispatch, useSelector } from 'react-redux'
 import * as  actions from '../actions'
-import Header from "modules/coursePortal/share/Header"
 import { formatDatetoThaiTest } from "utils/dateFormat"
 export default function MaterialTableDemo(props: any) {
   const tableRef = React.createRef();
@@ -100,7 +99,7 @@ export default function MaterialTableDemo(props: any) {
   return (
     <div>
       <CssBaseline />
-      <Header text={"ประกาศนียบัตร"} />
+
 
       <MaterialTable
         icons={tableIcons}
@@ -110,7 +109,7 @@ export default function MaterialTableDemo(props: any) {
 
           { title: "รหัสรายวิชา", field: "courseid" },
           { title: "ชื่อรายวิชา", field: "course" },
-          { title: " หน่วยงานที่ให้ประกาศนียบัตร", field: "platform" },
+          { title: "หน่วยงานที่ให้ประกาศนียบัตร", field: "platform" },
         ]}
         data={predata}
         detailPanel={(rowData) => {
@@ -161,7 +160,7 @@ export default function MaterialTableDemo(props: any) {
           { title: "รหัสหลักสูตร", field: "curriculumid" },
           { title: "ชื่อหลักสูตร", field: "curriculum" },
 
-          { title: " หน่วยงานที่ให้ประกาศนียบัตร", field: "platform" },
+          { title: "หน่วยงานที่ให้ประกาศนียบัตร", field: "platform" },
         ]}
         data={predata1}
         detailPanel={(rowData) => {

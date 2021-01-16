@@ -1,9 +1,11 @@
 import React from "react";
-import { Grid, Box, Divider, Link, CardMedia } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { Column, Row, Item } from "@mui-treasury/components/flex";
-import categoryFormat from 'utils/categoryFormat'
+
 import { CardProps, CardRecommentProps } from "./typescript"
+
+import CardRecProps from "./CardRecProps"
 const useStyles = makeStyles((theme) => ({
   card: {
     marginTop: "10px",
@@ -76,11 +78,22 @@ const useStyles = makeStyles((theme) => ({
     boxShadow:
       "0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)",
   },
+  dot: {
+    height: "10px",
+    width: "10px",
+    backgroundColor: "#cfcde6",
+    borderRadius: "50%",
+    display: "inline-block",
+    marginLeft: 10,
+    marginRight: 4,
+  },
 }));
 
 export default function SocialCard(props: CardRecommentProps) {
   const { title, data } = props;
   const classes = useStyles();
+
+
 
   return (
     <>
@@ -97,54 +110,8 @@ export default function SocialCard(props: CardRecommentProps) {
           alignItems="center"
         >
           {data.map((item: CardProps, index: number) => (
-            <Link href={item.link} target="_blank" underline="none" key={index}>
-              <Grid
-                key={index}
-                container
-                justify="flex-start"
-                alignItems="center"
-                spacing={2}
-                className={classes.items}
+            <CardRecProps data={item} key={index} />
 
-              >
-                <Grid item xs={5}>
-
-                  < CardMedia
-                    style={{
-                      background: `url('${item.thumbnail}')`,
-                      backgroundSize: "cover",
-                    }}
-                    image={item.thumbnail}
-                    className={classes.cardMedia}
-                    title={item.name}
-
-                  />
-
-
-                </Grid>
-                <Grid item xs={7}>
-                  <Box
-                    fontSize={12}
-                    fontWeight={700}
-                    className={classes.category}
-                  >
-                    {index + 1} • {categoryFormat(item.courseCategoryId)}
-                  </Box>
-
-                  <Box fontSize={14} fontWeight={700} className={classes.name}>
-                    {item.name}
-                  </Box>
-                  <Box fontSize={14} fontWeight={700} className={classes.name}>
-                    {item.code}
-                  </Box>
-                  <Box fontSize={12} fontWeight={400} className={classes.caption}>
-                    {item.learningTopic}
-                  </Box>
-
-                  <Divider />
-                </Grid>
-              </Grid>
-            </Link>
           ))}
         </Grid>
 

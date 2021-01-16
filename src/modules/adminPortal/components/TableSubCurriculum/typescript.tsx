@@ -14,6 +14,7 @@ export interface openProps {
     open: boolean;
     setOpen: (someting: boolean) => void;
     valueCurriculun: any;
+
 }
 export interface couresProps {
     code: string;
@@ -33,4 +34,5 @@ export interface openEditProps {
     setOpen: (someting: boolean) => void;
     valueCurriculun: any;
     data: any;
+    numberNo: number;
 }

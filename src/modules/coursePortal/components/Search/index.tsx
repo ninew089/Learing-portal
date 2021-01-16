@@ -9,7 +9,7 @@ import { parse } from "query-string"
 import { useDispatch, useSelector } from 'react-redux'
 import * as actions from "../../actions"
 import searchNotfound from "assets/gif/somethingbroken.gif"
-import Search from "../Search"
+import Search from "./SearchPage"
 import formatPlatform from "utils/platformFormat"
 const CourseDetail = lazy(() => import('../Course/CourseDetails'));
 const Header = lazy(() => import('../../share/Header'));
@@ -133,6 +133,7 @@ export default function GroupCourse(props: any) {
                                 justify={"center"}
                             >
                                 <h2>ขออภัยค่ะ หารายวิชาไม่พบ {q}</h2>
+
                                 <img src={searchNotfound} alt="" width="400px" height="400px" />
 
                             </Grid>

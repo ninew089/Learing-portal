@@ -110,7 +110,7 @@ export default function MaterialTableDemo(props: any) {
   }
 
   const { message, severity } = useSelector((state: any) => state.admin);
-
+  const [number, setNumber] = useState(0)
 
   return (
     <div>
@@ -131,11 +131,7 @@ export default function MaterialTableDemo(props: any) {
       <MaterialTable
         title="รายวิชาในหลักสูตร"
         columns={[
-          {
 
-            title: 'ลำดับ',
-            render: rowData => rowData.tableData.id + 1
-          },
           { title: "รหัสวิชา", field: "code", type: "numeric" },
           { title: "ชื่อวิชา", field: "name" },
         ]}
@@ -164,6 +160,7 @@ export default function MaterialTableDemo(props: any) {
             onClick: (event, rowData) => {
               setOpenEdit(true)
               const save = rowData
+              setNumber(rowData.tableData.id + 1)
 
               setEditData(save)
 
@@ -189,7 +186,7 @@ export default function MaterialTableDemo(props: any) {
 
         }}
       />
-      <DialogEdit open={openEdit} setOpen={setOpenEdit} data={editData} valueCurriculun={value} />
+      <DialogEdit open={openEdit} setOpen={setOpenEdit} data={editData} valueCurriculun={value} numberNo={number} />
       <DialogAdd open={open} setOpen={setOpen} valueCurriculun={value} />
     </div>
   );

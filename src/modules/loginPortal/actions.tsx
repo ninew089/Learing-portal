@@ -54,6 +54,16 @@ function loadLogin(userInfo: any) {
         });
 
       }
+      if (err.response.status === 500) {
+        dispatch({
+          type: LOAD_LOGIN_FAILURE,
+          payload: {
+            status: err.response.status,
+            messageLogin: `เกิดปัญหาทาง server ${err.response.status}`
+          },
+        });
+
+      }
 
     }
   };

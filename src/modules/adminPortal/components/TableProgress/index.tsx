@@ -162,9 +162,9 @@ export default function ReportTable() {
           { title: "คำนำหน้าชื่อ", field: "title" },
           { title: "ชื่อ", field: "firstName" },
           { title: "นามสกุล", field: "lastname" },
-          { title: "รหัสวิชา", field: "courseId", type: "numeric" },
+          { title: "เลขวิชา", field: "courseId", type: "numeric" },
           { title: "วันเปิดเรียน", field: "startDate", type: "date", dateSetting: { locale: "th-TH" } },
-          { title: "เปอร์เซ็นความก้าวหน้า", field: "percent", type: "numeric" },
+          { title: "เปอร์เซ็นความก้าวหน้า", field: "percent", type: "numeric", validate: rowData => rowData.percent <= 100 && rowData.percent >= 0 },
           { title: "วันที่ได้รับข้อมูล", field: "createDate", type: "date", editable: "never", dateSetting: { locale: "th-TH" } },
 
         ]}
@@ -259,11 +259,11 @@ export default function ReportTable() {
           { title: "คำนำหน้าชื่อ", field: "title" },
           { title: "ชื่อ", field: "firstName" },
           { title: "นามสกุล", field: "lastname" },
-          { title: "รหัสวิชา", field: "curriculumId", type: "numeric" },
+          { title: "เลขหลักสูตร", field: "curriculumId", type: "numeric" },
           {
             title: "วันเปิดเรียน", field: "startDate", type: "date", dateSetting: { locale: "th-TH" }
           },
-          { title: "เปอร์เซ็นความก้าวหน้า", field: "percent", type: "numeric" },
+          { title: "เปอร์เซ็นความก้าวหน้า", field: "percent", type: "numeric", validate: rowData => rowData.percent <= 100 && rowData.percent >= 0 },
           { title: "วันที่ได้รับข้อมูล", field: "createDate", type: "date", editable: "never", dateSetting: { locale: "th-TH" } },
         ]}
         options={{

@@ -113,8 +113,7 @@ export default function ReportTable() {
           pageSizeOptions: [20, 50, 100]
         }}
         columns={[
-          { title: "เลขประจำตัวบัตรประชาชน", field: "identNo", type: "numeric", editable: 'never' },
-
+          { title: "เลขประจำตัวประชาชน", field: "identNo", type: "string" },
           { title: "คำนำหน้าชื่อ", field: "title", type: "string" },
           { title: "ชื่อ", field: "firstName", type: "string" },
           { title: "นามสกุล", field: "lastName", type: "string" },

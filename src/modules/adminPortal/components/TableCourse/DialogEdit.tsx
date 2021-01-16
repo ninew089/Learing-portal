@@ -267,22 +267,24 @@ export default function CustomizedDialogs({
                     multiline
                     id="input-with-icon-textfield"
                     label="เป้าหมายการเรียนรู้"
-                    name="learningTopic"
+                    name="learningObjective"
                     inputRef={register}
-                    helperText={errors.learningTopic ? "กรอกประเด็นการเรียนรู้" : ""}
-                    error={!!errors.learningTopic}
-                    defaultValue={data.learningTopic}
+                    helperText={errors.learningObjective ? "กรอกเป้าหมายการเรียนรู้" : ""}
+                    error={!!errors.learningObjective}
+                    defaultValue={data.learningObjective}
+
                   />
                   <TextField
                     fullWidth
                     multiline
                     id="input-with-icon-textfield"
                     label="ประเด็นการเรียนรู้"
-                    name="learningObjective"
+                    name="learningTopic"
                     inputRef={register}
-                    helperText={errors.learningObjective ? "กรอกเป้าหมายการเรียนรู้" : ""}
-                    error={!!errors.learningObjective}
-                    defaultValue={data.learningObjective}
+                    helperText={errors.learningTopic ? "กรอกประเด็นการเรียนรู้" : ""}
+                    error={!!errors.learningTopic}
+                    defaultValue={data.learningTopic}
+
                   />
                   <TextField
                     fullWidth

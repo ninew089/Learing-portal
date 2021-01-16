@@ -1,5 +1,5 @@
 import React, { useEffect, lazy, Suspense } from "react";
-import { Grid, Divider, Box, Button } from "@material-ui/core";
+import { Grid, Divider, Box, Button, CircularProgress } from "@material-ui/core";
 
 import { useHistory, useRouteMatch } from "react-router-dom";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
@@ -51,7 +51,7 @@ export default function SingleLineGridList(props: { title: string }) {
   }, [])
 
   const dispatch = useDispatch();
-  const { curriculums } = useSelector((state: any) => state.course);
+  const { curriculums, isLoadingCurriculums } = useSelector((state: any) => state.course);
 
 
   const renderLoader = () =>
@@ -84,8 +84,9 @@ export default function SingleLineGridList(props: { title: string }) {
         <Divider style={{ marginBottom: 20 }} />
 
         <Grid container direction="row" alignItems="center" justify={"center"}>
-          <CurriculumCarousel isCurriculum={true} detail={curriculums} />
-
+          {isLoadingCurriculums ? <CircularProgress color="secondary" style={{ margin: 20 }} /> :
+            <CurriculumCarousel isCurriculum={true} detail={curriculums} />
+          }
         </Grid>
       </Box>
     </Suspense>

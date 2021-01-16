@@ -10,14 +10,15 @@ import CloseIcon from "@material-ui/icons/Close";
 import {
   IconButton,
   Typography,
-  DialogActions,
+
   DialogContent,
   DialogTitle,
   Dialog,
   Button, Avatar, Grid
 } from "@material-ui/core";
-import { BsLink } from "react-icons/bs";
 import { amber } from "@material-ui/core/colors";
+import * as actions from "../actions"
+import { useDispatch } from 'react-redux'
 
 import { LibraryBooksRounded, CreateRounded, FaceSharp, EqualizerRounded } from '@material-ui/icons';
 const useStyles = makeStyles((theme) => ({
@@ -33,6 +34,12 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: amber[500],
     marginRight: 10
   },
+  button: {
+    textAlign: "center", margin: 4, padding: 4, fontWeight: 700, fontSize: 16
+  },
+  action: {
+    textAlign: "center", margin: 4, padding: 4
+  }
 }));
 const styles = (theme: Theme) =>
   createStyles({
@@ -86,14 +93,7 @@ const MuiDialogContent = withStyles((theme) => ({
   },
 }))(DialogContent);
 
-const MuiDialogActions = withStyles((theme) => ({
-  root: {
-    margin: 0,
-    padding: theme.spacing(1),
-    //background: '#182437',
-    color: "#1b1a1a",
-  },
-}))(DialogActions);
+
 
 export interface CustomizedDialogsProps {
   open: boolean;
@@ -107,7 +107,20 @@ export default function CustomizedDialogs({
   data
 }: CustomizedDialogsProps) {
   const handleClose = () => {
+
     setOpen(false);
+
+
+  };
+  const dispatch = useDispatch();
+  const navToPage = () => {
+
+
+    setOpen(false);
+    const action = actions.loadCourseView(data.id)
+    dispatch(action)
+    window.open(data.link, '_blank')
+
   };
   const classes = useStyles();
   //  const { platformId, learningTopic, viewCount, point, satisfactionCount, code, learningObjective, link, thumbnail, courseCategoryId, name, id } = props;
@@ -136,7 +149,7 @@ export default function CustomizedDialogs({
 
 
           <Typography gutterBottom className={`color:'#90a0aa',fontWeigth:300`}>
-            <div dangerouslySetInnerHTML={{ __html: data.learningTopic }} />
+            <div dangerouslySetInnerHTML={{ __html: data.learningObjective }} />
 
           </Typography>
           <Grid container direction="row" justify="flex-start" alignItems="center">
@@ -150,7 +163,7 @@ export default function CustomizedDialogs({
 
 
           <Typography gutterBottom>
-            <div dangerouslySetInnerHTML={{ __html: data.learningObjective }} />
+            <div dangerouslySetInnerHTML={{ __html: data.learningTopic }} />
 
           </Typography>
           <Grid container direction="row" justify="flex-start" alignItems="center">
@@ -178,11 +191,11 @@ export default function CustomizedDialogs({
 
           </Typography>
         </MuiDialogContent>
-        <MuiDialogActions>
-          <Button autoFocus onClick={handleClose}>
-            <BsLink size={24} style={{ color: "#1b1a1a" }} />
+        <MuiDialogContent className={classes.action} >
+          <Button autoFocus onClick={navToPage} className={classes.button} >
+            เข้าเรียน
           </Button>
-        </MuiDialogActions>
+        </MuiDialogContent>
       </Dialog>
     </div>
   );

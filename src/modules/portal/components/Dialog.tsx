@@ -12,7 +12,8 @@ export default function AlertDialog(props: any) {
   };
   const handleAgree = () => {
     if (data !== null) {
-      window.location.replace(`${data.link}`);
+
+      window.open(`${data.link}`, '_blank')
     }
 
   };

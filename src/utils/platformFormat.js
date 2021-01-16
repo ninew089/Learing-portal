@@ -121,7 +121,7 @@ export default function category(id) {
 
    name: "สำนักงานคณะกรรมการพัฒนาระบบราชการ",
 
-    logo: "https://learn.ocsc.info/learning-portal/static/media/Logo/opdc.png",
+    logo: "https://learn.ocsc.info/learning-portal/static/media/Logo/opdc.jpg",
     
     }
     ]

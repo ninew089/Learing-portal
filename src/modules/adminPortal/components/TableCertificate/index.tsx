@@ -142,7 +142,7 @@ export default function ReportTable() {
       }
       <MaterialTable
         icons={tableIcons}
-        title="ประกาศนีบัตร รายวิชา"
+        title="ประกาศนียบัตรรายวิชา"
         options={{
           pageSize: 20,
           pageSizeOptions: [20, 50, 100]
@@ -160,12 +160,12 @@ export default function ReportTable() {
           { title: "คำนำหน้าชื่อ", field: "title" },
           { title: "ชื่อ", field: "firstName" },
           { title: "นามสกุล", field: "lastname" },
-          { title: "รหัสวิชา", field: "courseId", type: "numeric" },
+          { title: "เลขวิชา", field: "courseId", type: "numeric" },
           { title: "วันเปิดเรียน", field: "startDate", type: "date", dateSetting: { locale: "th-TH" } },
           { title: "วันที่สำเร็จการศึกษา", field: "endDate", type: "date", dateSetting: { locale: "th-TH" } },
           { title: "จำนวนชั่วโมง", field: "hour", type: "numeric" },
           { title: "เกรด", field: "grade" },
-          { title: "คะแนนความพึงพอใจ", field: "satisfactionScore", type: "numeric" },
+          { title: "คะแนนความพึงพอใจ", field: "satisfactionScore", type: "numeric", validate: rowData => rowData.satisfactionScore <= 5 && rowData.satisfactionScore >= 1 },
           { title: "วันที่ได้รับข้อมูล", field: "createDate", type: "date", editable: "never", dateSetting: { locale: "th-TH" } },
           { title: "ผลการอนุมัติ", field: "approved", editable: "never" },
         ]}
@@ -244,7 +244,7 @@ export default function ReportTable() {
       />
       <MaterialTable
         icons={tableIcons}
-        title="ประกาศนีบัตร หลักสูตร"
+        title="ประกาศนียบัตรหลักสูตร"
         options={{
           pageSize: 20,
           pageSizeOptions: [20, 50, 100]
@@ -254,12 +254,12 @@ export default function ReportTable() {
           { title: "คำนำหน้าชื่อ", field: "title" },
           { title: "ชื่อ", field: "firstName" },
           { title: "นามสกุล", field: "lastname" },
-          { title: "รหัสหลักสูตร", field: "curriculumId", type: "numeric" },
+          { title: "เลขหลักสูตร", field: "curriculumId", type: "numeric" },
           { title: "วันเปิดเรียน", field: "startDate", type: "date", dateSetting: { locale: "th-TH" } },
           { title: "วันที่สำเร็จการศึกษา", field: "endDate", type: "date", dateSetting: { locale: "th-TH" } },
           { title: "จำนวนชั่วโมง", field: "hour", type: "numeric" },
           { title: "เกรด", field: "grade" },
-          { title: "คะแนนความพึงพอใจ", field: "satisfactionScore", type: "numeric" },
+          { title: "คะแนนความพึงพอใจ", field: "satisfactionScore", type: "numeric", validate: rowData => rowData.satisfactionScore <= 5 && rowData.satisfactionScore >= 1 },
           { title: "วันที่ได้รับข้อมูล", field: "createDate", type: "date", editable: "never", dateSetting: { locale: "th-TH" } },
           { title: "ผลการอนุมัติ", field: "approved", editable: "never" },
         ]}

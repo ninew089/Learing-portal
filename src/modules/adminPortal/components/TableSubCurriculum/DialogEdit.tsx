@@ -120,7 +120,8 @@ export default function CustomizedDialogs({
   open,
   setOpen,
   data,
-  valueCurriculun
+  valueCurriculun,
+  numberNo
 }: openEditProps) {
   const handleClose = () => {
     setOpen(false);
@@ -131,10 +132,13 @@ export default function CustomizedDialogs({
   useEffect(() => {
     const action = actions.loadCourseCategory()
     dispatch(action)
+    if (!isNaN(data.tableData?.id!)) {
+      setValue(data.tableData?.id + 1)
+    }
     // eslint-disable-next-line
-  }, [])
+  }, [data.tableData?.id])
+  const [value, setValue] = useState('')
 
-  const [value, setValue] = useState("")
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
   };
@@ -166,9 +170,10 @@ export default function CustomizedDialogs({
             <CssBaseline />
             <div className={classes.paper}>
               <Typography component="h1" variant="h5">
-                ข้อมูลหลักสูตร
+                ข้อมูลรายวิชาในหลักสูตร
               </Typography>
-              <TextField id="standard-name" label="ลำดับการแสดง" value={value} onChange={handleChange} />
+              <TextField id="standard-name" label="ลำดับการแสดง" value={value} onChange={handleChange}
+              />
 
             </div>
           </Container>

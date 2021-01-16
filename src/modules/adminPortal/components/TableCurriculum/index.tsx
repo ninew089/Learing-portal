@@ -130,7 +130,7 @@ export default function MaterialTableDemo() {
       <MaterialTable
         title="หลักสูตร"
         columns={[
-          { title: "id", field: "id", type: "numeric", editable: "never" },
+          { title: "เลขหลักสูตร", field: "id", type: "numeric", editable: "never" },
           { title: "รหัสหลักสูตร", field: "code", type: "numeric" },
           { title: "ชื่อหลักสูตร", field: "name" },
         ]}

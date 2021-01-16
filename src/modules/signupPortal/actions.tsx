@@ -25,7 +25,8 @@ function loadSignUp(signUpInfo: any) {
         },
       });
     } catch (err) {
-      const action = infoactions.loadMessage("เกิดข้อผิดพลาดในการสมัคร", "error")
+
+      const action = infoactions.loadMessage(`เกิดข้อผิดพลาดในการสมัคร ${err.response.status}`, "error")
       dispatch(action)
       dispatch({
         type: LOAD_SIGNUP_FAILURE,

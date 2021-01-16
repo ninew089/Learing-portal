@@ -154,7 +154,7 @@ export default function PersistentDrawerLeft(props: any) {
 
                         <Hidden mdDown>
                             <Typography variant="h6" noWrap className={classes.title}>
-                                ศูนย์รวมหลักสูตร/รายวิชาที่เรียนรู้ทางสื่ออิเล็กทรอนิกส์
+                                ศูนย์การเรียนรู้ทางสื่ออิเล็กทรอนิกส์แบบบูรณาการ
                 </Typography>
                         </Hidden>
                     </Grid>

@@ -251,15 +251,16 @@ export default function CustomizedDialogs({ open, setOpen }: DialogsProps) {
                     helperText={errors.targetGroup ? "กรอกกลุ่มเป้าหมาย" : ""}
                     error={!!errors.targetGroup}
                   />
+
                   <TextField
                     fullWidth
                     multiline
                     id="input-with-icon-textfield"
                     label="เป้าหมายการเรียนรู้"
-                    name="learningTopic"
+                    name="learningObjective"
                     inputRef={register}
-                    helperText={errors.learningTopic ? "กรอกประเด็นการเรียนรู้" : ""}
-                    error={!!errors.learningTopic}
+                    helperText={errors.learningObjective ? "กรอกเป้าหมายการเรียนรู้" : ""}
+                    error={!!errors.learningObjective}
 
                   />
                   <TextField
@@ -267,10 +268,10 @@ export default function CustomizedDialogs({ open, setOpen }: DialogsProps) {
                     multiline
                     id="input-with-icon-textfield"
                     label="ประเด็นการเรียนรู้"
-                    name="learningObjective"
+                    name="learningTopic"
                     inputRef={register}
-                    helperText={errors.learningObjective ? "กรอกเป้าหมายการเรียนรู้" : ""}
-                    error={!!errors.learningObjective}
+                    helperText={errors.learningTopic ? "กรอกประเด็นการเรียนรู้" : ""}
+                    error={!!errors.learningTopic}
 
                   />
 

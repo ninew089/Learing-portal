@@ -83,6 +83,7 @@ export default function SingleLineGridList(props: { id: number }) {
       <Divider style={{ marginBottom: 20 }} />
       <Grid container direction="row" alignItems="center" justify={"center"}>
         <Suspense fallback={renderLoader()}>
+
           {isLoadingCourseCategories ? <CircularProgress color="secondary" style={{ margin: 20 }} /> :
             <CourseCarousel isCurriculum={false} detail={courseCategories} />}
         </Suspense>

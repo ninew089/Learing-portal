@@ -73,7 +73,7 @@ export default function GroupCourse() {
 
                 <Grid container className={classes.content} direction="row" alignItems="center" justify={"space-between"} >
 
-                    <h2>คอร์สเรียนทั้งหมด</h2>
+                    <h2>รายวิชาทั้งหมด</h2>
                     <SelectCategory />
 
                 </Grid>

@@ -8,24 +8,36 @@ import ForgetRoutes from "modules/forgetPassword/components/index";
 import Edit from "modules/editProfile/components/index";
 import FAQ from "modules/F&A/FAQ"
 import Page404 from "modules/404page/component/404";
-import { Route, Switch, useRouteMatch } from "react-router-dom";
+import { Redirect, Route, Switch, useRouteMatch } from "react-router-dom";
 import Scroll from "./Scroll";
 import PrivateRoute from 'auth/PrivateRouter'
 import PublicLoginRouter from 'auth/PublicLoginRouter'
 
 import { Toolbar } from '@material-ui/core'
+import { useSelector } from 'react-redux'
+
+import Page500 from "modules/404page/component/500";
 export default function Router() {
   const { path } = useRouteMatch();
-
+  const { isError } = useSelector((state: any) => state.course);
+  console.log(isError)
   return (
     <>
       <Scroll />
       <Switch>
-  
+        <Route path={`${path}/500`}>
+          <Page500 />
+        </Route>
+        {!isError && <Redirect to='/learning-portal/500' />}
         <Route path={`${path}/FAQ`}>
           <Toolbar />
           <FAQ />
         </Route>
+        <Route path={`${path}/signup`}>
+          <Toolbar />
+          <SignupRoutes />
+        </Route>
+
         <PrivateRoute path={`${path}/edit`} component={Edit} />
         <PrivateRoute path={`${path}/history`} component={HistoryRoutes} />
         <PrivateRoute path={`${path}/reset`} component={ResetRoutes} />
@@ -46,10 +58,14 @@ export default function Router() {
         <Route path={`${path}`}>
           <CourseRoutes></CourseRoutes>
         </Route>
+
         <Route path="*">
           <Page404 />
         </Route>
       </Switch>
+
+
+
     </>
   );
 }

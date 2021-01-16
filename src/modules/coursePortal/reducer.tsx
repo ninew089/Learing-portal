@@ -43,7 +43,7 @@ const initialState = {
   isLoadingToprate: false,
   isLoadingRecommemded: false,
   isLoadingCourseCategories: false,
-  isError: false,
+  isError: true,
   courseCategories: [],
   categories: [],
   course: [],
@@ -138,7 +138,7 @@ export default function (state = initialState, action: any) {
       return {
         ...state,
         isLoading: true,
-        courseCategories: [],
+
 
       };
     case LOAD_COURSEVIEW_SUCCESS:
@@ -160,7 +160,7 @@ export default function (state = initialState, action: any) {
         isError: true,
       };
     case LOAD_CURRICULUM_FAILURE:
-      return { ...state, isLoadingCurriculum: false };
+      return { ...state, isLoadingCurriculum: false, isError: false, };
     case LOAD_CURRICULUMS_REQUEST:
       return { ...state, isLoadingCurriculums: true, curriculums: [] };
     case LOAD_CURRICULUMS_SUCCESS:

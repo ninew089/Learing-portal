@@ -89,6 +89,7 @@ export default function SingleLineGridList(props: any) {
             spacing={3}
           >
             {isLoadingCurriculums && <CircularProgress color="secondary" className={classes.circular} />}
+
             {
               postsToShow.map((item: any, index: number) => (
                 <Grid item xs={12} sm={6} md={4} lg={3} xl={3} key={index}>

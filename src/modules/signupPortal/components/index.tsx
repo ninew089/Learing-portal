@@ -11,6 +11,7 @@ import * as actions from "../actions";
 import { useDispatch, useSelector } from "react-redux";
 import { info } from "utils/formatInfomation"
 import { accountFormProps } from "../typescript"
+//import ShowInfoDialog from "./ShowInfo/ShowInfoDialog"
 const useStyles = makeStyles((theme) => ({
   paper: {
     background: "white",
@@ -291,12 +292,16 @@ export default function SignIn() {
   });
 
   const dispatch = useDispatch();
+  //const [data, setData] = useState([])
+  //const [open, setOpen] = useState(false)
 
 
 
 
   const onSubmitData = (data: any) => {
     const preinfo = info(data);
+    //setData(preinfo)
+    //setOpen(true)
     const action = actions.loadSignUp(preinfo);
     dispatch(action);
   };

@@ -56,7 +56,7 @@ export default function Asynchronous(props: any) {
             renderInput={(params) => (
                 <TextField
                     {...params}
-                    label="ค้นหาหลักสูตร"
+                    label="ค้นรายวิชา"
 
 
                     InputProps={{
