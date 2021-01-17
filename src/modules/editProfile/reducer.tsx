@@ -11,14 +11,15 @@ const initialState = {
     status: [],
     message: [],
     data: [],
-    edit: []
+    edit: [],
+    isErrorProfile: 404
 };
 
 export default function (state = initialState, action: any) {
     switch (action.type) {
 
         case LOAD_PROFILE_REQUEST:
-            return { ...state, isLoading: true, message: [], data: [] };
+            return { ...state, isLoading: true, message: [], data: [], isErrorProfile: [] };
         case LOAD_PROFILE_SUCCESS:
             return {
                 ...state,
@@ -34,6 +35,7 @@ export default function (state = initialState, action: any) {
                 isLoading: false,
                 message: action.payload.message,
                 status: action.payload.status,
+                isErrorProfile: action.payload.isErrorProfile,
 
             };
 

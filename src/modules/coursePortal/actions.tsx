@@ -80,7 +80,12 @@ function loadRecommended() {
         },
       });
     } catch (err) {
-      dispatch({ type: LOAD_RECOMMENDED_FAILURE });
+      dispatch({
+        type: LOAD_RECOMMENDED_FAILURE,
+        payload: {
+          isErrorCourse: err.response.status,
+        }
+      });
     }
   };
 }
@@ -96,7 +101,12 @@ function loadTopRate() {
         },
       });
     } catch (err) {
-      dispatch({ type: LOAD_TOPRATE_FAILURE });
+      dispatch({
+        type: LOAD_TOPRATE_FAILURE,
+        payload: {
+          isErrorCourse: err.response.status,
+        }
+      });
     }
   };
 }
@@ -109,7 +119,12 @@ function loadCurriculumsView(id: number) {
         type: LOAD_CURRICULUMVIEW_SUCCESS,
       });
     } catch (err) {
-      dispatch({ type: LOAD_CURRICULUMVIEW_FAILURE });
+      dispatch({
+        type: LOAD_CURRICULUMVIEW_FAILURE,
+        payload: {
+          isErrorCourse: err.response.status,
+        }
+      });
     }
   };
 }
@@ -126,7 +141,12 @@ function loadCurriculums(text: string) {
         },
       });
     } catch (err) {
-      dispatch({ type: LOAD_CURRICULUMS_FAILURE });
+      dispatch({
+        type: LOAD_CURRICULUMS_FAILURE,
+        payload: {
+          isErrorCourse: err.response.status,
+        }
+      });
     }
   };
 }
@@ -143,7 +163,12 @@ function loadCurriculum(id: number) {
         },
       });
     } catch (err) {
-      dispatch({ type: LOAD_CURRICULUM_FAILURE });
+      dispatch({
+        type: LOAD_CURRICULUM_FAILURE,
+        payload: {
+          isErrorCourse: err.response.status,
+        }
+      });
     }
   };
 }
@@ -159,7 +184,12 @@ function loadCurriculumsCourse(id: number) {
         },
       });
     } catch (err) {
-      dispatch({ type: LOAD_CURRICULUMCOURSE_FAILURE });
+      dispatch({
+        type: LOAD_CURRICULUMCOURSE_FAILURE,
+        payload: {
+          isErrorCourse: err.response.status,
+        }
+      });
     }
   };
 }
@@ -172,7 +202,13 @@ function loadCourseView(id?: number) {
         type: LOAD_COURSEVIEW_SUCCESS,
       });
     } catch (err) {
-      dispatch({ type: LOAD_COURSEVIEW_FAILURE });
+      dispatch({
+        type: LOAD_COURSEVIEW_FAILURE,
+
+        payload: {
+          isErrorCourse: err.response.status,
+        }
+      });
     }
   };
 }
@@ -189,7 +225,12 @@ function loadCourses(text: string) {
         },
       });
     } catch (err) {
-      dispatch({ type: LOAD_COURSES_FAILURE });
+      dispatch({
+        type: LOAD_COURSES_FAILURE,
+        payload: {
+          isErrorCourse: err.response.status,
+        }
+      });
     }
   };
 }
@@ -205,7 +246,12 @@ function loadCourse(id: any) {
         },
       });
     } catch (err) {
-      dispatch({ type: LOAD_COURSE_FAILURE });
+      dispatch({
+        type: LOAD_COURSE_FAILURE,
+        payload: {
+          isErrorCourse: err.response.status,
+        }
+      });
     }
   };
 }
@@ -224,7 +270,12 @@ function loadCourseCategory() {
         },
       });
     } catch (err) {
-      dispatch({ type: LOAD_COURSESCATEGORY_FAILURE });
+      dispatch({
+        type: LOAD_COURSESCATEGORY_FAILURE,
+        payload: {
+          isErrorCourse: err.response.status,
+        }
+      });
     }
   };
 }
@@ -240,7 +291,12 @@ function loadCourseCategories(id: any) {
         },
       });
     } catch (err) {
-      dispatch({ type: LOAD_COURSESCATEGORIES_FAILURE });
+      dispatch({
+        type: LOAD_COURSESCATEGORIES_FAILURE,
+        payload: {
+          isErrorCourse: err.response.status,
+        }
+      });
     }
   };
 }

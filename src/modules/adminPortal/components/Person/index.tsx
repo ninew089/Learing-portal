@@ -1,90 +1,122 @@
-import {
-  AddBox,
-  Check,
-  ChevronLeft,
-  ChevronRight,
-  Clear,
-  DeleteOutline,
-  Edit,
-  FilterList,
-  FirstPage,
-  LastPage,
-  Remove,
-  SaveAlt,
-  Search,
-  ViewColumn,
-  ArrowUpward,
-} from "@material-ui/icons";
-import { getCookie } from "cookie/cookie"
-import MaterialTable from 'material-table'
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { personProps } from './tyscript'
-import { forwardRef } from 'react';
+import { useForm } from "react-hook-form";
+import { Button, Box } from "@material-ui/core";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import TextField from "@material-ui/core/TextField";
+import img from "assets/images/OCSC-banner.png";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
+import { getCookie } from "cookie/cookie"
+import { parseJwt } from "utils/getDataJWT"
+import * as actions from "../../actions"
+import * as yup from "yup";
+import { useDispatch, useSelector } from 'react-redux'
+import Snackbar from "shared/SnackBar/SnackBar"
 
+const useStyles = makeStyles((theme) => ({
+  root: { marginTop: "2rem", background: theme.palette.primary.light },
+  paper: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main,
+  },
+  form: {
+    margin: 10,
+    color: "#132740",
+  },
+  submit: {
+    background: "#ff533d",
+    color: theme.palette.primary.light,
+    margin: theme.spacing(3, 0, 2),
+  },
+  input: {
+    color: "#0f1626",
+    fontWeight: 700,
+    "& .MuiInputBase-root.MuiOutlineInput-root": {
+      color: "#45A29E",
+      borderColor: "#757575",
+      fontWeight: 700,
+    },
+  },
+  textfield: {
+    margin: theme.spacing(1),
 
-export default function ReportTable() {
-  const tableIcons = {
-    Add: forwardRef<SVGSVGElement>((props, ref) => (
-      <AddBox {...props} ref={ref} />
-    )),
-    Check: forwardRef<SVGSVGElement>((props, ref) => (
-      <Check {...props} ref={ref} />
-    )),
-    Clear: forwardRef<SVGSVGElement>((props, ref) => (
-      <Clear {...props} ref={ref} />
-    )),
-    Delete: forwardRef<SVGSVGElement>((props, ref) => (
-      <DeleteOutline {...props} ref={ref} />
-    )),
-    DetailPanel: forwardRef<SVGSVGElement>((props, ref) => (
-      <ChevronRight {...props} ref={ref} />
-    )),
-    Edit: forwardRef<SVGSVGElement>((props, ref) => (
-      <Edit {...props} ref={ref} />
-    )),
-    Export: forwardRef<SVGSVGElement>((props, ref) => (
-      <SaveAlt {...props} ref={ref} />
-    )),
-    Filter: forwardRef<SVGSVGElement>((props, ref) => (
-      <FilterList {...props} ref={ref} />
-    )),
-    FirstPage: forwardRef<SVGSVGElement>((props, ref) => (
-      <FirstPage {...props} ref={ref} />
-    )),
-    LastPage: forwardRef<SVGSVGElement>((props, ref) => (
-      <LastPage {...props} ref={ref} />
-    )),
-    NextPage: forwardRef<SVGSVGElement>((props, ref) => (
-      <ChevronRight {...props} ref={ref} />
-    )),
-    PreviousPage: forwardRef<SVGSVGElement>((props, ref) => (
-      <ChevronLeft {...props} ref={ref} />
-    )),
-    ResetSearch: forwardRef<SVGSVGElement>((props, ref) => (
-      <Clear {...props} ref={ref} />
-    )),
-    Search: forwardRef<SVGSVGElement>((props, ref) => (
-      <Search {...props} ref={ref} />
-    )),
-    SortArrow: forwardRef<SVGSVGElement>((props, ref) => (
-      <ArrowUpward {...props} ref={ref} />
-    )),
-    ThirdStateCheck: forwardRef<SVGSVGElement>((props, ref) => (
-      <Remove {...props} ref={ref} />
-    )),
-    ViewColumn: forwardRef<SVGSVGElement>((props, ref) => (
-      <ViewColumn {...props} ref={ref} />
-    )),
-  }
+    padding: theme.spacing(1),
+    "& .MuiFormHelperText-root.Mui-error ": {
+      color: "ff533d",
+      fontWeight: 700,
+      borderWidth: "3px",
+    },
+    "& .MuiInput-underline.Mui-error:after": {
+      borderColor: "ff533d",
+      borderWidth: "3px",
+    },
+    "& label.MuiFormLabel-root": {
+      fontWeight: 700,
+      "&:after .Mui-error": {
+        borderColor: "#ff533d",
+        borderWidth: "3px",
+      },
+    },
+    "& label.Mui-focused": {
+      color: "#132740",
+    },
+    "& .MuiInput-underline:after": {
+      borderBottomColor: "#ffae0c",
+    },
+    "& .MuiOutlinedInput-root": {
+      borderWidth: "3px",
+      "& fieldset": {
+        borderColor: "#ffae0c",
+        borderWidth: "2px",
+      },
+      "&:hover fieldset": {
+        borderColor: "#a8c6ff",
+        borderWidth: "3px",
+      },
+      "&.Mui-focused fieldset": {
+        borderColor: "#a8c6ff",
+        borderWidth: "3px",
+      },
+      "&.Mui-error .MuiOutlinedInput-notchedOutline": {
+        borderColor: "#ff533d",
+        borderWidth: "3px",
+      },
+    },
+  },
+  box: {
+    width: "100%",
+    borderRadius: 10,
+  },
+  title: {
+    fontWeight: 700,
+    margin: 10,
+  },
+  image: {
+    margin: 10,
+    display: "block",
+    marginLeft: "auto",
+    marginRight: "auto",
+    width: "50%",
+  },
+  container: {
+    background: theme.palette.primary.light,
+    borderRadius: 10,
+    padding: 10,
+  },
+}));
+
+export default function SignIn() {
+  const classes = useStyles();
 
   const [entries, setEntries] = useState<personProps[]>([])
-  const token = getCookie('token');
-  const platformid = getCookie('platformid');
-  const headers = {
-    Authorization: `Bearer ${token}`,
-  }
-
   useEffect(() => {
     const fetch = async () => {
       try {
@@ -100,48 +132,183 @@ export default function ReportTable() {
     // eslint-disable-next-line
   }, [])
 
+  const { register, handleSubmit, errors } = useForm({
+    mode: "onChange",
+    validationSchema: yup.object().shape({
+      identNo: yup.string().required(),
+      title: yup.string().required(),
+      firstName: yup.string().required(),
+      lastName: yup.string().required(),
+      phone: yup.string().required(),
+      email: yup.string().required().email(),
+    }),
+
+  });
+
+  const token = getCookie('token')
+  const platformid = parseJwt(token).unique_name
+  const dispatch = useDispatch();
+
+
+
+  const submit = async (personInfo: object) => {
+    const preInfo = {
+      ...personInfo, id: entries[0]?.id, officialName: entries[0]?.officialName, abbreviation: entries[0]?.abbreviation, thumbnail: entries[0]?.thumbnail, link: entries[0]?.link,
+      curriculum: entries[0]?.curriculum,
+      course: entries[0]?.course
+    }
+    const action = actions.putPerson(preInfo)
+    dispatch(action)
+  };
+  const { message, severity } = useSelector((state: any) => state.admin);
+
 
   return (
-    <>
 
+    <div className={classes.root}>
+      {entries.length !== 0 &&
+        <Container component="main" maxWidth="xs" className={classes.container}>
+          {
+            message !== null && <Snackbar
+              message={message
+              }
+              open={message !== null ? true : false}
+              severity={severity}
+            />
+          }
+          <Box>
+            <img alt="banner" src={img} className={classes.image} />
+            <Box className={classes.box}>
+              <form className={classes.form} onSubmit={handleSubmit(submit)}>
+                <CssBaseline />
+                <div className={classes.paper}>
+                  <Typography
+                    component="h1"
+                    variant="h5"
+                    className={classes.title}
+                  >
+                    ข้อมูลส่วนบุคคล
+                </Typography>
 
-      <MaterialTable
-        icons={tableIcons}
-        title="ข้อมูลส่วนบุคคล"
-        options={{
-          pageSize: 20,
-          pageSizeOptions: [20, 50, 100]
-        }}
-        columns={[
-          { title: "เลขประจำตัวประชาชน", field: "identNo", type: "string" },
-          { title: "คำนำหน้าชื่อ", field: "title", type: "string" },
-          { title: "ชื่อ", field: "firstName", type: "string" },
-          { title: "นามสกุล", field: "lastName", type: "string" },
-          { title: "เบอร์โทร", field: "phone", type: "string" },
-          { title: "อีเมลล์", field: "email", type: "string" },
-        ]}
-        data={entries}
-        editable={{
-          onRowUpdate: (newData: personProps, oldData: any) =>
-            new Promise((resolve) => {
-              setTimeout(() => {
-                //@ts-ignore
-                resolve()
-                const data = [...entries]
-                data[oldData.tableData.id] = newData
+                  <TextField
+                    variant="outlined"
+                    margin="normal"
+                    className={classes.textfield}
+                    InputProps={{
+                      className: classes.input,
+                    }}
+                    name="identNo"
+                    inputRef={register}
+                    helperText={errors.identNo ? "เลขประจำตัวประชาชน" : ""}
+                    error={!!errors.identNo}
+                    fullWidth
+                    label="เลขประจำตัวประชาชน"
+                    autoComplete="identNo"
+                    defaultValue={entries[0]?.identNo}
 
-                axios
-                  .put(
-                    `/Platforms/${platformid}`,
-                    { id: data[oldData.tableData.id].id, officialName: data[oldData.tableData.id].officialName, abbreviation: data[oldData.tableData.id].abbreviation, thumbnail: data[oldData.tableData.id].thumbnail, link: data[oldData.tableData.id].link, curriculum: data[oldData.tableData.id].curriculum, course: data[oldData.tableData.id].course, identNo: newData.identNo, title: newData.title, firstName: newData.firstName, lastName: newData.lastName, phone: newData.phone, email: newData.email },
-                    { headers }
-                  )
-                  .then((res) => console.log(res.data))
-                setEntries([...data])
-              }, 600)
-            }),
-        }}
-      />
-    </>
-  )
+                  />
+                  <TextField
+                    variant="outlined"
+                    margin="normal"
+                    className={classes.textfield}
+                    InputProps={{
+                      className: classes.input,
+                    }}
+                    name="title"
+                    inputRef={register}
+                    helperText={errors.title ? "กรุณากรอกคำนำหน้าชื่อ" : ""}
+                    error={!!errors.title}
+                    fullWidth
+                    label="คำนำหน้าชื่อ"
+                    defaultValue={entries[0]?.title}
+
+                    autoFocus
+                  />
+                  <TextField
+                    variant="outlined"
+                    margin="normal"
+                    className={classes.textfield}
+                    InputProps={{
+                      className: classes.input,
+                    }}
+                    name="firstName"
+
+                    inputRef={register}
+                    helperText={errors.firstName ? "กรุณากรอกชื่อ" : ""}
+                    error={!!errors.firstName}
+                    fullWidth
+                    label="ชื่อ"
+                    defaultValue={entries[0]?.firstName}
+
+                    autoFocus
+                  />
+                  <TextField
+                    variant="outlined"
+                    margin="normal"
+                    className={classes.textfield}
+                    InputProps={{
+                      className: classes.input,
+                    }}
+                    name="lastName"
+
+                    inputRef={register}
+                    helperText={errors.lastName ? "กรุณากรอกนามสกุล" : ""}
+                    error={!!errors.lastName}
+                    fullWidth
+                    label="นามสกุล"
+                    defaultValue={entries[0]?.lastName}
+                    autoFocus
+                  />
+                  <TextField
+                    variant="outlined"
+                    margin="normal"
+                    className={classes.textfield}
+                    InputProps={{
+                      className: classes.input,
+                    }}
+                    name="phone"
+
+                    inputRef={register}
+                    helperText={errors.phone ? "กรุณากรอกเบอร์โทร" : ""}
+                    error={!!errors.phone}
+                    fullWidth
+                    label="เบอร์โทร"
+                    defaultValue={entries[0]?.phone}
+
+                    autoFocus
+                  />
+                  <TextField
+                    variant="outlined"
+                    margin="normal"
+                    className={classes.textfield}
+                    InputProps={{
+                      className: classes.input,
+                    }}
+                    name="email"
+
+                    inputRef={register}
+                    helperText={errors.email ? "กรุณากรอกอีเมล" : ""}
+                    error={!!errors.email}
+                    fullWidth
+                    label="อีเมล"
+                    defaultValue={entries[0]?.email}
+                    autoFocus
+                  />
+
+                  <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    className={classes.submit}
+                  >
+                    ส่งข้อมูล
+                </Button>
+                </div>
+              </form>
+            </Box>
+          </Box>
+        </Container>
+      }
+    </div>
+  );
 }

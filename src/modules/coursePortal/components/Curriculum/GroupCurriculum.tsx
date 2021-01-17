@@ -54,9 +54,12 @@ export default function SingleLineGridList(props: any) {
     setNext(next + postsPerPage);
   };
   useEffect(() => {
-    setPostsToShow([])
+
     const action = actions.loadCurriculums("all")
     dispatch(action)
+    return () => {
+      setPostsToShow([])
+    };
     // eslint-disable-next-line
   }, [search])
 

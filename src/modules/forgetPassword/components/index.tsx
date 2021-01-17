@@ -126,7 +126,7 @@ export default function SignIn() {
   });
   //const { message, status } = useSelector((state: any) => state.forgot);
   const onSubmitData = (data: any) => {
-    console.log(data.dob)
+
     const predata = JSON.parse(`{"email":"${data.email}","dob":"${data.dob - 543}"}`)
     const action = actions.loadFORGOT(predata, data.userId)
     dispatch(action)
@@ -153,7 +153,7 @@ export default function SignIn() {
           </Typography>
           <Typography component="h1" variant="subtitle2" align="left">
             &nbsp; &nbsp;หากลืมรหัสผ่านในการลงชื่อเข้าใช้
-            กรุณากรอกเลขบัตรประชาชน ปีเกิด และ อีเมลที่ใช้สมัคร
+            กรุณากรอกเลขประจำตัวประชาชน ปีเกิด และ อีเมลที่ใช้สมัคร
           </Typography>
           <TextField
             variant="outlined"

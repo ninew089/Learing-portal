@@ -26,10 +26,10 @@ export default function FAQ() {
 
 
                     {data.map((item: any, index: number) =>
-                        <>
+                        <div key={item.question}>
                             <Divider />
-                            <QuestionBox key={index} question={item.question} answer={item.answer} />
-                        </>
+                            <QuestionBox question={item.question} answer={item.answer} />
+                        </div>
 
                     )}
 

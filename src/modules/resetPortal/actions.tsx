@@ -1,7 +1,7 @@
 import axios from "axios";
 import { getCookie } from 'cookie/cookie'
 import * as infoactions from "modules/infomation/actions"
-
+import { parseJwt } from "utils/getDataJWT"
 const LOAD_PUT_REQUEST = "learning-portal/src/ui/LOAD_PUT_REQUEST";
 const LOAD_PUT_SUCCESS = "learning-portal/src/ui/LOAD_PUT_SUCCESS";
 const LOAD_PUT_FAILURE = "learning-portal/src/ui/LOAD_PUT_REQUEST";
@@ -10,9 +10,8 @@ function loadPUT(updateInfo: any) {
     return async (dispatch: any) => {
         dispatch({ type: LOAD_PUT_REQUEST });
         try {
-            const id = getCookie('id')
             const token = getCookie('token')
-            const data = await axios.put(`/Users/${id}/Password`, updateInfo, {
+            const data = await axios.put(`/Users/${parseJwt(token).unique_name}/Password`, updateInfo, {
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${token}`,

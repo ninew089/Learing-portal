@@ -106,9 +106,10 @@ export default function SignIn(props: typeProps) {
                 formProps.errors.stateEnterprisid.message
               }
               error={!!formProps.errors.stateEnterprisid}
+              
             >
               {StateEnterprises.map((stateEnterprise: stateEnterpriseProps, index: number) => (
-                <MenuItem value={stateEnterprise.id}>
+                <MenuItem value={stateEnterprise.id} key={index}>
                   {stateEnterprise.name}
                 </MenuItem>
               ))}

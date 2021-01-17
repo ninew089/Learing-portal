@@ -130,18 +130,27 @@ export default function SignIn(props: any) {
   }, []);
 
 
-  const value = formProps.getValues("MinistryId");
-
-  useEffect(() => {
-
-    const actionDepartments = actions.loadDepartments(value);
-    dispatch(actionDepartments);
-    // eslint-disable-next-line
-  }, [value]);
-
   const { Ministries, Departments } = useSelector(
     (state: any) => state.infomation
   );
+
+  const value = formProps.getValues("MinistryId");
+  const dep = formProps.getValues("DepartmentId");
+  const depProps = Departments.filter((member: any) => {
+    return member.id === parseInt(dep)
+  }).length === 0
+
+  useEffect(() => {
+    const value = formProps.getValues("MinistryId");
+    const actionDepartments = actions.loadDepartments(value);
+    dispatch(actionDepartments);
+
+    if (!depProps) {
+      formProps.setValue("DepartmentId", undefined, { shouldValidate: true });
+    }
+
+    // eslint-disable-next-line
+  }, [value]);
 
   return (
     <>

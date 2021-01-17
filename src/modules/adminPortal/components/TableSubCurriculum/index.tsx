@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import MaterialTable from "material-table";
 import { forwardRef } from "react";
 import { CssBaseline, Grid, Button } from "@material-ui/core";
@@ -25,7 +25,7 @@ import SeacrchCourse from "./SearhCurriculum";
 import DialogEdit from "./DialogEdit";
 import { useSelector } from 'react-redux'
 import Snackbar from "shared/SnackBar/SnackBar"
-
+import { parseJwt } from "utils/getDataJWT"
 
 export default function MaterialTableDemo(props: any) {
   const tableIcons = {
@@ -98,19 +98,44 @@ export default function MaterialTableDemo(props: any) {
   const headers = {
     Authorization: `Bearer ${token}`,
   }
-  const platformid = getCookie('platformid');
+
+  const { message, severity } = useSelector((state: any) => state.admin);
+  const [number, setNumber] = useState(0)
+
+  const platformid = parseJwt(token).unique_name
+  useEffect(() => {
+    const fetch = async () => {
+      try {
+        const response = await axios.get(`/Platforms/${platformid}/Curriculums/${value}/Courses`)
+        setEntries(response.data)
+
+
+      } catch (err) {
+        setEntries([])
+        console.log(err)
+      }
+
+    }
+    fetch()
+    // eslint-disable-next-line
+  }, [message])
   const onSubmit = async () => {
     if (value !== undefined) {
-      const response = await axios.get(`/Platforms/${platformid}/Curriculums/${value}/Courses`)
-      setEntries(response.data)
+      try {
+        const response = await axios.get(`/Platforms/${platformid}/Curriculums/${value}/Courses`)
+        setEntries(response.data)
+
+
+      } catch (err) {
+        setEntries([])
+        console.log(err)
+      }
 
     }
 
 
   }
 
-  const { message, severity } = useSelector((state: any) => state.admin);
-  const [number, setNumber] = useState(0)
 
   return (
     <div>
@@ -131,7 +156,7 @@ export default function MaterialTableDemo(props: any) {
       <MaterialTable
         title="รายวิชาในหลักสูตร"
         columns={[
-
+          { title: "ลำดับที่", field: "no", type: "numeric" },
           { title: "รหัสวิชา", field: "code", type: "numeric" },
           { title: "ชื่อวิชา", field: "name" },
         ]}

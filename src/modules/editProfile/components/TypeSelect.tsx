@@ -135,7 +135,7 @@ export default function SignIn(props: typeUserProps) {
   return (
     <>
       <CssBaseline />
-      <form className={classes.form} noValidate>
+      <div className={classes.form} >
         <Typography component="h1" variant="h5" align="center">
           ข้อมูลการทำงาน
         </Typography>
@@ -149,6 +149,7 @@ export default function SignIn(props: typeUserProps) {
               InputLabelProps={{
                 className: classes.selectInput,
               }}
+
               select
               helperText={
                 formProps.errors.usertypeid &&
@@ -156,14 +157,9 @@ export default function SignIn(props: typeUserProps) {
               }
               error={!!formProps.errors.usertypeid}
             >
-
-
               {userTypes.map((userType: userTypeProps, index: number) =>
-                (<MenuItem value={userType.id}>{userType.name}</MenuItem>)
+                (<MenuItem value={userType.id} key={index}>{userType.name}</MenuItem>)
               )}
-
-
-
             </TextField>
           }
           name="usertypeid"
@@ -173,7 +169,7 @@ export default function SignIn(props: typeUserProps) {
         />
 
         {renderTypeProps()}
-      </form>
+      </div>
     </>
   );
 }

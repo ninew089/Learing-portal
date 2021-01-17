@@ -170,7 +170,7 @@ export default function SignIn() {
                   helperText={errors.userId ? "กรุณากรอกเลขประจำตัวประชาชน" : ""}
                   error={!!errors.userId}
                   fullWidth
-                  label="เลขประจำตัวบัตรประชาชน"
+                  label="เลขประจำตัวประชาชน"
                   autoComplete="userId"
                   autoFocus
                 />

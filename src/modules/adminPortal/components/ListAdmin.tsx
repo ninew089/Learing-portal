@@ -37,10 +37,9 @@ export default function PersistentDrawerLeft() {
     history.push(`${path}`);
   };
   const onLogout = () => {
-    eraseCookie("role")
-    eraseCookie("id")
+
     eraseCookie("token")
-    eraseCookie("platformid")
+
     navigatorTologout();
     window.location.reload();
   };

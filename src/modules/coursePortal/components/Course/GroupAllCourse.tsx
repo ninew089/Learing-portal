@@ -54,9 +54,14 @@ export default function GroupCourse() {
         setNext(next + postsPerPage);
     };
     useEffect(() => {
-        setPostsToShow([])
+
+
+
         const action = actions.loadCourses("all")
         dispatch(action)
+        return () => {
+            setPostsToShow([])
+        };
         // eslint-disable-next-line
     }, [])
 
@@ -91,7 +96,7 @@ export default function GroupCourse() {
 
                         {postsToShow.map((item: any, index: number) => (
 
-                            <Grid item xs={12} sm={6} md={4} lg={3} xl={3}>
+                            <Grid item xs={12} sm={6} md={4} lg={3} xl={3} key={index} >
 
                                 <CourseDetail
                                     key={index}

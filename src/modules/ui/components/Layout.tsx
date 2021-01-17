@@ -121,7 +121,7 @@ export default function PersistentDrawerLeft(props: any) {
 
               display="block"
               align="center"
-              gutterBottom
+              component="span"
               className={classes.ocsc}
             >
               สำนักงานคณะกรรมการข้าราชการพลเรือน (สำนักงาน ก.พ.)
@@ -130,7 +130,7 @@ export default function PersistentDrawerLeft(props: any) {
 
               display="block"
               align="center"
-              gutterBottom
+              component="span"
               className={classes.color}
             >
               Copyright © office of the Civil Service Commission (OCSC) 2021
@@ -138,7 +138,7 @@ export default function PersistentDrawerLeft(props: any) {
           </Grid>
 
           <Typography
-
+            component="span"
             display="block"
             align="center"
             className={classes.color1}
@@ -148,7 +148,7 @@ export default function PersistentDrawerLeft(props: any) {
 
               display="block"
               align="center"
-
+              component="span"
               className={classes.color}
             >
               E-mail : ocsc.hrd@gmail.com
@@ -158,7 +158,7 @@ export default function PersistentDrawerLeft(props: any) {
 
               display="block"
               align="center"
-              gutterBottom
+              component="span"
               className={classes.color1}
             >
               โทร. 02-547-1795 , 02-547-1807 (ภายในเวลาราชการ)

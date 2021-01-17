@@ -43,11 +43,55 @@ const LOAD_SUBCURRICULUMADD_REQUEST = "learning-portal/src/platform/LOAD_SUBCURR
 const LOAD_SUBCURRICULUMADD_SUCCESS = "learning-portal/src/platform/LOAD_SUBCURRICULUMADD_SUCCESS";
 const LOAD_SUBCURRICULUMADD_FAILURE = "learning-portal/src/platform/LOAD_SUBCURRICULUMADD_FAILURE";
 
+const LOAD_PUTPERSON_REQUEST = "learning-portal/src/platform/LOAD_PUTPERSON_REQUEST";
+const LOAD_PUTPERSON_SUCCESS = "learning-portal/src/platform/LOAD_PUTPERSON_SUCCESS";
+const LOAD_PUTPERSON_FAILURE = "learning-portal/src/platform/LOAD_PUTPERSON_FAILURE";
+
 const CLEAR_MESSAGE = "learning-portal/src/platform/CLEAR_MESSAGE";
 const LOAD_MESSAGE = "learning-portal/src/platform/LOAD_MESSAGE";
 
 /*/Platforms */
+/*    const response = await axios.put(`/Platforms/${platformid}`, preInfo, { headers })*/
 
+function putPerson(info: any) {
+    return async (dispatch: any) => {
+        dispatch({ type: LOAD_PUTPERSON_REQUEST });
+        try {
+            const token = getCookie('token')
+
+            const platformid = parseJwt(token).unique_name
+
+            const headers = {
+                Authorization: `Bearer ${token}`,
+            }
+            await axios.put(`/Platforms/${platformid}`, info, { headers })
+            dispatch({
+                type: LOAD_PUTPERSON_SUCCESS,
+            })
+
+            dispatch({
+                type: LOAD_MESSAGE,
+                payload: {
+                    message: "แก้ไขข้อมูลสำเร็จ",
+                    severity: "success"
+                }
+            })
+
+        } catch (err) {
+            dispatch({
+                type: LOAD_PUTPERSON_FAILURE,
+            });
+            dispatch({
+                type: LOAD_MESSAGE,
+                payload: {
+                    message: `เกิดข้อผิดพลาด ${err.response.status}`,
+                    severity: "error"
+                }
+            })
+
+        }
+    };
+}
 function loadLogin(userInfo: any) {
     return async (dispatch: any) => {
         dispatch({ type: LOAD_LOGIN_REQUEST });
@@ -62,11 +106,10 @@ function loadLogin(userInfo: any) {
             })
 
 
-            const platformid = parseJwt(result.data.token)
-            setCookie('id', userInfo.userId, 3)
-            setCookie('role', userInfo.role, 3)
+
+
             setCookie('token', result.data.token, 3)
-            setCookie('platformid', platformid.unique_name, 3)
+
             dispatch(push('/learning-portal/admin/main'))
         } catch (err) {
             dispatch({
@@ -112,7 +155,7 @@ function loadPassword(passwordInfo: any) {
         dispatch({ type: LOAD_PASSWORD_REQUEST });
         try {
             const token = getCookie('token')
-            const platformid = getCookie('platformid')
+            const platformid = parseJwt(token).unique_name
             const headers = {
                 Authorization: `Bearer ${token}`,
             }
@@ -167,7 +210,7 @@ function loadEditCourse(Course: any, id: number) {
         dispatch({ type: LOAD_COURSEEDIT_REQUEST });
         try {
             const token = getCookie('token')
-            const platformid = getCookie('platformid')
+            const platformid = parseJwt(token).unique_name
             const headers = {
                 Authorization: `Bearer ${token}`,
             }
@@ -211,7 +254,7 @@ function loadAddCourse(Course: any) {
         dispatch({ type: LOAD_COURSEADD_REQUEST });
         try {
             const token = getCookie('token')
-            const platformid = getCookie('platformid')
+            const platformid = parseJwt(token).unique_name
             const headers = {
                 Authorization: `Bearer ${token}`,
             }
@@ -253,7 +296,7 @@ function loadEditCurriculum(Curriculums: any, id: number) {
         dispatch({ type: LOAD_CURRICULUMEDIT_REQUEST });
         try {
             const token = getCookie('token')
-            const platformid = getCookie('platformid')
+            const platformid = parseJwt(token).unique_name
             const headers = {
                 Authorization: `Bearer ${token}`,
             }
@@ -295,7 +338,7 @@ function loadAddCurriculums(Curriculums: any) {
         dispatch({ type: LOAD_CURRICULUMADD_REQUEST });
         try {
             const token = getCookie('token')
-            const platformid = getCookie('platformid')
+            const platformid = parseJwt(token).unique_name
             const headers = {
                 Authorization: `Bearer ${token}`,
             }
@@ -337,7 +380,8 @@ function loadGetProfile() {
     return async (dispatch: any) => {
         dispatch({ type: LOAD_PROFILE_REQUEST });
         try {
-            const platformid = getCookie('platformid')
+            const token = getCookie('token')
+            const platformid = parseJwt(token).unique_name
             const { data } = await axios.get(`/Platforms/${platformid}`);
 
             dispatch({
@@ -364,7 +408,7 @@ function loadEditSubCurriculum(Curriculums: any, id: any, courseid: any) {
         dispatch({ type: LOAD_SUBCURRICULUMEDIT_REQUEST });
         try {
             const token = getCookie('token')
-            const platformid = getCookie('platformid')
+            const platformid = parseJwt(token).unique_name
             const headers = {
                 Authorization: `Bearer ${token}`,
             }
@@ -406,7 +450,7 @@ function loadAddSubCurriculums(valueCurriculun: any, id: any) {
         dispatch({ type: LOAD_SUBCURRICULUMADD_REQUEST });
         try {
             const token = getCookie('token')
-            const platformid = getCookie('platformid')
+            const platformid = parseJwt(token).unique_name
             const headers = {
                 Authorization: `Bearer ${token}`,
             }
@@ -491,6 +535,10 @@ export {
     LOAD_SUBCURRICULUMADD_REQUEST,
     LOAD_SUBCURRICULUMADD_SUCCESS,
     LOAD_SUBCURRICULUMADD_FAILURE,
+    LOAD_PUTPERSON_REQUEST,
+    LOAD_PUTPERSON_SUCCESS,
+    LOAD_PUTPERSON_FAILURE,
+    putPerson,
     loadEditCurriculum,
     loadAddCurriculums,
     loadLogin,

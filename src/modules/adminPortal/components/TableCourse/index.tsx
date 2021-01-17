@@ -23,7 +23,7 @@ import { getCookie } from 'cookie/cookie'
 import axios from "axios"
 import { useSelector } from 'react-redux'
 import Snackbar from "shared/SnackBar/SnackBar"
-
+import { parseJwt } from "utils/getDataJWT"
 
 export default function MaterialTableDemo() {
   const tableIcons = {
@@ -86,7 +86,7 @@ export default function MaterialTableDemo() {
 
 
   const token = getCookie('token');
-  const platformid = getCookie('platformid');
+  const platformid = parseJwt(token).unique_name
   const headers = {
     Authorization: `Bearer ${token}`,
   }

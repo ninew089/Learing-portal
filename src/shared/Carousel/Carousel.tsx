@@ -9,7 +9,6 @@ import {
 } from "pure-react-carousel";
 import "assets/css/slide.css"
 import "pure-react-carousel/dist/react-carousel.es.css";
-import IconButton from "@material-ui/core/IconButton";
 import ArrowForward from "@material-ui/icons/ArrowForwardIosRounded";
 import ArrowBack from "@material-ui/icons/ArrowBackIosRounded";
 import { useTheme } from "@material-ui/core/styles";
@@ -54,6 +53,7 @@ const useStyles = makeStyles((theme: Theme) =>
       height: "100%",
     },
     buttonBack: {
+      outline: "none",
       position: "absolute",
       top: "45%",
       left: "-30px",
@@ -62,6 +62,7 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: theme.spacing(0, 0),
     },
     buttonNext: {
+      outline: "none",
       position: "absolute",
       top: "45%",
       right: "-30px",
@@ -103,7 +104,7 @@ export default function CourseCarousel(props: CourseCarouselProps) {
         <Slider className={classes.slider}>
 
           {data!.map((item: any, index: number) => (
-            <Suspense fallback={<div></div>}>
+            <Suspense key={index} fallback={<div></div>}>
               < Slide key={index} index={index} className={classes.slide} >
 
                 <div className={classes.course}>
@@ -152,14 +153,14 @@ export default function CourseCarousel(props: CourseCarouselProps) {
         </Slider>
 
         <ButtonBack className={classes.buttonBack}>
-          <IconButton edge="end">
-            <ArrowBack />
-          </IconButton>
+
+          <ArrowBack />
+
         </ButtonBack>
         <ButtonNext className={classes.buttonNext}>
-          <IconButton edge="start">
-            <ArrowForward />
-          </IconButton>
+
+          <ArrowForward />
+
         </ButtonNext>
       </div>
     </CarouselProvider >

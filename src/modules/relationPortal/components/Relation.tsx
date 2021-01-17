@@ -11,7 +11,6 @@ import {
 } from "pure-react-carousel";
 import "assets/css/slide.css"
 import "pure-react-carousel/dist/react-carousel.es.css";
-import IconButton from "@material-ui/core/IconButton";
 import ArrowForward from "@material-ui/icons/ArrowForwardIosRounded";
 import ArrowBack from "@material-ui/icons/ArrowBackIosRounded";
 import { Link } from "@material-ui/core";
@@ -47,6 +46,7 @@ const useStyles = makeStyles((theme: Theme) =>
       height: "100%",
     },
     buttonBack: {
+      outline: "none",
       position: "absolute",
       top: "45%",
       left: "10px",
@@ -55,6 +55,7 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: theme.spacing(0, 0),
     },
     buttonNext: {
+      outline: "none",
       position: "absolute",
       top: "45%",
       right: "10px",
@@ -140,14 +141,14 @@ export default function CourseCarousel() {
           </Slider>
 
           <ButtonBack className={classes.buttonBack}>
-            <IconButton edge="end">
-              <ArrowBack />
-            </IconButton>
+
+            <ArrowBack />
+
           </ButtonBack>
           <ButtonNext className={classes.buttonNext}>
-            <IconButton edge="start">
-              <ArrowForward />
-            </IconButton>
+
+            <ArrowForward />
+
           </ButtonNext>
         </div>
         <div className={classes.dotGroup}>

@@ -26,6 +26,9 @@ import {
     LOAD_SUBCURRICULUMADD_REQUEST,
     LOAD_SUBCURRICULUMADD_SUCCESS,
     LOAD_SUBCURRICULUMADD_FAILURE,
+    LOAD_PUTPERSON_REQUEST,
+    LOAD_PUTPERSON_SUCCESS,
+    LOAD_PUTPERSON_FAILURE,
     CLEAR_MESSAGE,
     LOAD_MESSAGE
 } from "./actions";
@@ -49,12 +52,23 @@ const initialState = {
     subCurriculumAddStatus: [],
     subCurriculumEditMessage: "",
     subCurriculumEditStatus: [],
+
     message: null,
     severity: null
 };
 
 export default function (state = initialState, action: any) {
     switch (action.type) {
+        case LOAD_PUTPERSON_REQUEST:
+            return { ...state, isLoading: true };
+        case LOAD_PUTPERSON_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+
+            };
+        case LOAD_PUTPERSON_FAILURE:
+            return { ...state, isLoading: false };
         case LOAD_LOGIN_REQUEST:
             return { ...state, isLoading: true, users: [], Login: false };
         case LOAD_LOGIN_SUCCESS:

@@ -53,6 +53,7 @@ const initialState = {
   curriculumscourse: [],
   toprate: [],
   recommemded: [],
+  isErrorCourse: []
 };
 
 export default function (state = initialState, action: any) {
@@ -67,7 +68,7 @@ export default function (state = initialState, action: any) {
         isError: true,
       };
     case LOAD_RECOMMENDED_FAILURE:
-      return { ...state, isLoadingRecommemded: false, isError: false };
+      return { ...state, isLoadingRecommemded: false, isError: false, isErrorCourse: action.payload.isErrorCourse };
 
     case LOAD_TOPRATE_REQUEST:
       return { ...state, isLoadingToprate: true, toprate: [] };
@@ -79,7 +80,7 @@ export default function (state = initialState, action: any) {
         isError: true,
       };
     case LOAD_TOPRATE_FAILURE:
-      return { ...state, isLoadingToprate: false, isError: false };
+      return { ...state, isLoadingToprate: false, isError: false, isErrorCourse: action.payload.isErrorCourse };
 
     case LOAD_COURSESCATEGORY_REQUEST:
       return { ...state, isLoading: true, categories: [] };
@@ -91,7 +92,7 @@ export default function (state = initialState, action: any) {
         isError: true,
       };
     case LOAD_COURSESCATEGORY_FAILURE:
-      return { ...state, isLoading: false, isError: false };
+      return { ...state, isLoading: false, isError: false, isErrorCourse: action.payload.isErrorCourse };
 
     case LOAD_COURSESCATEGORIES_REQUEST:
       return {
@@ -109,7 +110,7 @@ export default function (state = initialState, action: any) {
       };
 
     case LOAD_COURSESCATEGORIES_FAILURE:
-      return { ...state, isLoadingCourseCategories: false, isError: false };
+      return { ...state, isLoadingCourseCategories: false, isError: false, isErrorCourse: action.payload.isErrorCourse };
 
     case LOAD_COURSE_REQUEST:
       return { ...state, isLoadingCourse: true, course: [] };
@@ -121,7 +122,7 @@ export default function (state = initialState, action: any) {
         isError: true,
       };
     case LOAD_COURSE_FAILURE:
-      return { ...state, isLoadingCourse: false, isError: false };
+      return { ...state, isLoadingCourse: false, isError: false, isErrorCourse: action.payload.isErrorCourse };
 
     case LOAD_COURSES_REQUEST:
       return { ...state, isLoadingCourses: true, courses: [] };
@@ -133,7 +134,7 @@ export default function (state = initialState, action: any) {
         isError: true,
       };
     case LOAD_COURSES_FAILURE:
-      return { ...state, isLoadingCourses: false, isError: false };
+      return { ...state, isLoadingCourses: false, isError: false, isErrorCourse: action.payload.isErrorCourse };
     case LOAD_COURSEVIEW_REQUEST:
       return {
         ...state,
@@ -148,7 +149,7 @@ export default function (state = initialState, action: any) {
         isError: true,
       };
     case LOAD_COURSEVIEW_FAILURE:
-      return { ...state, isLoading: false, isError: false };
+      return { ...state, isLoading: false, isError: false, isErrorCourse: action.payload.isErrorCourse };
 
     case LOAD_CURRICULUM_REQUEST:
       return { ...state, isLoadingCurriculum: true, curriculum: [] };
@@ -160,7 +161,7 @@ export default function (state = initialState, action: any) {
         isError: true,
       };
     case LOAD_CURRICULUM_FAILURE:
-      return { ...state, isLoadingCurriculum: false, isError: false, };
+      return { ...state, isLoadingCurriculum: false, isError: false, isErrorCourse: action.payload.isErrorCourse };
     case LOAD_CURRICULUMS_REQUEST:
       return { ...state, isLoadingCurriculums: true, curriculums: [] };
     case LOAD_CURRICULUMS_SUCCESS:
@@ -171,7 +172,7 @@ export default function (state = initialState, action: any) {
         isError: true,
       };
     case LOAD_CURRICULUMS_FAILURE:
-      return { ...state, isLoadingCurriculums: false, isError: false };
+      return { ...state, isLoadingCurriculums: false, isError: false, isErrorCourse: action.payload.isErrorCourse };
 
     case LOAD_CURRICULUMCOURSE_REQUEST:
       return {
@@ -188,7 +189,7 @@ export default function (state = initialState, action: any) {
         isError: true,
       };
     case LOAD_CURRICULUMCOURSE_FAILURE:
-      return { ...state, isLoading: false, isError: false };
+      return { ...state, isLoading: false, isError: false, isErrorCourse: action.payload.isErrorCourse };
 
     case LOAD_CURRICULUMVIEW_REQUEST:
       return {
@@ -204,7 +205,7 @@ export default function (state = initialState, action: any) {
         isError: true,
       };
     case LOAD_CURRICULUMVIEW_FAILURE:
-      return { ...state, isLoading: false, isError: false };
+      return { ...state, isLoading: false, isError: false, isErrorCourse: action.payload.isErrorCourse };
 
     default:
       return state;

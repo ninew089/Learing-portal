@@ -148,12 +148,14 @@ export default function Type1(props: typeProps) {
               InputLabelProps={{
                 className: classes.selectInput,
               }}
+
+
               select
               helperText={
                 formProps.errors.jobLevelid &&
                 formProps.errors.jobLevelid.message
               }
-              error={!!formProps.errors.jobLevel}
+              error={!!formProps.errors.jobLevelid}
             >
               {jobLevels.map((jobLevel: jobLevelProps, index: number) => (
                 <MenuItem key={index} value={jobLevel.id}>

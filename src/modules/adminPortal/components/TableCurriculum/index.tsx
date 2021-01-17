@@ -19,7 +19,7 @@ import Search from "@material-ui/icons/Search";
 import ViewColumn from "@material-ui/icons/ViewColumn";
 import DialogAdd from "./DialogAdd";
 import DialogEdit from "./DialogEdit";
-
+import { parseJwt } from "utils/getDataJWT"
 import { getCookie } from 'cookie/cookie'
 import axios from "axios"
 import { useSelector } from 'react-redux'
@@ -87,7 +87,7 @@ export default function MaterialTableDemo() {
 
 
   const token = getCookie('token');
-  const platformid = getCookie('platformid');
+  const platformid = parseJwt(token).unique_name
   const headers = {
     Authorization: `Bearer ${token}`,
   }

@@ -4,6 +4,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import React, { useEffect } from "react";
 import axios from "axios"
 import { getCookie } from 'cookie/cookie'
+import { parseJwt } from "utils/getDataJWT"
 
 
 
@@ -13,7 +14,9 @@ export default function Asynchronous(props: any) {
   const [open, setOpen] = React.useState(false);
   const [options, setOptions] = React.useState<any>([]);
   const loading = open && options.length === 0;
-  const platformid = getCookie('platformid');
+
+  const token = getCookie('token');
+  const platformid = parseJwt(token).unique_name
   const { setValue } = props
   useEffect(() => {
     const fetch = async () => {

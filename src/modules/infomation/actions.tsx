@@ -240,7 +240,7 @@ function loadPresence(id: string) {
       dispatch({
         type: LOAD_USER_SUCCESS,
         payload: {
-          message: data.presence ? "เลขบัตรประชาชนนี้ได้ทำการสมัครเเล้ว" : "สามารถใช้เลขบัตรประชาชนนี้ได้",
+          message: data.presence ? "เลขประจำตัวประชาชนนี้ได้ทำการสมัครเเล้ว" : "สามารถใช้เลขประจำตัวประชาชนนี้ได้",
           severity: data.presence ? "error" : "info"
 
         },

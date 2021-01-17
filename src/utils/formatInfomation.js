@@ -1,5 +1,6 @@
 import { formatDate } from "./dateFormat"
-import {getCookie} from "cookie/cookie"
+import { getCookie } from "cookie/cookie"
+import {parseJwt} from "./getDataJWT"
  export   function info(signUpInfo){
     if (signUpInfo.usertypeid === "1") {
       const data = JSON.parse(`{
@@ -122,7 +123,8 @@ import {getCookie} from "cookie/cookie"
 };
   
 export  function infoEdit(signUpInfo) {
-  const id =getCookie("id")
+  const token = getCookie("token")
+  const id =parseJwt(token).unique_name
   if (signUpInfo.usertypeid === "1") {
     const data = JSON.parse(`{
       "id": "${id}",

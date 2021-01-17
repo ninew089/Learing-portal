@@ -172,6 +172,7 @@ export default function CustomizedDialogs({
 
     const actionCourse = actionsCourse.loadAddCurriculums(infoData)
     dispatch(actionCourse)
+    handleClose()
   });
   return (
     <div>

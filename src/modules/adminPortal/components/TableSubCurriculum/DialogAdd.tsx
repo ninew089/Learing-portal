@@ -145,6 +145,7 @@ export default function CustomizedDialogs({
 
     const actionCourse = actionsCourse.loadAddSubCurriculums(valueCurriculun, value)
     dispatch(actionCourse)
+    handleClose()
 
 
 

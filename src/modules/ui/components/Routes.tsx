@@ -19,16 +19,21 @@ import { useSelector } from 'react-redux'
 import Page500 from "modules/404page/component/500";
 export default function Router() {
   const { path } = useRouteMatch();
-  const { isError } = useSelector((state: any) => state.course);
-  console.log(isError)
+  const { isError, isErrorCourse } = useSelector((state: any) => state.course);
+
+  const { isErrorProfile } = useSelector((state: any) => state.edit);
+
   return (
     <>
       <Scroll />
       <Switch>
+        <Route path={`${path}/community/plugins/comments`}>
+          <Redirect to={`${path}`} />
+        </Route>
         <Route path={`${path}/500`}>
           <Page500 />
         </Route>
-        {!isError && <Redirect to='/learning-portal/500' />}
+        {(!isError || isErrorProfile > 404 || isErrorCourse > 404) && <Redirect to={`${path}/500`} />}
         <Route path={`${path}/FAQ`}>
           <Toolbar />
           <FAQ />

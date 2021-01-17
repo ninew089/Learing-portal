@@ -1,5 +1,6 @@
 import axios from "axios";
 import { getCookie } from "cookie/cookie"
+import { parseJwt } from "utils/getDataJWT"
 const LOAD_COURSECERTIFICATE_REQUEST = "learning-portal/src/ui/LOAD_COURSECERTIFICATE_REQUEST";
 const LOAD_COURSECERTIFICATE_SUCCESS = "learning-portal/src/ui/LOAD_COURSECERTIFICATE_SUCCESS";
 const LOAD_COURSECERTIFICATE_FAILURE = "learning-portal/src/ui/LOAD_COURSECERTIFICATE_REQUEST";
@@ -20,8 +21,8 @@ function loadSubCurriculumCertificates(cid: number) {
 
         dispatch({ type: LOAD_SUBCURRICULUMCERTIFICATES_REQUEST });
         try {
-            const id = getCookie('id')
-            const data = await axios.get(`/Users/${id}/CurriculumCertificates/${cid}`)
+            const token = getCookie('token')
+            const data = await axios.get(`/Users/${parseJwt(token).unique_name}/CurriculumCertificates/${cid}`)
             dispatch({
                 type: LOAD_SUBCURRICULUMCERTIFICATES_SUCCESS,
                 payload: {
@@ -47,8 +48,8 @@ function loadSubCourseCertificates(cid: number) {
 
         dispatch({ type: LOAD_SUBCOURSECERTIFICATE_REQUEST });
         try {
-            const id = getCookie('id')
-            const data = await axios.get(`/Users/${id}/CourseCertificates/${cid}`);
+            const token = getCookie('token')
+            const data = await axios.get(`/Users/${parseJwt(token).unique_name}/CourseCertificates/${cid}`);
             dispatch({
                 type: LOAD_SUBCOURSECERTIFICATE_SUCCESS,
                 payload: {
@@ -73,8 +74,8 @@ function loadCurriculumCertificates() {
 
         dispatch({ type: LOAD_CURRICULUMCERTIFICATES_REQUEST });
         try {
-            const id = getCookie('id')
-            const data = await axios.get(`/Users/${id}/CurriculumCertificates`)
+            const token = getCookie('token')
+            const data = await axios.get(`/Users/${parseJwt(token).unique_name}/CurriculumCertificates`)
             dispatch({
                 type: LOAD_CURRICULUMCERTIFICATES_SUCCESS,
                 payload: {
@@ -100,8 +101,8 @@ function loadCourseCertificates() {
 
         dispatch({ type: LOAD_COURSECERTIFICATE_REQUEST });
         try {
-            const id = getCookie('id')
-            const data = await axios.get(`/Users/${id}/CourseCertificates`);
+            const token = getCookie('token')
+            const data = await axios.get(`/Users/${parseJwt(token).unique_name}/CourseCertificates`);
             dispatch({
                 type: LOAD_COURSECERTIFICATE_SUCCESS,
                 payload: {

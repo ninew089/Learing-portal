@@ -25,6 +25,8 @@ import { forwardRef } from 'react';
 import * as actions from "../../actions"
 import { useDispatch, useSelector } from "react-redux"
 import Snackbar from "shared/SnackBar/SnackBar"
+import { parseJwt } from "utils/getDataJWT"
+
 
 export default function ReportTable() {
   const tableIcons = {
@@ -83,8 +85,9 @@ export default function ReportTable() {
   const [entries, setEntries] = useState<any>([])
   const [entriesCurriculum, setEntriesCurriculum] = useState<any>([])
 
+
   const token = getCookie('token');
-  const platformid = getCookie('platformid');
+  const platformid = parseJwt(token).unique_name
   const headers = {
     Authorization: `Bearer ${token}`,
   }

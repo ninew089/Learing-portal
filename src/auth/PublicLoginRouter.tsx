@@ -19,7 +19,7 @@ export default function PrivateRoute({ component: Component, ...rest }: PrivateR
             return false
         }
     }
-    console.log(authed())
+
     return (
         <Route
             {...rest}

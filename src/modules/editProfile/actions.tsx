@@ -1,6 +1,7 @@
 import axios from "axios";
 import { getCookie } from 'cookie/cookie'
 import * as infoactions from "modules/infomation/actions"
+import { parseJwt } from "utils/getDataJWT"
 
 const LOAD_EDIT_REQUEST = "learning-portal/src/ui/LOAD_EDIT_REQUEST";
 const LOAD_EDIT_SUCCESS = "learning-portal/src/ui/LOAD_EDIT_SUCCESS";
@@ -12,29 +13,27 @@ function loadGetProfile() {
     return async (dispatch: any) => {
         dispatch({ type: LOAD_PROFILE_REQUEST });
         try {
-            const id = getCookie('id')
-            const token = getCookie('token')
-            const data = await axios.get(`/Users/${id}`, {
+            const token = getCookie('token');
+            const data = await axios.get(`/Users/${parseJwt(token).unique_name}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
             });
-
             dispatch({
                 type: LOAD_PROFILE_SUCCESS,
                 payload: {
-                    message: "ท่านสมัครเรียบร้อยเเล้ว",
+                    message: "แก้ไขเรียบร้อยเเล้ว",
                     data: data.data,
                     status: data.status
                 },
             });
         } catch (err) {
-
             dispatch({
                 type: LOAD_PROFILE_FAILURE,
                 payload: {
                     message: "เกิดข้อผิดพลาด",
-                    staus: err
+                    staus: err.response.status,
+                    isErrorProfile: err.response.status
                 },
             });
         }
@@ -45,14 +44,16 @@ function loadEdit(updateInfo: any) {
     return async (dispatch: any) => {
         dispatch({ type: LOAD_EDIT_REQUEST });
         try {
-            const id = getCookie('id')
+
             const token = getCookie('token')
-            const data = await axios.put(`/Users/${id}`, updateInfo, {
+
+            const data = await axios.put(`/Users/${parseJwt(token).unique_name}`, updateInfo, {
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${token}`,
                 },
             });
+
             const action = infoactions.loadMessage("แก้ไขข้อมูลเรียบร้อยเเล้ว", "success")
             dispatch(action)
             dispatch({
@@ -64,6 +65,7 @@ function loadEdit(updateInfo: any) {
                 },
             });
         } catch (err) {
+
             dispatch({
                 type: LOAD_EDIT_FAILURE,
                 payload: {

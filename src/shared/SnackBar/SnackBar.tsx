@@ -34,12 +34,14 @@ export default function CustomizedSnackbars(props: SnackBarProps) {
         dispatch(actionClear)
     };
 
+
     return (
+
         <div className={classes.root}>
             <Snackbar
                 open={open}
                 anchorOrigin={{ vertical: "top", horizontal: "center" }}
-                autoHideDuration={6000}
+                autoHideDuration={3000}
                 onClose={handleClose}
             >
                 <Alert onClose={handleClose} severity={severity}>

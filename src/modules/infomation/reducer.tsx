@@ -192,7 +192,7 @@ export default function (state = initialState, action: any) {
     case LOAD_USER_FAILURE:
       return { ...state, isLoading: false, isError: false };
     case CLEAR_MESSAGE:
-      return { ...state, message: null };
+      return { ...state, message: null, severity: null };
     case LOAD_MESSAGE:
       return {
         ...state, message: action.payload.message, severity: action.payload.severity,

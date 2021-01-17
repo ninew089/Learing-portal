@@ -10,7 +10,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import {
   IconButton,
   Typography,
-
+  DialogActions,
   DialogContent,
   DialogTitle,
   Dialog,
@@ -92,7 +92,13 @@ const MuiDialogContent = withStyles((theme) => ({
     color: "#1b1a1a",
   },
 }))(DialogContent);
-
+const MuiDialogActions = withStyles((theme) => ({
+  root: {
+    margin: 0,
+    padding: theme.spacing(1),
+    display: "block"
+  },
+}))(DialogActions)
 
 
 export interface CustomizedDialogsProps {
@@ -191,11 +197,11 @@ export default function CustomizedDialogs({
 
           </Typography>
         </MuiDialogContent>
-        <MuiDialogContent className={classes.action} >
-          <Button autoFocus onClick={navToPage} className={classes.button} >
+        <MuiDialogActions className={classes.action} >
+          <Button onClick={navToPage} className={classes.button} >
             เข้าเรียน
           </Button>
-        </MuiDialogContent>
+        </MuiDialogActions>
       </Dialog>
     </div>
   );

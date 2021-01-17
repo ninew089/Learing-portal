@@ -13,7 +13,6 @@ import {
   CssBaseline,
   TextField,
   Grid,
-  Link,
   Typography, FormHelperText, Toolbar
 } from "@material-ui/core";
 import { NavLink } from "react-router-dom";
@@ -167,11 +166,11 @@ export default function SignIn() {
     validationSchema: yup.object().shape({
       userId: yup
         .string()
-        .required("กรุณากรอกเลขบัตรประจำตัวประชาชน")
+        .required("กรุณากรอกเลขประจำตัวประจำตัวประชาชน")
         .matches(/^[0-9]{13}$/, "กรุณากรอกเป็นตัวเลข 13 หลัก")
     /*    .test(
           "ตรวจสอบรหัสบัตรประชาชน",
-          "กรอกเลขบัตรประชาชนผิด กรุณากรอกใหม่",
+          "กรอกเลขประจำตัวประชาชนผิด กรุณากรอกใหม่",
 
           function (item: any) {
             var i, sum;
@@ -198,7 +197,7 @@ export default function SignIn() {
   return (
     <Container component="main" maxWidth="xs">
       <Toolbar />
-      <form autoComplete="off" className={classes.form}>
+      <div className={classes.form}>
         <CssBaseline />
         <div className={classes.paper}>
           <img alt="banner" src={img} className={classes.image} />
@@ -256,12 +255,12 @@ export default function SignIn() {
             <Grid container>
               <Grid item xs>
                 <NavLink to="/learning-portal/forget" className={classes.nav}>
-                  <Link variant="body2">ลืมรหัสผ่าน?</Link>
+                  ลืมรหัสผ่าน?
                 </NavLink>
               </Grid>
               <Grid item>
                 <NavLink to="/learning-portal/signup" className={classes.nav}>
-                  <Link variant="body2">{"สมัครสมาชิก"}</Link>
+                  สมัครสมาชิก
                 </NavLink>
               </Grid>
             </Grid>
@@ -278,7 +277,7 @@ export default function SignIn() {
             </Button>
           </form>
         </div>
-      </form>
+      </div>
     </Container >
   );
 }

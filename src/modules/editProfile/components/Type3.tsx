@@ -101,7 +101,7 @@ export default function SignIn(props: typeProps) {
               error={!!formProps.errors.jobtypeId}
             >
               {jobTypes3.map((jobType3: jobTypes3Props, index: number) => (
-                <MenuItem key={index} value={jobType3.id}>
+                <MenuItem key={index} value={jobType3.id} >
                   {jobType3.name}
                 </MenuItem>
               ))}

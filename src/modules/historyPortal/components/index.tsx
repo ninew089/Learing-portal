@@ -116,36 +116,36 @@ export default function MaterialTableDemo(props: any) {
           return (
             <div>
               <h4>
-                &nbsp;&nbsp;&nbsp;&nbsp; เลขประจำตัวประชาชน: {rowData.coursecertificate.userId}{" "}
+                &nbsp;&nbsp;&nbsp;&nbsp; เลขประจำตัวประชาชน: {rowData.userId}{" "}
               </h4>
 
               <h4>
                 {" "}
-                &nbsp;&nbsp;&nbsp;&nbsp; ชื่อ: {rowData.coursecertificate.title}
-                {rowData.coursecertificate.firstName} {rowData.coursecertificate.lastname}
+                &nbsp;&nbsp;&nbsp;&nbsp; ชื่อ: {rowData.title}
+                {rowData.firstName} {rowData.lastname}
               </h4>
 
-              <h4> &nbsp;&nbsp;&nbsp;&nbsp;วันเปิดเรียน: {formatDatetoThaiTest(rowData.coursecertificate.createDate)}</h4>
+              <h4> &nbsp;&nbsp;&nbsp;&nbsp;วันเปิดเรียน: {formatDatetoThaiTest(rowData.createdate)}</h4>
               <h4>
                 {" "}
-                &nbsp;&nbsp;&nbsp;&nbsp;วันที่เริ่มเรียน: {formatDatetoThaiTest(rowData.coursecertificate.startDate)}
-              </h4>
-
-              <h4>
-                {" "}
-                &nbsp;&nbsp;&nbsp;&nbsp;วันที่สำเร็จการศึกษา: {formatDatetoThaiTest(rowData.coursecertificate.endDate)}
+                &nbsp;&nbsp;&nbsp;&nbsp;วันที่เริ่มเรียน: {formatDatetoThaiTest(rowData.startdate)}
               </h4>
 
               <h4>
                 {" "}
-                &nbsp;&nbsp;&nbsp;&nbsp;จำนวนชั่วโมงที่เข้าเรียน: {rowData.coursecertificate.hour}
+                &nbsp;&nbsp;&nbsp;&nbsp;วันที่สำเร็จการศึกษา: {formatDatetoThaiTest(rowData.enddate)}
+              </h4>
+
+              <h4>
+                {" "}
+                &nbsp;&nbsp;&nbsp;&nbsp;จำนวนชั่วโมงที่เข้าเรียน: {rowData.hour}
               </h4>
               <h4>
                 {" "}
-                &nbsp;&nbsp;&nbsp;&nbsp;คะแนนความพึงพอใจ: {rowData.coursecertificate.satisfactionScore}
+                &nbsp;&nbsp;&nbsp;&nbsp;คะแนนความพึงพอใจ: {rowData.satisfactionScore}
               </h4>
 
-              <h4> &nbsp;&nbsp;&nbsp;&nbsp;เกรด: {rowData.coursecertificate.grade}</h4>
+              <h4> &nbsp;&nbsp;&nbsp;&nbsp;เกรด: {rowData.grade}</h4>
             </div>
           );
         }}
@@ -164,41 +164,42 @@ export default function MaterialTableDemo(props: any) {
         ]}
         data={predata1}
         detailPanel={(rowData) => {
+          console.log(rowData)
           return (
             <div>
               <h4>
-                &nbsp;&nbsp;&nbsp;&nbsp; เลขประจำตัวประชาชน: {rowData.curriculumcertificate.userId}{" "}
+                &nbsp;&nbsp;&nbsp;&nbsp; เลขประจำตัวประชาชน: {rowData.userId}
               </h4>
 
               <h4>
                 {" "}
-                &nbsp;&nbsp;&nbsp;&nbsp; ชื่อ: {rowData.curriculumcertificate.title}
-                {rowData.curriculumcertificate.firstName} {rowData.curriculumcertificate.lastname}
+                &nbsp;&nbsp;&nbsp;&nbsp; ชื่อ: {rowData.title}
+                {rowData.firstName} {rowData.lastname}
               </h4>
 
-              <h4> &nbsp;&nbsp;&nbsp;&nbsp;วันเปิดเรียน: {formatDatetoThaiTest(rowData.curriculumcertificate.createDate)}
+              <h4> &nbsp;&nbsp;&nbsp;&nbsp;วันเปิดเรียน: {formatDatetoThaiTest(rowData.createdate)}
 
               </h4>
               <h4>
                 {" "}
-                &nbsp;&nbsp;&nbsp;&nbsp;วันที่เริ่มเรียน: {formatDatetoThaiTest(rowData.curriculumcertificate.startDate)}
+                &nbsp;&nbsp;&nbsp;&nbsp;วันที่เริ่มเรียน: {formatDatetoThaiTest(rowData.startdate)}
               </h4>
 
               <h4>
                 {" "}
-                &nbsp;&nbsp;&nbsp;&nbsp;วันที่สำเร็จการศึกษา: {formatDatetoThaiTest(rowData.curriculumcertificate.endDate)}
+                &nbsp;&nbsp;&nbsp;&nbsp;วันที่สำเร็จการศึกษา: {formatDatetoThaiTest(rowData.enddate)}
               </h4>
 
               <h4>
                 {" "}
-                &nbsp;&nbsp;&nbsp;&nbsp;จำนวนชั่วโมงที่เข้าเรียน: {rowData.curriculumcertificate.hour}
+                &nbsp;&nbsp;&nbsp;&nbsp;จำนวนชั่วโมงที่เข้าเรียน: {rowData.hour}
               </h4>
               <h4>
                 {" "}
-                &nbsp;&nbsp;&nbsp;&nbsp;คะแนนความพึงพอใจ: {rowData.curriculumcertificate.satisfactionScore}
+                &nbsp;&nbsp;&nbsp;&nbsp;คะแนนความพึงพอใจ: {rowData.satisfactionScore}
               </h4>
 
-              <h4> &nbsp;&nbsp;&nbsp;&nbsp;เกรด: {rowData.curriculumcertificate.grade}</h4>
+              <h4> &nbsp;&nbsp;&nbsp;&nbsp;เกรด: {rowData.grade}</h4>
             </div>
           );
         }}

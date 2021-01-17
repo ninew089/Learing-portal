@@ -87,7 +87,7 @@ export default function SignIn() {
                 name="userId"
                 variant="outlined"
                 className={classes.textfield}
-                value={value}
+                value={value || ''}
                 onChange={handlerSearch}
                 InputProps={{
                     className: classes.input,

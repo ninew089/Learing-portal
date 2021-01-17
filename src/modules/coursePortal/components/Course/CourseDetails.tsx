@@ -259,7 +259,7 @@ export default function IconBreadcrumbs(props: CardProps) {
                     <Typography
                       variant="caption"
                       align="left"
-                      component="p"
+                      component="span"
                       color={"textSecondary"}
                     >
                       การดู {numberFormat(viewCount)} ครั้ง

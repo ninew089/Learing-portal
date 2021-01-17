@@ -28,11 +28,11 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export default function ItemComponent({
-  key,
+
     question,
     answer,
 }: {
-    key:number,
+
     question: string,
     answer: string,
 }) {
@@ -40,7 +40,7 @@ export default function ItemComponent({
 
     return (
         <React.Fragment>
-            <Grid container direction="row" alignItems="center" spacing={2} className={classes.root} key={key}>
+            <Grid container direction="row" alignItems="center" spacing={2} className={classes.root} >
                 <Grid item>
                     <Avatar className={classes.amber}>Q</Avatar>
                 </Grid>

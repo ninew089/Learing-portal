@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect,useState } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -35,6 +35,7 @@ export default function ControlledOpenSelect() {
     const [open, setOpen] = React.useState(false);
     const dispatch = useDispatch();
     const { categories } = useSelector((state: any) => state.course);
+    const [value,setValue]= useState<any>('')
     const history = useHistory()
 
     useEffect(() => {
@@ -45,14 +46,20 @@ export default function ControlledOpenSelect() {
     const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
         switch (event.target.value) {
             case 0:
+                setValue(0)
                 history.push("/learning-portal/courses")
+           
                 break;
             case -1:
+                setValue(-1)
                 history.push("/learning-portal/curriculum?category=หลักสูตร")
+               
                 break;
 
             default:
+                setValue(event.target.value)
                 history.push(`/learning-portal/course?category=${event.target.value}`)
+
                 break;
         }
 
@@ -76,6 +83,7 @@ export default function ControlledOpenSelect() {
                     onClose={handleClose}
                     onOpen={handleOpen}
                     onChange={handleChange}
+                    value={value}
                 >
                     <MenuItem value={0}>
                

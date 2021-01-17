@@ -122,11 +122,12 @@ export default function PointNavigationMenu({ title }: { title: string }) {
 
       <Grid container direction="row" justify={sm ? "center" : "flex-start"} alignItems="center">
         {categories.map((item: any, i: number) => (
-          <Grid item xs={3} sm={2} lg={1}>
+          <Grid item xs={3} sm={2} lg={1} key={i}>
             <IconButton
               onClick={handleClick(i)}
               className={classes.root}
               disableRipple
+              key={i}
             >
               <Grid
                 container

@@ -62,8 +62,7 @@ export default function LongMenu() {
     history.push(`${path}`);
   };
   const onLogout = () => {
-    eraseCookie("role")
-    eraseCookie("id")
+
     eraseCookie("token")
     navigatorTologout();
     window.location.reload();

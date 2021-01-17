@@ -76,8 +76,7 @@ export default function TemporaryDrawer() {
 
   }
   const onLogout = () => {
-    eraseCookie("role")
-    eraseCookie("id")
+
     eraseCookie("token")
     window.location.reload();
 

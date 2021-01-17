@@ -25,6 +25,7 @@ import { curriculumCertificateProps, courseCertificateProps } from './typescript
 import { forwardRef } from 'react';
 import * as actions from "../../actions"
 import { useDispatch, useSelector } from "react-redux"
+import { parseJwt } from "utils/getDataJWT"
 
 export default function ReportTable() {
   const tableIcons = {
@@ -86,7 +87,7 @@ export default function ReportTable() {
   const im = entries !== undefined && entries.length
   const im2 = entriesCurriculum !== undefined && entriesCurriculum.length
   const token = getCookie('token');
-  const platformid = getCookie('platformid');
+  const platformid = parseJwt(token).unique_name
   const headers = {
     Authorization: `Bearer ${token}`,
   }
@@ -118,7 +119,7 @@ export default function ReportTable() {
     fetch()
     // eslint-disable-next-line
   }, [im2])
-
+  console.log(entries)
   const { message, severity } = useSelector((state: any) => state.admin);
   const onSubmitCourseCirtificate = async () => {
     const response = await axios.get(`/Platforms/${platformid}/CourseCertificates?max=10000`)
@@ -165,7 +166,7 @@ export default function ReportTable() {
           { title: "วันที่สำเร็จการศึกษา", field: "endDate", type: "date", dateSetting: { locale: "th-TH" } },
           { title: "จำนวนชั่วโมง", field: "hour", type: "numeric" },
           { title: "เกรด", field: "grade" },
-          { title: "คะแนนความพึงพอใจ", field: "satisfactionScore", type: "numeric", validate: rowData => rowData.satisfactionScore <= 5 && rowData.satisfactionScore >= 1 },
+          { title: "คะแนนความพึงพอใจ", field: "satisfactionScore", type: "numeric", validate: rowData => ((rowData.satisfactionScore <= 5 && rowData.satisfactionScore >= 1) || rowData.satisfactionScore === null || rowData.satisfactionScore === undefined) },
           { title: "วันที่ได้รับข้อมูล", field: "createDate", type: "date", editable: "never", dateSetting: { locale: "th-TH" } },
           { title: "ผลการอนุมัติ", field: "approved", editable: "never" },
         ]}
@@ -259,7 +260,7 @@ export default function ReportTable() {
           { title: "วันที่สำเร็จการศึกษา", field: "endDate", type: "date", dateSetting: { locale: "th-TH" } },
           { title: "จำนวนชั่วโมง", field: "hour", type: "numeric" },
           { title: "เกรด", field: "grade" },
-          { title: "คะแนนความพึงพอใจ", field: "satisfactionScore", type: "numeric", validate: rowData => rowData.satisfactionScore <= 5 && rowData.satisfactionScore >= 1 },
+          { title: "คะแนนความพึงพอใจ", field: "satisfactionScore", type: "numeric", validate: rowData => ((rowData.satisfactionScore <= 5 && rowData.satisfactionScore >= 1) || rowData.satisfactionScore === null || rowData.satisfactionScore === undefined) },
           { title: "วันที่ได้รับข้อมูล", field: "createDate", type: "date", editable: "never", dateSetting: { locale: "th-TH" } },
           { title: "ผลการอนุมัติ", field: "approved", editable: "never" },
         ]}

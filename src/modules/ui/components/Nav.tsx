@@ -109,8 +109,9 @@ export default function PersistentDrawerLeft(props: any) {
         history.push(`${path}/login`);
     };
     const { pathname } = useLocation();
+    const token = getCookie('token');
     const login = () => {
-        const token = getCookie('token');
+
         if (token === null) {
             return false
         }
@@ -125,7 +126,9 @@ export default function PersistentDrawerLeft(props: any) {
     const [active, setActive] = useState<number>(0);
 
     const dispatch = useDispatch();
-    const id = getCookie('id')
+
+    const id = parseJwt(token).unique_name
+
     useEffect(() => {
         const actionProfile = actionsEdit.loadGetProfile()
         dispatch(actionProfile)

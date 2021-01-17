@@ -46,11 +46,11 @@ export default function SignIn() {
     validationSchema: yup.object().shape({
       id: yup
         .string()
-        .required("กรุณากรอกเลขบัตรประจำตัวประชาชน")
+        .required("กรุณากรอกเลขประจำตัวประจำตัวประชาชน")
         .matches(/^[0-9]{13}$/, "กรุณากรอกเป็นตัวเลข 13 หลัก")
         .test(
           "ตรวจสอบรหัสบัตรประชาชน",
-          "กรอกเลขบัตรประชาชนผิด กรุณากรอกใหม่",
+          "กรอกเลขประจำตัวประชาชนผิด กรุณากรอกใหม่",
 
           function (item: any) {
             var i, sum;

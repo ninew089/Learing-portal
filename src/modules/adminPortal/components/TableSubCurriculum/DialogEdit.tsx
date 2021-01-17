@@ -121,7 +121,7 @@ export default function CustomizedDialogs({
   setOpen,
   data,
   valueCurriculun,
-  numberNo
+
 }: openEditProps) {
   const handleClose = () => {
     setOpen(false);
@@ -132,8 +132,8 @@ export default function CustomizedDialogs({
   useEffect(() => {
     const action = actions.loadCourseCategory()
     dispatch(action)
-    if (!isNaN(data.tableData?.id!)) {
-      setValue(data.tableData?.id + 1)
+    if (!isNaN(data.no!)) {
+      setValue(data.no)
     }
     // eslint-disable-next-line
   }, [data.tableData?.id])
@@ -147,6 +147,7 @@ export default function CustomizedDialogs({
     const no = parseInt(value)
     const actionCourse = actionsCourse.loadEditSubCurriculum(valueCurriculun, data.id, no)
     dispatch(actionCourse)
+    handleClose()
   };
 
   return (
@@ -172,7 +173,7 @@ export default function CustomizedDialogs({
               <Typography component="h1" variant="h5">
                 ข้อมูลรายวิชาในหลักสูตร
               </Typography>
-              <TextField id="standard-name" label="ลำดับการแสดง" value={value} onChange={handleChange}
+              <TextField id="standard-name" label="ลำดับที่" value={value} onChange={handleChange}
               />
 
             </div>

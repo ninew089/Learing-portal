@@ -80,7 +80,6 @@ export default function Edit(props: any) {
       name: data.firstName,
       lastname: data.lastName,
       email: data.email,
-      // birthyear: "2560",
       gender: data.gender,
       educationid: data.educationId,
       usertypeid: data.userTypeId,

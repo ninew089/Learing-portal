@@ -166,6 +166,7 @@ export default function CustomizedDialogs({ open, setOpen }: DialogsProps) {
 
     const actionCourse = actionsCourse.loadAddCourse(infoData)
     dispatch(actionCourse)
+    handleClose()
   });
   return (
     <div>
