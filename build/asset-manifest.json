@@ -13,8 +13,8 @@
     "static/js/4.a971c1f3.chunk.js": "/learning-portal/static/js/4.a971c1f3.chunk.js",
     "static/js/4.a971c1f3.chunk.js.map": "/learning-portal/static/js/4.a971c1f3.chunk.js.map",
     "main.css": "/learning-portal/static/css/main.31ac9333.chunk.css",
-    "main.js": "/learning-portal/static/js/main.0b57f1eb.chunk.js",
-    "main.js.map": "/learning-portal/static/js/main.0b57f1eb.chunk.js.map",
+    "main.js": "/learning-portal/static/js/main.80ff29ee.chunk.js",
+    "main.js.map": "/learning-portal/static/js/main.80ff29ee.chunk.js.map",
     "runtime-main.js": "/learning-portal/static/js/runtime-main.60b19203.js",
     "runtime-main.js.map": "/learning-portal/static/js/runtime-main.60b19203.js.map",
     "static/js/7.c93828f9.chunk.js": "/learning-portal/static/js/7.c93828f9.chunk.js",
@@ -52,7 +52,7 @@
     "static/js/22.d55a65a7.chunk.js": "/learning-portal/static/js/22.d55a65a7.chunk.js",
     "static/js/22.d55a65a7.chunk.js.map": "/learning-portal/static/js/22.d55a65a7.chunk.js.map",
     "index.html": "/learning-portal/index.html",
-    "precache-manifest.c0ad748b500aa4315d27fa6850748661.js": "/learning-portal/precache-manifest.c0ad748b500aa4315d27fa6850748661.js",
+    "precache-manifest.80600c8683ceb32ce9a4c49c0b55c490.js": "/learning-portal/precache-manifest.80600c8683ceb32ce9a4c49c0b55c490.js",
     "service-worker.js": "/learning-portal/service-worker.js",
     "static/css/0.5a56e992.chunk.css.map": "/learning-portal/static/css/0.5a56e992.chunk.css.map",
     "static/css/11.cd5ea0fd.chunk.css.map": "/learning-portal/static/css/11.cd5ea0fd.chunk.css.map",
@@ -65,7 +65,7 @@
     "static/js/8.1d387379.chunk.js.LICENSE.txt": "/learning-portal/static/js/8.1d387379.chunk.js.LICENSE.txt",
     "static/media/01.jpg": "/learning-portal/static/media/01.9a141ccb.jpg",
     "static/media/404.gif": "/learning-portal/static/media/404.21845847.gif",
-    "static/media/HowToRegister.jpg": "/learning-portal/static/media/HowToRegister.755d3202.jpg",
+    "static/media/HowToRegister.jpg": "/learning-portal/static/media/HowToRegister.da7bf0c8.jpg",
     "static/media/animation.gif": "/learning-portal/static/media/animation.a633972d.gif",
     "static/media/animation00.gif": "/learning-portal/static/media/animation00.084625de.gif",
     "static/media/logo2.png": "/learning-portal/static/media/logo2.a431cc81.png",
@@ -76,6 +76,6 @@
     "static/js/runtime-main.60b19203.js",
     "static/js/7.c93828f9.chunk.js",
     "static/css/main.31ac9333.chunk.css",
-    "static/js/main.0b57f1eb.chunk.js"
+    "static/js/main.80ff29ee.chunk.js"
   ]
 }

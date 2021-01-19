@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "771a49a04975ce87a7ec4e545e94b73b",
+    "revision": "e5465873c70f32385d9de6715a08c049",
     "url": "/learning-portal/index.html"
   },
   {
@@ -20,7 +20,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/learning-portal/static/css/2.5c5adfc2.chunk.css"
   },
   {
-    "revision": "f8bbf843ad1ee4333897",
+    "revision": "8c8e35f010c3ae55a7f4",
     "url": "/learning-portal/static/css/main.31ac9333.chunk.css"
   },
   {
@@ -124,8 +124,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/learning-portal/static/js/9.4c86b9e4.chunk.js"
   },
   {
-    "revision": "f8bbf843ad1ee4333897",
-    "url": "/learning-portal/static/js/main.0b57f1eb.chunk.js"
+    "revision": "8c8e35f010c3ae55a7f4",
+    "url": "/learning-portal/static/js/main.80ff29ee.chunk.js"
   },
   {
     "revision": "9a99329a3f018ce01a12",
@@ -140,8 +140,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/learning-portal/static/media/404.21845847.gif"
   },
   {
-    "revision": "755d32023f23517d3cce2bb06e80ab55",
-    "url": "/learning-portal/static/media/HowToRegister.755d3202.jpg"
+    "revision": "da7bf0c8e270274cb8289abcfefbde95",
+    "url": "/learning-portal/static/media/HowToRegister.da7bf0c8.jpg"
   },
   {
     "revision": "a633972d036fc44e2b1ae8b191cf966d",

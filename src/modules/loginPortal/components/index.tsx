@@ -154,6 +154,10 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 600,
     fontSize: 14,
     margin: 2
+  }, warring: {
+    color: "red",
+    textAlign: "center",
+    margin: 8
   }
 }));
 
@@ -194,6 +198,32 @@ export default function SignIn() {
     dispatch(actionLogin);
 
   };
+
+  function randomState(length: any) {
+    var result = '';
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+  }
+
+  /*use this function when click the button "sign in with EDTA Connect"*/
+  function redirect() {
+
+    var res = "response_type=code";
+    var clientId = "&client_id=e45e0593-3b44-44b4-9d0b-37b71acb0a56";
+    var uri = "&redirect_uri=https://learn.ocsc.info/etda/callback.html";
+    var scope = "&scope=openid%20profile";
+    var state = "&state=";
+    var random = randomState(11);
+    var prompt = "&prompt=login%20consent";
+
+    document.cookie = "state=" + random;
+    window.open("https://openid1.digitalid.or.th/proxy/v1/list.htm?" + res + clientId + uri + scope + state + random + prompt);
+
+  }
   return (
     <Container component="main" maxWidth="xs">
       <Toolbar />
@@ -272,9 +302,10 @@ export default function SignIn() {
               <div className={classes.border} />
             </div>
 
-            <Button fullWidth className={classes.etda}>
+            <Button fullWidth className={classes.etda} onClick={redirect}>
               LOGIN WITH ETDA CONNECT
             </Button>
+            <div className={classes.warring} >ต้องสมัครสมาชิกก่อนใช้งาน ETDA CONNECT</div>
           </form>
         </div>
       </div>

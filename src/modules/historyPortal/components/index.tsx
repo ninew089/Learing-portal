@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import MaterialTable from "material-table";
 import { forwardRef } from "react";
-import { CssBaseline } from "@material-ui/core";
+import { CssBaseline, Toolbar } from "@material-ui/core";
 import {
   AddBox,
   ArrowDownward,
@@ -98,6 +98,8 @@ export default function MaterialTableDemo(props: any) {
 
   return (
     <div>
+      <Toolbar />
+
       <CssBaseline />
 
 
@@ -116,7 +118,7 @@ export default function MaterialTableDemo(props: any) {
           return (
             <div>
               <h4>
-                &nbsp;&nbsp;&nbsp;&nbsp; เลขประจำตัวประชาชน: {rowData.userId}{" "}
+                &nbsp;&nbsp;&nbsp;&nbsp; เลขประจำตัวประชาชน: {rowData.userid}{" "}
               </h4>
 
               <h4>
@@ -142,7 +144,7 @@ export default function MaterialTableDemo(props: any) {
               </h4>
               <h4>
                 {" "}
-                &nbsp;&nbsp;&nbsp;&nbsp;คะแนนความพึงพอใจ: {rowData.satisfactionScore}
+                &nbsp;&nbsp;&nbsp;&nbsp;คะแนนความพึงพอใจ: {rowData.satisfactionscore}
               </h4>
 
               <h4> &nbsp;&nbsp;&nbsp;&nbsp;เกรด: {rowData.grade}</h4>
@@ -168,7 +170,7 @@ export default function MaterialTableDemo(props: any) {
           return (
             <div>
               <h4>
-                &nbsp;&nbsp;&nbsp;&nbsp; เลขประจำตัวประชาชน: {rowData.userId}
+                &nbsp;&nbsp;&nbsp;&nbsp; เลขประจำตัวประชาชน: {rowData.userid}
               </h4>
 
               <h4>
@@ -196,7 +198,7 @@ export default function MaterialTableDemo(props: any) {
               </h4>
               <h4>
                 {" "}
-                &nbsp;&nbsp;&nbsp;&nbsp;คะแนนความพึงพอใจ: {rowData.satisfactionScore}
+                &nbsp;&nbsp;&nbsp;&nbsp;คะแนนความพึงพอใจ: {rowData.satisfactionscore}
               </h4>
 
               <h4> &nbsp;&nbsp;&nbsp;&nbsp;เกรด: {rowData.grade}</h4>
