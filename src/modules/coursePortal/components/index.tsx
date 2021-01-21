@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import * as actions from "../actions";
 import animation from "assets/gif/animation.gif"
 import animation00 from "assets/gif/animation00.gif"
-
+import Disqus from "modules/Disqus/index"
 
 import "assets/css/styles.css";
 
@@ -216,6 +216,10 @@ export default function Course() {
 
                 <Facebook />
               </Grid>
+              <Grid item xs={12} sm={12} md={12} lg={12}>
+                <Disqus />
+              </Grid>
+
             </Grid>
           </Container>
 
