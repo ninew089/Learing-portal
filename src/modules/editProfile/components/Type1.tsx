@@ -87,7 +87,7 @@ export default function Type1(props: typeProps) {
 
   return (
     <>
-      <FormControl fullWidth>
+      < FormControl fullWidth>
         <h4> {name}</h4>
 
         <Controller
@@ -101,27 +101,29 @@ export default function Type1(props: typeProps) {
                 className: classes.selectInput,
               }}
               select
+              defaultValue=""
               helperText={
                 formProps.errors.jobtypeId && formProps.errors.jobtypeId.message
               }
               error={!!formProps.errors.jobtypeId}
             >
+
               {jobTypes1.map((jobType1: jobTypes1Props, index: number) => (
+
                 < MenuItem key={index} value={jobType1.id}>
                   {jobType1.name}
                 </MenuItem>
+
               ))}
 
             </TextField>
           }
           name="jobtypeId"
+
           rules={{ required: "กรุณาเลือกประเภทตำแหน่ง" }}
           control={formProps.control}
-          defaultValue=""
+
         />
-
-
-
         <TextField
           fullWidth
           label="ตำแหน่ง"
@@ -170,6 +172,7 @@ export default function Type1(props: typeProps) {
           defaultValue=""
         />
       </FormControl>
+
     </>
   );
 }

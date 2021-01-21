@@ -195,7 +195,7 @@ export default function (state = initialState, action: any) {
       return {
         ...state,
         isLoading: true,
-        courseCategories: [],
+
 
       };
     case LOAD_CURRICULUMVIEW_SUCCESS:

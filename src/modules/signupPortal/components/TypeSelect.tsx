@@ -135,7 +135,7 @@ export default function SignIn(props: typeUserProps) {
   return (
     <>
       <CssBaseline />
-      <form className={classes.form} noValidate>
+      <div className={classes.form} >
         <Typography component="h1" variant="h5" align="center">
           ข้อมูลการทำงาน
         </Typography>
@@ -168,7 +168,7 @@ export default function SignIn(props: typeUserProps) {
         />
 
         {renderTypeProps()}
-      </form>
+      </div>
     </>
   );
 }

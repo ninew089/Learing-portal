@@ -66,9 +66,7 @@ export default function GroupCourse() {
 
     const action = actions.loadCourseCategories(parsed.category === undefined ? 1 : parsed.category)
     dispatch(action)
-    return () => {
-      setPostsToShow([])
-    };
+    setPostsToShow([])
 
     // eslint-disable-next-line
   }, [parsed.category])

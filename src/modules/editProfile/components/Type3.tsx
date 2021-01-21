@@ -110,7 +110,7 @@ export default function SignIn(props: typeProps) {
           name="jobtypeId"
           rules={{ required: "กรุณาเลือกประเภทตำแหน่ง" }}
           control={formProps.control}
-          defaultValue=""
+å
         />
 
         <TextField

@@ -136,7 +136,7 @@ export default function SignIn(props: any) {
     <>
       <CssBaseline />
 
-      <form className={classes.form} noValidate>
+      <div className={classes.form} >
         <Typography component="h1" variant="h5" align="center">
           ข้อมูลส่วนบุคคล
         </Typography>
@@ -271,7 +271,7 @@ export default function SignIn(props: any) {
             error={!!formProps.errors.email}
           />
         </FormControl>
-      </form>
+      </div>
     </>
   );
 }

@@ -1,4 +1,4 @@
-import React, { useEffect, lazy, Suspense } from "react";
+import React, { useEffect, lazy, Suspense, useState, useRef } from "react";
 import { Grid, Box, Container } from "@material-ui/core";
 import { useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
@@ -23,15 +23,19 @@ const Facebook = lazy(() => import('modules/facebook/components/FaceBook'));
 
 
 function FadeInSection(props: any) {
-  const [isVisible, setVisible] = React.useState(false);
-  const domRef = React.useRef<any>();
-
+  const [isVisible, setVisible] = useState(false);
+  const domRef = useRef<any>();
+  // eslint-disable-next-line
+  const [state, setState] = useState({});
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => setVisible(entry.isIntersecting));
     });
     observer.observe(domRef.current);
+    return () => {
+      setState({}); // This worked for me
+    };
   }, []);
 
 

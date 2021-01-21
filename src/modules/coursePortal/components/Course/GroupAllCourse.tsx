@@ -59,9 +59,7 @@ export default function GroupCourse() {
 
         const action = actions.loadCourses("all")
         dispatch(action)
-        return () => {
-            setPostsToShow([])
-        };
+        setPostsToShow([])
         // eslint-disable-next-line
     }, [])
 

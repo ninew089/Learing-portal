@@ -144,14 +144,14 @@ export default function SignIn(props: any) {
         severity={severity}
       />}
 */}
-      <form className={classes.form} noValidate>
+      <div className={classes.form} >
         <FormControl className={classes.formControlInfo} fullWidth>
           <Typography component="h1" variant="h5" align="center">
             ลงทะเบียนเข้ารับการอบรมออนไลน์
           </Typography>
           <TextField
             fullWidth
-            id="input-with-icon-textfield"
+
             label="เลขประจำตัวประชาชน"
             name="id"
             inputRef={formProps.register}
@@ -170,7 +170,7 @@ export default function SignIn(props: any) {
           />
           <TextField
             fullWidth
-            id="input-with-icon-textfield"
+
             label="รหัสผ่าน"
             name="password"
             inputRef={formProps.register}
@@ -192,7 +192,7 @@ export default function SignIn(props: any) {
           />
           <TextField
             fullWidth
-            id="input-with-icon-textfield"
+
             label="ยืนยันรหัสผ่าน"
             name="comfirmpassword"
             inputRef={formProps.register}
@@ -219,7 +219,7 @@ export default function SignIn(props: any) {
             ตรวจสอบว่ามีผู้ใช้หรือไม่
           </Button>
         </FormControl>
-      </form>
+      </div>
     </>
   );
 }

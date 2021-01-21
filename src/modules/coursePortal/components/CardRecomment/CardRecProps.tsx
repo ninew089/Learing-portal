@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import { Grid, Box, Divider, CardMedia } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-
-import categoryFormat from 'utils/categoryFormat'
-
 import colorCategory from "utils/categoryColorCode"
 
 import Dialog from '../../share/DialogCourse'
+import { useSelector } from 'react-redux'
 
 
 
@@ -96,16 +94,12 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SocialCard(props: any) {
     const { data } = props;
-
     const classes = useStyles();
-
     const [open, setOpen] = useState<boolean>(false)
-
+    const { categories } = useSelector((state: any) => state.course);
     const onSelected = () => {
-
         setOpen(true)
     }
-
     return (
         <>
 
@@ -149,7 +143,7 @@ export default function SocialCard(props: any) {
                         fontWeight={700}
                         className={classes.category}
                     >
-                        <div className={classes.dot} style={{ background: colorCategory(data.courseCategoryId) }} />{categoryFormat(data.courseCategoryId)}
+                        <div className={classes.dot} style={{ background: colorCategory(data.courseCategoryId) }} />{categories.length !== 0 && categories[data.courseCategoryId - 1].name}
                     </Box>
                     <Box fontSize={12} fontWeight={400} className={classes.caption}>
                         {data.learningObjective}

@@ -124,14 +124,13 @@ export default function PersistentDrawerLeft(props: any) {
     }
     const matchesIspad = useMediaQuery(theme.breakpoints.down("md"));
     const [active, setActive] = useState<number>(0);
-
     const dispatch = useDispatch();
-
     const id = parseJwt(token).unique_name
-
     useEffect(() => {
-        const actionProfile = actionsEdit.loadGetProfile()
-        dispatch(actionProfile)
+        if (login()) {
+            const actionProfile = actionsEdit.loadGetProfile()
+            dispatch(actionProfile)
+        }
         // eslint-disable-next-line
     }, [id])
 

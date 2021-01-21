@@ -258,6 +258,7 @@ export default function SignIn() {
               label="รหัสผ่าน"
               type="password"
               name="password"
+              autoComplete="on"
               inputRef={register}
               fullWidth
               variant="outlined"
