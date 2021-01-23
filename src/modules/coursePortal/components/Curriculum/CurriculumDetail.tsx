@@ -1,11 +1,11 @@
-import React, { useState, lazy, Suspense } from "react";
+import React, { useState, lazy, Suspense, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, Grid, Box } from "@material-ui/core";
 import numberFormat from "utils/numberFormat";
 import Rating from "../../share/Rating";
 import { Theme } from "@material-ui/core/styles";
-import platformFormat from 'utils/platformFormat'
-
+import { useSelector, useDispatch } from 'react-redux'
+import * as actions from "../../actions"
 
 import CardMedia from '@material-ui/core/CardMedia';
 import { CardProps } from "./tyscript"
@@ -164,13 +164,19 @@ const useStyles = makeStyles((theme: Theme) => ({
 export default function CurriculumDetailCard(props: CardProps) {
   const { platformId, learningObjective, viewCount, point, satisfactionCount, code, thumbnail, name } = props;
   const classes = useStyles();
-
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const action = actions.paltform()
+    dispatch(action)
+    // eslint-disable-next-line
+  }, [])
 
   const [open, setOpen] = useState<boolean>(false)
   const onOpen = () => {
     setOpen(true)
 
   }
+  const { platform } = useSelector((state: any) => state.course);
   const renderLoader = () =>
     <div></div>
 
@@ -196,11 +202,7 @@ export default function CurriculumDetailCard(props: CardProps) {
                   title={name}
 
                 />
-
-
               </div>
-
-
               <Typography variant={"h2"} className={classes.title}>
                 {name}
               </Typography>
@@ -238,13 +240,14 @@ export default function CurriculumDetailCard(props: CardProps) {
                 >
                   <div className={classes.logo}>
                     < div style={{
-                      background: `url('${platformFormat(platformId).logo}`,
+                      backgroundImage: `url('${platform && platform.length !== 0 && platform[platformId! - 1].thumbnail}`,
                       backgroundSize: "cover",
-                      padding: "30px"
+                      padding: "30px",
+                      backgroundPosition: " center center"
                     }} />
                   </div>
                   <div>
-                    <div className={classes.author}>{platformFormat(platformId).name}</div>
+                    <div className={classes.author}>{platform && platform.length !== 0 && platform[platformId! - 1].officialName}</div>
                     <div className={classes.rating}>
                       <Rating vote={satisfactionCount} point={point} />
                     </div>

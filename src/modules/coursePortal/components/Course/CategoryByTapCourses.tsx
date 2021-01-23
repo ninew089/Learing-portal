@@ -2,7 +2,6 @@ import React, { useEffect, Suspense, lazy } from "react";
 import { Grid, Divider, Box, Button, CircularProgress } from "@material-ui/core";
 import { useHistory, useRouteMatch, useLocation } from "react-router-dom";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import categoryFormat from "utils/categoryFormat";
 import queryString from 'query-string'
 
 import { useDispatch, useSelector } from 'react-redux'
@@ -43,11 +42,15 @@ export default function SingleLineGridList(props: { id: number }) {
   const { path } = useRouteMatch();
   const { search } = useLocation()
   const parsed = queryString.parse(search)
-  const filterCoursebyCategory = (title: number) => {
-    history.push(`${path}/course?category=${(title)}`);
+
+  const filterCoursebyCategory = (title: number, name: any) => {
+    history.push(`${path}/course?category=${(title)}&&name=${(name)}`);
   };
   const Next = () => {
-    setTimeout(() => filterCoursebyCategory(id + 1), 1000);
+
+    setTimeout(() =>
+
+      filterCoursebyCategory(id + 1, parsed.name !== undefined ? parsed.name : "ความรู้เกี่ยวกับราชการไทยและการเป็นข้าราชการ"), 1000);
   };
 
   const classes = useStyles();
@@ -74,9 +77,8 @@ export default function SingleLineGridList(props: { id: number }) {
         justify="space-between"
 
       >
-        <h3 className={classes.line}>{categoryFormat(id + 1)}</h3>{" "}
+        <h3 className={classes.line}>{parsed.name ? parsed.name : "ความรู้เกี่ยวกับราชการไทยและการเป็นข้าราชการ"}</h3>{" "}
         <Button onClick={Next} style={{ color: "#0f1626" }}>
-          {" "}
           ดูเพิ่มเติม
         </Button>
       </Grid>

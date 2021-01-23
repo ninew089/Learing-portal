@@ -8,12 +8,15 @@ export interface CardProps {
     learningTopic?: string
     link?: string
     name?: string
-    platformId?: number
+    platformlogo?: string
     satisfactionCount?: number
-    thumbnail?: string
+    thumbNail?: string
     viewCount?: number
     point?: number
     key?: number
+    platformName?: string
+    courseCategory?: string
+
 
 
 }

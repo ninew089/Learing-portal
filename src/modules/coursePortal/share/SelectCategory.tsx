@@ -7,7 +7,8 @@ import Select from '@material-ui/core/Select';
 import { useDispatch, useSelector } from 'react-redux'
 import * as actions from "../actions"
 import { useHistory } from 'react-router-dom';
-import colorCategory from "utils/categoryColorCode"
+
+
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -34,8 +35,8 @@ export default function ControlledOpenSelect() {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     const dispatch = useDispatch();
-    const { categories } = useSelector((state: any) => state.course);
-    const [value,setValue]= useState<any>('')
+    const { categories,colorCategory } = useSelector((state: any) => state.course);
+    const [value,setValue]= useState<any>({})
     const history = useHistory()
 
     useEffect(() => {
@@ -43,10 +44,11 @@ export default function ControlledOpenSelect() {
         dispatch(action)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
-    const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+    const handleChange = (event: React.ChangeEvent<{ value: any }>) => {
+     const categoryValue=event.target.value
         switch (event.target.value) {
-            case 0:
-                setValue(0)
+            case -2:
+                setValue(-2)
                 history.push("/learning-portal/courses")
            
                 break;
@@ -58,8 +60,7 @@ export default function ControlledOpenSelect() {
 
             default:
                 setValue(event.target.value)
-                history.push(`/learning-portal/course?category=${event.target.value}`)
-
+                history.push(`/learning-portal/course?category=${categoryValue.id}&&name=${categoryValue.name}`)
                 break;
         }
 
@@ -85,17 +86,17 @@ export default function ControlledOpenSelect() {
                     onChange={handleChange}
                     value={value}
                 >
-                    <MenuItem value={0}>
+                    <MenuItem value={-2}>
                
 ทังหมด
                    
                     </MenuItem>
                     {categories.map((item: any, index: number) =>
-                        <MenuItem value={index + 1} key={index}>
-                            <div className={classes.dot} style={{ background: colorCategory(index + 1) }} />  {item.name}
+                        <MenuItem value={item } key={index}>
+                            <div className={classes.dot} style={{ background: colorCategory[index ] }} />  {item.name}
                         </MenuItem>
                     )}
-                    <MenuItem value={-1} > <div className={classes.dot} style={{ background: colorCategory(9) }} /> หลักสูตร</MenuItem>
+                    <MenuItem value={-1} > <div className={classes.dot} style={{ background: colorCategory[8]}} /> หลักสูตร</MenuItem>
 
                 </Select>
             </FormControl>

@@ -31,9 +31,7 @@ export default function VariantAvatars() {
     fetch()
   }, [])
   const handleClickOpen = () => {
-
     setOpen(true);
-
   };
   const handleChange = (event: any, newValue: any) => {
     setValue(newValue);
@@ -69,11 +67,7 @@ export default function VariantAvatars() {
 
               }
             />
-
-
           )}
-
-
         </Tabs>
       </div>
       <Dialog open={open} setOpen={setOpen} data={data !== undefined ? data[value] : null} />

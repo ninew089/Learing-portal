@@ -166,7 +166,7 @@ export default function MaterialTableDemo(props: any) {
         ]}
         data={predata1}
         detailPanel={(rowData) => {
-          console.log(rowData)
+
           return (
             <div>
               <h4>

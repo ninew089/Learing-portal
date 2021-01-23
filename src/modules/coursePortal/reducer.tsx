@@ -32,6 +32,9 @@ import {
   LOAD_CURRICULUMS_REQUEST,
   LOAD_CURRICULUMS_SUCCESS,
   LOAD_CURRICULUMS_FAILURE,
+  LOAD_PLATFORM_REQUEST,
+  LOAD_PLATFORM_SUCCESS,
+  LOAD_PLATFORM_FAILURE,
 } from "./actions";
 
 const initialState = {
@@ -53,11 +56,46 @@ const initialState = {
   curriculumscourse: [],
   toprate: [],
   recommemded: [],
-  isErrorCourse: []
+  isErrorCourse: [],
+  colorName: [
+    {
+      "ความรู้เกี่ยวกับราชการไทยและการเป็นข้าราชการ": "#fd1515",
+      "การพัฒนากรอบความคิด(Mindset)": "#fd156a",
+      "ทักษะเชิงภาวะผู้นำ": "#e253e4",
+      "ความรู้ด้านการบริหารงานและทรัพยากรบุคคล": "#5e53e4",
+      "กฎหมายและระเบียบราชการ": "#15c7fd",
+      "ทักษะด้านภาษา": "#46119a",
+      "ทักษะเชิงยุทธศาสตร์": "#2ab311",
+      "ทักษะการเขียนหนังสือราชการ": "#f9b122",
+    }
+  ],
+  colorCategory: ["#fd1515", "#fd156a", "#e253e4", "#5e53e4", "#15c7fd", "#46119a", "#2ab311", "#fd8b15", "#f9b122"],
+  categoryImg: [
+    { title: "การบริหารงาน ก.พ.", img: "https://learn.ocsc.info/learning-portal/static/media/category/1.jpg" },
+    { title: "การบริหารทรัพยากรบุคคล", img: "https://learn.ocsc.info/learning-portal/static/media/category/2.jpg" },
+    { title: "กฎหมายและระเบียบราชการ", img: "https://learn.ocsc.info/learning-portal/static/media/category/3.jpg" },
+    { title: "การเขียนหนังสือราชการ", img: "https://learn.ocsc.info/learning-portal/static/media/category/4.jpg" },
+    { title: "สังคม (Soft Skill)", img: "https://learn.ocsc.info/learning-portal/static/media/category/5.jpg" },
+    { title: "ดิจิทัล", img: "https://learn.ocsc.info/learning-portal/static/media/category/6.jpg" },
+    { title: "ภาษา", img: "https://learn.ocsc.info/learning-portal/static/media/category/7.jpg" },
+    { title: "ภาษา", img: "https://learn.ocsc.info/learning-portal/static/media/category/7.jpg" },
+  ],
+  platform: []
 };
 
 export default function (state = initialState, action: any) {
   switch (action.type) {
+    case LOAD_PLATFORM_REQUEST:
+      return { ...state, platform: [] };
+    case LOAD_PLATFORM_SUCCESS:
+      return {
+        ...state,
+        platform: action.payload.platform,
+        isError: true,
+      };
+    case LOAD_PLATFORM_FAILURE:
+      return { ...state, isError: false };
+
     case LOAD_RECOMMENDED_REQUEST:
       return { ...state, isLoadingRecommemded: true, recommemded: [] };
     case LOAD_RECOMMENDED_SUCCESS:

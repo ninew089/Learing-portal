@@ -56,17 +56,17 @@ export default function Course() {
 
 
   useEffect(() => {
-
-    const actionRecommend = actions.loadRecommended()
-    dispatch(actionRecommend)
     const actionTopRate = actions.loadTopRate()
     dispatch(actionTopRate)
+    const actionRecommend = actions.loadRecommended()
+    dispatch(actionRecommend)
+
 
     // eslint-disable-next-line
   }, [])
 
   const dispatch = useDispatch();
-  const { recommemded, toprate } = useSelector((state: any) => state.course);
+  const { toprate, recommemded } = useSelector((state: any) => state.course);
 
 
 

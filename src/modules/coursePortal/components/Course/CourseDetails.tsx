@@ -1,15 +1,12 @@
-import React, { useState, lazy, Suspense } from "react";
+import React, { useState, lazy, Suspense, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, Grid, Box } from "@material-ui/core";
 import numberFormat from "utils/numberFormat";
 
-
-import categoryFormat from "utils/categoryFormat"
-import platformFormat from 'utils/platformFormat'
 import { CardProps } from "./tyscript"
 import CardMedia from '@material-ui/core/CardMedia';
-import colorCategory from "utils/categoryColorCode"
-
+import { useSelector, useDispatch } from 'react-redux'
+import * as actions from "../../actions"
 const Dialog = lazy(() => import('../../share/DialogCourse'));
 const Rating = lazy(() => import('../../share/Rating'));
 
@@ -160,17 +157,20 @@ const useStyles = makeStyles((theme) => ({
 
 export default function IconBreadcrumbs(props: CardProps) {
 
-  const { platformId, learningObjective, viewCount, point, satisfactionCount, code, thumbnail, courseCategoryId, name } = props;
+  const { platformlogo, learningObjective, viewCount, point, platformName, satisfactionCount, code, thumbNail, name, courseCategory } = props;
   const classes = useStyles();
-
   const renderLoader = () => <div></div>
-
   const [open, setOpen] = useState<boolean>(false)
   const onOpen = () => {
     setOpen(true)
-
-
   }
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const action = actions.paltform()
+    dispatch(action)
+    // eslint-disable-next-line
+  }, [])
+  const { colorName } = useSelector((state: any) => state.course);
 
   return (
 
@@ -187,19 +187,13 @@ export default function IconBreadcrumbs(props: CardProps) {
               <div style={{ width: "100%", backgroundSize: "cover", backgroundPosition: "center center", borderRadius: "10px" }} />
               <CardMedia
                 style={{
-                  background: `url('${thumbnail}')`,
+                  background: `url('${thumbNail}')`,
                   backgroundSize: "cover",
                 }}
-                image={thumbnail}
+                image={thumbNail}
                 className={classes.cardMedia}
                 title={name}
-
               />
-
-
-
-
-
               <Typography variant={"h2"} className={classes.title}>
                 {name}
               </Typography>
@@ -213,23 +207,16 @@ export default function IconBreadcrumbs(props: CardProps) {
                 alignItems="center"
                 className={classes.detail}
               >
-
-                <div className={classes.dot} style={{ background: colorCategory(courseCategoryId) }} />
-                <Box fontWeight={500} className={classes.category}>{categoryFormat(courseCategoryId)}</Box>
-
-
+                <div className={classes.dot} style={{ background: colorName[0][courseCategory !== undefined ? courseCategory : 0] }} />
+                <Box fontWeight={500} className={classes.category}>{courseCategory}</Box>
                 <Grid item xs={12}>
                   <div>
-
-
-
                     <Box fontWeight={400} className={classes.caption}>
                       {learningObjective}
                     </Box>
                   </div>
                 </Grid>
               </Grid>
-
               <Grid
                 container
                 direction="row"
@@ -238,14 +225,14 @@ export default function IconBreadcrumbs(props: CardProps) {
               >
                 <div className={classes.logo}>
                   < div style={{
-                    background: `url('${platformFormat(platformId).logo}`,
+                    backgroundImage: `url('${platformlogo}`,
                     backgroundSize: "cover",
-
-                    padding: "30px"
+                    padding: "30px",
+                    backgroundPosition: " center center"
                   }} />
                 </div>
                 <div>
-                  <div className={classes.author}>{platformFormat(platformId).name}</div>
+                  <div className={classes.author}>{platformName}</div>
                   <div className={classes.rating}>
                     <Rating vote={satisfactionCount} point={point} />
                   </div>
@@ -267,15 +254,11 @@ export default function IconBreadcrumbs(props: CardProps) {
                   </Grid>
                 </div>
               </Grid>
-
             </div>
           </Grid>
-
-
         </div>
         <Dialog open={open} setOpen={setOpen} data={props} />
       </div>
-
     </Suspense>
   );
 }

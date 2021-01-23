@@ -10,7 +10,6 @@ import { Route, Switch, useRouteMatch } from "react-router-dom";
 import CourseCertificate from "./TableCertificate";
 import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 
-
 export default function RouteAdmin() {
   const { path } = useRouteMatch();
   const theme = createMuiTheme({
@@ -46,7 +45,7 @@ export default function RouteAdmin() {
         <Route exact path={`${path}/person`}>
           <Person></Person>
         </Route>
-        <Route exact path={`${path}/progress`}>
+        <Route path={`${path}/progress`}>
           <Progress></Progress>
         </Route>
         <Route exact path={`${path}/curriculm`}>
@@ -61,7 +60,7 @@ export default function RouteAdmin() {
         <Route exact path={`${path}/course`}>
           <Law />
         </Route>
-        <Route exact path={`${path}/coursecertificate`}>
+        <Route path={`${path}/coursecertificate`}>
           <CourseCertificate></CourseCertificate>
         </Route>
       </Switch>

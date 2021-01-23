@@ -13,6 +13,7 @@ const initialState = {
     data: [],
     edit: [],
     isErrorProfile: 404
+
 };
 
 export default function (state = initialState, action: any) {

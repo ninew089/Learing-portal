@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import * as actions from "../../actions"
 import searchNotfound from "assets/gif/somethingbroken.gif"
 import Search from "./SearchPage"
-import formatPlatform from "utils/platformFormat"
+
 const CourseDetail = lazy(() => import('../Course/CourseDetails'));
 const Header = lazy(() => import('../../share/Header'));
 const SelectCategory = lazy(() => import('../../share/SelectCategory'));
@@ -57,7 +57,7 @@ export default function GroupCourse(props: any) {
         item.targetGroup.toLowerCase().includes(q)
         ||
         //@ts-ignore
-        (item.platformId !== null && formatPlatform(item.platformId).name.toLowerCase().includes(q))
+        item.platformName.toLowerCase().includes(q)
     )
     const loopWithSlice = (start: any, end: any) => {
         const slicedPosts = courses.filter((item: any) => item.name.toLowerCase().includes(q)
@@ -71,7 +71,7 @@ export default function GroupCourse(props: any) {
             item.targetGroup.toLowerCase().includes(q)
             ||
             //@ts-ignore
-            (item.platformId !== null && formatPlatform(item.platformId).name.toLowerCase().includes(q))
+            item.platformName.toLowerCase().includes(q)
         ).slice(start, end);
         setPostsToShow([...postsToShow, ...slicedPosts]);
     };
@@ -139,14 +139,14 @@ export default function GroupCourse(props: any) {
                             </Grid>
                         }
                         {postsToShow.map((item: any, index: number) => (
-                            <Grid item xs={12} sm={6} md={4} lg={3} xl={3}>
+                            <Grid item xs={12} sm={6} md={4} lg={3} xl={3} key={item.name}>
                                 <CourseDetail
                                     key={index}
                                     id={item.id}
                                     learningTopic={item.learningTopic}
                                     learningObjective={item.learningObjective}
                                     courseCategoryId={item.courseCategoryId}
-                                    thumbnail={item.thumbnail}
+                                    thumbNail={item.thumbNail}
                                     viewCount={item.viewCount}
                                     assessment={item.assessment}
                                     targetGroup={item.targetGroup}
@@ -155,7 +155,9 @@ export default function GroupCourse(props: any) {
                                     link={item.link}
                                     code={item.code}
                                     name={item.name}
-                                    platformId={item.platformId}
+                                    platformlogo={item.platformlogo}
+                                    platformName={item.platformName}
+                                    courseCategory={item.courseCategory}
                                 />
                             </Grid>
                         ))
@@ -169,7 +171,6 @@ export default function GroupCourse(props: any) {
                             justify={"center"}
                             spacing={3}
                         >
-
                             <Button onClick={handleShowMorePosts} color="secondary" className={classes.button}>ดูเพิ่มเติม</Button>
                         </Grid>}
                 </Container>

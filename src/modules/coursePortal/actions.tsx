@@ -67,6 +67,31 @@ const LOAD_RECOMMENDED_SUCCESS =
   "learning-portal/src/ui/LOAD_RECOMMENDED_SUCCESS";
 const LOAD_RECOMMENDED_FAILURE =
   "learning-portal/src/ui/LOAD_RECOMMENDED_FAILURE";
+const LOAD_PLATFORM_REQUEST =
+  "learning-portal/src/ui/LOAD_PLATFORM_REQUEST";
+const LOAD_PLATFORM_SUCCESS =
+  "learning-portal/src/ui/LOAD_PLATFORM_SUCCESS";
+const LOAD_PLATFORM_FAILURE =
+  "learning-portal/src/ui/LOAD_PLATFORM_FAILURE";
+
+function paltform() {
+  return async (dispatch: any) => {
+    dispatch({ type: LOAD_PLATFORM_REQUEST });
+    try {
+      const { data } = await axios.get(`/Platforms`);
+      dispatch({
+        type: LOAD_PLATFORM_SUCCESS,
+        payload: {
+          platform: data,
+        },
+      });
+    } catch (err) {
+      dispatch({
+        type: LOAD_PLATFORM_FAILURE
+      });
+    }
+  };
+}
 
 function loadRecommended() {
   return async (dispatch: any) => {
@@ -335,6 +360,9 @@ export {
   LOAD_RECOMMENDED_REQUEST,
   LOAD_RECOMMENDED_SUCCESS,
   LOAD_RECOMMENDED_FAILURE,
+  LOAD_PLATFORM_REQUEST,
+  LOAD_PLATFORM_SUCCESS,
+  LOAD_PLATFORM_FAILURE,
   loadCurriculumsCourse,
   loadCourseCategory,
   loadCourseCategories,
@@ -346,5 +374,6 @@ export {
   loadRecommended,
   loadCourses,
   loadCurriculum,
+  paltform
 
 };

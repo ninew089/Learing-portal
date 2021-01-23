@@ -30,7 +30,37 @@ import {
     LOAD_PUTPERSON_SUCCESS,
     LOAD_PUTPERSON_FAILURE,
     CLEAR_MESSAGE,
-    LOAD_MESSAGE
+    LOAD_MESSAGE,
+    LOAD_COURSEPLATFORM_REQUEST,
+    LOAD_COURSEPLATFORM_SUCCESS,
+    LOAD_COURSEPLATFORM_FAILURE,
+    LOAD_CERTIFICATEADD_REQUEST,
+    LOAD_CERTIFICATEADD_SUCCESS,
+    LOAD_CERTIFICATEADD_FAILURE,
+    LOAD_CERTIFICATEEDIT_REQUEST,
+    LOAD_CERTIFICATEEDIT_SUCCESS,
+    LOAD_CERTIFICATEEDIT_FAILURE,
+    LOAD_CURRICULUMCERTIFICATEEDIT_REQUEST,
+    LOAD_CURRICULUMCERTIFICATEEDIT_SUCCESS,
+    LOAD_CURRICULUMCERTIFICATEEDIT_FAILURE,
+    LOAD_CURRICULUMCERTIFICATEADD_REQUEST,
+    LOAD_CURRICULUMCERTIFICATEADD_SUCCESS,
+    LOAD_CURRICULUMCERTIFICATEADD_FAILURE,
+    LOAD_PROGRESSADD_REQUEST,
+    LOAD_PROGRESSADD_SUCCESS,
+    LOAD_PROGRESSADD_FAILURE,
+    LOAD_PROGRESSEDIT_REQUEST,
+    LOAD_PROGRESSEDIT_SUCCESS,
+    LOAD_PROGRESSEDIT_FAILURE,
+    LOAD_CURRICULUMPROGRESSADD_REQUEST,
+    LOAD_CURRICULUMPROGRESSADD_SUCCESS,
+    LOAD_CURRICULUMPROGRESSADD_FAILURE,
+    LOAD_CURRICULUMPROGRESSEDIT_REQUEST,
+    LOAD_CURRICULUMPROGRESSEDIT_SUCCESS,
+    LOAD_CURRICULUMPROGRESSEDIT_FAILURE,
+    LOAD_CURRICULUMPLATFORM_REQUEST,
+    LOAD_CURRICULUMPLATFORM_SUCCESS,
+    LOAD_CURRICULUMPLATFORM_FAILURE
 } from "./actions";
 const initialState = {
     isLoading: false,
@@ -44,6 +74,24 @@ const initialState = {
     courseEditStatus: [],
     courseAddMessage: "",
     courseAddStatus: [],
+    certificateAddMessage: "",
+    certificateAddStatus: [],
+    certificateEditMessage: "",
+    certificateEditStatus: [],
+    curriculumcertificateAddMessage: "",
+    curriculumcertificateAddStatus: [],
+    curriculumcertificateEditMessage: "",
+    curriculumcertificateEditStatus: [],
+
+    progressAddMessage: "",
+    progressAddStatus: [],
+    progressEditMessage: "",
+    progressEditStatus: [],
+    curriculumprogressAddMessage: "",
+    curriculumprogressAddStatus: [],
+    curriculumprogressEditMessage: "",
+    curriculumprogressEditStatus: [],
+
     curriculumAddMessage: "",
     curriculumAddStatus: [],
     curriculumEditMessage: "",
@@ -52,13 +100,150 @@ const initialState = {
     subCurriculumAddStatus: [],
     subCurriculumEditMessage: "",
     subCurriculumEditStatus: [],
-
+    course: [],
+    curriculum: [],
     message: null,
     severity: null
 };
 
 export default function (state = initialState, action: any) {
     switch (action.type) {
+        case LOAD_CURRICULUMPROGRESSEDIT_REQUEST:
+            return { ...state, isLoading: true, curriculumprogressEditMessage: [], curriculumprogressditStatus: [] };
+        case LOAD_CURRICULUMPROGRESSEDIT_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+                curriculumprogressEditMessage: action.payload.curriculumprogressEditMessage,
+                curriculumprogressEditStatus: action.payload.curriculumprogressEditStatus,
+
+            };
+        case LOAD_CURRICULUMPROGRESSEDIT_FAILURE:
+            return { ...state, isLoading: false, curriculumprogressEditStatus: action.payload.curriculumprogressEditStatus };
+
+
+        case LOAD_CURRICULUMPROGRESSADD_REQUEST:
+            return { ...state, isLoading: true, curriculumprogressAddMessage: [], curriculumprogressAddStatus: [] };
+        case LOAD_CURRICULUMPROGRESSADD_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+                curriculumprogressAddMessage: action.payload.curriculumprogressAddMessage,
+                curriculumprogressAddStatus: action.payload.curriculumprogressAddStatus,
+
+            };
+        case LOAD_CURRICULUMPROGRESSADD_FAILURE:
+            return { ...state, isLoading: false, curriculumprogressAddStatus: action.payload.curriculumprogressAddStatus };
+
+        /*------------------- */
+        case LOAD_PROGRESSEDIT_REQUEST:
+            return { ...state, isLoading: true, progressEditMessage: [], progressditStatus: [] };
+        case LOAD_PROGRESSEDIT_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+                progressEditMessage: action.payload.progressEditMessage,
+                progressEditStatus: action.payload.progressEditStatus,
+
+            };
+        case LOAD_PROGRESSEDIT_FAILURE:
+            return { ...state, isLoading: false, progressEditStatus: action.payload.progressEditStatus };
+
+
+        case LOAD_PROGRESSADD_REQUEST:
+            return { ...state, isLoading: true, progressAddMessage: [], progressAddStatus: [] };
+        case LOAD_PROGRESSADD_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+                progressAddMessage: action.payload.progressAddMessage,
+                progressAddStatus: action.payload.progressAddStatus,
+
+            };
+        case LOAD_PROGRESSADD_FAILURE:
+            return { ...state, isLoading: false, progressAddStatus: action.payload.progressAddStatus };
+
+
+        /*-----------ประกาศนียบัตร-------- */
+        case LOAD_CURRICULUMCERTIFICATEEDIT_REQUEST:
+            return { ...state, isLoading: true, curriculumcertificateEditMessage: [], curriculumcertificatEditStatus: [] };
+        case LOAD_CURRICULUMCERTIFICATEEDIT_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+                curriculumcertificateEditMessage: action.payload.curriculumcertificateEditMessage,
+                curriculumcertificateEditStatus: action.payload.curriculumcertificateEditStatus,
+
+            };
+        case LOAD_CURRICULUMCERTIFICATEEDIT_FAILURE:
+            return { ...state, isLoading: false, curriculumcertificateEditStatus: action.payload.curriculumcertificateEditStatus };
+
+
+        case LOAD_CURRICULUMCERTIFICATEADD_REQUEST:
+            return { ...state, isLoading: true, curriculumcertificateAddMessage: [], curriculumcertificateAddStatus: [] };
+        case LOAD_CURRICULUMCERTIFICATEADD_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+                curriculumcertificateAddMessage: action.payload.curriculumcertificateAddMessage,
+                curriculumcertificateAddStatus: action.payload.curriculumcertificateAddStatus,
+
+            };
+        case LOAD_CURRICULUMCERTIFICATEADD_FAILURE:
+            return { ...state, isLoading: false, curriculumcertificateAddStatus: action.payload.curriculumcertificateAddStatus };
+
+        /*------------------- */
+        case LOAD_CERTIFICATEEDIT_REQUEST:
+            return { ...state, isLoading: true, certificateEditMessage: [], certificatEditStatus: [] };
+        case LOAD_CERTIFICATEEDIT_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+                certificateEditMessage: action.payload.certificateEditMessage,
+                certificateEditStatus: action.payload.certificateEditStatus,
+
+            };
+        case LOAD_CERTIFICATEEDIT_FAILURE:
+            return { ...state, isLoading: false, certificateEditStatus: action.payload.certificateEditStatus };
+
+
+        case LOAD_CERTIFICATEADD_REQUEST:
+            return { ...state, isLoading: true, certificateAddMessage: [], certificateAddStatus: [] };
+        case LOAD_CERTIFICATEADD_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+                certificateAddMessage: action.payload.certificateAddMessage,
+                certificateAddStatus: action.payload.certificateAddStatus,
+
+            };
+        case LOAD_CERTIFICATEADD_FAILURE:
+            return { ...state, isLoading: false, certificateAddStatus: action.payload.certificateAddStatus };
+
+        /*------------------- */
+        case LOAD_COURSEPLATFORM_REQUEST:
+            return { ...state, isLoading: true, course: [] };
+        case LOAD_COURSEPLATFORM_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+                course: action.payload.course,
+            };
+        case LOAD_COURSEPLATFORM_FAILURE:
+            return { ...state, isLoading: false, status: action.payload.status };
+
+        case LOAD_CURRICULUMPLATFORM_REQUEST:
+            return { ...state, isLoading: true, curriculum: [] };
+        case LOAD_CURRICULUMPLATFORM_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+                curriculum: action.payload.curriculum,
+            };
+        case LOAD_CURRICULUMPLATFORM_FAILURE:
+            return { ...state, isLoading: false, status: action.payload.status };
+
+
         case LOAD_PUTPERSON_REQUEST:
             return { ...state, isLoading: true };
         case LOAD_PUTPERSON_SUCCESS:

@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { Grid, Box, Divider, CardMedia } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import colorCategory from "utils/categoryColorCode"
-
 import Dialog from '../../share/DialogCourse'
 import { useSelector } from 'react-redux'
 
@@ -96,7 +94,7 @@ export default function SocialCard(props: any) {
     const { data } = props;
     const classes = useStyles();
     const [open, setOpen] = useState<boolean>(false)
-    const { categories } = useSelector((state: any) => state.course);
+    const { categories, colorCategory } = useSelector((state: any) => state.course);
     const onSelected = () => {
         setOpen(true)
     }
@@ -114,7 +112,6 @@ export default function SocialCard(props: any) {
                 onClick={onSelected}
             >
                 <Grid item xs={5}>
-
                     < CardMedia
                         style={{
                             background: `url('${data.thumbnail}')`,
@@ -125,16 +122,11 @@ export default function SocialCard(props: any) {
                         title={data.name}
 
                     />
-
-
                 </Grid>
                 <Grid item xs={7}>
-
-
                     <Box fontSize={14} fontWeight={700} className={classes.name}>
                         {data.name}
                     </Box>
-
                     <Box fontSize={14} fontWeight={700} className={classes.name}>
                         {data.code}
                     </Box>
@@ -143,12 +135,11 @@ export default function SocialCard(props: any) {
                         fontWeight={700}
                         className={classes.category}
                     >
-                        <div className={classes.dot} style={{ background: colorCategory(data.courseCategoryId) }} />{categories.length !== 0 && categories[data.courseCategoryId - 1].name}
+                        <div className={classes.dot} style={{ background: colorCategory[data.courseCategoryId - 1] }} />{categories.length !== 0 && categories[data.courseCategoryId - 1].name}
                     </Box>
                     <Box fontSize={12} fontWeight={400} className={classes.caption}>
                         {data.learningObjective}
                     </Box>
-
                     <Divider />
                 </Grid>
             </Grid>

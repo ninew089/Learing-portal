@@ -40,10 +40,10 @@ export default function SingleLineGridList(props: any) {
   const [postsToShow, setPostsToShow] = useState<any>([]);
   const [next, setNext] = useState(8);
   const loopWithSlice = (start: any, end: any) => {
-    console.log(curriculums)
+
     const slicedPosts = curriculums.slice(start, end);
     setPostsToShow([...postsToShow, ...slicedPosts]);
-    console.log(postsToShow)
+
   };
 
   useEffect(() => {

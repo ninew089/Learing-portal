@@ -102,7 +102,7 @@ export default function GroupCourse() {
                                     learningTopic={item.learningTopic}
                                     learningObjective={item.learningObjective}
                                     courseCategoryId={item.courseCategoryId}
-                                    thumbnail={item.thumbnail}
+                                    thumbNail={item.thumbNail}
                                     viewCount={item.viewCount}
                                     assessment={item.assessment}
                                     targetGroup={item.targetGroup}
@@ -111,7 +111,9 @@ export default function GroupCourse() {
                                     link={item.link}
                                     code={item.code}
                                     name={item.name}
-                                    platformId={item.platformId}
+                                    platformlogo={item.platformlogo}
+                                    platformName={item.platformName}
+                                    courseCategory={item.courseCategory}
                                 />
 
                             </Grid>

@@ -1,7 +1,6 @@
 import React, { useEffect, Suspense, lazy, useState } from "react";
 import { Grid, Divider, Container, CircularProgress, Button } from "@material-ui/core";
 import queryString from "query-string";
-import categoryFormat from "utils/categoryFormat"
 import { useLocation } from "react-router-dom";
 
 import { useDispatch, useSelector } from 'react-redux'
@@ -36,9 +35,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default function GroupCourse() {
   const { search } = useLocation();
-  const { category } = queryString.parse(search);
+  const { category, name } = queryString.parse(search);
   const dispatch = useDispatch();
-  const parsed = queryString.parse(search)
+
   const { courseCategories, isLoadingCourseCategories } = useSelector((state: any) => state.course);
   const classes = useStyles()
   const postsPerPage = 8;
@@ -64,12 +63,12 @@ export default function GroupCourse() {
 
   useEffect(() => {
 
-    const action = actions.loadCourseCategories(parsed.category === undefined ? 1 : parsed.category)
+    const action = actions.loadCourseCategories(category === undefined ? 1 : category)
     dispatch(action)
     setPostsToShow([])
 
     // eslint-disable-next-line
-  }, [parsed.category])
+  }, [category])
 
   return (
     <Suspense fallback={renderLoader()}>
@@ -79,7 +78,7 @@ export default function GroupCourse() {
 
           <Grid container className={classes.content} direction="row" alignItems="center" justify={"space-between"} >
 
-            <h2>{categoryFormat(category)}</h2>
+            <h2>{name}</h2>
             <SelectCategory />
 
           </Grid>
@@ -97,14 +96,14 @@ export default function GroupCourse() {
             {isLoadingCourseCategories && <CircularProgress color="secondary" className={classes.circular} />}
 
             {postsToShow.map((item: any, index: number) => (
-              <Grid item xs={12} sm={6} md={4} lg={3} xl={3} key={index}>
+              <Grid item xs={12} sm={6} md={4} lg={3} xl={3} key={item.name}>
                 <CourseDetail
                   key={index}
                   id={item.id}
                   learningTopic={item.learningTopic}
                   learningObjective={item.learningObjective}
                   courseCategoryId={item.courseCategoryId}
-                  thumbnail={item.thumbnail}
+                  thumbNail={item.thumbNail}
                   viewCount={item.viewCount}
                   assessment={item.assessment}
                   targetGroup={item.targetGroup}
@@ -113,7 +112,9 @@ export default function GroupCourse() {
                   link={item.link}
                   code={item.code}
                   name={item.name}
-                  platformId={item.platformId}
+                  platformlogo={item.platformlogo}
+                  platformName={item.platformName}
+                  courseCategory={item.courseCategory}
                 />
               </Grid>
             ))}

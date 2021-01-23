@@ -5,6 +5,13 @@ import { parseJwt } from "utils/getDataJWT"
 
 
 
+const LOAD_CURRICULUMPLATFORM_REQUEST = "learning-portal/src/platform/LOAD_CURRICULUMPLATFORM_REQUEST";
+const LOAD_CURRICULUMPLATFORM_SUCCESS = "learning-portal/src/platform/LOAD_CURRICULUMPLATFORM_SUCCESS";
+const LOAD_CURRICULUMPLATFORM_FAILURE = "learning-portal/src/platform/LOAD_CURRICULUMPLATFORM_FAILURE";
+
+const LOAD_COURSEPLATFORM_REQUEST = "learning-portal/src/platform/LOAD_COURSEPLATFORM_REQUEST";
+const LOAD_COURSEPLATFORM_SUCCESS = "learning-portal/src/platform/LOAD_COURSEPLATFORM_SUCCESS";
+const LOAD_COURSEPLATFORM_FAILURE = "learning-portal/src/platform/LOAD_COURSEPLATFORM_FAILURE";
 
 const LOAD_PROFILE_REQUEST = "learning-portal/src/platform/LOAD_PROFILE_REQUEST";
 const LOAD_PROFILE_SUCCESS = "learning-portal/src/platform/LOAD_PROFILE_SUCCESS";
@@ -43,6 +50,23 @@ const LOAD_SUBCURRICULUMADD_REQUEST = "learning-portal/src/platform/LOAD_SUBCURR
 const LOAD_SUBCURRICULUMADD_SUCCESS = "learning-portal/src/platform/LOAD_SUBCURRICULUMADD_SUCCESS";
 const LOAD_SUBCURRICULUMADD_FAILURE = "learning-portal/src/platform/LOAD_SUBCURRICULUMADD_FAILURE";
 
+
+const LOAD_CERTIFICATEADD_REQUEST = "learning-portal/src/platform/LOAD_CERTIFICATEADD_REQUEST";
+const LOAD_CERTIFICATEADD_SUCCESS = "learning-portal/src/platform/LOAD_CERTIFICATEADD_SUCCESS";
+const LOAD_CERTIFICATEADD_FAILURE = "learning-portal/src/platform/LOAD_CERTIFICATEADD_FAILURE";
+
+const LOAD_CERTIFICATEEDIT_REQUEST = "learning-portal/src/platform/LOAD_CERTIFICATEEDIT_REQUEST";
+const LOAD_CERTIFICATEEDIT_SUCCESS = "learning-portal/src/platform/LOAD_CERTIFICATEEDIT_SUCCESS";
+const LOAD_CERTIFICATEEDIT_FAILURE = "learning-portal/src/platform/LOAD_CERTIFICATEEDIT_FAILURE";
+
+const LOAD_CURRICULUMCERTIFICATEADD_REQUEST = "learning-portal/src/platform/LOAD_CURRICULUMCERTIFICATEADD_REQUEST";
+const LOAD_CURRICULUMCERTIFICATEADD_SUCCESS = "learning-portal/src/platform/LOAD_CURRICULUMCERTIFICATEADD_SUCCESS";
+const LOAD_CURRICULUMCERTIFICATEADD_FAILURE = "learning-portal/src/platform/LOAD_CURRICULUMCERTIFICATEADD_FAILURE";
+
+const LOAD_CURRICULUMCERTIFICATEEDIT_REQUEST = "learning-portal/src/platform/LOAD_CURRICULUMCERTIFICATEEDIT_REQUEST";
+const LOAD_CURRICULUMCERTIFICATEEDIT_SUCCESS = "learning-portal/src/platform/LOAD_CURRICULUMCERTIFICATEEDIT_SUCCESS";
+const LOAD_CURRICULUMCERTIFICATEEDIT_FAILURE = "learning-portal/src/platform/LOAD_CURRICULUMCERTIFICATEEDIT_FAILURE";
+
 const LOAD_PUTPERSON_REQUEST = "learning-portal/src/platform/LOAD_PUTPERSON_REQUEST";
 const LOAD_PUTPERSON_SUCCESS = "learning-portal/src/platform/LOAD_PUTPERSON_SUCCESS";
 const LOAD_PUTPERSON_FAILURE = "learning-portal/src/platform/LOAD_PUTPERSON_FAILURE";
@@ -50,8 +74,372 @@ const LOAD_PUTPERSON_FAILURE = "learning-portal/src/platform/LOAD_PUTPERSON_FAIL
 const CLEAR_MESSAGE = "learning-portal/src/platform/CLEAR_MESSAGE";
 const LOAD_MESSAGE = "learning-portal/src/platform/LOAD_MESSAGE";
 
-/*/Platforms */
-/*    const response = await axios.put(`/Platforms/${platformid}`, preInfo, { headers })*/
+
+const LOAD_PROGRESSADD_REQUEST = "learning-portal/src/platform/LOAD_PROGRESSADD_REQUEST";
+const LOAD_PROGRESSADD_SUCCESS = "learning-portal/src/platform/LOAD_PROGRESSADD_SUCCESS";
+const LOAD_PROGRESSADD_FAILURE = "learning-portal/src/platform/LOAD_PROGRESSADD_FAILURE";
+
+const LOAD_PROGRESSEDIT_REQUEST = "learning-portal/src/platform/LOAD_PROGRESSEDIT_REQUEST";
+const LOAD_PROGRESSEDIT_SUCCESS = "learning-portal/src/platform/LOAD_PROGRESSEDIT_SUCCESS";
+const LOAD_PROGRESSEDIT_FAILURE = "learning-portal/src/platform/LOAD_PROGRESSEDIT_FAILURE";
+
+const LOAD_CURRICULUMPROGRESSADD_REQUEST = "learning-portal/src/platform/LOAD_CURRICULUMPROGRESSADD_REQUEST";
+const LOAD_CURRICULUMPROGRESSADD_SUCCESS = "learning-portal/src/platform/LOAD_CURRICULUMPROGRESSADD_SUCCESS";
+const LOAD_CURRICULUMPROGRESSADD_FAILURE = "learning-portal/src/platform/LOAD_CURRICULUMPROGRESSADD_FAILURE";
+
+const LOAD_CURRICULUMPROGRESSEDIT_REQUEST = "learning-portal/src/platform/LOAD_CURRICULUMPROGRESSEDIT_REQUEST";
+const LOAD_CURRICULUMPROGRESSEDIT_SUCCESS = "learning-portal/src/platform/LOAD_CURRICULUMPROGRESSEDIT_SUCCESS";
+const LOAD_CURRICULUMPROGRESSEDIT_FAILURE = "learning-portal/src/platform/LOAD_CURRICULUMPROGRESSEDIT_FAILURE";
+
+
+/*
+
+          post  /Platforms/${platformid}/CourseProgresses
+                put    `/Platforms/${platformid}/CourseProgresses/${newData.id}`,
+*/
+function loadEditCurriculumProgress(CourseProgresses: any, id: any) {
+    return async (dispatch: any) => {
+        dispatch({ type: LOAD_CURRICULUMPROGRESSEDIT_REQUEST });
+        try {
+            const token = getCookie('token')
+            const platformid = parseJwt(token).unique_name
+            const headers = {
+                Authorization: `Bearer ${token}`,
+            }
+            const result = await axios.put(`/Platforms/${platformid}/CurriculumProgresses/${id}`, CourseProgresses, { headers })
+            dispatch({
+                type: LOAD_CURRICULUMPROGRESSEDIT_SUCCESS,
+                payload: {
+                    curriculumprogressEditMessage: "แก้ไขประกาศนียบัตรสำเร็จ",
+                    curriculumprogressEditStatus: result.status
+                }
+            })
+            dispatch({
+                type: LOAD_MESSAGE,
+                payload: {
+                    message: `แก้ไขประกาศนียบัตรสำเร็จ`,
+                    severity: "success"
+                }
+            })
+        } catch (err) {
+            dispatch({
+                type: LOAD_CURRICULUMPROGRESSEDIT_FAILURE,
+                payload: {
+                    curriculumprogressEditStatus: err
+                },
+            });
+            dispatch({
+                type: LOAD_MESSAGE,
+                payload: {
+                    message: `เกิดข้อผิดพลาด ${err.response.status}`,
+                    severity: "error"
+                }
+            })
+
+        }
+    };
+}
+function loadAddCurriculumProgress(CourseProgresses: any) {
+    return async (dispatch: any) => {
+        dispatch({ type: LOAD_CURRICULUMPROGRESSADD_REQUEST });
+        try {
+            const token = getCookie('token')
+            const platformid = parseJwt(token).unique_name
+            const headers = {
+                Authorization: `Bearer ${token}`,
+            }
+            const result = await axios.post(`/Platforms/${platformid}/CurriculumProgresses`, CourseProgresses, { headers })
+            dispatch({
+                type: LOAD_CURRICULUMPROGRESSADD_SUCCESS,
+                payload: {
+                    progressAddMessage: "เพิ่มประกาศนียบัตรสำเร็จ",
+                    progressAddStatus: result.status
+                }
+            })
+            dispatch({
+                type: LOAD_MESSAGE,
+                payload: {
+                    message: `เพิ่มประกาศนียบัตรสำเร็จ`,
+                    severity: "success"
+                }
+            })
+        } catch (err) {
+            dispatch({
+                type: LOAD_CURRICULUMPROGRESSADD_FAILURE,
+                payload: {
+                    progressAddStatus: err
+                },
+            });
+            dispatch({
+                type: LOAD_MESSAGE,
+                payload: {
+                    message: `เกิดข้อผิดพลาด ${err.response.status}`,
+                    severity: "error"
+                }
+            })
+
+        }
+    };
+}
+
+/*------*/
+
+function loadEditProgress(CourseProgresses: any, id: any) {
+    return async (dispatch: any) => {
+        dispatch({ type: LOAD_PROGRESSEDIT_REQUEST });
+        try {
+            const token = getCookie('token')
+            const platformid = parseJwt(token).unique_name
+            const headers = {
+                Authorization: `Bearer ${token}`,
+            }
+            const result = await axios.put(`/Platforms/${platformid}/CourseProgresses/${id}`, CourseProgresses, { headers })
+            dispatch({
+                type: LOAD_PROGRESSEDIT_SUCCESS,
+                payload: {
+                    progressEditMessage: "แก้ไขประกาศนียบัตรสำเร็จ",
+                    progressEditStatus: result.status
+                }
+            })
+            dispatch({
+                type: LOAD_MESSAGE,
+                payload: {
+                    message: `แก้ไขประกาศนียบัตรสำเร็จ`,
+                    severity: "success"
+                }
+            })
+        } catch (err) {
+            dispatch({
+                type: LOAD_PROGRESSEDIT_FAILURE,
+                payload: {
+                    progressEditStatus: err
+                },
+            });
+            dispatch({
+                type: LOAD_MESSAGE,
+                payload: {
+                    message: `เกิดข้อผิดพลาด ${err.response.status}`,
+                    severity: "error"
+                }
+            })
+
+        }
+    };
+}
+function loadAddProgress(CourseProgresses: any) {
+    return async (dispatch: any) => {
+        dispatch({ type: LOAD_PROGRESSADD_REQUEST });
+        try {
+            const token = getCookie('token')
+            const platformid = parseJwt(token).unique_name
+            const headers = {
+                Authorization: `Bearer ${token}`,
+            }
+            const result = await axios.post(`/Platforms/${platformid}/CourseProgresses`, CourseProgresses, { headers })
+            dispatch({
+                type: LOAD_PROGRESSADD_SUCCESS,
+                payload: {
+                    progressAddMessage: "เพิ่มประกาศนียบัตรสำเร็จ",
+                    progressAddStatus: result.status
+                }
+            })
+            dispatch({
+                type: LOAD_MESSAGE,
+                payload: {
+                    message: `เพิ่มประกาศนียบัตรสำเร็จ`,
+                    severity: "success"
+                }
+            })
+        } catch (err) {
+            dispatch({
+                type: LOAD_PROGRESSADD_FAILURE,
+                payload: {
+                    progressAddStatus: err
+                },
+            });
+            dispatch({
+                type: LOAD_MESSAGE,
+                payload: {
+                    message: `เกิดข้อผิดพลาด ${err.response.status}`,
+                    severity: "error"
+                }
+            })
+
+        }
+    };
+}
+/*--ประกาศนียบัตร--*/
+function loadEditCurriculumCertificate(certificate: any, id: any) {
+    return async (dispatch: any) => {
+        dispatch({ type: LOAD_CURRICULUMCERTIFICATEEDIT_REQUEST });
+        try {
+            const token = getCookie('token')
+            const platformid = parseJwt(token).unique_name
+            const headers = {
+                Authorization: `Bearer ${token}`,
+            }
+            const result = await axios.put(`/Platforms/${platformid}/CurriculumCertificates/${id}`, certificate, { headers })
+            dispatch({
+                type: LOAD_CURRICULUMCERTIFICATEEDIT_SUCCESS,
+                payload: {
+                    curriculumcertificateEditMessage: "แก้ไขประกาศนียบัตรสำเร็จ",
+                    curriculumcertificateEditStatus: result.status
+                }
+            })
+            dispatch({
+                type: LOAD_MESSAGE,
+                payload: {
+                    message: `แก้ไขประกาศนียบัตรสำเร็จ`,
+                    severity: "success"
+                }
+            })
+        } catch (err) {
+            dispatch({
+                type: LOAD_CURRICULUMCERTIFICATEEDIT_FAILURE,
+                payload: {
+                    curriculumcertificateEditStatus: err
+                },
+            });
+            dispatch({
+                type: LOAD_MESSAGE,
+                payload: {
+                    message: `เกิดข้อผิดพลาด ${err.response.status}`,
+                    severity: "error"
+                }
+            })
+
+        }
+    };
+}
+function loadAddCurriculumCertificate(certificate: any) {
+    return async (dispatch: any) => {
+        dispatch({ type: LOAD_CURRICULUMCERTIFICATEADD_REQUEST });
+        try {
+            const token = getCookie('token')
+            const platformid = parseJwt(token).unique_name
+            const headers = {
+                Authorization: `Bearer ${token}`,
+            }
+            const result = await axios.post(`/Platforms/${platformid}/CurriculumCertificates`, certificate, { headers })
+            dispatch({
+                type: LOAD_CURRICULUMCERTIFICATEADD_SUCCESS,
+                payload: {
+                    certificateAddMessage: "เพิ่มประกาศนียบัตรสำเร็จ",
+                    certificateAddStatus: result.status
+                }
+            })
+            dispatch({
+                type: LOAD_MESSAGE,
+                payload: {
+                    message: `เพิ่มประกาศนียบัตรสำเร็จ`,
+                    severity: "success"
+                }
+            })
+        } catch (err) {
+            dispatch({
+                type: LOAD_CURRICULUMCERTIFICATEADD_FAILURE,
+                payload: {
+                    certificateAddStatus: err
+                },
+            });
+            dispatch({
+                type: LOAD_MESSAGE,
+                payload: {
+                    message: `เกิดข้อผิดพลาด ${err.response.status}`,
+                    severity: "error"
+                }
+            })
+
+        }
+    };
+}
+
+/*------*/
+
+function loadEditCertificate(certificate: any, id: any) {
+    return async (dispatch: any) => {
+        dispatch({ type: LOAD_CERTIFICATEEDIT_REQUEST });
+        try {
+            const token = getCookie('token')
+            const platformid = parseJwt(token).unique_name
+            const headers = {
+                Authorization: `Bearer ${token}`,
+            }
+            const result = await axios.put(`/Platforms/${platformid}/CourseCertificates/${id}`, certificate, { headers })
+            dispatch({
+                type: LOAD_CERTIFICATEEDIT_SUCCESS,
+                payload: {
+                    certificateEditMessage: "แก้ไขประกาศนียบัตรสำเร็จ",
+                    certificateEditStatus: result.status
+                }
+            })
+            dispatch({
+                type: LOAD_MESSAGE,
+                payload: {
+                    message: `แก้ไขประกาศนียบัตรสำเร็จ`,
+                    severity: "success"
+                }
+            })
+        } catch (err) {
+            dispatch({
+                type: LOAD_CERTIFICATEEDIT_FAILURE,
+                payload: {
+                    certificateEditStatus: err
+                },
+            });
+            dispatch({
+                type: LOAD_MESSAGE,
+                payload: {
+                    message: `เกิดข้อผิดพลาด ${err.response.status}`,
+                    severity: "error"
+                }
+            })
+
+        }
+    };
+}
+function loadAddCertificate(info: any) {
+    return async (dispatch: any) => {
+        dispatch({ type: LOAD_CERTIFICATEADD_REQUEST });
+        try {
+            const token = getCookie('token')
+            const platformid = parseJwt(token).unique_name
+            const headers = {
+                Authorization: `Bearer ${token}`,
+            }
+            const result = await axios.post(`/Platforms/${platformid}/CourseCertificates`, info, { headers })
+            dispatch({
+                type: LOAD_CERTIFICATEADD_SUCCESS,
+                payload: {
+                    certificateAddMessage: "เพิ่มประกาศนียบัตรสำเร็จ",
+                    certificateAddStatus: result.status
+                }
+            })
+            dispatch({
+                type: LOAD_MESSAGE,
+                payload: {
+                    message: `เพิ่มประกาศนียบัตรสำเร็จ`,
+                    severity: "success"
+                }
+            })
+        } catch (err) {
+            dispatch({
+                type: LOAD_CERTIFICATEADD_FAILURE,
+                payload: {
+                    certificateAddStatus: err
+                },
+            });
+            dispatch({
+                type: LOAD_MESSAGE,
+                payload: {
+                    message: `เกิดข้อผิดพลาด ${err.response.status}`,
+                    severity: "error"
+                }
+            })
+
+        }
+    };
+}
 
 function putPerson(info: any) {
     return async (dispatch: any) => {
@@ -104,10 +492,6 @@ function loadLogin(userInfo: any) {
                     status: result.status
                 },
             })
-
-
-
-
             setCookie('token', result.data.token, 3)
 
             dispatch(push('/learning-portal/admin/main'))
@@ -487,6 +871,60 @@ function loadAddSubCurriculums(valueCurriculun: any, id: any) {
         }
     };
 }
+function getCourse() {
+    return async (dispatch: any) => {
+        dispatch({ type: LOAD_COURSEPLATFORM_REQUEST });
+        try {
+            const token = getCookie('token')
+            const platformid = parseJwt(token).unique_name
+            const { data } = await axios.get(`/Platforms/${platformid}/Courses`);
+            dispatch({
+                type: LOAD_COURSEPLATFORM_SUCCESS,
+                payload: {
+                    course: data,
+
+                },
+            });
+
+        } catch (err) {
+            dispatch({
+                type: LOAD_COURSEPLATFORM_FAILURE,
+                payload: {
+                    status: err.response.status
+                },
+            });
+
+        }
+    };
+
+}
+function getCurriculum() {
+    return async (dispatch: any) => {
+        dispatch({ type: LOAD_CURRICULUMPLATFORM_REQUEST });
+        try {
+            const token = getCookie('token')
+            const platformid = parseJwt(token).unique_name
+            const { data } = await axios.get(`/Platforms/${platformid}/Curriculums`);
+            dispatch({
+                type: LOAD_CURRICULUMPLATFORM_SUCCESS,
+                payload: {
+                    curriculum: data,
+
+                },
+            });
+
+        } catch (err) {
+            dispatch({
+                type: LOAD_CURRICULUMPLATFORM_FAILURE,
+                payload: {
+                    status: err.response.status
+                },
+            });
+
+        }
+    };
+
+}
 
 function clearMessage() {
     return {
@@ -538,7 +976,37 @@ export {
     LOAD_PUTPERSON_REQUEST,
     LOAD_PUTPERSON_SUCCESS,
     LOAD_PUTPERSON_FAILURE,
-    putPerson,
+    LOAD_COURSEPLATFORM_REQUEST,
+    LOAD_COURSEPLATFORM_SUCCESS,
+    LOAD_COURSEPLATFORM_FAILURE,
+    LOAD_CERTIFICATEADD_REQUEST,
+    LOAD_CERTIFICATEADD_SUCCESS,
+    LOAD_CERTIFICATEADD_FAILURE,
+    LOAD_CERTIFICATEEDIT_REQUEST,
+    LOAD_CERTIFICATEEDIT_SUCCESS,
+    LOAD_CERTIFICATEEDIT_FAILURE,
+    LOAD_CURRICULUMCERTIFICATEEDIT_REQUEST,
+    LOAD_CURRICULUMCERTIFICATEEDIT_SUCCESS,
+    LOAD_CURRICULUMCERTIFICATEEDIT_FAILURE,
+    LOAD_CURRICULUMCERTIFICATEADD_REQUEST,
+    LOAD_CURRICULUMCERTIFICATEADD_SUCCESS,
+    LOAD_CURRICULUMCERTIFICATEADD_FAILURE,
+    LOAD_PROGRESSADD_REQUEST,
+    LOAD_PROGRESSADD_SUCCESS,
+    LOAD_PROGRESSADD_FAILURE,
+    LOAD_PROGRESSEDIT_REQUEST,
+    LOAD_PROGRESSEDIT_SUCCESS,
+    LOAD_PROGRESSEDIT_FAILURE,
+    LOAD_CURRICULUMPROGRESSADD_REQUEST,
+    LOAD_CURRICULUMPROGRESSADD_SUCCESS,
+    LOAD_CURRICULUMPROGRESSADD_FAILURE,
+    LOAD_CURRICULUMPROGRESSEDIT_REQUEST,
+    LOAD_CURRICULUMPROGRESSEDIT_SUCCESS,
+    LOAD_CURRICULUMPROGRESSEDIT_FAILURE,
+    LOAD_CURRICULUMPLATFORM_REQUEST,
+    LOAD_CURRICULUMPLATFORM_SUCCESS,
+    LOAD_CURRICULUMPLATFORM_FAILURE,
+    getCurriculum,
     loadEditCurriculum,
     loadAddCurriculums,
     loadLogin,
@@ -549,5 +1017,15 @@ export {
     loadEditSubCurriculum,
     loadMessage,
     clearMessage,
-    loadGetProfile
+    loadGetProfile,
+    loadAddCertificate,
+    getCourse,
+    putPerson,
+    loadEditCertificate,
+    loadEditCurriculumCertificate,
+    loadAddCurriculumCertificate,
+    loadEditCurriculumProgress,
+    loadAddCurriculumProgress,
+    loadEditProgress,
+    loadAddProgress
 };

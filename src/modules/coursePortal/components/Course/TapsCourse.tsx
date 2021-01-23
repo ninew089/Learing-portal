@@ -2,7 +2,6 @@ import React, { useEffect, Suspense, lazy } from "react";
 import { Box, Grid, IconButton, useMediaQuery } from "@material-ui/core";
 import { useHistory, useRouteMatch, useLocation } from "react-router-dom";
 import { createStyles, makeStyles, Theme, useTheme } from "@material-ui/core/styles";
-import { category } from "data/category";
 import { useDispatch, useSelector } from 'react-redux'
 import * as actions from "../../actions"
 import { parse } from "query-string"
@@ -77,11 +76,11 @@ export default function PointNavigationMenu({ title }: { title: string }) {
 
 
   const { path } = useRouteMatch();
-  const filterCoursebyCategory = (title: string) => {
-    history.push(`${path}?category=${title}`);
+  const filterCoursebyCategory = (title: string, name: string) => {
+    history.push(`${path}?category=${title}&&name=${name}`);
   };
-  const handleClick = (i: any) => (e: React.SyntheticEvent) => {
-    filterCoursebyCategory(i + 1);
+  const handleClick = (i: any, name: any) => (e: React.SyntheticEvent) => {
+    filterCoursebyCategory(i + 1, name);
     setIndex(i);
   };
 
@@ -98,7 +97,7 @@ export default function PointNavigationMenu({ title }: { title: string }) {
   const renderLoader = () =>
     <div></div>
   const dispatch = useDispatch();
-  const { categories } = useSelector((state: any) => state.course);
+  const { categories, categoryImg } = useSelector((state: any) => state.course);
   const theme = useTheme();
   const sm = useMediaQuery(theme.breakpoints.up("lg"))
   useEffect(() => {
@@ -124,7 +123,7 @@ export default function PointNavigationMenu({ title }: { title: string }) {
         {categories.map((item: any, i: number) => (
           <Grid item xs={3} sm={2} lg={1} key={i}>
             <IconButton
-              onClick={handleClick(i)}
+              onClick={handleClick(i, item.name)}
               className={classes.root}
               disableRipple
               key={i}
@@ -143,7 +142,7 @@ export default function PointNavigationMenu({ title }: { title: string }) {
                 >
 
                   < div style={{
-                    background: `url('${category[i].img}')`,
+                    background: `url('${categoryImg[i].img}')`,
                     backgroundSize: "cover",
 
                     padding: "30px"
