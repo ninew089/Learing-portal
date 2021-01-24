@@ -10,9 +10,12 @@ export interface CardProps {
     name?: string
     platformId?: number
     satisfactionCount?: number
-    thumbnail?: string
+    thumbNail?: string
     viewCount?: number
     point?: number
     key?: number
+    platformlogo?: string
+    platformName?: string
+
 
 }

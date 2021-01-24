@@ -116,7 +116,7 @@ export default function CourseCarousel(props: CourseCarouselProps) {
                       learningTopic={item.learningTopic}
                       learningObjective={item.learningObjective}
                       courseCategoryId={item.courseCategoryId}
-                      thumbnail={item.thumbnail}
+                      thumbNail={item.thumbNail}
                       targetGroup={item.targetGroup}
                       assessment={item.assessment}
                       viewCount={item.viewCount}
@@ -125,7 +125,8 @@ export default function CourseCarousel(props: CourseCarouselProps) {
                       link={item.link}
                       code={item.code}
                       name={item.name}
-                      platformId={item.platformId}
+                      platformlogo={item.platformlogo}
+                      platformName={item.platformName}
                     />
                   ) : (
                       <CourseDetail

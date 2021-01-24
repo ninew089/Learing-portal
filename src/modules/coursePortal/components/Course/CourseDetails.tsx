@@ -1,12 +1,11 @@
-import React, { useState, lazy, Suspense, useEffect } from "react";
+import React, { useState, lazy, Suspense } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, Grid, Box } from "@material-ui/core";
 import numberFormat from "utils/numberFormat";
 
 import { CardProps } from "./tyscript"
 import CardMedia from '@material-ui/core/CardMedia';
-import { useSelector, useDispatch } from 'react-redux'
-import * as actions from "../../actions"
+import { useSelector } from 'react-redux'
 const Dialog = lazy(() => import('../../share/DialogCourse'));
 const Rating = lazy(() => import('../../share/Rating'));
 
@@ -164,12 +163,7 @@ export default function IconBreadcrumbs(props: CardProps) {
   const onOpen = () => {
     setOpen(true)
   }
-  const dispatch = useDispatch();
-  useEffect(() => {
-    const action = actions.paltform()
-    dispatch(action)
-    // eslint-disable-next-line
-  }, [])
+
   const { colorName } = useSelector((state: any) => state.course);
 
   return (

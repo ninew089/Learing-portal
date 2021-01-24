@@ -105,14 +105,15 @@ export default function SingleLineGridList(props: any) {
                     learningTopic={item.learningTopic}
                     learningObjective={item.learningObjective}
                     courseCategoryId={item.courseCategoryId}
-                    thumbnail={item.thumbnail}
+                    thumbNail={item.thumbNail}
                     viewCount={item.viewCount}
                     point={(item.satisfactionSum) / item.satisfactionCount}
                     satisfactionCount={item.satisfactionCount}
                     link={item.link}
                     code={item.code}
                     name={item.name}
-                    platformId={item.platformId}
+                    platformlogo={item.platformlogo}
+                    platformName={item.platformName}
                   />
                 </Grid>
               ))}
