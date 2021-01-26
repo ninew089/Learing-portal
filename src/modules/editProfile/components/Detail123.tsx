@@ -137,18 +137,21 @@ export default function SignIn(props: any) {
   const value = formProps.getValues("MinistryId");
   const dep = formProps.getValues("DepartmentId");
 
-
   useEffect(() => {
+
     const value = formProps.getValues("MinistryId");
     const actionDepartments = actions.loadDepartments(value);
     dispatch(actionDepartments);
-    const depProps = Departments.filter((member: any) => {
-      return member.id === parseInt(dep)
-    }).length === 0
-    console.log(depProps)
-    if (depProps !== true) {
-      formProps.setValue("DepartmentId", undefined, { shouldValidate: true });
+
+    if (Departments.length !== 0) {
+      const depProps = Departments.filter((member: any) => {
+        return member.id === parseInt(dep)
+      }).length
+      if (depProps === 0) {
+        formProps.setValue("DepartmentId", undefined, { shouldValidate: true });
+      }
     }
+
 
     // eslint-disable-next-line
   }, [value]);

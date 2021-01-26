@@ -147,7 +147,7 @@ export default function SocialCard(props: any) {
 
 
 
-            <Dialog open={open} setOpen={setOpen} data={data} />
+            <Dialog open={open} setOpen={setOpen} data={data} isCurriculum={false} />
 
         </>
     );

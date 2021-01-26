@@ -105,12 +105,14 @@ export interface CustomizedDialogsProps {
   open: boolean;
   setOpen: any;
   data: any;
+  isCurriculum: boolean;
 }
 
 export default function CustomizedDialogs({
   open,
   setOpen,
-  data
+  data,
+  isCurriculum
 }: CustomizedDialogsProps) {
   const handleClose = () => {
 
@@ -123,8 +125,17 @@ export default function CustomizedDialogs({
 
 
     setOpen(false);
-    const action = actions.loadCourseView(data.id)
-    dispatch(action)
+    if (isCurriculum) {
+      const action = actions.loadCurriculumsView(data.id)
+      dispatch(action)
+
+    }
+    else {
+      const action = actions.loadCourseView(data.id)
+      dispatch(action)
+    }
+
+
     window.open(data.link, '_blank')
 
   };

@@ -251,7 +251,7 @@ export default function IconBreadcrumbs(props: CardProps) {
             </div>
           </Grid>
         </div>
-        <Dialog open={open} setOpen={setOpen} data={props} />
+        <Dialog open={open} setOpen={setOpen} data={props} isCurriculum={false} />
       </div>
     </Suspense>
   );

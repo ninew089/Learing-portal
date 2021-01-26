@@ -269,7 +269,7 @@ export default function CurriculumDetailCard(props: CardProps) {
 
 
         </div>
-        <Dialog open={open} setOpen={setOpen} data={props} />
+        <Dialog open={open} setOpen={setOpen} data={props} isCurriculum={true} />
       </div>
     </Suspense>
   );
