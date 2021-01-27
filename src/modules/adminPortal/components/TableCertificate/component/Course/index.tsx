@@ -101,6 +101,7 @@ export default function ReportTable() {
         const response = await axios.get(`/Platforms/${platformid}/CourseCertificates?max=10000`)
         setEntries(response.data)
 
+
       } catch (err) {
         setEntries([])
         console.log(err)
@@ -117,6 +118,10 @@ export default function ReportTable() {
   const [editData, setEditData] = useState<any>([])
   const [openEdit, setOpenEdit] = useState(false);
 
+  if (entries !== undefined) {
+    entries.map((course: any, index: number) => (entries[index].courseCodeName = `${course.courseCode} ${course.courseName}`))
+
+  }
 
 
 
@@ -146,17 +151,16 @@ export default function ReportTable() {
           { title: "เลขประจำตัวบัตรประชาชน", field: "userId", type: "string" },
           { title: "คำนำหน้าชื่อ", field: "title" },
           { title: "ชื่อ", field: "firstName" },
-          { title: "นามสกุล", field: "lastname" },
-          { title: "เลขวิชา", field: "courseId", type: "numeric" },
-          { title: "รหัสหลักรายวิชา", field: "code" },
-          { title: "ชื่อหลักรายวิชา", field: "name" },
+          { title: "นามสกุล", field: "lastName" },
+          { title: "รหัสวิชา", field: "courseCodeName" },
+
           { title: "วันเปิดเรียน", field: "startDate", type: "date", dateSetting: { locale: "th-TH" } },
           { title: "วันที่สำเร็จการศึกษา", field: "endDate", type: "date", dateSetting: { locale: "th-TH" } },
           { title: "จำนวนชั่วโมง", field: "hour", type: "numeric" },
           { title: "เกรด", field: "grade" },
           { title: "คะแนนความพึงพอใจ", field: "satisfactionScore", type: "numeric" },
           { title: "วันที่ได้รับข้อมูล", field: "createDate", type: "date", editable: "never", dateSetting: { locale: "th-TH" } },
-          { title: "ผลการอนุมัติ", field: "approved", editable: "never" },
+          { title: "ผลการอนุมัติ", field: "approve", editable: "never" },
         ]}
         data={entries}
         actions={[

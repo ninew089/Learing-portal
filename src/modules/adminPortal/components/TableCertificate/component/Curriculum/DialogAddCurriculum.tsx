@@ -153,10 +153,10 @@ export default function CustomizedDialogs({ open, setOpen }: DialogsProps) {
 
   const { curriculum } = useSelector((state: any) => state.admin);
   const onSubmitData = handleSubmit((info) => {
-    console.log(info)
+
     info.startDate = formatDate(info.startDate)
     info.endDate = formatDate(info.endDate)
-    console.log(info)
+
     const action = actions.loadAddCurriculumCertificate(info)
     dispatch(action)
     handleClose()
@@ -254,7 +254,7 @@ export default function CustomizedDialogs({ open, setOpen }: DialogsProps) {
                             key={index}
                             value={categorie.id}
                           >
-                            {categorie.code}
+                            {categorie.code}     {categorie.name}
                           </MenuItem>
                         ))}
                       </TextField>

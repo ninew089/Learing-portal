@@ -54,7 +54,7 @@ export default function Asynchronous(props: any) {
                 setValue(newValue.id)
             }}
             getOptionSelected={(option: any, value: any) => String(option.name) === String(value.name)}
-            getOptionLabel={(option: any) => String(option.name)}
+            getOptionLabel={(option: any) => String(option.code) + " " + String(option.name)}
             options={options}
             loading={loading}
             renderInput={(params) => (

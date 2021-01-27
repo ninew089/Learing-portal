@@ -226,7 +226,7 @@ export default function CustomizedDialogs({ open, setOpen, data }: any) {
                     inputRef={register}
                     helperText={errors.lastName ? "กรอกนามสกุล" : ""}
                     error={!!errors.lastName}
-                    defaultValue={data.lastname}
+                    defaultValue={data.lastName}
                   />
                   <Controller
                     style={{ marginTop: 10 }}
@@ -245,7 +245,7 @@ export default function CustomizedDialogs({ open, setOpen, data }: any) {
                             key={index}
                             value={categorie.id}
                           >
-                            {categorie.code}
+                            {categorie.code} {categorie.name}
                           </MenuItem>
                         ))}
                       </TextField>

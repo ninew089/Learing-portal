@@ -87,10 +87,13 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 700,
     color: "#132740",
     padding: 3,
-    width: 190
+    width: 190,
+    marginLeft: 8,
+    marginBottom: 2,
   },
   box: {
     padding: 8,
+    marginLeft: 6,
   },
   view: {
     marginRight: 10,
@@ -101,7 +104,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#cfcde6",
     borderRadius: "50%",
     display: "inline-block",
-    marginLeft: 10,
+    marginLeft: 8,
     marginRight: 4,
   },
   rating: {
@@ -131,7 +134,7 @@ const useStyles = makeStyles((theme) => ({
 
   },
   detail: {
-    marginBottom: 30,
+    marginBottom: 14,
   },
   submit: {
     padding: 0,
@@ -183,6 +186,7 @@ export default function IconBreadcrumbs(props: CardProps) {
                 style={{
                   background: `url('${thumbNail}')`,
                   backgroundSize: "cover",
+                  backgroundPosition: "center center"
                 }}
                 image={thumbNail}
                 className={classes.cardMedia}
@@ -205,9 +209,9 @@ export default function IconBreadcrumbs(props: CardProps) {
                 <Box fontWeight={500} className={classes.category}>{courseCategory}</Box>
                 <Grid item xs={12}>
                   <div>
-                    <Box fontWeight={400} className={classes.caption}>
-                      {learningObjective}
-                    </Box>
+                    {learningObjective !== undefined && <div className={classes.caption} dangerouslySetInnerHTML={{ __html: learningObjective }} />}
+
+
                   </div>
                 </Grid>
               </Grid>
@@ -225,7 +229,7 @@ export default function IconBreadcrumbs(props: CardProps) {
                     backgroundPosition: " center center"
                   }} />
                 </div>
-                <div>
+                <Grid item>
                   <div className={classes.author}>{platformName}</div>
                   <div className={classes.rating}>
                     <Rating vote={satisfactionCount} point={point} />
@@ -246,7 +250,7 @@ export default function IconBreadcrumbs(props: CardProps) {
                       การดู {numberFormat(viewCount)} ครั้ง
                   </Typography>
                   </Grid>
-                </div>
+                </Grid>
               </Grid>
             </div>
           </Grid>

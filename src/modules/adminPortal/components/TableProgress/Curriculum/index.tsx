@@ -106,7 +106,9 @@ export default function ReportTable() {
     const fetch = async () => {
       try {
         const responseCurriculum = await axios.get(`/Platforms/${platformid}/CurriculumProgresses?max=10000`)
+
         setEntriesCurriculum(responseCurriculum.data)
+
 
       } catch (err) {
         console.log(err)
@@ -117,8 +119,9 @@ export default function ReportTable() {
     fetch()
     // eslint-disable-next-line
   }, [message])
-
+  entriesCurriculum.map((curriculum: any, index: number) => (entriesCurriculum[index].curriculumCodeName = `${curriculum.curriculumCode} ${curriculum.curriculumName}`))
   const dispatch = useDispatch();
+
 
 
 
@@ -160,10 +163,9 @@ export default function ReportTable() {
           { title: "เลขประจำตัวบัตรประชาชน", field: "userId", type: "string" },
           { title: "คำนำหน้าชื่อ", field: "title" },
           { title: "ชื่อ", field: "firstName" },
-          { title: "นามสกุล", field: "lastname" },
-          { title: "เลขหลักสูตร", field: "curriculumId", type: "numeric" },
-          { title: "รหัสหลักสูตร", field: "code" },
-          { title: "ชื่อหลักสูตร", field: "name" },
+          { title: "นามสกุล", field: "lastName" },
+          { title: "รหัสหลักสูตร", field: "curriculumCodeName" },
+
           {
             title: "วันเปิดเรียน", field: "startDate", type: "date", dateSetting: { locale: "th-TH" }
           },

@@ -85,7 +85,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: "#cfcde6",
         borderRadius: "50%",
         display: "inline-block",
-        marginLeft: 10,
+        marginLeft: 2,
         marginRight: 4,
     },
 }));
@@ -116,6 +116,7 @@ export default function SocialCard(props: any) {
                         style={{
                             background: `url('${data.thumbnail}')`,
                             backgroundSize: "cover",
+                            backgroundPosition: "center center"
                         }}
                         image={data.thumbnail}
                         className={classes.cardMedia}
@@ -137,9 +138,7 @@ export default function SocialCard(props: any) {
                     >
                         <div className={classes.dot} style={{ background: colorCategory[data.courseCategoryId - 1] }} />{categories.length !== 0 && categories[data.courseCategoryId - 1].name}
                     </Box>
-                    <Box fontSize={12} fontWeight={400} className={classes.caption}>
-                        {data.learningObjective}
-                    </Box>
+                    {data.learningObjective !== undefined && <div className={classes.caption} dangerouslySetInnerHTML={{ __html: data.learningObjective }} />}
                     <Divider />
                 </Grid>
             </Grid>

@@ -238,7 +238,7 @@ export default function CustomizedDialogs({ open, setOpen }: DialogsProps) {
                             key={index}
                             value={categorie.id}
                           >
-                            {categorie.code}
+                            {categorie.code} {categorie.name}
                           </MenuItem>
                         ))}
                       </TextField>

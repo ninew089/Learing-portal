@@ -80,7 +80,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontWeight: 700,
     color: "#132740",
     padding: 3,
-    width: 190
+    width: 190,
+    marginLeft: 8,
+    marginBottom: 2,
   },
   subtitle: {
     overflow: "hidden",
@@ -97,6 +99,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   box: {
     padding: 8,
+    marginLeft: 6,
   },
   view: {
     marginRight: 10,
@@ -107,7 +110,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     backgroundColor: theme.palette.secondary.main,
     borderRadius: "50%",
     display: "inline-block",
-    marginLeft: 10,
+    marginLeft: 8,
     marginRight: 4,
   },
   rating: {
@@ -128,7 +131,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     paddingRight: 14,
   },
   detail: {
-    marginBottom: 30,
+    marginBottom: 14,
   },
   submit: {
     padding: 0,
@@ -188,6 +191,7 @@ export default function CurriculumDetailCard(props: CardProps) {
                   style={{
                     background: `url('${thumbNail}')`,
                     backgroundSize: "cover",
+                    backgroundPosition: "center center"
                   }}
                   image={thumbNail}
                   className={classes.cardMedia}
@@ -213,9 +217,7 @@ export default function CurriculumDetailCard(props: CardProps) {
                 <Box fontWeight={500}>หลักสูตร</Box>
 
                 <Grid item xs={12}>
-                  <Box fontWeight={400} className={classes.caption}>
-                    {learningObjective}
-                  </Box>
+                  {learningObjective !== undefined && <div className={classes.caption} dangerouslySetInnerHTML={{ __html: learningObjective }} />}
                 </Grid>
               </Grid>
               <Grid

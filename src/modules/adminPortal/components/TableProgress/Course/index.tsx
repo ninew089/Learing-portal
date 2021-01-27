@@ -118,7 +118,7 @@ export default function ReportTable() {
 
 
   const dispatch = useDispatch();
-
+  entries.map((course: any, index: number) => (entries[index].courseCodeName = `${course.courseCode} ${course.courseName}`))
 
 
   return (
@@ -145,10 +145,8 @@ export default function ReportTable() {
           { title: "เลขประจำตัวบัตรประชาชน", field: "userId", type: "string" },
           { title: "คำนำหน้าชื่อ", field: "title" },
           { title: "ชื่อ", field: "firstName" },
-          { title: "นามสกุล", field: "lastname" },
-          { title: "เลขวิชา", field: "courseId", type: "numeric" },
-          { title: "รหัสรายวิชา", field: "code" },
-          { title: "ชื่อรายวิชา", field: "name" },
+          { title: "นามสกุล", field: "lastName" },
+          { title: "รหัสรายวิชา", field: "courseCodeName" },
           { title: "วันเปิดเรียน", field: "startDate", type: "date", dateSetting: { locale: "th-TH" } },
           { title: "เปอร์เซ็นความก้าวหน้า", field: "percent", type: "numeric", validate: rowData => rowData.percent <= 100 && rowData.percent >= 0 },
           { title: "วันที่ได้รับข้อมูล", field: "createDate", type: "date", editable: "never", dateSetting: { locale: "th-TH" } },

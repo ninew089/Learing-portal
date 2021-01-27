@@ -118,7 +118,10 @@ export default function ReportTable() {
   const [openCurriculum, setOpenCurriculum] = useState(false);
   const [editDataCurriculum, setEditDataCurriculum] = useState<any>([])
   const [openEditCurriculum, setOpenEditCurriculum] = useState(false);
+  if (entriesCurriculum !== undefined) {
+    entriesCurriculum.map((curriculum: any, index: number) => (entriesCurriculum[index].curriculumCodeName = `${curriculum.courseCode} ${curriculum.courseName}`))
 
+  }
 
   return (
     <>
@@ -142,17 +145,15 @@ export default function ReportTable() {
           { title: "เลขประจำตัวบัตรประชาชน", field: "userId", type: "string" },
           { title: "คำนำหน้าชื่อ", field: "title" },
           { title: "ชื่อ", field: "firstName" },
-          { title: "นามสกุล", field: "lastname" },
-          { title: "เลขหลักสูตร", field: "curriculumId", type: "numeric" },
-          { title: "รหัสหลักสูตร", field: "code" },
-          { title: "ชื่อหลักสูตร", field: "name" },
+          { title: "นามสกุล", field: "lastName" },
+          { title: "รหัสหลักสูตร", field: "curriculumCodeName" },
           { title: "วันเปิดเรียน", field: "startDate", type: "date", dateSetting: { locale: "th-TH" } },
           { title: "วันที่สำเร็จการศึกษา", field: "endDate", type: "date", dateSetting: { locale: "th-TH" } },
           { title: "จำนวนชั่วโมง", field: "hour", type: "numeric" },
           { title: "เกรด", field: "grade" },
           { title: "คะแนนความพึงพอใจ", field: "satisfactionScore", type: "numeric", validate: rowData => ((rowData.satisfactionScore <= 5 && rowData.satisfactionScore >= 1) || rowData.satisfactionScore === null || rowData.satisfactionScore === undefined) },
           { title: "วันที่ได้รับข้อมูล", field: "createDate", type: "date", editable: "never", dateSetting: { locale: "th-TH" } },
-          { title: "ผลการอนุมัติ", field: "approved", editable: "never" },
+          { title: "ผลการอนุมัติ", field: "approve", editable: "never" },
         ]}
         data={entriesCurriculum}
         actions={[

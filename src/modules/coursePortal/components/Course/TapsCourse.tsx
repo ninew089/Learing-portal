@@ -97,7 +97,7 @@ export default function PointNavigationMenu({ title }: { title: string }) {
   const renderLoader = () =>
     <div></div>
   const dispatch = useDispatch();
-  const { categories, categoryImg } = useSelector((state: any) => state.course);
+  const { categories } = useSelector((state: any) => state.course);
   const theme = useTheme();
   const sm = useMediaQuery(theme.breakpoints.up("lg"))
   useEffect(() => {
@@ -142,7 +142,7 @@ export default function PointNavigationMenu({ title }: { title: string }) {
                 >
 
                   < div style={{
-                    background: `url('${categoryImg[i].img}')`,
+                    background: `url('${item.thumbnail}')`,
                     backgroundSize: "cover",
 
                     padding: "30px"
