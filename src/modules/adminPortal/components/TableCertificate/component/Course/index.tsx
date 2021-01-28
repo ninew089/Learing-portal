@@ -190,18 +190,15 @@ export default function ReportTable() {
                 //@ts-ignore
                 resolve()
                 const data = [...entries]
-                console.log(data.splice(data.indexOf(oldData), 1))
                 data.splice(data.indexOf(oldData), 1)
-                axios
-                  .delete(`/Platforms/${platformid}/CourseCertificates/${oldData.id}`, { headers })
-                  .catch((error) => {
-                    const action = actions.loadMessage(` เกิดข้อผิดพลาด${error.response.status}`, "error")
-                    dispatch(action)
 
-                  })
-
-
-                setEntries(data)
+                try {
+                  axios.delete(`/Platforms/${platformid}/CourseCertificates/${oldData.id}`, { headers })
+                } catch (error) {
+                  const action = actions.loadMessage(` เกิดข้อผิดพลาด${error.response.status}`, "error")
+                  dispatch(action)
+                }
+                setEntries([...data])
               }, 600)
             }),
 

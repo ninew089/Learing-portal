@@ -142,7 +142,7 @@ export default function CustomizedDialogs({ open, setOpen, data }: any) {
       courseId: yup.number(),
       endDate: yup.string().required(),
       hour: yup.number().moreThan(0, "จำนวนต้องมากกว่า 1 ").nullable(true).transform((_, val) => val === "" ? null : parseInt(val)),
-      grade: yup.string().required(),
+      grade: yup.string().nullable(true).transform((_, val) => val === "" ? null : val),
       satisfactionScore: yup.number().moreThan(0, "คะแนนความพึงพอต้องอยู่ระหว่าง 1-5").lessThan(6, "คะแนนความพึงพอต้องอยู่ระหว่าง 1-5").nullable(true).transform((_, val) => val === "" ? null : parseInt(val))
     }),
   });

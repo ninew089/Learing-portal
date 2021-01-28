@@ -179,75 +179,25 @@ export default function ReportTable() {
         ]}
 
         editable={{
-          //update
-          /*
-          onRowAdd: (newData: curriculumCertificateProps) =>
-            new Promise((resolve) => {
-              setTimeout(() => {
-                //@ts-ignore
-                resolve()
-                const data = entriesCurriculum === undefined ? [] : [...entriesCurriculum]
-                data[entriesCurriculum === undefined ? 0 : data.length] = newData
 
-                axios
-                  .post(
-                    `/Platforms/${platformid}/CurriculumCertificates`,
-                    { curriculumId: newData.curriculumId, grade: newData.grade, userId: newData.userId, title: newData.title, firstName: newData.firstName, lastName: newData.lastname, startDate: newData.startDate, endDate: newData.endDate, hour: newData.hour, satisfactionScore: newData.satisfactionScore },
-                    { headers }
-                  )
-                  .catch((error) => {
-                    const action = actions.loadMessage(` เกิดข้อผิดพลาด${error.response.status}`, "error")
-                    dispatch(action)
-
-                  })
-
-
-                setEntriesCurriculum(data)
-              }, 600)
-            }),
-          onRowUpdate: (newData: curriculumCertificateProps, oldData: any) =>
-            new Promise((resolve) => {
-              setTimeout(() => {
-                //@ts-ignore
-                resolve()
-                const data = [...entriesCurriculum]
-                data[oldData.tableData.id] = newData
-
-                axios
-                  .put(
-                    `/Platforms/${platformid}/CurriculumCertificates/${newData.id}`,
-                    { curriculumId: newData.curriculumId, grade: newData.grade, userId: newData.userId, title: newData.title, firstName: newData.firstName, lastName: newData.lastname, startDate: newData.startDate, endDate: newData.endDate, hour: newData.hour, satisfactionScore: newData.satisfactionScore },
-                    { headers }
-                  )
-                  .catch((error) => {
-                    const action = actions.loadMessage(` เกิดข้อผิดพลาด${error.response.status}`, "error")
-                    dispatch(action)
-
-                  })
-
-
-                setEntriesCurriculum([...data])
-              }, 600)
-            }),
-            */
           onRowDelete: (oldData: any) =>
             new Promise((resolve) => {
               setTimeout(() => {
                 //@ts-ignore
                 resolve()
                 const data = [...entriesCurriculum]
-
                 data.splice(data.indexOf(oldData), 1)
-                axios
-                  .delete(`/Platforms/${platformid}/CurriculumCertificates/${oldData.id}`, { headers })
-                  .catch((error) => {
-                    const action = actions.loadMessage(` เกิดข้อผิดพลาด${error.response.status}`, "error")
-                    dispatch(action)
 
-                  })
+                try {
+                  axios
+                    .delete(`/Platforms/${platformid}/CurriculumCertificates/${oldData.id}`, { headers })
 
+                } catch (error) {
+                  const action = actions.loadMessage(` เกิดข้อผิดพลาด${error.response.status}`, "error")
+                  dispatch(action)
+                }
+                setEntriesCurriculum([...data])
 
-                setEntriesCurriculum(data)
               }, 600)
             }),
 
