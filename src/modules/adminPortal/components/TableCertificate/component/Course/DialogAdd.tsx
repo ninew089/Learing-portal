@@ -233,10 +233,8 @@ export default function CustomizedDialogs({ open, setOpen }: DialogsProps) {
                         variant="outlined"
                         label="รายวิชา"
                         select
-                        helperText={
-                          errors.courseCategoryId && errors.courseCategoryId.message
-                        }
-                        error={!!errors.courseCategoryId}
+
+                        error={!!errors.courseId}
                       >
                         {course.map((categorie: any, index: number) => (
                           <MenuItem

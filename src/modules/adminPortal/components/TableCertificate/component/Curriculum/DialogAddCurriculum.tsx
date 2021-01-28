@@ -135,7 +135,7 @@ export default function CustomizedDialogs({ open, setOpen }: DialogsProps) {
       firstName: yup.string().required(),
       lastName: yup.string().required(),
       startDate: yup.string().required(),
-      curriculumId: yup.number(),
+      curriculumId: yup.number().required('กรุณาเลือกหลักสูตร'),
       endDate: yup.string().required(),
       hour: yup.number().moreThan(0, "จำนวนต้องมากกว่า 1 ").nullable(true).transform((_, val) => val === "" ? null : parseInt(val)),
       grade: yup.string().nullable(true).transform((_, val) => val === "" ? null : val),
@@ -244,11 +244,10 @@ export default function CustomizedDialogs({ open, setOpen }: DialogsProps) {
                         variant="outlined"
                         label="หลักสูตร"
                         select
-                        helperText={
-                          errors.courseCategoryId && errors.courseCategoryId.message
-                        }
-                        error={!!errors.courseCategoryId}
+
+                        error={!!errors.curriculumId}
                       >
+
                         {curriculum.map((categorie: any, index: number) => (
                           <MenuItem
                             key={index}
@@ -260,6 +259,7 @@ export default function CustomizedDialogs({ open, setOpen }: DialogsProps) {
                       </TextField>
                     }
                     name="curriculumId"
+
                     rules={{ required: "กรุณาเลือกรายวิชา" }}
                     control={control}
                     defaultValue=""
