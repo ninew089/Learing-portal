@@ -118,7 +118,7 @@ export default function SocialCard(props: any) {
     const { data } = props;
     const classes = useStyles();
     const [open, setOpen] = useState<boolean>(false)
-    const { categories, colorCategory } = useSelector((state: any) => state.course);
+    const { colorCategory } = useSelector((state: any) => state.course);
     const onSelected = () => {
         setOpen(true)
     }
@@ -162,7 +162,7 @@ export default function SocialCard(props: any) {
                                 < div style={{
                                     backgroundImage: `url('${data.platformlogo}`,
                                     backgroundSize: "cover",
-                                    padding: "8px",
+                                    padding: "10px",
                                     backgroundPosition: " center center"
                                 }} />
                             </div>
@@ -171,7 +171,7 @@ export default function SocialCard(props: any) {
                         <Grid item>
                             <div className={classes.author}>{data.platformName}</div>
                             <div className={classes.rating}>
-                                <Rating vote={data.satisfactionCount} point={data.point} />
+                                <Rating vote={data.satisfactionCount} point={data.satisfactionSum / data.satisfactionCount} />
                             </div>
                             <Grid
                                 container
@@ -202,7 +202,7 @@ export default function SocialCard(props: any) {
                         fontWeight={700}
                         className={classes.category}
                     >
-                        <div className={classes.dot} style={{ background: colorCategory[data.courseCategoryId - 1] }} />{categories.length !== 0 && categories[data.courseCategoryId - 1].name}
+                        <div className={classes.dot} style={{ background: colorCategory[data.courseCategoryId - 1] }} />{data.courseCategory}
                     </Box>
 
                     <Divider />
