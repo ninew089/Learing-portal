@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { Grid, Box, Divider, CardMedia } from "@material-ui/core";
+import { Grid, Box, Divider, CardMedia, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Dialog from '../../share/DialogCourse'
 import { useSelector } from 'react-redux'
-
-
+import Rating from '../../share/Rating'
+import numberFormat from "utils/numberFormat";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -88,6 +88,30 @@ const useStyles = makeStyles((theme) => ({
         marginLeft: 2,
         marginRight: 4,
     },
+    author: {
+        overflow: "hidden",
+        display: "-webkit-box",
+        textOverflow: "ellipsis",
+        WebkitLineClamp: 1,
+        WebkitBoxOrient: "vertical",
+        fontSize: "14px",
+        fontWeight: 700,
+        color: "#132740",
+        padding: 3,
+        width: 190,
+        marginLeft: 8,
+        marginBottom: 2,
+    },
+    rating: {
+        paddingLeft: 8,
+    },
+    box: {
+        padding: 8,
+        marginLeft: 6,
+    },
+    logo: {
+        margin: 8,
+    },
 }));
 
 export default function SocialCard(props: any) {
@@ -98,10 +122,9 @@ export default function SocialCard(props: any) {
     const onSelected = () => {
         setOpen(true)
     }
+
     return (
         <>
-
-
             <Grid
 
                 container
@@ -124,7 +147,50 @@ export default function SocialCard(props: any) {
 
                     />
                 </Grid>
+
                 <Grid item xs={7}>
+
+                    <Grid
+
+                        container
+                        justify="flex-start"
+                        alignItems="center"
+                        direction="column"
+
+                    >     <Grid item>
+                            <div className={classes.logo}>
+                                < div style={{
+                                    backgroundImage: `url('${data.platformlogo}`,
+                                    backgroundSize: "cover",
+                                    padding: "8px",
+                                    backgroundPosition: " center center"
+                                }} />
+                            </div>
+
+                        </Grid>
+                        <Grid item>
+                            <div className={classes.author}>{data.platformName}</div>
+                            <div className={classes.rating}>
+                                <Rating vote={data.satisfactionCount} point={data.point} />
+                            </div>
+                            <Grid
+                                container
+                                direction="row"
+                                justify="flex-start"
+                                alignItems="flex-start"
+                                className={classes.box}
+                            >
+                                <Typography
+                                    variant="caption"
+                                    align="left"
+                                    component="span"
+                                    color={"textSecondary"}
+                                >
+                                    การดู {numberFormat(data.viewCount)} ครั้ง
+                  </Typography>
+                            </Grid>
+                        </Grid>
+                    </Grid>
                     <Box fontSize={14} fontWeight={700} className={classes.name}>
                         {data.name}
                     </Box>
@@ -138,7 +204,7 @@ export default function SocialCard(props: any) {
                     >
                         <div className={classes.dot} style={{ background: colorCategory[data.courseCategoryId - 1] }} />{categories.length !== 0 && categories[data.courseCategoryId - 1].name}
                     </Box>
-                    {data.learningObjective !== undefined && <div className={classes.caption} dangerouslySetInnerHTML={{ __html: data.learningObjective }} />}
+
                     <Divider />
                 </Grid>
             </Grid>
