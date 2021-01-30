@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   createStyles,
   Theme,
@@ -14,13 +14,21 @@ import {
   DialogContent,
   DialogTitle,
   Dialog,
-  Button, Avatar, Grid
+  Button,
+  Avatar,
+  Grid,
 } from "@material-ui/core";
 import { amber } from "@material-ui/core/colors";
-import * as actions from "../actions"
-import { useDispatch } from 'react-redux'
+import * as actions from "../actions";
+import { useDispatch, useSelector } from "react-redux";
 
-import { LibraryBooksRounded, CreateRounded, FaceSharp, EqualizerRounded } from '@material-ui/icons';
+import {
+  LibraryBooksRounded,
+  CreateRounded,
+  FaceSharp,
+  EqualizerRounded,
+  ListRounded,
+} from "@material-ui/icons";
 const useStyles = makeStyles((theme) => ({
   root: {
     "& .MuiPaper-root": {
@@ -32,14 +40,20 @@ const useStyles = makeStyles((theme) => ({
   avatar: {
     color: theme.palette.getContrastText(amber[500]),
     backgroundColor: amber[500],
-    marginRight: 10
+    marginRight: 10,
   },
   button: {
-    textAlign: "center", margin: 4, padding: 4, fontWeight: 700, fontSize: 16
+    textAlign: "center",
+    margin: 4,
+    padding: 4,
+    fontWeight: 700,
+    fontSize: 16,
   },
   action: {
-    textAlign: "center", margin: 4, padding: 4
-  }
+    textAlign: "center",
+    margin: 4,
+    padding: 4,
+  },
 }));
 const styles = (theme: Theme) =>
   createStyles({
@@ -96,10 +110,9 @@ const MuiDialogActions = withStyles((theme) => ({
   root: {
     margin: 0,
     padding: theme.spacing(1),
-    display: "block"
+    display: "block",
   },
-}))(DialogActions)
-
+}))(DialogActions);
 
 export interface CustomizedDialogsProps {
   open: boolean;
@@ -112,32 +125,32 @@ export default function CustomizedDialogs({
   open,
   setOpen,
   data,
-  isCurriculum
+  isCurriculum,
 }: CustomizedDialogsProps) {
   const handleClose = () => {
-
     setOpen(false);
-
-
   };
   const dispatch = useDispatch();
+  useEffect(() => {
+    if (isCurriculum) {
+      const action = actions.loadCurriculumsCourse(data.id);
+      dispatch(action);
+    }
+    // eslint-disable-next-line
+  }, []);
+  const { curriculumscourse } = useSelector((state: any) => state.course);
+  console.log(curriculumscourse);
   const navToPage = () => {
-
-
     setOpen(false);
     if (isCurriculum) {
-      const action = actions.loadCurriculumsView(data.id)
-      dispatch(action)
-
-    }
-    else {
-      const action = actions.loadCourseView(data.id)
-      dispatch(action)
+      const action = actions.loadCurriculumsView(data.id);
+      dispatch(action);
+    } else {
+      const action = actions.loadCourseView(data.id);
+      dispatch(action);
     }
 
-
-    window.open(data.link, '_blank')
-
+    window.open(data.link, "_blank");
   };
   const classes = useStyles();
   //  const { platformId, learningTopic, viewCount, point, satisfactionCount, code, learningObjective, link, thumbnail, courseCategoryId, name, id } = props;
@@ -155,61 +168,117 @@ export default function CustomizedDialogs({
           <Typography variant="h6">{data.name}</Typography>
         </MuiDialogTitle>
         <MuiDialogContent dividers>
-          <Grid container direction="row" justify="flex-start" alignItems="center">
+          {isCurriculum && (
+            <div>
+              <Grid
+                container
+                direction="row"
+                justify="flex-start"
+                alignItems="center"
+              >
+                <Grid item>
+                  <Avatar className={classes.avatar}>
+                    <ListRounded />
+                  </Avatar>
+                </Grid>
+                <Grid item>
+                  <h2>รายวิชาในหลักสูตร</h2>
+                </Grid>
+              </Grid>
+              <Grid
+                container
+                direction="column"
+                justify="center"
+                alignItems="flex-start"
+              >
+                {curriculumscourse.map((item: any, index: number) => (
+                  <Grid item>
+                    {item.code} {item.name}
+                  </Grid>
+                ))}
+              </Grid>
+            </div>
+          )}
+          <Grid
+            container
+            direction="row"
+            justify="flex-start"
+            alignItems="center"
+          >
             <Grid item>
-              <Avatar className={classes.avatar} ><LibraryBooksRounded /></Avatar>
+              <Avatar className={classes.avatar}>
+                <LibraryBooksRounded />
+              </Avatar>
             </Grid>
             <Grid item>
-              <h2 >เป้าหมายการเรียนรู้</h2>
+              <h2>เป้าหมายการเรียนรู้</h2>
             </Grid>
           </Grid>
-
 
           <Typography gutterBottom className={`color:'#90a0aa',fontWeigth:300`}>
             <div dangerouslySetInnerHTML={{ __html: data.learningObjective }} />
-
           </Typography>
-          <Grid container direction="row" justify="flex-start" alignItems="center">
+          <Grid
+            container
+            direction="row"
+            justify="flex-start"
+            alignItems="center"
+          >
             <Grid item>
-              <Avatar className={classes.avatar} ><CreateRounded /></Avatar>
+              <Avatar className={classes.avatar}>
+                <CreateRounded />
+              </Avatar>
             </Grid>
             <Grid item>
-              <h2 >ประเด็นการเรียนรู้</h2>
+              <h2>ประเด็นการเรียนรู้</h2>
             </Grid>
           </Grid>
-
 
           <Typography gutterBottom>
             <div dangerouslySetInnerHTML={{ __html: data.learningTopic }} />
-
           </Typography>
-          <Grid container direction="row" justify="flex-start" alignItems="center">
+          <Grid
+            container
+            direction="row"
+            justify="flex-start"
+            alignItems="center"
+          >
             <Grid item>
-              <Avatar className={classes.avatar} ><FaceSharp /></Avatar>
+              <Avatar className={classes.avatar}>
+                <FaceSharp />
+              </Avatar>
             </Grid>
             <Grid item>
-              <h2 >กลุ่มเป้าหมาย</h2>
+              <h2>กลุ่มเป้าหมาย</h2>
             </Grid>
           </Grid>
 
-
-          <Typography gutterBottom>  <div dangerouslySetInnerHTML={{ __html: data.targetGroup }} /></Typography>
-          <Grid container direction="row" justify="flex-start" alignItems="center">
+          <Typography gutterBottom>
+            {" "}
+            <div dangerouslySetInnerHTML={{ __html: data.targetGroup }} />
+          </Typography>
+          <Grid
+            container
+            direction="row"
+            justify="flex-start"
+            alignItems="center"
+          >
             <Grid item>
-              <Avatar className={classes.avatar} ><EqualizerRounded /></Avatar>
+              <Avatar className={classes.avatar}>
+                <EqualizerRounded />
+              </Avatar>
             </Grid>
             <Grid item>
-              <h2 >วิธีการประเมินผล</h2>
+              <h2>วิธีการประเมินผล</h2>
             </Grid>
           </Grid>
 
           <Typography gutterBottom>
             <div dangerouslySetInnerHTML={{ __html: data.assessment }} />
-
           </Typography>
         </MuiDialogContent>
-        <MuiDialogActions className={classes.action} >
-          <Button onClick={navToPage} className={classes.button} >
+        <MuiDialogActions className={classes.action}>
+          <Button onClick={navToPage} className={classes.button}>
             เข้าเรียน
           </Button>
         </MuiDialogActions>
