@@ -1,13 +1,17 @@
 import React, { useEffect, Suspense, lazy } from "react";
 import { Box, Grid, IconButton, useMediaQuery } from "@material-ui/core";
 import { useHistory, useRouteMatch, useLocation } from "react-router-dom";
-import { createStyles, makeStyles, Theme, useTheme } from "@material-ui/core/styles";
-import { useDispatch, useSelector } from 'react-redux'
-import * as actions from "../../actions"
-import { parse } from "query-string"
+import {
+  createStyles,
+  makeStyles,
+  Theme,
+  useTheme,
+} from "@material-ui/core/styles";
+import { useDispatch, useSelector } from "react-redux";
+import * as actions from "../../actions";
+import { parse } from "query-string";
 
-const Courses = lazy(() => import('./CategoryByTapCourses'));
-
+const Courses = lazy(() => import("./CategoryByTapCourses"));
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -70,14 +74,12 @@ export default function PointNavigationMenu({ title }: { title: string }) {
   const classes = useStyles();
   const [index, setIndex] = React.useState(0);
   const history = useHistory();
-  const { search } = useLocation()
-  const categoryIndex = parse(search)
-
-
+  const { search } = useLocation();
+  const categoryIndex = parse(search);
 
   const { path } = useRouteMatch();
   const filterCoursebyCategory = (title: string, name: string) => {
-    history.push(`${path}?category=${title}&&name=${name}`);
+    history.push(`${path}?category=${title}&name=${name}`);
   };
   const handleClick = (i: any, name: any) => (e: React.SyntheticEvent) => {
     filterCoursebyCategory(i + 1, name);
@@ -94,23 +96,22 @@ export default function PointNavigationMenu({ title }: { title: string }) {
       return "bold";
     }
   };
-  const renderLoader = () =>
-    <div></div>
+  const renderLoader = () => <div></div>;
   const dispatch = useDispatch();
   const { categories } = useSelector((state: any) => state.course);
   const theme = useTheme();
-  const sm = useMediaQuery(theme.breakpoints.up("lg"))
+  const sm = useMediaQuery(theme.breakpoints.up("lg"));
   useEffect(() => {
-    const action = actions.loadCourseCategory()
-    dispatch(action)
+    const action = actions.loadCourseCategory();
+    dispatch(action);
     if (categoryIndex.category !== null) {
-      setIndex(parseInt(`${categoryIndex.category}`) - 1)
-    } if (categoryIndex.category === undefined) {
-      setIndex(0)
+      setIndex(parseInt(`${categoryIndex.category}`) - 1);
+    }
+    if (categoryIndex.category === undefined) {
+      setIndex(0);
     }
     // eslint-disable-next-line
-  }, [])
-
+  }, []);
 
   return (
     <>
@@ -118,8 +119,12 @@ export default function PointNavigationMenu({ title }: { title: string }) {
         {title}
       </Box>
 
-
-      <Grid container direction="row" justify={sm ? "center" : "flex-start"} alignItems="center">
+      <Grid
+        container
+        direction="row"
+        justify={sm ? "center" : "flex-start"}
+        alignItems="center"
+      >
         {categories.map((item: any, i: number) => (
           <Grid item xs={3} sm={2} lg={1} key={i}>
             <IconButton
@@ -140,13 +145,14 @@ export default function PointNavigationMenu({ title }: { title: string }) {
                   alignItems="center"
                   justify="center"
                 >
+                  <div
+                    style={{
+                      background: `url('${item.thumbnail}')`,
+                      backgroundSize: "cover",
 
-                  < div style={{
-                    background: `url('${item.thumbnail}')`,
-                    backgroundSize: "cover",
-
-                    padding: "30px"
-                  }} />
+                      padding: "30px",
+                    }}
+                  />
                 </Grid>
                 <Grid
                   className={classes.text}
@@ -163,10 +169,7 @@ export default function PointNavigationMenu({ title }: { title: string }) {
         ))}
       </Grid>
       <Suspense fallback={renderLoader()}>
-
         <Courses id={index} />
-
-
       </Suspense>
     </>
   );

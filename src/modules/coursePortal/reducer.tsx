@@ -59,18 +59,28 @@ const initialState = {
   isErrorCourse: [],
   colorName: [
     {
-      "ความรู้เกี่ยวกับราชการไทยและการเป็นข้าราชการ": "#fd1515",
-      "การพัฒนากรอบความคิด(Mindset)": "#fd156a",
-      "ทักษะเชิงภาวะผู้นำ": "#e253e4",
-      "ความรู้ด้านการบริหารงานและทรัพยากรบุคคล": "#5e53e4",
-      "กฎหมายและระเบียบราชการ": "#15c7fd",
-      "ทักษะด้านภาษา": "#46119a",
-      "ทักษะเชิงยุทธศาสตร์": "#2ab311",
-      "ทักษะการเขียนหนังสือราชการ": "#f9b122",
-    }
+      ความรู้เกี่ยวกับราชการไทยและการเป็นข้าราชการ: "#fd1515",
+      "การพัฒนากรอบความคิด (Mindset)": "#fd156a",
+      ทักษะเชิงภาวะผู้นำ: "#e253e4",
+      ความรู้ด้านการบริหารงานและทรัพยากรบุคคล: "#5e53e4",
+      กฎหมายและระเบียบราชการ: "#15c7fd",
+      ทักษะด้านภาษา: "#46119a",
+      ทักษะเชิงยุทธศาสตร์: "#2ab311",
+      ทักษะการเขียนหนังสือราชการ: "#f9b122",
+    },
   ],
-  colorCategory: ["#fd1515", "#fd156a", "#e253e4", "#5e53e4", "#15c7fd", "#46119a", "#2ab311", "#fd8b15", "#f9b122"],
-  platform: []
+  colorCategory: [
+    "#fd1515",
+    "#fd156a",
+    "#e253e4",
+    "#5e53e4",
+    "#15c7fd",
+    "#46119a",
+    "#2ab311",
+    "#fd8b15",
+    "#f9b122",
+  ],
+  platform: [],
 };
 
 export default function (state = initialState, action: any) {
@@ -96,7 +106,12 @@ export default function (state = initialState, action: any) {
         isError: true,
       };
     case LOAD_RECOMMENDED_FAILURE:
-      return { ...state, isLoadingRecommemded: false, isError: false, isErrorCourse: action.payload.isErrorCourse };
+      return {
+        ...state,
+        isLoadingRecommemded: false,
+        isError: false,
+        isErrorCourse: action.payload.isErrorCourse,
+      };
 
     case LOAD_TOPRATE_REQUEST:
       return { ...state, isLoadingToprate: true, toprate: [] };
@@ -108,7 +123,12 @@ export default function (state = initialState, action: any) {
         isError: true,
       };
     case LOAD_TOPRATE_FAILURE:
-      return { ...state, isLoadingToprate: false, isError: false, isErrorCourse: action.payload.isErrorCourse };
+      return {
+        ...state,
+        isLoadingToprate: false,
+        isError: false,
+        isErrorCourse: action.payload.isErrorCourse,
+      };
 
     case LOAD_COURSESCATEGORY_REQUEST:
       return { ...state, isLoading: true, categories: [] };
@@ -120,14 +140,18 @@ export default function (state = initialState, action: any) {
         isError: true,
       };
     case LOAD_COURSESCATEGORY_FAILURE:
-      return { ...state, isLoading: false, isError: false, isErrorCourse: action.payload.isErrorCourse };
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        isErrorCourse: action.payload.isErrorCourse,
+      };
 
     case LOAD_COURSESCATEGORIES_REQUEST:
       return {
         ...state,
         isLoadingCourseCategories: true,
         courseCategories: [],
-
       };
     case LOAD_COURSESCATEGORIES_SUCCESS:
       return {
@@ -138,7 +162,12 @@ export default function (state = initialState, action: any) {
       };
 
     case LOAD_COURSESCATEGORIES_FAILURE:
-      return { ...state, isLoadingCourseCategories: false, isError: false, isErrorCourse: action.payload.isErrorCourse };
+      return {
+        ...state,
+        isLoadingCourseCategories: false,
+        isError: false,
+        isErrorCourse: action.payload.isErrorCourse,
+      };
 
     case LOAD_COURSE_REQUEST:
       return { ...state, isLoadingCourse: true, course: [] };
@@ -150,7 +179,12 @@ export default function (state = initialState, action: any) {
         isError: true,
       };
     case LOAD_COURSE_FAILURE:
-      return { ...state, isLoadingCourse: false, isError: false, isErrorCourse: action.payload.isErrorCourse };
+      return {
+        ...state,
+        isLoadingCourse: false,
+        isError: false,
+        isErrorCourse: action.payload.isErrorCourse,
+      };
 
     case LOAD_COURSES_REQUEST:
       return { ...state, isLoadingCourses: true, courses: [] };
@@ -162,13 +196,16 @@ export default function (state = initialState, action: any) {
         isError: true,
       };
     case LOAD_COURSES_FAILURE:
-      return { ...state, isLoadingCourses: false, isError: false, isErrorCourse: action.payload.isErrorCourse };
+      return {
+        ...state,
+        isLoadingCourses: false,
+        isError: false,
+        isErrorCourse: action.payload.isErrorCourse,
+      };
     case LOAD_COURSEVIEW_REQUEST:
       return {
         ...state,
         isLoading: true,
-
-
       };
     case LOAD_COURSEVIEW_SUCCESS:
       return {
@@ -177,7 +214,12 @@ export default function (state = initialState, action: any) {
         isError: true,
       };
     case LOAD_COURSEVIEW_FAILURE:
-      return { ...state, isLoading: false, isError: false, isErrorCourse: action.payload.isErrorCourse };
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        isErrorCourse: action.payload.isErrorCourse,
+      };
 
     case LOAD_CURRICULUM_REQUEST:
       return { ...state, isLoadingCurriculum: true, curriculum: [] };
@@ -189,7 +231,12 @@ export default function (state = initialState, action: any) {
         isError: true,
       };
     case LOAD_CURRICULUM_FAILURE:
-      return { ...state, isLoadingCurriculum: false, isError: false, isErrorCourse: action.payload.isErrorCourse };
+      return {
+        ...state,
+        isLoadingCurriculum: false,
+        isError: false,
+        isErrorCourse: action.payload.isErrorCourse,
+      };
     case LOAD_CURRICULUMS_REQUEST:
       return { ...state, isLoadingCurriculums: true, curriculums: [] };
     case LOAD_CURRICULUMS_SUCCESS:
@@ -200,14 +247,18 @@ export default function (state = initialState, action: any) {
         isError: true,
       };
     case LOAD_CURRICULUMS_FAILURE:
-      return { ...state, isLoadingCurriculums: false, isError: false, isErrorCourse: action.payload.isErrorCourse };
+      return {
+        ...state,
+        isLoadingCurriculums: false,
+        isError: false,
+        isErrorCourse: action.payload.isErrorCourse,
+      };
 
     case LOAD_CURRICULUMCOURSE_REQUEST:
       return {
         ...state,
         isLoading: true,
         curriculumscourse: [],
-
       };
     case LOAD_CURRICULUMCOURSE_SUCCESS:
       return {
@@ -217,14 +268,17 @@ export default function (state = initialState, action: any) {
         isError: true,
       };
     case LOAD_CURRICULUMCOURSE_FAILURE:
-      return { ...state, isLoading: false, isError: false, isErrorCourse: action.payload.isErrorCourse };
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        isErrorCourse: action.payload.isErrorCourse,
+      };
 
     case LOAD_CURRICULUMVIEW_REQUEST:
       return {
         ...state,
         isLoading: true,
-
-
       };
     case LOAD_CURRICULUMVIEW_SUCCESS:
       return {
@@ -233,7 +287,12 @@ export default function (state = initialState, action: any) {
         isError: true,
       };
     case LOAD_CURRICULUMVIEW_FAILURE:
-      return { ...state, isLoading: false, isError: false, isErrorCourse: action.payload.isErrorCourse };
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        isErrorCourse: action.payload.isErrorCourse,
+      };
 
     default:
       return state;
