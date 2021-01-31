@@ -7,14 +7,14 @@ import {
   Container,
   InputAdornment,
 } from "@material-ui/core";
-import Snackbar from "shared/SnackBar/SnackBar"
+import Snackbar from "shared/SnackBar/SnackBar";
 import { makeStyles } from "@material-ui/core/styles";
 import { AiFillIdcard, AiOutlineMail } from "react-icons/ai";
 import Dateth from "./DateTh";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
-import { useSelector, useDispatch } from 'react-redux'
-import * as actions from '../actions'
+import { useSelector, useDispatch } from "react-redux";
+import * as actions from "../actions";
 const useStyles = makeStyles((theme) => ({
   input: {
     color: "#0f1626",
@@ -126,25 +126,23 @@ export default function SignIn() {
   });
   //const { message, status } = useSelector((state: any) => state.forgot);
   const onSubmitData = (data: any) => {
-
-    const predata = JSON.parse(`{"email":"${data.email}","dob":"${data.dob - 543}"}`)
-    const action = actions.loadFORGOT(predata, data.userId)
-    dispatch(action)
+    const predata = JSON.parse(
+      `{"email":"${data.email}","dob":"${data.dob - 543}"}`
+    );
+    const action = actions.loadFORGOT(predata, data.userId);
+    dispatch(action);
   };
   const { message, severity } = useSelector((state: any) => state.infomation);
 
-
-
   return (
     <Container component="main" maxWidth="xs">
-      {
-        message !== null && <Snackbar
-          message={message
-          }
+      {message !== null && (
+        <Snackbar
+          message={message}
           open={message !== null ? true : false}
           severity={severity}
         />
-      }
+      )}
       <form className={classes.form} onSubmit={handleSubmit(onSubmitData)}>
         <CssBaseline />
         <div className={classes.paper}>

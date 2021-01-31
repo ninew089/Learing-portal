@@ -21,16 +21,14 @@ import {
   DialogTitle,
   Dialog,
   Button,
-
 } from "@material-ui/core";
-
 
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
-import { useDispatch } from 'react-redux'
-import * as actions from "modules/coursePortal/actions"
-import * as actionsCourse from "../../actions"
-import { couresProps, openEditProps, DialogTitleProps } from "./typescript"
+import { useDispatch } from "react-redux";
+import * as actions from "modules/coursePortal/actions";
+import * as actionsCourse from "../../actions";
+import { couresProps, openEditProps, DialogTitleProps } from "./typescript";
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -89,8 +87,6 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-
-
 const MuiDialogTitle = withStyles(styles)((props: DialogTitleProps) => {
   const { children, classes, onClose, ...other } = props;
   return (
@@ -125,14 +121,12 @@ const MuiDialogActions = withStyles((theme) => ({
 export default function CustomizedDialogs({
   open,
   setOpen,
-  data
+  data,
 }: openEditProps) {
   const handleClose = () => {
     setOpen(false);
   };
   const classes = useStyles();
-
-
 
   const { register, handleSubmit, errors } = useForm<couresProps>({
     mode: "onChange",
@@ -145,37 +139,46 @@ export default function CustomizedDialogs({
       targetGroup: yup.string().required(),
       thumbnail: yup.string().required(),
       link: yup.string().required(),
-
-
-
     }),
   });
   const dispatch = useDispatch();
   useEffect(() => {
-
-    const action = actions.loadCourseCategory()
-    dispatch(action)
+    const action = actions.loadCourseCategory();
+    dispatch(action);
 
     // eslint-disable-next-line
-  }, [])
+  }, []);
 
+  const onSubmitData = handleSubmit(
+    ({
+      code,
+      name,
+      learningTopic,
+      learningObjective,
+      assessment,
+      targetGroup,
+      thumbnail,
+      link,
+      courseCategoryId,
+      isShown,
+    }) => {
+      const infoData = {
+        platformId: data.platformId,
+        code: code,
+        name: name,
+        learningTopic: learningTopic,
+        learningObjective: learningObjective,
+        assessment: assessment,
+        targetGroup: targetGroup,
+        thumbnail: thumbnail,
+        link: link,
+      };
 
-
-  const onSubmitData = handleSubmit(({ code, name, learningTopic, learningObjective, assessment, targetGroup, thumbnail, link, courseCategoryId, isShown }) => {
-
-
-    const infoData = {
-      platformId: data.platformId, code: code, name: name, learningTopic: learningTopic, learningObjective: learningObjective,
-      assessment: assessment, targetGroup: targetGroup, thumbnail: thumbnail,
-      link: link
+      const actionCourse = actionsCourse.loadEditCurriculum(infoData, data.id);
+      dispatch(actionCourse);
+      handleClose();
     }
-
-
-    const actionCourse = actionsCourse.loadEditCurriculum(infoData, data.id)
-    dispatch(actionCourse)
-    handleClose()
-
-  });
+  );
   return (
     <div>
       <Dialog
@@ -236,7 +239,6 @@ export default function CustomizedDialogs({
                     defaultValue={data.targetGroup}
                   />
 
-
                   <TextField
                     fullWidth
                     multiline
@@ -244,10 +246,11 @@ export default function CustomizedDialogs({
                     label="เป้าหมายการเรียนรู้"
                     name="learningObjective"
                     inputRef={register}
-                    helperText={errors.learningObjective ? "กรอกเป้าหมายการเรียนรู้" : ""}
+                    helperText={
+                      errors.learningObjective ? "กรอกเป้าหมายการเรียนรู้" : ""
+                    }
                     error={!!errors.learningObjective}
                     defaultValue={data.learningObjective}
-
                   />
                   <TextField
                     fullWidth
@@ -256,11 +259,11 @@ export default function CustomizedDialogs({
                     label="ประเด็นการเรียนรู้"
                     name="learningTopic"
                     inputRef={register}
-                    helperText={errors.learningTopic ? "กรอกประเด็นการเรียนรู้" : ""}
+                    helperText={
+                      errors.learningTopic ? "กรอกประเด็นการเรียนรู้" : ""
+                    }
                     error={!!errors.learningTopic}
                     defaultValue={data.learningTopic}
-
-
                   />
                   <TextField
                     fullWidth
@@ -278,7 +281,6 @@ export default function CustomizedDialogs({
                     multiline
                     id="URL รูปThumbnail"
                     label="URL รูปThumbnail"
-
                     name="thumbnail"
                     inputRef={register}
                     helperText={errors.thumbnail ? "กรอกรูปThumbnail" : ""}
@@ -296,7 +298,6 @@ export default function CustomizedDialogs({
                     error={!!errors.link}
                     defaultValue={data.link}
                   />
-
                 </FormControl>
               </form>
             </div>

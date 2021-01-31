@@ -6,7 +6,6 @@ import Date from "./DatePickerJob";
 import * as actions from "modules/infomation/actions";
 import { useDispatch, useSelector } from "react-redux";
 
-
 const useStyles = makeStyles((theme) => ({
   margin: {
     margin: theme.spacing(1),
@@ -209,8 +208,6 @@ export default function SignIn(props: any) {
             }
             error={!!formProps.errors.DepartmentId}
           >
-
-
             {Departments.map((department: any, index: number) => (
               <MenuItem
                 className={classes.menu}
@@ -220,10 +217,6 @@ export default function SignIn(props: any) {
                 {department.name}
               </MenuItem>
             ))}
-
-
-
-
           </TextField>
         }
         name="DepartmentId"
@@ -231,10 +224,6 @@ export default function SignIn(props: any) {
         control={formProps.control}
         defaultValue={undefined}
       />
-
-
-
-
 
       <TextField
         fullWidth

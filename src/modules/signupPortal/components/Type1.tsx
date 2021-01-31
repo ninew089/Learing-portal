@@ -4,7 +4,7 @@ import { TextField, MenuItem, FormControl } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import * as actions from "modules/infomation/actions";
 import { useDispatch, useSelector } from "react-redux";
-import { jobTypes1Props, jobLevelProps, typeProps } from "../typescript"
+import { jobTypes1Props, jobLevelProps, typeProps } from "../typescript";
 const useStyles = makeStyles((theme) => ({
   input: {
     color: "#0f1626",

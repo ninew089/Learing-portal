@@ -19,12 +19,11 @@ import Search from "@material-ui/icons/Search";
 import ViewColumn from "@material-ui/icons/ViewColumn";
 import DialogAdd from "./DialogAdd";
 import DialogEdit from "./DialogEdit";
-import { parseJwt } from "utils/getDataJWT"
-import { getCookie } from 'cookie/cookie'
-import axios from "axios"
-import { useSelector } from 'react-redux'
-import Snackbar from "shared/SnackBar/SnackBar"
-
+import { parseJwt } from "utils/getDataJWT";
+import { getCookie } from "cookie/cookie";
+import axios from "axios";
+import { useSelector } from "react-redux";
+import Snackbar from "shared/SnackBar/SnackBar";
 
 export default function MaterialTableDemo() {
   const tableIcons = {
@@ -83,54 +82,55 @@ export default function MaterialTableDemo() {
   const { useState } = React;
   /*https://learn.ocsc.info/learning-portal-api/Platforms/1/Courses */
 
-  const [entries, setEntries] = useState<any>([])
+  const [entries, setEntries] = useState<any>([]);
 
-
-  const token = getCookie('token');
-  const platformid = parseJwt(token).unique_name
+  const token = getCookie("token");
+  const platformid = parseJwt(token).unique_name;
   const headers = {
     Authorization: `Bearer ${token}`,
-  }
+  };
   const { message, severity } = useSelector((state: any) => state.admin);
 
   useEffect(() => {
     const fetch = async () => {
       try {
-        const response = await axios.get(`/Platforms/${platformid}/Curriculums`)
-        console.log(response.data)
-        setEntries(response.data)
-
+        const response = await axios.get(
+          `/Platforms/${platformid}/Curriculums`
+        );
+        console.log(response.data);
+        setEntries(response.data);
       } catch (err) {
-        console.log(err)
+        console.log(err);
       }
-
-    }
-    fetch()
+    };
+    fetch();
     // eslint-disable-next-line
-  }, [message])
-
-
+  }, [message]);
 
   const [open, setOpen] = useState(false);
 
-  const [editData, setEditData] = useState<any>([])
+  const [editData, setEditData] = useState<any>([]);
   const [openEdit, setOpenEdit] = useState(false);
 
   return (
     <div>
       <CssBaseline />
-      {
-        message !== null && <Snackbar
-          message={message
-          }
+      {message !== null && (
+        <Snackbar
+          message={message}
           open={message !== null ? true : false}
           severity={severity}
         />
-      }
+      )}
       <MaterialTable
         title="หลักสูตร"
         columns={[
-          { title: "เลขหลักสูตร", field: "id", type: "numeric", editable: "never" },
+          {
+            title: "เลขหลักสูตร",
+            field: "id",
+            type: "numeric",
+            editable: "never",
+          },
           { title: "รหัสหลักสูตร", field: "code", type: "numeric" },
           { title: "ชื่อหลักสูตร", field: "name" },
         ]}
@@ -138,7 +138,7 @@ export default function MaterialTableDemo() {
         icons={tableIcons}
         options={{
           pageSize: 20,
-          pageSizeOptions: [20, 50, 100]
+          pageSizeOptions: [20, 50, 100],
         }}
         actions={[
           {
@@ -146,23 +146,18 @@ export default function MaterialTableDemo() {
             tooltip: "เพิ่ม",
             isFreeAction: true,
             onClick: (event, rowData) => {
-              setOpen(true)
-
+              setOpen(true);
             },
-
           },
 
           {
             icon: () => <Edit />,
             tooltip: "แก้ไข",
             onClick: (event, rowData) => {
-              setOpenEdit(true)
-              const save = rowData
+              setOpenEdit(true);
+              const save = rowData;
 
-              setEditData(save)
-
-
-
+              setEditData(save);
             },
           },
         ]}
@@ -171,16 +166,18 @@ export default function MaterialTableDemo() {
             new Promise((resolve) => {
               setTimeout(() => {
                 //@ts-ignore
-                resolve()
-                const data = [...entries]
-                data.splice(data.indexOf(oldData), 1)
+                resolve();
+                const data = [...entries];
+                data.splice(data.indexOf(oldData), 1);
                 axios
-                  .delete(`/Platforms/${platformid}/Curriculums/${oldData.id}`, { headers })
-                  .then((res) => console.log(res.data))
-                setEntries(data)
-              }, 600)
+                  .delete(
+                    `/Platforms/${platformid}/Curriculums/${oldData.id}`,
+                    { headers }
+                  )
+                  .then((res) => console.log(res.data));
+                setEntries(data);
+              }, 600);
             }),
-
         }}
       />
       <DialogAdd open={open} setOpen={setOpen} />

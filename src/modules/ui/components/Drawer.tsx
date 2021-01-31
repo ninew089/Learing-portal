@@ -13,10 +13,18 @@ import { AiOutlineMenu } from "react-icons/ai";
 import { useRouteMatch } from "react-router-dom";
 import { useSelector } from "react-redux";
 import avatar from "assets/images/user.svg";
-import { getCookie } from 'cookie/cookie'
-import { parseJwt } from "utils/getDataJWT"
-import { eraseCookie } from "cookie/cookie"
-import { RecentActors, LockRounded, CardMembership, ExitToApp, Home, AccountCircle, Help } from '@material-ui/icons';
+import { getCookie } from "cookie/cookie";
+import { parseJwt } from "utils/getDataJWT";
+import { eraseCookie } from "cookie/cookie";
+import {
+  RecentActors,
+  LockRounded,
+  CardMembership,
+  ExitToApp,
+  Home,
+  AccountCircle,
+  Help,
+} from "@material-ui/icons";
 const useStyles = makeStyles((theme) => ({
   root: {
     background: "#0f1726",
@@ -64,23 +72,23 @@ export default function TemporaryDrawer() {
   const { path } = useRouteMatch();
 
   const login = () => {
-    const token = getCookie('token');
+    const token = getCookie("token");
     if (token === null) {
-      return false
+      return false;
     }
-    if ((token !== "" || token !== undefined) && parseJwt(token).role === "user") {
-      return true
+    if (
+      (token !== "" || token !== undefined) &&
+      parseJwt(token).role === "user"
+    ) {
+      return true;
     }
 
-    return false
-
-  }
+    return false;
+  };
   const onLogout = () => {
-
-    eraseCookie("token")
+    eraseCookie("token");
     window.location.reload();
-
-  }
+  };
   const { data } = useSelector((state: any) => state.edit);
   const list = (anchor: Anchor) => (
     <div
@@ -99,22 +107,21 @@ export default function TemporaryDrawer() {
                 <ListItemIcon>
                   <Avatar alt="" src={avatar} />
                 </ListItemIcon>
-                <ListItemText primary={`${data.title}${data.firstName} ${data.lastName}`} />
+                <ListItemText
+                  primary={`${data.title}${data.firstName} ${data.lastName}`}
+                />
               </ListItem>
             </NavLink>
             <Divider />
             <NavLink to={`${path}/edit`} className={classes.navLink}>
               <ListItem button>
                 <ListItemIcon>
-
                   <RecentActors />
-
                 </ListItemIcon>
                 <ListItemText primary={"แก้ไขโปรไฟล์"} />
               </ListItem>
             </NavLink>
             <NavLink to={`${path}/reset`} className={classes.navLink}>
-
               <ListItem button>
                 <ListItemIcon>
                   <LockRounded />
@@ -133,20 +140,20 @@ export default function TemporaryDrawer() {
             <Divider />
           </>
         ) : (
-            <>
+          <>
+            <ListItem button>
+              <ListItemText primary={`Learning Portal`} />
+            </ListItem>
+            <NavLink to={`${path}/login`} className={classes.navLink}>
               <ListItem button>
-                <ListItemText primary={`Learning Portal`} />
+                <ListItemIcon>
+                  <AccountCircle />
+                </ListItemIcon>
+                <ListItemText primary={"เข้าสู่ระบบ"} />
               </ListItem>
-              <NavLink to={`${path}/login`} className={classes.navLink}>
-                <ListItem button>
-                  <ListItemIcon>
-                    <AccountCircle />
-                  </ListItemIcon>
-                  <ListItemText primary={"เข้าสู่ระบบ"} />
-                </ListItem>
-              </NavLink>
-            </>
-          )}
+            </NavLink>
+          </>
+        )}
 
         <NavLink to={`${path}`} className={classes.navLink}>
           <ListItem button>
@@ -168,7 +175,6 @@ export default function TemporaryDrawer() {
         {login() ? (
           <NavLink to={`${path}`} className={classes.navLink}>
             <ListItem button onClick={onLogout}>
-
               <ListItemIcon>
                 <ExitToApp />
               </ListItemIcon>
@@ -176,8 +182,8 @@ export default function TemporaryDrawer() {
             </ListItem>
           </NavLink>
         ) : (
-            ""
-          )}
+          ""
+        )}
       </List>
     </div>
   );

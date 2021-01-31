@@ -33,9 +33,7 @@ export default function ControlledOpenSelect() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const dispatch = useDispatch();
-  const { categories, colorCategory } = useSelector(
-    (state: any) => state.course
-  );
+  const { categories, colorName } = useSelector((state: any) => state.course);
   const [value, setValue] = useState<any>({});
   const history = useHistory();
 
@@ -91,17 +89,16 @@ export default function ControlledOpenSelect() {
             <MenuItem value={item} key={index}>
               <div
                 className={classes.dot}
-                style={{ background: colorCategory[index] }}
-              />{" "}
+                style={{
+                  background:
+                    colorName[0][item.name !== undefined ? item.name : 0],
+                }}
+              />
               {item.name}
             </MenuItem>
           ))}
           <MenuItem value={-1}>
-            {" "}
-            <div
-              className={classes.dot}
-              style={{ background: colorCategory[8] }}
-            />{" "}
+            <div className={classes.dot} style={{ background: "#f9b122" }} />
             หลักสูตร
           </MenuItem>
         </Select>

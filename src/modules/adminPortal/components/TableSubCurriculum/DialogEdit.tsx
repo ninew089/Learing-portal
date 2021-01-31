@@ -19,13 +19,13 @@ import {
   DialogTitle,
   Dialog,
   Button,
-  TextField
+  TextField,
 } from "@material-ui/core";
 
-import { useDispatch } from 'react-redux'
-import * as actions from "modules/coursePortal/actions"
-import * as actionsCourse from "../../actions"
-import { openEditProps, DialogTitleProps } from "./typescript"
+import { useDispatch } from "react-redux";
+import * as actions from "modules/coursePortal/actions";
+import * as actionsCourse from "../../actions";
+import { openEditProps, DialogTitleProps } from "./typescript";
 const styles = (theme: Theme) =>
   createStyles({
     root: {
@@ -83,8 +83,6 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-
-
 const MuiDialogTitle = withStyles(styles)((props: DialogTitleProps) => {
   const { children, classes, onClose, ...other } = props;
   return (
@@ -121,7 +119,6 @@ export default function CustomizedDialogs({
   setOpen,
   data,
   valueCurriculun,
-
 }: openEditProps) {
   const handleClose = () => {
     setOpen(false);
@@ -130,24 +127,28 @@ export default function CustomizedDialogs({
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const action = actions.loadCourseCategory()
-    dispatch(action)
+    const action = actions.loadCourseCategory();
+    dispatch(action);
     if (!isNaN(data.no!)) {
-      setValue(data.no)
+      setValue(data.no);
     }
     // eslint-disable-next-line
-  }, [data.tableData?.id])
-  const [value, setValue] = useState('')
+  }, [data.tableData?.id]);
+  const [value, setValue] = useState("");
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
   };
 
   const onSubmitData = () => {
-    const no = parseInt(value)
-    const actionCourse = actionsCourse.loadEditSubCurriculum(valueCurriculun, data.id, no)
-    dispatch(actionCourse)
-    handleClose()
+    const no = parseInt(value);
+    const actionCourse = actionsCourse.loadEditSubCurriculum(
+      valueCurriculun,
+      data.id,
+      no
+    );
+    dispatch(actionCourse);
+    handleClose();
   };
 
   return (
@@ -173,18 +174,21 @@ export default function CustomizedDialogs({
               <Typography component="h1" variant="h5">
                 ข้อมูลรายวิชาในหลักสูตร
               </Typography>
-              <TextField id="standard-name" label="ลำดับที่" value={value} onChange={handleChange}
+              <TextField
+                id="standard-name"
+                label="ลำดับที่"
+                value={value}
+                onChange={handleChange}
               />
-
             </div>
           </Container>
         </MuiDialogContent>
         <MuiDialogActions>
-          {value !== undefined &&
+          {value !== undefined && (
             <Button color="primary" fullWidth onClick={onSubmitData}>
               ส่งข้อมูล
-          </Button>
-          }
+            </Button>
+          )}
         </MuiDialogActions>
       </Dialog>
     </div>

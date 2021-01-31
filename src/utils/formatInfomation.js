@@ -1,9 +1,9 @@
-import { formatDate } from "./dateFormat"
-import { getCookie } from "cookie/cookie"
-import {parseJwt} from "./getDataJWT"
- export   function info(signUpInfo){
-    if (signUpInfo.usertypeid === "1") {
-      const data = JSON.parse(`{
+import { formatDate } from "./dateFormat";
+import { getCookie } from "cookie/cookie";
+import { parseJwt } from "./getDataJWT";
+export function info(signUpInfo) {
+  if (signUpInfo.usertypeid === "1") {
+    const data = JSON.parse(`{
         "id": "${signUpInfo.id}",
         "usertypeid": ${parseInt(signUpInfo.usertypeid)},
         "title": "${signUpInfo.title}",
@@ -25,10 +25,10 @@ import {parseJwt} from "./getDataJWT"
         "jobstartdate": "${formatDate(signUpInfo.jobStartDate)}"
       }
     }`);
-      return data;
-    }
-    if (signUpInfo.usertypeid === "2") {
-      const data = JSON.parse(`{
+    return data;
+  }
+  if (signUpInfo.usertypeid === "2") {
+    const data = JSON.parse(`{
         "id": "${signUpInfo.id}",
         "usertypeid": ${parseInt(signUpInfo.usertypeid)},
         "title": "${signUpInfo.title}",
@@ -50,10 +50,10 @@ import {parseJwt} from "./getDataJWT"
           "jobstartdate": "${formatDate(signUpInfo.jobStartDate)}"
         }
       }`);
-      return data;
-    }
-    if (signUpInfo.usertypeid === "3") {
-      const data = JSON.parse(`{
+    return data;
+  }
+  if (signUpInfo.usertypeid === "3") {
+    const data = JSON.parse(`{
         "id": "${signUpInfo.id}",
         "usertypeid": ${parseInt(signUpInfo.usertypeid)},
         "title": "${signUpInfo.title}",
@@ -73,11 +73,11 @@ import {parseJwt} from "./getDataJWT"
             "departmentid":${parseInt(signUpInfo.DepartmentId)},
             "division": "${signUpInfo.Division}",
             "jobstartdate": "${formatDate(signUpInfo.jobStartDate)}"}}`);
-      return data;
-    }
+    return data;
+  }
 
-    if (signUpInfo.usertypeid === "4") {
-      const data = JSON.parse(`{
+  if (signUpInfo.usertypeid === "4") {
+    const data = JSON.parse(`{
         "id": "${signUpInfo.id}",
         "usertypeid": ${parseInt(signUpInfo.usertypeid)},
         "title": "${signUpInfo.title}",
@@ -95,10 +95,10 @@ import {parseJwt} from "./getDataJWT"
               "jobstartdate": "${formatDate(signUpInfo.jobStartDate)}"
           }
         }`);
-      return data;
-    }
-    if (signUpInfo.usertypeid === "5") {
-      const data = JSON.parse(`{
+    return data;
+  }
+  if (signUpInfo.usertypeid === "5") {
+    const data = JSON.parse(`{
         "id": "${signUpInfo.id}",
         "usertypeid": ${parseInt(signUpInfo.usertypeid)},
         "title": "${signUpInfo.title}",
@@ -117,14 +117,14 @@ import {parseJwt} from "./getDataJWT"
           }
         }`);
 
-      return data;
-    }
-    return "";
-};
-  
-export  function infoEdit(signUpInfo) {
-  const token = getCookie("token")
-  const id =parseJwt(token).unique_name
+    return data;
+  }
+  return "";
+}
+
+export function infoEdit(signUpInfo) {
+  const token = getCookie("token");
+  const id = parseJwt(token).unique_name;
   if (signUpInfo.usertypeid === "1") {
     const data = JSON.parse(`{
       "id": "${id}",
@@ -243,4 +243,4 @@ export  function infoEdit(signUpInfo) {
     return data;
   }
   return "";
-};
+}

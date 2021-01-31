@@ -17,9 +17,9 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import * as actions from "../actions";
 import { useDispatch, useSelector } from "react-redux";
-import Snackbar from "shared/SnackBar/SnackBar"
-import { infoEdit } from "utils/formatInfomation"
-import { accountFormProps } from "../typescript"
+import Snackbar from "shared/SnackBar/SnackBar";
+import { infoEdit } from "utils/formatInfomation";
+import { accountFormProps } from "../typescript";
 const useStyles = makeStyles((theme) => ({
   paper: {
     background: "white",
@@ -67,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Edit(props: any) {
   const classes = useStyles();
-  const { data } = props
+  const { data } = props;
   // eslint-disable-next-line
   const [types, setType] = React.useState<string>("");
   // eslint-disable-next-line
@@ -318,35 +318,26 @@ export default function Edit(props: any) {
     }),
   });
 
-
-
   const dispatch = useDispatch();
-
-
-
-
 
   const onSubmitData = (data: any) => {
     const preinfo = infoEdit(data);
 
     const action = actions.loadEdit(preinfo);
     dispatch(action);
-
   };
 
   const { message, severity } = useSelector((state: any) => state.infomation);
 
-
   return (
     <>
-      {
-        message !== null && <Snackbar
-          message={message
-          }
+      {message !== null && (
+        <Snackbar
+          message={message}
           open={message !== null ? true : false}
           severity={severity}
         />
-      }
+      )}
 
       <Container component="main" maxWidth="sm" className={classes.paper}>
         <Grid container direction="row" justify="center" alignItems="center">
@@ -365,7 +356,8 @@ export default function Edit(props: any) {
             <Grid item xs={12}>
               <Box fontWeight="fontWeightBold" fontSize={18} textAlign="center">
                 {" "}
-                {data.title}{data.firstName} {data.lastName}
+                {data.title}
+                {data.firstName} {data.lastName}
               </Box>
               <Toolbar />
               <Divider variant="middle" />
@@ -389,9 +381,6 @@ export default function Edit(props: any) {
           </Grid>
         </Grid>
       </Container>
-
     </>
   );
 }
-
-

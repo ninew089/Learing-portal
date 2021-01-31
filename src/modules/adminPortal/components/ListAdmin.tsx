@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory } from "react-router-dom"
+import { useHistory } from "react-router-dom";
 import {
   AiOutlineUser,
   AiOutlineUserAdd,
@@ -14,13 +14,13 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@material-ui/core";
-import { useSelector } from 'react-redux'
+import { useSelector } from "react-redux";
 
 import { NavLink } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import { CgPassword } from "react-icons/cg";
 import { useRouteMatch } from "react-router-dom";
-import { eraseCookie } from "cookie/cookie"
+import { eraseCookie } from "cookie/cookie";
 const useStyles = makeStyles({
   nav: {
     color: "inherit",
@@ -31,14 +31,13 @@ const useStyles = makeStyles({
 export default function PersistentDrawerLeft() {
   const classes = useStyles();
   const { path } = useRouteMatch();
-  const history = useHistory()
+  const history = useHistory();
   const { profile } = useSelector((state: any) => state.admin);
   const navigatorTologout = () => {
     history.push(`${path}`);
   };
   const onLogout = () => {
-
-    eraseCookie("token")
+    eraseCookie("token");
 
     navigatorTologout();
     window.location.reload();
@@ -50,7 +49,9 @@ export default function PersistentDrawerLeft() {
           <ListItemIcon>
             <AiOutlineUser size={24} />
           </ListItemIcon>
-          <ListItemText primary={`${profile.title}${profile.firstName} ${profile.lastName}`} />
+          <ListItemText
+            primary={`${profile.title}${profile.firstName} ${profile.lastName}`}
+          />
         </ListItem>
 
         <ListItem key={"mooc"}>
@@ -135,7 +136,6 @@ export default function PersistentDrawerLeft() {
           </ListItemIcon>
           <ListItemText primary={"ลงชื่อออก"} />
         </ListItem>
-
       </List>
     </div>
   );

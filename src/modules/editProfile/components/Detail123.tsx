@@ -129,7 +129,6 @@ export default function SignIn(props: any) {
     // eslint-disable-next-line
   }, []);
 
-
   const { Ministries, Departments } = useSelector(
     (state: any) => state.infomation
   );
@@ -138,20 +137,18 @@ export default function SignIn(props: any) {
   const dep = formProps.getValues("DepartmentId");
 
   useEffect(() => {
-
     const value = formProps.getValues("MinistryId");
     const actionDepartments = actions.loadDepartments(value);
     dispatch(actionDepartments);
 
     if (Departments.length !== 0) {
       const depProps = Departments.filter((member: any) => {
-        return member.id === parseInt(dep)
-      }).length
+        return member.id === parseInt(dep);
+      }).length;
       if (depProps === 0) {
         formProps.setValue("DepartmentId", undefined, { shouldValidate: true });
       }
     }
-
 
     // eslint-disable-next-line
   }, [value]);
@@ -192,7 +189,6 @@ export default function SignIn(props: any) {
                 className={classes.menu}
                 key={index}
                 value={ministry.id}
-
               >
                 {ministry.name}
               </MenuItem>
@@ -216,13 +212,14 @@ export default function SignIn(props: any) {
             }}
             select
             helperText={
-              formProps.errors.DepartmentId && formProps.errors.DepartmentId.message
+              formProps.errors.DepartmentId &&
+              formProps.errors.DepartmentId.message
             }
             error={!!formProps.errors.DepartmentId}
           >
-
             {Departments.map((department: any, index: number) => (
-              <MenuItem className={classes.menu}
+              <MenuItem
+                className={classes.menu}
                 key={index}
                 value={department.id}
               >
@@ -234,10 +231,7 @@ export default function SignIn(props: any) {
         name="DepartmentId"
         rules={{ required: "กรุณาเลือกกรมที่สังกัด" }}
         control={formProps.control}
-
       />
-
-
 
       <TextField
         fullWidth

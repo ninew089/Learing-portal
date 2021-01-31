@@ -9,8 +9,7 @@ import {
   //@ts-ignore
   formatDate,
 } from "react-day-picker/moment";
-import { useSelector } from 'react-redux'
-
+import { useSelector } from "react-redux";
 
 class LocalizedUtils extends DateFnsUtils {
   getDatePickerHeaderText(date: Date) {
@@ -97,8 +96,6 @@ function DateFnsLocalizationExample(props: any) {
 
   return (
     <MuiPickersUtilsProvider utils={LocalizedUtils} locale={th}>
-
-
       <KeyboardDatePicker
         name={`${name}`}
         fullWidth

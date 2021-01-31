@@ -4,7 +4,7 @@ import { Controller } from "react-hook-form";
 import { makeStyles } from "@material-ui/core/styles";
 import * as actions from "modules/infomation/actions";
 import { useDispatch, useSelector } from "react-redux";
-import { jobTypes3Props, typeProps } from "../typescript"
+import { jobTypes3Props, typeProps } from "../typescript";
 const useStyles = makeStyles((theme) => ({
   input: {
     color: "#0f1626",
@@ -101,7 +101,7 @@ export default function SignIn(props: typeProps) {
               error={!!formProps.errors.jobtypeId}
             >
               {jobTypes3.map((jobType3: jobTypes3Props, index: number) => (
-                <MenuItem key={index} value={jobType3.id} >
+                <MenuItem key={index} value={jobType3.id}>
                   {jobType3.name}
                 </MenuItem>
               ))}
@@ -110,7 +110,7 @@ export default function SignIn(props: typeProps) {
           name="jobtypeId"
           rules={{ required: "กรุณาเลือกประเภทตำแหน่ง" }}
           control={formProps.control}
-å
+          å
         />
 
         <TextField

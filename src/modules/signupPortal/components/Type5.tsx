@@ -7,7 +7,7 @@ import Date from "./DatePickerJob";
 
 import * as actions from "modules/infomation/actions";
 import { useDispatch, useSelector } from "react-redux";
-import { stateEnterpriseProps, typeProps } from "../typescript"
+import { stateEnterpriseProps, typeProps } from "../typescript";
 const useStyles = makeStyles((theme) => ({
   input: {
     color: "#0f1626",
@@ -106,11 +106,13 @@ export default function SignIn(props: typeProps) {
               }
               error={!!formProps.errors.stateEnterprisid}
             >
-              {StateEnterprises.map((stateEnterprise: stateEnterpriseProps, index: number) => (
-                <MenuItem value={stateEnterprise.id} key={index}>
-                  {stateEnterprise.name}
-                </MenuItem>
-              ))}
+              {StateEnterprises.map(
+                (stateEnterprise: stateEnterpriseProps, index: number) => (
+                  <MenuItem value={stateEnterprise.id} key={index}>
+                    {stateEnterprise.name}
+                  </MenuItem>
+                )
+              )}
             </TextField>
           }
           name="stateEnterprisid"

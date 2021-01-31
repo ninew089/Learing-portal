@@ -9,7 +9,7 @@ import {
   //@ts-ignore
   formatDate,
 } from "react-day-picker/moment";
-import { useSelector } from 'react-redux'
+import { useSelector } from "react-redux";
 
 class LocalizedUtils extends DateFnsUtils {
   getDatePickerHeaderText(date: Date) {
@@ -88,7 +88,7 @@ const useStyles = makeStyles((theme) => ({
 function DateFnsLocalizationExample(props: any) {
   const { title, register, name } = props;
   const { data } = useSelector((state: any) => state.edit);
-  let date = data[`user${data.userTypeId}`].jobStartDate
+  let date = data[`user${data.userTypeId}`].jobStartDate;
   const [selectedDate, handleDateChange] = useState(date);
   const classes = useStyles();
 

@@ -21,15 +21,20 @@ import {
   DialogTitle,
   Dialog,
   Button,
-  MenuItem
+  MenuItem,
 } from "@material-ui/core";
 
 import { useForm, Controller } from "react-hook-form";
 import * as yup from "yup";
-import { useSelector, useDispatch } from 'react-redux'
-import * as actions from "modules/coursePortal/actions"
-import * as actionsCourse from "../../actions"
-import { DialogTitleProps, DialogsProps, couresProps, categoryProps } from "./typescript"
+import { useSelector, useDispatch } from "react-redux";
+import * as actions from "modules/coursePortal/actions";
+import * as actionsCourse from "../../actions";
+import {
+  DialogTitleProps,
+  DialogsProps,
+  couresProps,
+  categoryProps,
+} from "./typescript";
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -88,8 +93,6 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-
-
 const MuiDialogTitle = withStyles(styles)((props: DialogTitleProps) => {
   const { children, classes, onClose, ...other } = props;
   return (
@@ -122,7 +125,6 @@ const MuiDialogActions = withStyles((theme) => ({
 }))(DialogActions);
 
 export default function CustomizedDialogs({ open, setOpen }: DialogsProps) {
-
   const handleClose = () => {
     setOpen(false);
   };
@@ -141,33 +143,47 @@ export default function CustomizedDialogs({ open, setOpen }: DialogsProps) {
       thumbnail: yup.string().required(),
       link: yup.string().required(),
       courseCategoryId: yup.string().required(),
-
-
     }),
   });
   const dispatch = useDispatch();
   useEffect(() => {
-
-    const action = actions.loadCourseCategory()
-    dispatch(action)
+    const action = actions.loadCourseCategory();
+    dispatch(action);
 
     // eslint-disable-next-line
-  }, [])
+  }, []);
 
   const { categories } = useSelector((state: any) => state.course);
-  const onSubmitData = handleSubmit(({ code, name, learningTopic, learningObjective, assessment, targetGroup, thumbnail, link, courseCategoryId, isShown }) => {
+  const onSubmitData = handleSubmit(
+    ({
+      code,
+      name,
+      learningTopic,
+      learningObjective,
+      assessment,
+      targetGroup,
+      thumbnail,
+      link,
+      courseCategoryId,
+      isShown,
+    }) => {
+      const infoData = {
+        code: code,
+        name: name,
+        learningTopic: learningTopic,
+        learningObjective: learningObjective,
+        assessment: assessment,
+        targetGroup: targetGroup,
+        thumbnail: thumbnail,
+        link: link,
+        courseCategoryId: parseInt(courseCategoryId),
+      };
 
-    const infoData = {
-      code: code, name: name, learningTopic: learningTopic, learningObjective: learningObjective,
-      assessment: assessment, targetGroup: targetGroup, thumbnail: thumbnail,
-      link: link, courseCategoryId: parseInt(courseCategoryId)
+      const actionCourse = actionsCourse.loadAddCourse(infoData);
+      dispatch(actionCourse);
+      handleClose();
     }
-
-
-    const actionCourse = actionsCourse.loadAddCourse(infoData)
-    dispatch(actionCourse)
-    handleClose()
-  });
+  );
   return (
     <div>
       <Dialog
@@ -218,23 +234,21 @@ export default function CustomizedDialogs({ open, setOpen }: DialogsProps) {
                     as={
                       <TextField
                         variant="outlined"
-
                         label="หมวดหมู่รายวิชา"
-
                         select
                         helperText={
-                          errors.courseCategoryId && errors.courseCategoryId.message
+                          errors.courseCategoryId &&
+                          errors.courseCategoryId.message
                         }
                         error={!!errors.courseCategoryId}
                       >
-                        {categories.map((categorie: categoryProps, index: number) => (
-                          <MenuItem
-                            key={index}
-                            value={categorie.id}
-                          >
-                            {categorie.name}
-                          </MenuItem>
-                        ))}
+                        {categories.map(
+                          (categorie: categoryProps, index: number) => (
+                            <MenuItem key={index} value={categorie.id}>
+                              {categorie.name}
+                            </MenuItem>
+                          )
+                        )}
                       </TextField>
                     }
                     name="courseCategoryId"
@@ -260,9 +274,10 @@ export default function CustomizedDialogs({ open, setOpen }: DialogsProps) {
                     label="เป้าหมายการเรียนรู้"
                     name="learningObjective"
                     inputRef={register}
-                    helperText={errors.learningObjective ? "กรอกเป้าหมายการเรียนรู้" : ""}
+                    helperText={
+                      errors.learningObjective ? "กรอกเป้าหมายการเรียนรู้" : ""
+                    }
                     error={!!errors.learningObjective}
-
                   />
                   <TextField
                     fullWidth
@@ -271,9 +286,10 @@ export default function CustomizedDialogs({ open, setOpen }: DialogsProps) {
                     label="ประเด็นการเรียนรู้"
                     name="learningTopic"
                     inputRef={register}
-                    helperText={errors.learningTopic ? "กรอกประเด็นการเรียนรู้" : ""}
+                    helperText={
+                      errors.learningTopic ? "กรอกประเด็นการเรียนรู้" : ""
+                    }
                     error={!!errors.learningTopic}
-
                   />
 
                   <TextField
@@ -291,7 +307,6 @@ export default function CustomizedDialogs({ open, setOpen }: DialogsProps) {
                     multiline
                     id="URL รูปThumbnail"
                     label="URL รูปThumbnail"
-
                     name="thumbnail"
                     inputRef={register}
                     helperText={errors.thumbnail ? "กรอกรูปThumbnail" : ""}
@@ -307,7 +322,6 @@ export default function CustomizedDialogs({ open, setOpen }: DialogsProps) {
                     helperText={errors.link ? "กรอกรูปThumbnail" : ""}
                     error={!!errors.link}
                   />
-
                 </FormControl>
               </form>
             </div>

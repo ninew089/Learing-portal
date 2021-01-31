@@ -2,25 +2,24 @@ import React, { useEffect, lazy, Suspense, useState, useRef } from "react";
 import { Grid, Box, Container } from "@material-ui/core";
 import { useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from "react-redux";
 import * as actions from "../actions";
-import animation from "assets/gif/animation.gif"
-import animation00 from "assets/gif/animation00.gif"
-import Disqus from "modules/Disqus/index"
+import animation from "assets/gif/animation.gif";
+import animation00 from "assets/gif/animation00.gif";
+import Disqus from "modules/Disqus/index";
 
 import "assets/css/styles.css";
 
-
-const Relation = lazy(() => import('modules/relationPortal/components/Relation'));
-const Portal = lazy(() => import('modules/portal/components/LinkPortal'));
-const TapsCourse = lazy(() => import('./Course/TapsCourse'));
-const AllCourse = lazy(() => import('./Course/AllCourse'));
-const SocialCardDemo = lazy(() => import('./CardRecomment/CardRecomment'));
-const GroupSearch = lazy(() => import('./Search'));
-const Curriculum = lazy(() => import('./Curriculum/CategoryByCurriculum'));
-const Facebook = lazy(() => import('modules/facebook/components/FaceBook'));
-
-
+const Relation = lazy(
+  () => import("modules/relationPortal/components/Relation")
+);
+const Portal = lazy(() => import("modules/portal/components/LinkPortal"));
+const TapsCourse = lazy(() => import("./Course/TapsCourse"));
+const AllCourse = lazy(() => import("./Course/AllCourse"));
+const SocialCardDemo = lazy(() => import("./CardRecomment/CardRecomment"));
+const GroupSearch = lazy(() => import("./Search"));
+const Curriculum = lazy(() => import("./Curriculum/CategoryByCurriculum"));
+const Facebook = lazy(() => import("modules/facebook/components/FaceBook"));
 
 function FadeInSection(props: any) {
   const [isVisible, setVisible] = useState(false);
@@ -38,7 +37,6 @@ function FadeInSection(props: any) {
     };
   }, []);
 
-
   return (
     <div
       className={`fade-in-section ${isVisible ? "is-visible" : ""}`}
@@ -50,34 +48,25 @@ function FadeInSection(props: any) {
 }
 
 export default function Course() {
-
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.only("xs"));
 
-
   useEffect(() => {
-    const actionTopRate = actions.loadTopRate()
-    dispatch(actionTopRate)
-    const actionRecommend = actions.loadRecommended()
-    dispatch(actionRecommend)
-
+    const actionTopRate = actions.loadTopRate();
+    dispatch(actionTopRate);
+    const actionRecommend = actions.loadRecommended();
+    dispatch(actionRecommend);
 
     // eslint-disable-next-line
-  }, [])
+  }, []);
 
   const dispatch = useDispatch();
   const { toprate, recommemded } = useSelector((state: any) => state.course);
 
-
-
-
-
-  const renderLoader = () =>
-    <div></div>
+  const renderLoader = () => <div></div>;
 
   return (
     <div>
-
       <Suspense fallback={renderLoader()}>
         <Relation />
         <Box p={2}>
@@ -99,14 +88,17 @@ export default function Course() {
               alignItems="center"
               style={{ padding: 10 }}
             >
-              <GroupSearch
-
-              />
+              <GroupSearch />
             </Grid>
           </div>
 
           <Container>
-            <Grid container direction="row" justify="center" alignItems="center">
+            <Grid
+              container
+              direction="row"
+              justify="center"
+              alignItems="center"
+            >
               <Portal />
               <Grid
                 container
@@ -116,7 +108,6 @@ export default function Course() {
               >
                 <Grid item xs={12} sm={6} md={6} lg={6}>
                   <SocialCardDemo title={"อันดับยอดฮิต"} data={toprate} />
-
                 </Grid>
                 <Grid item xs={12} sm={6} md={6} lg={6}>
                   <SocialCardDemo title={"รายการแนะนำ"} data={recommemded} />
@@ -177,8 +168,12 @@ export default function Course() {
                 >
                   <Grid item xs={12} sm={4} md={4} lg={4}>
                     <FadeInSection key={"image"}>
-                      <img src={animation00} alt="" width="100%" height="100%" />
-
+                      <img
+                        src={animation00}
+                        alt=""
+                        width="100%"
+                        height="100%"
+                      />
                     </FadeInSection>
                   </Grid>
 
@@ -219,13 +214,9 @@ export default function Course() {
               <Grid item xs={12} sm={12} md={12} lg={12}>
                 <Disqus />
               </Grid>
-
             </Grid>
           </Container>
-
-
         </Box>
-
       </Suspense>
     </div>
   );

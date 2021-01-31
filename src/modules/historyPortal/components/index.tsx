@@ -18,12 +18,11 @@ import {
   SaveAlt,
   Search,
   ViewColumn,
-
 } from "@material-ui/icons";
 
-import { useDispatch, useSelector } from 'react-redux'
-import * as  actions from '../actions'
-import { formatDatetoThaiTest } from "utils/dateFormat"
+import { useDispatch, useSelector } from "react-redux";
+import * as actions from "../actions";
+import { formatDatetoThaiTest } from "utils/dateFormat";
 export default function MaterialTableDemo(props: any) {
   const tableRef = React.createRef();
   const tableIcons = {
@@ -80,21 +79,21 @@ export default function MaterialTableDemo(props: any) {
     )),
   };
 
-
-
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const action = actions.loadCourseCertificates()
-    dispatch(action)
-    const actionCurriculums = actions.loadCurriculumCertificates()
-    dispatch(actionCurriculums)
+    const action = actions.loadCourseCertificates();
+    dispatch(action);
+    const actionCurriculums = actions.loadCurriculumCertificates();
+    dispatch(actionCurriculums);
     // eslint-disable-next-line
-  }, [])
+  }, []);
 
-  const { coursecertificate, curriculumcertificate } = useSelector((state: any) => state.certificate);
-  const predata = [...coursecertificate]
-  const predata1 = [...curriculumcertificate]
+  const { coursecertificate, curriculumcertificate } = useSelector(
+    (state: any) => state.certificate
+  );
+  const predata = [...coursecertificate];
+  const predata1 = [...curriculumcertificate];
 
   return (
     <div>
@@ -102,13 +101,11 @@ export default function MaterialTableDemo(props: any) {
 
       <CssBaseline />
 
-
       <MaterialTable
         icons={tableIcons}
         title="รายวิชา"
         tableRef={tableRef}
         columns={[
-
           { title: "รหัสรายวิชา", field: "courseid" },
           { title: "ชื่อรายวิชา", field: "course" },
           { title: "หน่วยงานที่ให้ประกาศนียบัตร", field: "platform" },
@@ -127,15 +124,21 @@ export default function MaterialTableDemo(props: any) {
                 {rowData.firstName} {rowData.lastname}
               </h4>
 
-              <h4> &nbsp;&nbsp;&nbsp;&nbsp;วันเปิดเรียน: {formatDatetoThaiTest(rowData.createdate)}</h4>
               <h4>
                 {" "}
-                &nbsp;&nbsp;&nbsp;&nbsp;วันที่เริ่มเรียน: {formatDatetoThaiTest(rowData.startdate)}
+                &nbsp;&nbsp;&nbsp;&nbsp;วันเปิดเรียน:{" "}
+                {formatDatetoThaiTest(rowData.createdate)}
+              </h4>
+              <h4>
+                {" "}
+                &nbsp;&nbsp;&nbsp;&nbsp;วันที่เริ่มเรียน:{" "}
+                {formatDatetoThaiTest(rowData.startdate)}
               </h4>
 
               <h4>
                 {" "}
-                &nbsp;&nbsp;&nbsp;&nbsp;วันที่สำเร็จการศึกษา: {formatDatetoThaiTest(rowData.enddate)}
+                &nbsp;&nbsp;&nbsp;&nbsp;วันที่สำเร็จการศึกษา:{" "}
+                {formatDatetoThaiTest(rowData.enddate)}
               </h4>
 
               <h4>
@@ -144,7 +147,8 @@ export default function MaterialTableDemo(props: any) {
               </h4>
               <h4>
                 {" "}
-                &nbsp;&nbsp;&nbsp;&nbsp;คะแนนความพึงพอใจ: {rowData.satisfactionscore}
+                &nbsp;&nbsp;&nbsp;&nbsp;คะแนนความพึงพอใจ:{" "}
+                {rowData.satisfactionscore}
               </h4>
 
               <h4> &nbsp;&nbsp;&nbsp;&nbsp;เกรด: {rowData.grade}</h4>
@@ -166,7 +170,6 @@ export default function MaterialTableDemo(props: any) {
         ]}
         data={predata1}
         detailPanel={(rowData) => {
-
           return (
             <div>
               <h4>
@@ -179,17 +182,21 @@ export default function MaterialTableDemo(props: any) {
                 {rowData.firstName} {rowData.lastname}
               </h4>
 
-              <h4> &nbsp;&nbsp;&nbsp;&nbsp;วันเปิดเรียน: {formatDatetoThaiTest(rowData.createdate)}
-
+              <h4>
+                {" "}
+                &nbsp;&nbsp;&nbsp;&nbsp;วันเปิดเรียน:{" "}
+                {formatDatetoThaiTest(rowData.createdate)}
               </h4>
               <h4>
                 {" "}
-                &nbsp;&nbsp;&nbsp;&nbsp;วันที่เริ่มเรียน: {formatDatetoThaiTest(rowData.startdate)}
+                &nbsp;&nbsp;&nbsp;&nbsp;วันที่เริ่มเรียน:{" "}
+                {formatDatetoThaiTest(rowData.startdate)}
               </h4>
 
               <h4>
                 {" "}
-                &nbsp;&nbsp;&nbsp;&nbsp;วันที่สำเร็จการศึกษา: {formatDatetoThaiTest(rowData.enddate)}
+                &nbsp;&nbsp;&nbsp;&nbsp;วันที่สำเร็จการศึกษา:{" "}
+                {formatDatetoThaiTest(rowData.enddate)}
               </h4>
 
               <h4>
@@ -198,7 +205,8 @@ export default function MaterialTableDemo(props: any) {
               </h4>
               <h4>
                 {" "}
-                &nbsp;&nbsp;&nbsp;&nbsp;คะแนนความพึงพอใจ: {rowData.satisfactionscore}
+                &nbsp;&nbsp;&nbsp;&nbsp;คะแนนความพึงพอใจ:{" "}
+                {rowData.satisfactionscore}
               </h4>
 
               <h4> &nbsp;&nbsp;&nbsp;&nbsp;เกรด: {rowData.grade}</h4>

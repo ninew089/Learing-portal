@@ -1,7 +1,7 @@
 import React from "react";
 import { IconButton } from "@material-ui/core";
 import MenuItem from "@material-ui/core/MenuItem";
-import { eraseCookie } from "cookie/cookie"
+import { eraseCookie } from "cookie/cookie";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { useHistory } from "react-router-dom";
 //@ts-ignore
@@ -13,7 +13,6 @@ import {
 } from "react-icons/ai";
 import { CgPassword } from "react-icons/cg";
 import Menu from "@material-ui/core/Menu";
-
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -62,8 +61,7 @@ export default function LongMenu() {
     history.push(`${path}`);
   };
   const onLogout = () => {
-
-    eraseCookie("token")
+    eraseCookie("token");
     navigatorTologout();
     window.location.reload();
   };

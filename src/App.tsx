@@ -6,35 +6,29 @@ import AdminRoute from "./modules/adminPortal/components/AdminLayout";
 
 import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import { Route, Switch } from "react-router-dom";
-import { ConnectedRouter } from 'connected-react-router'
+import { ConnectedRouter } from "connected-react-router";
 import { Provider } from "react-redux";
 import configureStore, { history } from "store/configureStore";
 import "assets/css/font.css";
 import "assets/css/bg.css";
-import PriveRouterAdmin from "auth/PrivateRouterAdmin"
+import PriveRouterAdmin from "auth/PrivateRouterAdmin";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
-import meta from "assets/logo/logo2.png"
+import meta from "assets/logo/logo2.png";
 
 export default function APP() {
-
-
   const theme = createMuiTheme({
     typography: {
       fontFamily: ["Prompt", "sans-serif"].join(","),
     },
     palette: {
-
       primary: {
         main: "#142840",
         light: "#f5f5f5",
-
       },
       secondary: {
         main: "#f9b122",
-
       },
-
     },
     overrides: {
       MuiTab: {
@@ -47,8 +41,8 @@ export default function APP() {
       },
       MuiFab: {
         root: {
-          boxShadow: 'none'
-        }
+          boxShadow: "none",
+        },
       },
     },
   });
@@ -56,7 +50,6 @@ export default function APP() {
 
   return (
     <HelmetProvider>
-
       <Provider store={store}>
         <Helmet>
           {/* Primary Meta Tags */}
@@ -93,9 +86,11 @@ export default function APP() {
         </Helmet>
 
         <ConnectedRouter history={history}>
-
           <Switch>
-            <PriveRouterAdmin path="/learning-portal/admin/main" component={AdminRoute} />
+            <PriveRouterAdmin
+              path="/learning-portal/admin/main"
+              component={AdminRoute}
+            />
 
             <Route exact path="/learning-portal/admin">
               <ThemeProvider theme={theme}>

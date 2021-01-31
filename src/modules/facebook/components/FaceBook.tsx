@@ -25,8 +25,8 @@ class FacebookComponent extends Component {
                     {loading ? <span>Loading...</span> : "Login with Facebook"}
                   </Button>
                 ) : (
-                    ""
-                  )}
+                  ""
+                )}
               </span>
             )}
           </Login>

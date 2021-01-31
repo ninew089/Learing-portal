@@ -7,23 +7,23 @@ import {
   ButtonBack,
   ButtonNext,
 } from "pure-react-carousel";
-import "assets/css/slide.css"
+import "assets/css/slide.css";
 import "pure-react-carousel/dist/react-carousel.es.css";
 import ArrowForward from "@material-ui/icons/ArrowForwardIosRounded";
 import ArrowBack from "@material-ui/icons/ArrowBackIosRounded";
 import { useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-//import CourseDetail from "modules/coursePortal/components/Course/CourseDetails";
-//import CurriculumDetail from "modules/coursePortal/components/Curriculum/CurriculumDetail";
 import { CourseCarouselProps } from "./typescript";
 
-const CourseDetail = lazy(() => import('modules/coursePortal/components/Course/CourseDetails'));
-const CurriculumDetail = lazy(() => import('modules/coursePortal/components/Curriculum/CurriculumDetail'));
+const CourseDetail = lazy(
+  () => import("modules/coursePortal/components/Course/CourseDetails")
+);
+const CurriculumDetail = lazy(
+  () => import("modules/coursePortal/components/Curriculum/CurriculumDetail")
+);
 
 const useStyles = makeStyles((theme: Theme) =>
-
   createStyles({
-
     carousel: {
       background: "none",
       border: "none",
@@ -39,12 +39,11 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     slider: {
       //maxWidth: "1200px",
-      outline: "none"
+      outline: "none",
     },
     slide: {
       padding: theme.spacing(0, 0),
       outline: "none !important",
-
     },
     course: {
       width: "100%",
@@ -84,12 +83,10 @@ export default function CourseCarousel(props: CourseCarouselProps) {
   const isSmUp = useMediaQuery(theme.breakpoints.up("sm"));
   const isLgUp = useMediaQuery(theme.breakpoints.up("lg"));
   const data = detail?.filter((item: any) => {
-
-    return item.isShown === true
-  })
+    return item.isShown === true;
+  });
 
   return (
-
     <CarouselProvider
       naturalSlideWidth={100}
       naturalSlideHeight={135}
@@ -100,15 +97,11 @@ export default function CourseCarousel(props: CourseCarouselProps) {
       className={classes.carousel}
     >
       <div>
-
         <Slider className={classes.slider}>
-
           {data!.map((item: any, index: number) => (
             <Suspense key={index} fallback={<div></div>}>
-              < Slide key={index} index={index} className={classes.slide} >
-
+              <Slide key={index} index={index} className={classes.slide}>
                 <div className={classes.course}>
-
                   {isCurriculum ? (
                     <CurriculumDetail
                       key={index}
@@ -120,7 +113,7 @@ export default function CourseCarousel(props: CourseCarouselProps) {
                       targetGroup={item.targetGroup}
                       assessment={item.assessment}
                       viewCount={item.viewCount}
-                      point={(item.satisfactionSum) / item.satisfactionCount}
+                      point={item.satisfactionSum / item.satisfactionCount}
                       satisfactionCount={item.satisfactionCount}
                       link={item.link}
                       code={item.code}
@@ -129,26 +122,26 @@ export default function CourseCarousel(props: CourseCarouselProps) {
                       platformName={item.platformName}
                     />
                   ) : (
-                      <CourseDetail
-                        key={index}
-                        id={item.id}
-                        learningTopic={item.learningTopic}
-                        learningObjective={item.learningObjective}
-                        courseCategoryId={item.courseCategoryId}
-                        thumbNail={item.thumbNail}
-                        targetGroup={item.targetGroup}
-                        assessment={item.assessment}
-                        viewCount={item.viewCount}
-                        point={(item.satisfactionSum) / item.satisfactionCount}
-                        satisfactionCount={item.satisfactionCount}
-                        link={item.link}
-                        code={item.code}
-                        name={item.name}
-                        platformlogo={item.platformlogo}
-                        platformName={item.platformName}
-                        courseCategory={item.courseCategory}
-                      />
-                    )}
+                    <CourseDetail
+                      key={index}
+                      id={item.id}
+                      learningTopic={item.learningTopic}
+                      learningObjective={item.learningObjective}
+                      courseCategoryId={item.courseCategoryId}
+                      thumbNail={item.thumbNail}
+                      targetGroup={item.targetGroup}
+                      assessment={item.assessment}
+                      viewCount={item.viewCount}
+                      point={item.satisfactionSum / item.satisfactionCount}
+                      satisfactionCount={item.satisfactionCount}
+                      link={item.link}
+                      code={item.code}
+                      name={item.name}
+                      platformlogo={item.platformlogo}
+                      platformName={item.platformName}
+                      courseCategory={item.courseCategory}
+                    />
+                  )}
                 </div>
               </Slide>
             </Suspense>
@@ -156,17 +149,12 @@ export default function CourseCarousel(props: CourseCarouselProps) {
         </Slider>
 
         <ButtonBack className={classes.buttonBack}>
-
           <ArrowBack />
-
         </ButtonBack>
         <ButtonNext className={classes.buttonNext}>
-
           <ArrowForward />
-
         </ButtonNext>
       </div>
-    </CarouselProvider >
-
+    </CarouselProvider>
   );
 }

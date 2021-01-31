@@ -12,14 +12,10 @@ export default function AlertDialog(props: any) {
   };
   const handleAgree = () => {
     if (data !== null) {
-
-      window.open(`${data.link}`, '_blank')
+      window.open(`${data.link}`, "_blank");
       setOpen(false);
     }
-
   };
-
-
 
   return (
     <div>
@@ -34,7 +30,9 @@ export default function AlertDialog(props: any) {
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            {`คุณกำลังเข้าสู่ เว็บ ${data ? data.link : ""} หากต้องการเข้าสู่เว็บไซต์นี้กดตกลงหากไม่ต้องการกดกลับ`}
+            {`คุณกำลังเข้าสู่ เว็บ ${
+              data ? data.link : ""
+            } หากต้องการเข้าสู่เว็บไซต์นี้กดตกลงหากไม่ต้องการกดกลับ`}
           </DialogContentText>
         </DialogContent>
         <DialogActions>

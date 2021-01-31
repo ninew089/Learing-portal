@@ -1,8 +1,4 @@
-
-import {
-  WithStyles,
-
-} from "@material-ui/core/styles";
+import { WithStyles } from "@material-ui/core/styles";
 export interface DialogTitleProps extends WithStyles {
   id: string;
   children: React.ReactNode;
@@ -25,8 +21,7 @@ export interface couresProps {
   courseCategoryId: string;
   link: string;
   isShown: string;
-
-};
+}
 export interface openEditProps {
   open: boolean;
   setOpen: (someting: boolean) => void;

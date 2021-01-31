@@ -4,7 +4,7 @@ import { TextField, MenuItem, FormControl } from "@material-ui/core";
 import { Controller } from "react-hook-form";
 import { makeStyles } from "@material-ui/core/styles";
 import { useSelector } from "react-redux";
-import { OccupationsProps, typeProps } from "../typescript"
+import { OccupationsProps, typeProps } from "../typescript";
 
 const useStyles = makeStyles((theme) => ({
   input: {
@@ -75,9 +75,7 @@ export default function SignIn(props: typeProps) {
 
   const { formProps, name } = props;
 
-
   const { Occupations } = useSelector((state: any) => state.infomation);
-
 
   return (
     <>
@@ -99,18 +97,19 @@ export default function SignIn(props: typeProps) {
                 formProps.errors.OccupationId.message
               }
               error={!!formProps.errors.OccupationId}
-
             >
-              {Occupations.map((Occupation: OccupationsProps, index: number) => (
-                <MenuItem key={index} value={Occupation.id}>{Occupation.name}</MenuItem>
-              ))}
-
+              {Occupations.map(
+                (Occupation: OccupationsProps, index: number) => (
+                  <MenuItem key={index} value={Occupation.id}>
+                    {Occupation.name}
+                  </MenuItem>
+                )
+              )}
             </TextField>
           }
           name="OccupationId"
           rules={{ required: "กรุณาเลือกอาชีพ" }}
           control={formProps.control}
-
         />
 
         <FormControl fullWidth>

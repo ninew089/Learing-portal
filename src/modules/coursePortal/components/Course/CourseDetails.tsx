@@ -3,11 +3,11 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Typography, Grid, Box } from "@material-ui/core";
 import numberFormat from "utils/numberFormat";
 
-import { CardProps } from "./tyscript"
-import CardMedia from '@material-ui/core/CardMedia';
-import { useSelector } from 'react-redux'
-const Dialog = lazy(() => import('../../share/DialogCourse'));
-const Rating = lazy(() => import('../../share/Rating'));
+import { CardProps } from "./tyscript";
+import CardMedia from "@material-ui/core/CardMedia";
+import { useSelector } from "react-redux";
+const Dialog = lazy(() => import("../../share/DialogCourse"));
+const Rating = lazy(() => import("../../share/Rating"));
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,9 +26,7 @@ const useStyles = makeStyles((theme) => ({
       "&:hover": {
         transform: "translateY(-4px)",
       },
-    }
-
-
+    },
   },
   main: {
     overflow: "hidden",
@@ -64,7 +62,8 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: 8,
     marginRight: 8,
     marginBottom: 10,
-  }, subtitle: {
+  },
+  subtitle: {
     overflow: "hidden",
     textOverflow: "ellipsis",
     whiteSpace: "nowrap",
@@ -130,8 +129,7 @@ const useStyles = makeStyles((theme) => ({
     textOverflow: "ellipsis",
     WebkitLineClamp: 1,
     WebkitBoxOrient: "vertical",
-    maxWidth: '200px'
-
+    maxWidth: "200px",
   },
   detail: {
     marginBottom: 14,
@@ -158,35 +156,46 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function IconBreadcrumbs(props: CardProps) {
-
-  const { platformlogo, learningObjective, viewCount, point, platformName, satisfactionCount, code, thumbNail, name, courseCategory } = props;
+  const {
+    platformlogo,
+    learningObjective,
+    viewCount,
+    point,
+    platformName,
+    satisfactionCount,
+    code,
+    thumbNail,
+    name,
+    courseCategory,
+  } = props;
   const classes = useStyles();
-  const renderLoader = () => <div></div>
-  const [open, setOpen] = useState<boolean>(false)
+  const renderLoader = () => <div></div>;
+  const [open, setOpen] = useState<boolean>(false);
   const onOpen = () => {
-    setOpen(true)
-  }
+    setOpen(true);
+  };
 
   const { colorName } = useSelector((state: any) => state.course);
 
   return (
-
     <Suspense fallback={renderLoader()}>
-      <div className={classes.root} >
+      <div className={classes.root}>
         <div className={classes.card} onClick={onOpen}>
-          <Grid
-            container
-            direction="column"
-            justify="flex-start"
-
-          >
+          <Grid container direction="column" justify="flex-start">
             <div style={{ display: "block" }}>
-              <div style={{ width: "100%", backgroundSize: "cover", backgroundPosition: "center center", borderRadius: "10px" }} />
+              <div
+                style={{
+                  width: "100%",
+                  backgroundSize: "cover",
+                  backgroundPosition: "center center",
+                  borderRadius: "10px",
+                }}
+              />
               <CardMedia
                 style={{
                   background: `url('${thumbNail}')`,
                   backgroundSize: "cover",
-                  backgroundPosition: "center center"
+                  backgroundPosition: "center center",
                 }}
                 image={thumbNail}
                 className={classes.cardMedia}
@@ -205,13 +214,26 @@ export default function IconBreadcrumbs(props: CardProps) {
                 alignItems="center"
                 className={classes.detail}
               >
-                <div className={classes.dot} style={{ background: colorName[0][courseCategory !== undefined ? courseCategory : 0] }} />
-                <Box fontWeight={500} className={classes.category}>{courseCategory}</Box>
+                <div
+                  className={classes.dot}
+                  style={{
+                    background:
+                      colorName[0][
+                        courseCategory !== undefined ? courseCategory : 0
+                      ],
+                  }}
+                />
+                <Box fontWeight={500} className={classes.category}>
+                  {courseCategory}
+                </Box>
                 <Grid item xs={12}>
                   <div>
-                    {learningObjective !== undefined && <div className={classes.caption} dangerouslySetInnerHTML={{ __html: learningObjective }} />}
-
-
+                    {learningObjective !== undefined && (
+                      <div
+                        className={classes.caption}
+                        dangerouslySetInnerHTML={{ __html: learningObjective }}
+                      />
+                    )}
                   </div>
                 </Grid>
               </Grid>
@@ -222,12 +244,14 @@ export default function IconBreadcrumbs(props: CardProps) {
                 alignItems="center"
               >
                 <div className={classes.logo}>
-                  < div style={{
-                    backgroundImage: `url('${platformlogo}`,
-                    backgroundSize: "cover",
-                    padding: "30px",
-                    backgroundPosition: " center center"
-                  }} />
+                  <div
+                    style={{
+                      backgroundImage: `url('${platformlogo}`,
+                      backgroundSize: "cover",
+                      padding: "30px",
+                      backgroundPosition: " center center",
+                    }}
+                  />
                 </div>
                 <Grid item>
                   <div className={classes.author}>{platformName}</div>
@@ -248,14 +272,19 @@ export default function IconBreadcrumbs(props: CardProps) {
                       color={"textSecondary"}
                     >
                       การดู {numberFormat(viewCount)} ครั้ง
-                  </Typography>
+                    </Typography>
                   </Grid>
                 </Grid>
               </Grid>
             </div>
           </Grid>
         </div>
-        <Dialog open={open} setOpen={setOpen} data={props} isCurriculum={false} />
+        <Dialog
+          open={open}
+          setOpen={setOpen}
+          data={props}
+          isCurriculum={false}
+        />
       </div>
     </Suspense>
   );

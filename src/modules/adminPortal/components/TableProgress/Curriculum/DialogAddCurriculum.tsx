@@ -6,9 +6,9 @@ import {
   withStyles,
   makeStyles,
 } from "@material-ui/core/styles";
-import { formatDate } from "utils/dateFormat"
+import { formatDate } from "utils/dateFormat";
 import CloseIcon from "@material-ui/icons/Close";
-import Date from "../component/Date"
+import Date from "../component/Date";
 import {
   Container,
   CssBaseline,
@@ -21,14 +21,14 @@ import {
   DialogTitle,
   Dialog,
   Button,
-  MenuItem
+  MenuItem,
 } from "@material-ui/core";
 import { useForm, Controller } from "react-hook-form";
 import * as yup from "yup";
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from "react-redux";
 
-import * as actions from "../../../actions"
-import { DialogTitleProps, DialogsProps } from "../typescript"
+import * as actions from "../../../actions";
+import { DialogTitleProps, DialogsProps } from "../typescript";
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -87,8 +87,6 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-
-
 const MuiDialogTitle = withStyles(styles)((props: DialogTitleProps) => {
   const { children, classes, onClose, ...other } = props;
   return (
@@ -121,7 +119,6 @@ const MuiDialogActions = withStyles((theme) => ({
 }))(DialogActions);
 
 export default function CustomizedDialogs({ open, setOpen }: DialogsProps) {
-
   const handleClose = () => {
     setOpen(false);
   };
@@ -136,25 +133,28 @@ export default function CustomizedDialogs({ open, setOpen }: DialogsProps) {
       lastName: yup.string().required(),
       startDate: yup.string().required(),
       curriculumId: yup.number(),
-      percent: yup.number().moreThan(-1, "ต้องมากกว่า 0 ").lessThan(101, "ต้องน้อยกว่า 100").nullable(true).transform((_, val) => val === "" ? null : parseInt(val)),
-
+      percent: yup
+        .number()
+        .moreThan(-1, "ต้องมากกว่า 0 ")
+        .lessThan(101, "ต้องน้อยกว่า 100")
+        .nullable(true)
+        .transform((_, val) => (val === "" ? null : parseInt(val))),
     }),
   });
   const dispatch = useDispatch();
   useEffect(() => {
-
-    const action = actions.getCurriculum()
-    dispatch(action)
+    const action = actions.getCurriculum();
+    dispatch(action);
 
     // eslint-disable-next-line
-  }, [])
+  }, []);
 
   const { curriculum } = useSelector((state: any) => state.admin);
   const onSubmitData = handleSubmit((info) => {
-    info.startDate = formatDate(info.startDate)
-    const action = actions.loadAddCurriculumProgress(info)
-    dispatch(action)
-    handleClose()
+    info.startDate = formatDate(info.startDate);
+    const action = actions.loadAddCurriculumProgress(info);
+    dispatch(action);
+    handleClose();
   });
 
   return (
@@ -203,7 +203,6 @@ export default function CustomizedDialogs({ open, setOpen }: DialogsProps) {
                   <TextField
                     fullWidth
                     multiline
-
                     label="ชื่อ"
                     name="firstName"
                     inputRef={register}
@@ -213,7 +212,6 @@ export default function CustomizedDialogs({ open, setOpen }: DialogsProps) {
                   <TextField
                     fullWidth
                     multiline
-
                     label="นามสกุล"
                     name="lastName"
                     inputRef={register}
@@ -228,15 +226,13 @@ export default function CustomizedDialogs({ open, setOpen }: DialogsProps) {
                         label="หลักสูตร"
                         select
                         helperText={
-                          errors.courseCategoryId && errors.courseCategoryId.message
+                          errors.courseCategoryId &&
+                          errors.courseCategoryId.message
                         }
                         error={!!errors.courseCategoryId}
                       >
                         {curriculum.map((categorie: any, index: number) => (
-                          <MenuItem
-                            key={index}
-                            value={categorie.id}
-                          >
+                          <MenuItem key={index} value={categorie.id}>
                             {categorie.code} {categorie.name}
                           </MenuItem>
                         ))}
@@ -248,7 +244,11 @@ export default function CustomizedDialogs({ open, setOpen }: DialogsProps) {
                     defaultValue=""
                   />
 
-                  <Date title="วันที่เปิดเรียน" register={register} name={"startDate"} />
+                  <Date
+                    title="วันที่เปิดเรียน"
+                    register={register}
+                    name={"startDate"}
+                  />
                   <TextField
                     fullWidth
                     multiline
@@ -259,7 +259,6 @@ export default function CustomizedDialogs({ open, setOpen }: DialogsProps) {
                     helperText={errors.percent ? errors.percent.message : ""}
                     error={!!errors.percent}
                   />
-
                 </FormControl>
               </form>
             </div>

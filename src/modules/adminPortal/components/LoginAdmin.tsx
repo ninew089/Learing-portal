@@ -8,10 +8,10 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 
-import * as actions from "../actions"
+import * as actions from "../actions";
 import * as yup from "yup";
-import { useDispatch, useSelector } from 'react-redux'
-import Snackbar from "shared/SnackBar/SnackBar"
+import { useDispatch, useSelector } from "react-redux";
+import Snackbar from "shared/SnackBar/SnackBar";
 
 const useStyles = makeStyles((theme) => ({
   root: { marginTop: "8rem", background: theme.palette.primary.light },
@@ -113,7 +113,6 @@ const useStyles = makeStyles((theme) => ({
 export default function SignIn() {
   const classes = useStyles();
 
-
   const { register, handleSubmit, errors } = useForm({
     mode: "onChange",
     validationSchema: yup.object().shape({
@@ -123,27 +122,22 @@ export default function SignIn() {
   });
   const dispatch = useDispatch();
   const submit = (adminInfo: object) => {
-
-
-    const info = { ...adminInfo, role: 'platform' };
+    const info = { ...adminInfo, role: "platform" };
     const actionLogin = actions.loadLogin(info);
     dispatch(actionLogin);
-
   };
   const { message, severity } = useSelector((state: any) => state.admin);
-
 
   return (
     <div className={classes.root}>
       <Container component="main" maxWidth="xs" className={classes.container}>
-        {
-          message !== null && <Snackbar
-            message={message
-            }
+        {message !== null && (
+          <Snackbar
+            message={message}
             open={message !== null ? true : false}
             severity={severity}
           />
-        }
+        )}
         <Box>
           <img alt="banner" src={img} className={classes.image} />
           <Box className={classes.box}>
@@ -167,7 +161,9 @@ export default function SignIn() {
                   }}
                   name="userId"
                   inputRef={register}
-                  helperText={errors.userId ? "กรุณากรอกเลขประจำตัวประชาชน" : ""}
+                  helperText={
+                    errors.userId ? "กรุณากรอกเลขประจำตัวประชาชน" : ""
+                  }
                   error={!!errors.userId}
                   fullWidth
                   label="เลขประจำตัวประชาชน"

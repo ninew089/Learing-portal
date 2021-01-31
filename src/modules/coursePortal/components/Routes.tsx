@@ -4,15 +4,13 @@ import GroupCurriculum from "./Curriculum/GroupCurriculum";
 import { Route, Switch } from "react-router-dom";
 import GroupCourse from "./Course/GroupCourse";
 import Page404 from "modules/404page/component/404";
-import GroupAllCourse from "./Course/GroupAllCourse"
-import Search from "./Search/index"
+import GroupAllCourse from "./Course/GroupAllCourse";
+import Search from "./Search/index";
 
 export default function Routes() {
   return (
     <>
-
       <Switch>
-
         <Route path={`/learning-portal/search`}>
           <Search />
         </Route>

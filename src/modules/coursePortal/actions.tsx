@@ -67,12 +67,9 @@ const LOAD_RECOMMENDED_SUCCESS =
   "learning-portal/src/ui/LOAD_RECOMMENDED_SUCCESS";
 const LOAD_RECOMMENDED_FAILURE =
   "learning-portal/src/ui/LOAD_RECOMMENDED_FAILURE";
-const LOAD_PLATFORM_REQUEST =
-  "learning-portal/src/ui/LOAD_PLATFORM_REQUEST";
-const LOAD_PLATFORM_SUCCESS =
-  "learning-portal/src/ui/LOAD_PLATFORM_SUCCESS";
-const LOAD_PLATFORM_FAILURE =
-  "learning-portal/src/ui/LOAD_PLATFORM_FAILURE";
+const LOAD_PLATFORM_REQUEST = "learning-portal/src/ui/LOAD_PLATFORM_REQUEST";
+const LOAD_PLATFORM_SUCCESS = "learning-portal/src/ui/LOAD_PLATFORM_SUCCESS";
+const LOAD_PLATFORM_FAILURE = "learning-portal/src/ui/LOAD_PLATFORM_FAILURE";
 
 function paltform() {
   return async (dispatch: any) => {
@@ -87,7 +84,7 @@ function paltform() {
       });
     } catch (err) {
       dispatch({
-        type: LOAD_PLATFORM_FAILURE
+        type: LOAD_PLATFORM_FAILURE,
       });
     }
   };
@@ -109,7 +106,7 @@ function loadRecommended() {
         type: LOAD_RECOMMENDED_FAILURE,
         payload: {
           isErrorCourse: err.response.status,
-        }
+        },
       });
     }
   };
@@ -130,7 +127,7 @@ function loadTopRate() {
         type: LOAD_TOPRATE_FAILURE,
         payload: {
           isErrorCourse: err.response.status,
-        }
+        },
       });
     }
   };
@@ -148,7 +145,7 @@ function loadCurriculumsView(id: number) {
         type: LOAD_CURRICULUMVIEW_FAILURE,
         payload: {
           isErrorCourse: err.response.status,
-        }
+        },
       });
     }
   };
@@ -170,7 +167,7 @@ function loadCurriculums(text: string) {
         type: LOAD_CURRICULUMS_FAILURE,
         payload: {
           isErrorCourse: err.response.status,
-        }
+        },
       });
     }
   };
@@ -192,7 +189,7 @@ function loadCurriculum(id: number) {
         type: LOAD_CURRICULUM_FAILURE,
         payload: {
           isErrorCourse: err.response.status,
-        }
+        },
       });
     }
   };
@@ -213,7 +210,7 @@ function loadCurriculumsCourse(id: number) {
         type: LOAD_CURRICULUMCOURSE_FAILURE,
         payload: {
           isErrorCourse: err.response.status,
-        }
+        },
       });
     }
   };
@@ -232,7 +229,7 @@ function loadCourseView(id?: number) {
 
         payload: {
           isErrorCourse: err.response.status,
-        }
+        },
       });
     }
   };
@@ -254,7 +251,7 @@ function loadCourses(text: string) {
         type: LOAD_COURSES_FAILURE,
         payload: {
           isErrorCourse: err.response.status,
-        }
+        },
       });
     }
   };
@@ -275,13 +272,11 @@ function loadCourse(id: any) {
         type: LOAD_COURSE_FAILURE,
         payload: {
           isErrorCourse: err.response.status,
-        }
+        },
       });
     }
   };
 }
-
-
 
 function loadCourseCategory() {
   return async (dispatch: any) => {
@@ -299,7 +294,7 @@ function loadCourseCategory() {
         type: LOAD_COURSESCATEGORY_FAILURE,
         payload: {
           isErrorCourse: err.response.status,
-        }
+        },
       });
     }
   };
@@ -320,7 +315,7 @@ function loadCourseCategories(id: any) {
         type: LOAD_COURSESCATEGORIES_FAILURE,
         payload: {
           isErrorCourse: err.response.status,
-        }
+        },
       });
     }
   };
@@ -374,6 +369,5 @@ export {
   loadRecommended,
   loadCourses,
   loadCurriculum,
-  paltform
-
+  paltform,
 };

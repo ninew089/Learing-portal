@@ -12,9 +12,9 @@ import {
   IconButton,
 } from "@material-ui/core";
 import { Menu, ChevronLeft, ChevronRight } from "@material-ui/icons";
-import { useDispatch } from 'react-redux'
+import { useDispatch } from "react-redux";
 
-import * as actions from "../actions"
+import * as actions from "../actions";
 import Routes from "./Routes";
 import ListMenu from "./ListAdmin";
 
@@ -93,11 +93,10 @@ export default function PersistentDrawerLeft() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const action = actions.loadGetProfile()
-    dispatch(action)
+    const action = actions.loadGetProfile();
+    dispatch(action);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
+  }, []);
 
   return (
     <div className={classes.root}>

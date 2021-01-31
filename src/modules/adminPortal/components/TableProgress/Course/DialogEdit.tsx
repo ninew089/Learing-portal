@@ -6,9 +6,9 @@ import {
   withStyles,
   makeStyles,
 } from "@material-ui/core/styles";
-import { formatDate } from "utils/dateFormat"
+import { formatDate } from "utils/dateFormat";
 import CloseIcon from "@material-ui/icons/Close";
-import Date from "../component/Dateedit"
+import Date from "../component/Dateedit";
 import {
   Container,
   CssBaseline,
@@ -21,14 +21,14 @@ import {
   DialogTitle,
   Dialog,
   Button,
-  MenuItem
+  MenuItem,
 } from "@material-ui/core";
 import { useForm, Controller } from "react-hook-form";
 import * as yup from "yup";
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from "react-redux";
 
-import * as actions from "../../../actions"
-import { DialogTitleProps } from "../typescript"
+import * as actions from "../../../actions";
+import { DialogTitleProps } from "../typescript";
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -87,8 +87,6 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-
-
 const MuiDialogTitle = withStyles(styles)((props: DialogTitleProps) => {
   const { children, classes, onClose, ...other } = props;
   return (
@@ -121,7 +119,6 @@ const MuiDialogActions = withStyles((theme) => ({
 }))(DialogActions);
 
 export default function CustomizedDialogs({ open, setOpen, data }: any) {
-
   const handleClose = () => {
     setOpen(false);
   };
@@ -130,8 +127,7 @@ export default function CustomizedDialogs({ open, setOpen, data }: any) {
   const { register, handleSubmit, errors, control } = useForm<any>({
     mode: "onChange",
     defaultValues: {
-      startDate: data.startDate
-
+      startDate: data.startDate,
     },
     validationSchema: yup.object().shape({
       userId: yup.string().required(),
@@ -140,26 +136,29 @@ export default function CustomizedDialogs({ open, setOpen, data }: any) {
       lastName: yup.string().required(),
       startDate: yup.string().required(),
       courseId: yup.number(),
-      percent: yup.number().moreThan(-1, "ต้องมากกว่า 0 ").lessThan(101, "ต้องน้อยกว่า 100").nullable(true).transform((_, val) => val === "" ? null : parseInt(val)),
+      percent: yup
+        .number()
+        .moreThan(-1, "ต้องมากกว่า 0 ")
+        .lessThan(101, "ต้องน้อยกว่า 100")
+        .nullable(true)
+        .transform((_, val) => (val === "" ? null : parseInt(val))),
     }),
   });
   const dispatch = useDispatch();
   useEffect(() => {
-
-    const action = actions.getCourse()
-    dispatch(action)
+    const action = actions.getCourse();
+    dispatch(action);
 
     // eslint-disable-next-line
-  }, [])
+  }, []);
 
   const { course } = useSelector((state: any) => state.admin);
   const onSubmitData = handleSubmit((info) => {
-    console.log(info)
-    info.startDate = formatDate(info.startDate)
-    const action = actions.loadEditProgress(info, data.id)
-    dispatch(action)
-    handleClose()
-
+    console.log(info);
+    info.startDate = formatDate(info.startDate);
+    const action = actions.loadEditProgress(info, data.id);
+    dispatch(action);
+    handleClose();
   });
   return (
     <div>
@@ -209,7 +208,6 @@ export default function CustomizedDialogs({ open, setOpen, data }: any) {
                   <TextField
                     fullWidth
                     multiline
-
                     label="ชื่อ"
                     name="firstName"
                     inputRef={register}
@@ -220,7 +218,6 @@ export default function CustomizedDialogs({ open, setOpen, data }: any) {
                   <TextField
                     fullWidth
                     multiline
-
                     label="นามสกุล"
                     name="lastName"
                     inputRef={register}
@@ -236,15 +233,13 @@ export default function CustomizedDialogs({ open, setOpen, data }: any) {
                         label="รายวิชา"
                         select
                         helperText={
-                          errors.courseCategoryId && errors.courseCategoryId.message
+                          errors.courseCategoryId &&
+                          errors.courseCategoryId.message
                         }
                         error={!!errors.courseCategoryId}
                       >
                         {course.map((categorie: any, index: number) => (
-                          <MenuItem
-                            key={index}
-                            value={categorie.id}
-                          >
+                          <MenuItem key={index} value={categorie.id}>
                             {categorie.code} {categorie.name}
                           </MenuItem>
                         ))}
@@ -256,7 +251,12 @@ export default function CustomizedDialogs({ open, setOpen, data }: any) {
                     defaultValue={data.courseId}
                   />
 
-                  <Date title="วันที่เปิดเรียน" register={register} name={"startDate"} value={data.startDate} />
+                  <Date
+                    title="วันที่เปิดเรียน"
+                    register={register}
+                    name={"startDate"}
+                    value={data.startDate}
+                  />
                   <TextField
                     fullWidth
                     multiline
@@ -268,7 +268,6 @@ export default function CustomizedDialogs({ open, setOpen, data }: any) {
                     error={!!errors.percent}
                     defaultValue={data.percent}
                   />
-
                 </FormControl>
               </form>
             </div>

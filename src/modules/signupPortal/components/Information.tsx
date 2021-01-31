@@ -136,7 +136,7 @@ export default function SignIn(props: any) {
     <>
       <CssBaseline />
 
-      <div className={classes.form} >
+      <div className={classes.form}>
         <Typography component="h1" variant="h5" align="center">
           ข้อมูลส่วนบุคคล
         </Typography>

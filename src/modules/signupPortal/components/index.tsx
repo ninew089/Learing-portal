@@ -1,5 +1,5 @@
 import React from "react";
-import Snackbar from "shared/SnackBar/SnackBar"
+import Snackbar from "shared/SnackBar/SnackBar";
 import { Container, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Account from "./Account";
@@ -9,8 +9,8 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import * as actions from "../actions";
 import { useDispatch, useSelector } from "react-redux";
-import { info } from "utils/formatInfomation"
-import { accountFormProps } from "../typescript"
+import { info } from "utils/formatInfomation";
+import { accountFormProps } from "../typescript";
 //import ShowInfoDialog from "./ShowInfo/ShowInfoDialog"
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -39,7 +39,6 @@ export default function SignIn() {
   const [type, setType] = React.useState<string>("");
   // eslint-disable-next-line
   const [mistry, setMistry] = React.useState<string>("");
-
 
   const accountForm = useForm<accountFormProps>({
     mode: "onChange",
@@ -195,27 +194,25 @@ export default function SignIn() {
         then: yup.string().required("กรุณาเลือกกระทรวงที่สังกัด"),
         otherwise: yup.string().nullable(),
       }),
-      DepartmentId: yup
-        .string()
-        .when(["usertypeid", "MinistryId"], {
-          is: (usertypeid, MinistryId) => {
-            setMistry(MinistryId);
-            switch (usertypeid) {
-              case "1":
-                return true;
-              case "2":
-                return true;
-              case "3":
-                return true;
-              case "5":
-                return false;
-              case "4":
-                return false;
-            }
-          },
-          then: yup.string().required("กรุณาเลือกกรมที่สังกัด"),
-          otherwise: yup.string().nullable(),
-        }),
+      DepartmentId: yup.string().when(["usertypeid", "MinistryId"], {
+        is: (usertypeid, MinistryId) => {
+          setMistry(MinistryId);
+          switch (usertypeid) {
+            case "1":
+              return true;
+            case "2":
+              return true;
+            case "3":
+              return true;
+            case "5":
+              return false;
+            case "4":
+              return false;
+          }
+        },
+        then: yup.string().required("กรุณาเลือกกรมที่สังกัด"),
+        otherwise: yup.string().nullable(),
+      }),
       Division: yup.string().when("usertypeid", {
         is: (usertypeid) => {
           switch (usertypeid) {
@@ -295,9 +292,6 @@ export default function SignIn() {
   //const [data, setData] = useState([])
   //const [open, setOpen] = useState(false)
 
-
-
-
   const onSubmitData = (data: any) => {
     const preinfo = info(data);
     //setData(preinfo)
@@ -308,18 +302,16 @@ export default function SignIn() {
 
   const { message, severity } = useSelector((state: any) => state.infomation);
 
-
   return (
     <>
-      {message !== null && <Snackbar
-        message={message
-        }
-        open={message !== null ? true : false}
-        severity={severity}
-      />
-      }
+      {message !== null && (
+        <Snackbar
+          message={message}
+          open={message !== null ? true : false}
+          severity={severity}
+        />
+      )}
       <form onSubmit={accountForm.handleSubmit(onSubmitData)}>
-
         <Container component="main" maxWidth="xs" className={classes.paper}>
           <Account formProps={accountForm} />
           <Information formProps={accountForm} />
@@ -328,7 +320,6 @@ export default function SignIn() {
             <Button type="submit" fullWidth className={classes.submit}>
               ส่งข้อมูล
             </Button>
-
           </Container>
         </Container>
       </form>

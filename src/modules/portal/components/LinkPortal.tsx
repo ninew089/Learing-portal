@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
-import axios from "axios"
+import axios from "axios";
 import Dialog from "./Dialog";
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,22 +20,20 @@ export default function VariantAvatars() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const [open, setOpen] = React.useState(false);
-  const [data, setData] = useState<any>([])
-
+  const [data, setData] = useState<any>([]);
 
   useEffect(() => {
     const fetch = async () => {
-      const { data } = await axios.get('/Platforms')
-      setData(data)
-    }
-    fetch()
-  }, [])
+      const { data } = await axios.get("/Platforms");
+      setData(data);
+    };
+    fetch();
+  }, []);
   const handleClickOpen = () => {
     setOpen(true);
   };
   const handleChange = (event: any, newValue: any) => {
     setValue(newValue);
-
   };
 
   return (
@@ -54,23 +52,28 @@ export default function VariantAvatars() {
           indicatorColor={undefined}
           textColor="primary"
         >
-          {data.map((item: any, index: number) =>
+          {data.map((item: any, index: number) => (
             <Tab
               key={index}
               icon={
-                < div style={{
-                  background: `url('${item.thumbnail}`,
-                  backgroundSize: "cover",
-                  padding: "30px"
-
-                }} onClick={handleClickOpen} />
-
+                <div
+                  style={{
+                    background: `url('${item.thumbnail}`,
+                    backgroundSize: "cover",
+                    padding: "30px",
+                  }}
+                  onClick={handleClickOpen}
+                />
               }
             />
-          )}
+          ))}
         </Tabs>
       </div>
-      <Dialog open={open} setOpen={setOpen} data={data !== undefined ? data[value] : null} />
+      <Dialog
+        open={open}
+        setOpen={setOpen}
+        data={data !== undefined ? data[value] : null}
+      />
     </>
   );
 }

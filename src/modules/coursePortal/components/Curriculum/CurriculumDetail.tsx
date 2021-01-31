@@ -5,13 +5,10 @@ import numberFormat from "utils/numberFormat";
 import Rating from "../../share/Rating";
 import { Theme } from "@material-ui/core/styles";
 
+import CardMedia from "@material-ui/core/CardMedia";
+import { CardProps } from "./tyscript";
 
-import CardMedia from '@material-ui/core/CardMedia';
-import { CardProps } from "./tyscript"
-
-const Dialog = lazy(() => import('../../share/DialogCourse'));
-
-
+const Dialog = lazy(() => import("../../share/DialogCourse"));
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -24,7 +21,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   card: {
     width: "100%",
     // background: '#fdfdfd',
-    minHeight: "460px",
+    minHeight: "480px",
     //boxShadow: '4px 4px 4px 4px rgb(0 0 0 / 8%)',
     borderRadius: "0.5rem",
     [theme.breakpoints.up("sm")]: {
@@ -33,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) => ({
         transform: "translateY(-4px)",
       },
     },
-    marginBottom: 4
+    marginBottom: 4,
   },
   main: {
     overflow: "hidden",
@@ -68,7 +65,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: "#132740",
     paddingLeft: 8,
     marginRight: 8,
-
   },
   author: {
     overflow: "hidden",
@@ -151,8 +147,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     textOverflow: "ellipsis",
     WebkitLineClamp: 1,
     WebkitBoxOrient: "vertical",
-    maxWidth: '200px'
-
+    maxWidth: "200px",
   },
   cardMedia: {
     paddingTop: "75%", // 4:3
@@ -160,20 +155,27 @@ const useStyles = makeStyles((theme: Theme) => ({
     boxShadow:
       "0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)",
   },
-
 }));
 
 export default function CurriculumDetailCard(props: CardProps) {
-  const { platformlogo, learningObjective, viewCount, point, platformName, satisfactionCount, code, thumbNail, name } = props;
+  const {
+    platformlogo,
+    learningObjective,
+    viewCount,
+    point,
+    platformName,
+    satisfactionCount,
+    code,
+    thumbNail,
+    name,
+  } = props;
   const classes = useStyles();
 
-  const [open, setOpen] = useState<boolean>(false)
+  const [open, setOpen] = useState<boolean>(false);
   const onOpen = () => {
-    setOpen(true)
-
-  }
-  const renderLoader = () =>
-    <div></div>
+    setOpen(true);
+  };
+  const renderLoader = () => <div></div>;
 
   return (
     <Suspense fallback={renderLoader()}>
@@ -191,12 +193,11 @@ export default function CurriculumDetailCard(props: CardProps) {
                   style={{
                     background: `url('${thumbNail}')`,
                     backgroundSize: "cover",
-                    backgroundPosition: "center center"
+                    backgroundPosition: "center center",
                   }}
                   image={thumbNail}
                   className={classes.cardMedia}
                   title={name}
-
                 />
               </div>
               <Typography variant={"h2"} className={classes.title}>
@@ -217,7 +218,12 @@ export default function CurriculumDetailCard(props: CardProps) {
                 <Box fontWeight={500}>หลักสูตร</Box>
 
                 <Grid item xs={12}>
-                  {learningObjective !== undefined && <div className={classes.caption} dangerouslySetInnerHTML={{ __html: learningObjective }} />}
+                  {learningObjective !== undefined && (
+                    <div
+                      className={classes.caption}
+                      dangerouslySetInnerHTML={{ __html: learningObjective }}
+                    />
+                  )}
                 </Grid>
               </Grid>
               <Grid
@@ -233,12 +239,14 @@ export default function CurriculumDetailCard(props: CardProps) {
                   alignItems="center"
                 >
                   <div className={classes.logo}>
-                    < div style={{
-                      backgroundImage: `url('${platformlogo}`,
-                      backgroundSize: "cover",
-                      padding: "30px",
-                      backgroundPosition: " center center"
-                    }} />
+                    <div
+                      style={{
+                        backgroundImage: `url('${platformlogo}`,
+                        backgroundSize: "cover",
+                        padding: "30px",
+                        backgroundPosition: " center center",
+                      }}
+                    />
                   </div>
                   <div>
                     <div className={classes.author}>{platformName}</div>
@@ -259,23 +267,21 @@ export default function CurriculumDetailCard(props: CardProps) {
                         color={"textSecondary"}
                       >
                         การดู {numberFormat(viewCount)} ครั้ง
-                  </Typography>
+                      </Typography>
                     </Grid>
                   </div>
-
                 </Grid>
               </Grid>
-
             </div>
           </Grid>
-
-
         </div>
-        <Dialog open={open} setOpen={setOpen} data={props} isCurriculum={true} />
+        <Dialog
+          open={open}
+          setOpen={setOpen}
+          data={props}
+          isCurriculum={true}
+        />
       </div>
     </Suspense>
   );
 }
-
-
-

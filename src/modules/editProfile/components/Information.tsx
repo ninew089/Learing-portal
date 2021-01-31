@@ -8,7 +8,6 @@ import {
   FormControl,
   CssBaseline,
   TextField,
-
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import * as actions from "modules/infomation/actions";
@@ -137,12 +136,11 @@ export default function SignIn(props: any) {
   return (
     <>
       <CssBaseline />
-      <div className={classes.form}  >
+      <div className={classes.form}>
         <Typography component="h1" variant="h5" align="center">
           ข้อมูลส่วนบุคคล
         </Typography>
         <FormControl className={classes.formControlInfo} fullWidth>
-
           <TextField
             fullWidth
             label="คำนำหน้าชื่อ"
@@ -233,7 +231,6 @@ export default function SignIn(props: any) {
                 fullWidth
                 className={classes.textfield}
                 label="ระดับการศึกษา"
-
                 InputLabelProps={{
                   className: classes.selectInput,
                 }}
@@ -276,7 +273,6 @@ export default function SignIn(props: any) {
           />
         </FormControl>
       </div>
-
     </>
   );
 }

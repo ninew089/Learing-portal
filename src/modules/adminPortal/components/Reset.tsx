@@ -1,6 +1,5 @@
 import React from "react";
 import {
-
   Button,
   CssBaseline,
   TextField,
@@ -14,10 +13,10 @@ import { RiLockPasswordLine } from "react-icons/ri";
 
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
-import { useDispatch, useSelector } from 'react-redux'
-import * as actions from "../actions"
+import { useDispatch, useSelector } from "react-redux";
+import * as actions from "../actions";
 
-import Snackbar from "shared/SnackBar/SnackBar"
+import Snackbar from "shared/SnackBar/SnackBar";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -66,27 +65,23 @@ export default function SignIn() {
   });
 
   const onSubmitData = handleSubmit(({ oldPassword, newPassword }) => {
-    const info = { oldPassword: oldPassword, newPassword: newPassword }
-    const action = actions.loadPassword(info)
-    dispatch(action)
-
+    const info = { oldPassword: oldPassword, newPassword: newPassword };
+    const action = actions.loadPassword(info);
+    dispatch(action);
   });
   const { message, severity } = useSelector((state: any) => state.admin);
 
-
   return (
     <Container component="main" maxWidth="xs" className={classes.container}>
-      {
-        message !== null && <Snackbar
-          message={message
-          }
+      {message !== null && (
+        <Snackbar
+          message={message}
           open={message !== null ? true : false}
           severity={severity}
         />
-      }
+      )}
       <CssBaseline />
       <div className={classes.paper}>
-
         <Typography component="h1" variant="h5">
           เปลี่ยนรหัสผ่าน
         </Typography>

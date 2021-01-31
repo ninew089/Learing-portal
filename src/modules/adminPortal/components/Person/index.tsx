@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import axios from 'axios'
-import { personProps } from './tyscript'
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { personProps } from "./tyscript";
 import { useForm } from "react-hook-form";
 import { Button, Box } from "@material-ui/core";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -9,12 +9,12 @@ import img from "assets/images/OCSC-banner.png";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import { getCookie } from "cookie/cookie"
-import { parseJwt } from "utils/getDataJWT"
-import * as actions from "../../actions"
+import { getCookie } from "cookie/cookie";
+import { parseJwt } from "utils/getDataJWT";
+import * as actions from "../../actions";
 import * as yup from "yup";
-import { useDispatch, useSelector } from 'react-redux'
-import Snackbar from "shared/SnackBar/SnackBar"
+import { useDispatch, useSelector } from "react-redux";
+import Snackbar from "shared/SnackBar/SnackBar";
 
 const useStyles = makeStyles((theme) => ({
   root: { marginTop: "2rem", background: theme.palette.primary.light },
@@ -116,21 +116,20 @@ const useStyles = makeStyles((theme) => ({
 export default function SignIn() {
   const classes = useStyles();
 
-  const [entries, setEntries] = useState<personProps[]>([])
+  const [entries, setEntries] = useState<personProps[]>([]);
   useEffect(() => {
     const fetch = async () => {
       try {
-        const response = await axios.get(`/Platforms/${platformid}`)
-        setEntries([response.data])
+        const response = await axios.get(`/Platforms/${platformid}`);
+        setEntries([response.data]);
       } catch (err) {
-        console.log(err)
-        setEntries([])
+        console.log(err);
+        setEntries([]);
       }
-
-    }
-    fetch()
+    };
+    fetch();
     // eslint-disable-next-line
-  }, [])
+  }, []);
 
   const { register, handleSubmit, errors } = useForm({
     mode: "onChange",
@@ -142,40 +141,39 @@ export default function SignIn() {
       phone: yup.string().required(),
       email: yup.string().required().email(),
     }),
-
   });
 
-  const token = getCookie('token')
-  const platformid = parseJwt(token).unique_name
+  const token = getCookie("token");
+  const platformid = parseJwt(token).unique_name;
   const dispatch = useDispatch();
-
-
 
   const submit = async (personInfo: object) => {
     const preInfo = {
-      ...personInfo, id: entries[0]?.id, officialName: entries[0]?.officialName, abbreviation: entries[0]?.abbreviation, thumbnail: entries[0]?.thumbnail, link: entries[0]?.link,
+      ...personInfo,
+      id: entries[0]?.id,
+      officialName: entries[0]?.officialName,
+      abbreviation: entries[0]?.abbreviation,
+      thumbnail: entries[0]?.thumbnail,
+      link: entries[0]?.link,
       curriculum: entries[0]?.curriculum,
-      course: entries[0]?.course
-    }
-    const action = actions.putPerson(preInfo)
-    dispatch(action)
+      course: entries[0]?.course,
+    };
+    const action = actions.putPerson(preInfo);
+    dispatch(action);
   };
   const { message, severity } = useSelector((state: any) => state.admin);
 
-
   return (
-
     <div className={classes.root}>
-      {entries.length !== 0 &&
+      {entries.length !== 0 && (
         <Container component="main" maxWidth="xs" className={classes.container}>
-          {
-            message !== null && <Snackbar
-              message={message
-              }
+          {message !== null && (
+            <Snackbar
+              message={message}
               open={message !== null ? true : false}
               severity={severity}
             />
-          }
+          )}
           <Box>
             <img alt="banner" src={img} className={classes.image} />
             <Box className={classes.box}>
@@ -188,7 +186,7 @@ export default function SignIn() {
                     className={classes.title}
                   >
                     ข้อมูลส่วนบุคคล
-                </Typography>
+                  </Typography>
 
                   <TextField
                     variant="outlined"
@@ -205,7 +203,6 @@ export default function SignIn() {
                     label="เลขประจำตัวประชาชน"
                     autoComplete="identNo"
                     defaultValue={entries[0]?.identNo}
-
                   />
                   <TextField
                     variant="outlined"
@@ -221,7 +218,6 @@ export default function SignIn() {
                     fullWidth
                     label="คำนำหน้าชื่อ"
                     defaultValue={entries[0]?.title}
-
                     autoFocus
                   />
                   <TextField
@@ -232,14 +228,12 @@ export default function SignIn() {
                       className: classes.input,
                     }}
                     name="firstName"
-
                     inputRef={register}
                     helperText={errors.firstName ? "กรุณากรอกชื่อ" : ""}
                     error={!!errors.firstName}
                     fullWidth
                     label="ชื่อ"
                     defaultValue={entries[0]?.firstName}
-
                     autoFocus
                   />
                   <TextField
@@ -250,7 +244,6 @@ export default function SignIn() {
                       className: classes.input,
                     }}
                     name="lastName"
-
                     inputRef={register}
                     helperText={errors.lastName ? "กรุณากรอกนามสกุล" : ""}
                     error={!!errors.lastName}
@@ -267,14 +260,12 @@ export default function SignIn() {
                       className: classes.input,
                     }}
                     name="phone"
-
                     inputRef={register}
                     helperText={errors.phone ? "กรุณากรอกเบอร์โทร" : ""}
                     error={!!errors.phone}
                     fullWidth
                     label="เบอร์โทร"
                     defaultValue={entries[0]?.phone}
-
                     autoFocus
                   />
                   <TextField
@@ -285,7 +276,6 @@ export default function SignIn() {
                       className: classes.input,
                     }}
                     name="email"
-
                     inputRef={register}
                     helperText={errors.email ? "กรุณากรอกอีเมล" : ""}
                     error={!!errors.email}
@@ -302,13 +292,13 @@ export default function SignIn() {
                     className={classes.submit}
                   >
                     ส่งข้อมูล
-                </Button>
+                  </Button>
                 </div>
               </form>
             </Box>
           </Box>
         </Container>
-      }
+      )}
     </div>
   );
 }

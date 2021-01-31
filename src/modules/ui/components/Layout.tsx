@@ -1,16 +1,9 @@
 import React from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
-import {
-  Grid,
-  Typography,
-  Box,
-  useMediaQuery
-} from "@material-ui/core";
+import { Grid, Typography, Box, useMediaQuery } from "@material-ui/core";
 import Routes from "./Routes";
-import Nav from "./Nav"
-
-
+import Nav from "./Nav";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,7 +15,6 @@ const useStyles = makeStyles((theme) => ({
   content: {
     flexGrow: 1,
     minHeight: `100vh`,
-
   },
   push: {
     height: "60px",
@@ -39,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("sm")]: {
       textAlign: "center",
       fontSize: 10,
-    }
+    },
   },
   ocsc: {
     color: theme.palette.primary.light,
@@ -48,18 +40,17 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("sm")]: {
       textAlign: "center",
       fontSize: 14,
-    }
+    },
   },
 
   color: {
-
     color: theme.palette.secondary.light,
     fontWeight: 400,
     fontSize: 16,
     [theme.breakpoints.down("sm")]: {
       textAlign: "center",
       fontSize: 10,
-    }
+    },
   },
   color1: {
     fontWeight: 400,
@@ -68,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("sm")]: {
       textAlign: "center",
       fontSize: 10,
-    }
+    },
   },
   name: {
     fontWeight: 700,
@@ -77,7 +68,7 @@ const useStyles = makeStyles((theme) => ({
     whiteSpace: "nowrap",
     overflow: "hidden",
     textOverflow: "ellipsis",
-    maxWidth: "75ch"
+    maxWidth: "75ch",
   },
   main: {
     fontWeight: 700,
@@ -95,13 +86,11 @@ const useStyles = makeStyles((theme) => ({
     borderBottom: `3px solid ${theme.palette.secondary.main}`,
     paddingBottom: "2px",
   },
-
 }));
 
 export default function PersistentDrawerLeft(props: any) {
   const classes = useStyles();
-  const matches = useMediaQuery('(min-width:1060px)');
-
+  const matches = useMediaQuery("(min-width:1060px)");
 
   return (
     <div className={classes.root}>
@@ -109,16 +98,17 @@ export default function PersistentDrawerLeft(props: any) {
 
       <Grid className={clsx(classes.content)}>
         <Routes />
-
-
-
       </Grid>
       <div className={classes.push} />
       <Box p={5} className={classes.footer}>
-        <Grid container direction="row" justify={matches ? "space-around" : "center"} alignItems="center">
-          <Grid item xs={12} lg={6} >
+        <Grid
+          container
+          direction="row"
+          justify={matches ? "space-around" : "center"}
+          alignItems="center"
+        >
+          <Grid item xs={12} lg={6}>
             <Typography
-
               display="block"
               align="center"
               component="span"
@@ -127,14 +117,13 @@ export default function PersistentDrawerLeft(props: any) {
               สำนักงานคณะกรรมการข้าราชการพลเรือน (สำนักงาน ก.พ.)
             </Typography>
             <Typography
-
               display="block"
               align="center"
               component="span"
               className={classes.color}
             >
               Copyright © office of the Civil Service Commission (OCSC) 2021
-          </Typography>
+            </Typography>
           </Grid>
 
           <Typography
@@ -143,29 +132,24 @@ export default function PersistentDrawerLeft(props: any) {
             align="center"
             className={classes.color1}
           >
-            47/111 หมู่ 4 ถนนติวานนท์ ตำบลตลาดขวัญ อำเภอเมือง จังหวัดนนทบุรี 11000
-                  <Typography
-
+            47/111 หมู่ 4 ถนนติวานนท์ ตำบลตลาดขวัญ อำเภอเมือง จังหวัดนนทบุรี
+            11000
+            <Typography
               display="block"
               align="center"
               component="span"
               className={classes.color}
             >
               E-mail : ocsc.hrd@gmail.com
-          </Typography>
-
+            </Typography>
             <Typography
-
               display="block"
               align="center"
               component="span"
               className={classes.color1}
             >
               โทร. 02-547-1795 , 02-547-1807 (ภายในเวลาราชการ)
-          </Typography>
-
-
-
+            </Typography>
           </Typography>
         </Grid>
       </Box>

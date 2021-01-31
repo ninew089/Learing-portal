@@ -6,9 +6,9 @@ import {
   withStyles,
   makeStyles,
 } from "@material-ui/core/styles";
-import { formatDate } from "utils/dateFormat"
+import { formatDate } from "utils/dateFormat";
 import CloseIcon from "@material-ui/icons/Close";
-import Date from "../Dateedit"
+import Date from "../Dateedit";
 import {
   Container,
   CssBaseline,
@@ -21,14 +21,14 @@ import {
   DialogTitle,
   Dialog,
   Button,
-  MenuItem
+  MenuItem,
 } from "@material-ui/core";
 import { useForm, Controller } from "react-hook-form";
 import * as yup from "yup";
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from "react-redux";
 
-import * as actions from "../../../../actions"
-import { DialogTitleProps } from "../typescript"
+import * as actions from "../../../../actions";
+import { DialogTitleProps } from "../typescript";
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -87,8 +87,6 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-
-
 const MuiDialogTitle = withStyles(styles)((props: DialogTitleProps) => {
   const { children, classes, onClose, ...other } = props;
   return (
@@ -121,7 +119,6 @@ const MuiDialogActions = withStyles((theme) => ({
 }))(DialogActions);
 
 export default function CustomizedDialogs({ open, setOpen, data }: any) {
-
   const handleClose = () => {
     setOpen(false);
   };
@@ -130,8 +127,7 @@ export default function CustomizedDialogs({ open, setOpen, data }: any) {
   const { register, handleSubmit, errors, control } = useForm<any>({
     mode: "onChange",
     defaultValues: {
-      startDate: data.startDate
-
+      startDate: data.startDate,
     },
     validationSchema: yup.object().shape({
       userId: yup.string().required(),
@@ -141,31 +137,41 @@ export default function CustomizedDialogs({ open, setOpen, data }: any) {
       startDate: yup.string().required(),
       courseId: yup.number().required(),
       endDate: yup.string().required(),
-      hour: yup.number().moreThan(0, "จำนวนต้องมากกว่า 1 ").nullable(true).transform((_, val) => val === "" ? null : parseInt(val)),
-      grade: yup.string().nullable(true).transform((_, val) => val === "" ? null : val),
-      satisfactionScore: yup.number().moreThan(0, "คะแนนความพึงพอต้องอยู่ระหว่าง 1-5").lessThan(6, "คะแนนความพึงพอต้องอยู่ระหว่าง 1-5").nullable(true).transform((_, val) => val === "" ? null : parseInt(val))
+      hour: yup
+        .number()
+        .moreThan(0, "จำนวนต้องมากกว่า 1 ")
+        .nullable(true)
+        .transform((_, val) => (val === "" ? null : parseInt(val))),
+      grade: yup
+        .string()
+        .nullable(true)
+        .transform((_, val) => (val === "" ? null : val)),
+      satisfactionScore: yup
+        .number()
+        .moreThan(0, "คะแนนความพึงพอต้องอยู่ระหว่าง 1-5")
+        .lessThan(6, "คะแนนความพึงพอต้องอยู่ระหว่าง 1-5")
+        .nullable(true)
+        .transform((_, val) => (val === "" ? null : parseInt(val))),
     }),
   });
   const dispatch = useDispatch();
   useEffect(() => {
-
-    const action = actions.getCourse()
-    dispatch(action)
-    handleClose()
+    const action = actions.getCourse();
+    dispatch(action);
+    handleClose();
 
     // eslint-disable-next-line
-  }, [])
+  }, []);
 
   const { course } = useSelector((state: any) => state.admin);
   const onSubmitData = handleSubmit((info) => {
-    console.log(info)
-    info.startDate = formatDate(info.startDate)
-    info.endDate = formatDate(info.endDate)
+    console.log(info);
+    info.startDate = formatDate(info.startDate);
+    info.endDate = formatDate(info.endDate);
 
-    const action = actions.loadEditCertificate(info, data.id)
-    dispatch(action)
-    handleClose()
-
+    const action = actions.loadEditCertificate(info, data.id);
+    dispatch(action);
+    handleClose();
   });
 
   return (
@@ -216,7 +222,6 @@ export default function CustomizedDialogs({ open, setOpen, data }: any) {
                   <TextField
                     fullWidth
                     multiline
-
                     label="ชื่อ"
                     name="firstName"
                     inputRef={register}
@@ -241,15 +246,11 @@ export default function CustomizedDialogs({ open, setOpen, data }: any) {
                         variant="outlined"
                         label="รายวิชา"
                         select
-
                         error={!!errors.courseId}
                       >
                         {course.map((categorie: any, index: number) => (
-                          <MenuItem
-                            key={index}
-                            value={categorie.id}
-                          >
-                            {categorie.code}   {categorie.name}
+                          <MenuItem key={index} value={categorie.id}>
+                            {categorie.code} {categorie.name}
                           </MenuItem>
                         ))}
                       </TextField>
@@ -260,8 +261,18 @@ export default function CustomizedDialogs({ open, setOpen, data }: any) {
                     defaultValue={data.courseId}
                   />
 
-                  <Date title="วันที่เปิดเรียน" register={register} name={"startDate"} value={data.startDate} />
-                  <Date title="วันที่สำเร็จการศึกษา" register={register} name={"endDate"} value={data.endDate} />
+                  <Date
+                    title="วันที่เปิดเรียน"
+                    register={register}
+                    name={"startDate"}
+                    value={data.startDate}
+                  />
+                  <Date
+                    title="วันที่สำเร็จการศึกษา"
+                    register={register}
+                    name={"endDate"}
+                    value={data.endDate}
+                  />
 
                   <TextField
                     fullWidth
@@ -277,9 +288,7 @@ export default function CustomizedDialogs({ open, setOpen, data }: any) {
                   <TextField
                     fullWidth
                     multiline
-
                     label="เกรด"
-
                     name="grade"
                     inputRef={register}
                     helperText={errors.grade ? "กรอกคะแนน" : ""}
@@ -289,15 +298,17 @@ export default function CustomizedDialogs({ open, setOpen, data }: any) {
                   <TextField
                     fullWidth
                     multiline
-
                     label="คะแนนความพึงพอใจ"
                     name="satisfactionScore"
                     inputRef={register}
-                    helperText={errors.satisfactionScore ? errors.satisfactionScore.message : ""}
+                    helperText={
+                      errors.satisfactionScore
+                        ? errors.satisfactionScore.message
+                        : ""
+                    }
                     error={!!errors.satisfactionScore}
                     defaultValue={data.satisfactionScore}
                   />
-
                 </FormControl>
               </form>
             </div>

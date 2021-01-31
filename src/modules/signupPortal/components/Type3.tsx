@@ -4,7 +4,7 @@ import { Controller } from "react-hook-form";
 import { makeStyles } from "@material-ui/core/styles";
 import * as actions from "modules/infomation/actions";
 import { useDispatch, useSelector } from "react-redux";
-import { jobTypes3Props, typeProps } from "../typescript"
+import { jobTypes3Props, typeProps } from "../typescript";
 const useStyles = makeStyles((theme) => ({
   input: {
     color: "#0f1626",

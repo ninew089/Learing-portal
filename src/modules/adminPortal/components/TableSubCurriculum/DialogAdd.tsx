@@ -9,7 +9,7 @@ import {
 
 import CloseIcon from "@material-ui/icons/Close";
 
-import Search from "./SearchCourse"
+import Search from "./SearchCourse";
 
 import {
   Container,
@@ -21,14 +21,12 @@ import {
   DialogTitle,
   Dialog,
   Button,
-
 } from "@material-ui/core";
 
-
-import { useDispatch } from 'react-redux'
-import * as actions from "modules/coursePortal/actions"
-import * as actionsCourse from "../../actions"
-import { openProps, DialogTitleProps } from "./typescript"
+import { useDispatch } from "react-redux";
+import * as actions from "modules/coursePortal/actions";
+import * as actionsCourse from "../../actions";
+import { openProps, DialogTitleProps } from "./typescript";
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -87,7 +85,6 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-
 const MuiDialogTitle = withStyles(styles)((props: DialogTitleProps) => {
   const { children, classes, onClose, ...other } = props;
   return (
@@ -122,8 +119,7 @@ const MuiDialogActions = withStyles((theme) => ({
 export default function CustomizedDialogs({
   open,
   setOpen,
-  valueCurriculun
-
+  valueCurriculun,
 }: openProps) {
   const handleClose = () => {
     setOpen(false);
@@ -133,22 +129,20 @@ export default function CustomizedDialogs({
   const dispatch = useDispatch();
 
   useEffect(() => {
-
-    const action = actions.loadCourseCategory()
-    dispatch(action)
+    const action = actions.loadCourseCategory();
+    dispatch(action);
 
     // eslint-disable-next-line
-  }, [])
+  }, []);
 
-  const [value, setValue] = useState()
+  const [value, setValue] = useState();
   const onSubmitData = () => {
-
-    const actionCourse = actionsCourse.loadAddSubCurriculums(valueCurriculun, value)
-    dispatch(actionCourse)
-    handleClose()
-
-
-
+    const actionCourse = actionsCourse.loadAddSubCurriculums(
+      valueCurriculun,
+      value
+    );
+    dispatch(actionCourse);
+    handleClose();
   };
   return (
     <div>
@@ -178,13 +172,12 @@ export default function CustomizedDialogs({
           </Container>
         </MuiDialogContent>
         <MuiDialogActions>
-          {value !== undefined &&
+          {value !== undefined && (
             <Button color="primary" fullWidth onClick={onSubmitData}>
               ส่งข้อมูล
-          </Button>
-          }
+            </Button>
+          )}
         </MuiDialogActions>
-
       </Dialog>
     </div>
   );

@@ -33,7 +33,7 @@ import {
   LOAD_USER_SUCCESS,
   LOAD_USER_FAILURE,
   CLEAR_MESSAGE,
-  LOAD_MESSAGE
+  LOAD_MESSAGE,
 } from "./actions";
 
 const initialState = {
@@ -50,7 +50,7 @@ const initialState = {
   StateEnterprises: [],
   Occupations: [],
   message: null,
-  severity: null
+  severity: null,
 };
 
 export default function (state = initialState, action: any) {
@@ -180,7 +180,13 @@ export default function (state = initialState, action: any) {
       return { ...state, isLoading: false, isError: false };
 
     case LOAD_USER_REQUEST:
-      return { ...state, isLoading: true, message: null, isError: false, severity: null };
+      return {
+        ...state,
+        isLoading: true,
+        message: null,
+        isError: false,
+        severity: null,
+      };
     case LOAD_USER_SUCCESS:
       return {
         ...state,
@@ -195,7 +201,9 @@ export default function (state = initialState, action: any) {
       return { ...state, message: null, severity: null };
     case LOAD_MESSAGE:
       return {
-        ...state, message: action.payload.message, severity: action.payload.severity,
+        ...state,
+        message: action.payload.message,
+        severity: action.payload.severity,
       };
     default:
       return state;

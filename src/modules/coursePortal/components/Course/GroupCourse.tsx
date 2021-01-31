@@ -1,17 +1,21 @@
 import React, { useEffect, Suspense, lazy, useState } from "react";
-import { Grid, Divider, Container, CircularProgress, Button } from "@material-ui/core";
+import {
+  Grid,
+  Divider,
+  Container,
+  CircularProgress,
+  Button,
+} from "@material-ui/core";
 import queryString from "query-string";
 import { useLocation } from "react-router-dom";
 
-import { useDispatch, useSelector } from 'react-redux'
-import * as actions from "../../actions"
+import { useDispatch, useSelector } from "react-redux";
+import * as actions from "../../actions";
 import { makeStyles } from "@material-ui/core/styles";
 
-
-
-const Header = lazy(() => import('../../share/Header'));
-const SelectCategory = lazy(() => import('../../share/SelectCategory'));
-const CourseDetail = lazy(() => import('./CourseDetails'));
+const Header = lazy(() => import("../../share/Header"));
+const SelectCategory = lazy(() => import("../../share/SelectCategory"));
+const CourseDetail = lazy(() => import("./CourseDetails"));
 
 const useStyles = makeStyles((theme) => ({
   content: {
@@ -19,27 +23,28 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: "8vw",
   },
   divider: {
-    marginBottom: 20
+    marginBottom: 20,
   },
   circular: {
-    marginTop: 20
-  }, button: {
+    marginTop: 20,
+  },
+  button: {
     background: theme.palette.primary.main,
     borderRadius: 40,
-    padding: '15px 30px 15px 30px',
-    margin: 10
-  }
-
+    padding: "15px 30px 15px 30px",
+    margin: 10,
+  },
 }));
-
 
 export default function GroupCourse() {
   const { search } = useLocation();
   const { category, name } = queryString.parse(search);
   const dispatch = useDispatch();
 
-  const { courseCategories, isLoadingCourseCategories } = useSelector((state: any) => state.course);
-  const classes = useStyles()
+  const { courseCategories, isLoadingCourseCategories } = useSelector(
+    (state: any) => state.course
+  );
+  const classes = useStyles();
   const postsPerPage = 8;
   const [postsToShow, setPostsToShow] = useState<any>([]);
   const [next, setNext] = useState(8);
@@ -56,31 +61,34 @@ export default function GroupCourse() {
   const handleShowMorePosts = () => {
     loopWithSlice(next, next + postsPerPage);
     setNext(next + postsPerPage);
-  }
+  };
 
-  const renderLoader = () =>
-    <div></div>
+  const renderLoader = () => <div></div>;
 
   useEffect(() => {
-
-    const action = actions.loadCourseCategories(category === undefined ? 1 : category)
-    dispatch(action)
-    setPostsToShow([])
+    const action = actions.loadCourseCategories(
+      category === undefined ? 1 : category
+    );
+    dispatch(action);
+    setPostsToShow([]);
 
     // eslint-disable-next-line
-  }, [category])
+  }, [category]);
 
   return (
     <Suspense fallback={renderLoader()}>
       <Header text={"รายวิชา"} />
       <div>
         <Grid container direction="row" alignItems="center">
-
-          <Grid container className={classes.content} direction="row" alignItems="center" justify={"space-between"} >
-
+          <Grid
+            container
+            className={classes.content}
+            direction="row"
+            alignItems="center"
+            justify={"space-between"}
+          >
             <h2>{name}</h2>
             <SelectCategory />
-
           </Grid>
         </Grid>
         <Divider style={{ marginBottom: 20 }} />
@@ -93,7 +101,12 @@ export default function GroupCourse() {
             justify={isLoadingCourseCategories ? "center" : "flex-start"}
             spacing={3}
           >
-            {isLoadingCourseCategories && <CircularProgress color="secondary" className={classes.circular} />}
+            {isLoadingCourseCategories && (
+              <CircularProgress
+                color="secondary"
+                className={classes.circular}
+              />
+            )}
 
             {postsToShow.map((item: any, index: number) => (
               <Grid item xs={12} sm={6} md={4} lg={3} xl={3} key={item.name}>
@@ -107,7 +120,7 @@ export default function GroupCourse() {
                   viewCount={item.viewCount}
                   assessment={item.assessment}
                   targetGroup={item.targetGroup}
-                  point={(item.satisfactionSum) / item.satisfactionCount}
+                  point={item.satisfactionSum / item.satisfactionCount}
                   satisfactionCount={item.satisfactionCount}
                   link={item.link}
                   code={item.code}
@@ -119,7 +132,7 @@ export default function GroupCourse() {
               </Grid>
             ))}
           </Grid>
-          {!isLoadingCourseCategories && next < courseCategories.length &&
+          {!isLoadingCourseCategories && next < courseCategories.length && (
             <Grid
               container
               direction="row"
@@ -127,9 +140,15 @@ export default function GroupCourse() {
               justify={"center"}
               spacing={3}
             >
-
-              <Button onClick={handleShowMorePosts} color="secondary" className={classes.button}>ดูเพิ่มเติม</Button>
-            </Grid>}
+              <Button
+                onClick={handleShowMorePosts}
+                color="secondary"
+                className={classes.button}
+              >
+                ดูเพิ่มเติม
+              </Button>
+            </Grid>
+          )}
         </Container>
       </div>
     </Suspense>

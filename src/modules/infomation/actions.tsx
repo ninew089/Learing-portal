@@ -1,8 +1,11 @@
 import axios from "axios";
 
-const LOAD_EDUCATION_REQUEST = "learning-portal/src/info/LOAD_EDUCATION_REQUEST";
-const LOAD_EDUCATION_SUCCESS = "learning-portal/src/info/LOAD_EDUCATION_SUCCESS";
-const LOAD_EDUCATION_FAILURE = "learning-portal/src/info/LOAD_EDUCATION_REQUEST";
+const LOAD_EDUCATION_REQUEST =
+  "learning-portal/src/info/LOAD_EDUCATION_REQUEST";
+const LOAD_EDUCATION_SUCCESS =
+  "learning-portal/src/info/LOAD_EDUCATION_SUCCESS";
+const LOAD_EDUCATION_FAILURE =
+  "learning-portal/src/info/LOAD_EDUCATION_REQUEST";
 
 const LOAD_USERTYPE_REQUEST = "learning-portal/src/info/LOAD_USERTYPE_REQUEST";
 const LOAD_USERTYPE_SUCCESS = "learning-portal/src/info/LOAD_USERTYPE_SUCCESS";
@@ -240,9 +243,10 @@ function loadPresence(id: string) {
       dispatch({
         type: LOAD_USER_SUCCESS,
         payload: {
-          message: data.presence ? "เลขประจำตัวประชาชนนี้ได้ทำการสมัครเเล้ว" : "สามารถใช้เลขประจำตัวประชาชนนี้ได้",
-          severity: data.presence ? "error" : "info"
-
+          message: data.presence
+            ? "เลขประจำตัวประชาชนนี้ได้ทำการสมัครเเล้ว"
+            : "สามารถใช้เลขประจำตัวประชาชนนี้ได้",
+          severity: data.presence ? "error" : "info",
         },
       });
     } catch (err) {
@@ -252,17 +256,17 @@ function loadPresence(id: string) {
 }
 function clearMessage() {
   return {
-    type: CLEAR_MESSAGE
-  }
+    type: CLEAR_MESSAGE,
+  };
 }
 function loadMessage(message: string, severity: string) {
   return {
     type: LOAD_MESSAGE,
     payload: {
       message,
-      severity
-    }
-  }
+      severity,
+    },
+  };
 }
 
 export {
@@ -313,6 +317,5 @@ export {
   loadStateEnterprises,
   loadOccupations,
   loadPresence,
-  loadMessage
-
+  loadMessage,
 };

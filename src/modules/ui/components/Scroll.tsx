@@ -7,9 +7,7 @@ export default function ScrollToTop() {
   useEffect(() => {
     if (pathname !== "/learning-portal") {
       window.scrollTo(0, 0);
-
     }
-
   }, [pathname, search]);
 
   return null;

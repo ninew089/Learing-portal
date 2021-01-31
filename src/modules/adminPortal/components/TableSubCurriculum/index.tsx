@@ -18,14 +18,14 @@ import SaveAlt from "@material-ui/icons/SaveAlt";
 import Search from "@material-ui/icons/Search";
 import ViewColumn from "@material-ui/icons/ViewColumn";
 import DialogAdd from "./DialogAdd";
-import { getCookie } from 'cookie/cookie'
-import axios from "axios"
-import RefreshIcon from '@material-ui/icons/Refresh';
+import { getCookie } from "cookie/cookie";
+import axios from "axios";
+import RefreshIcon from "@material-ui/icons/Refresh";
 import SeacrchCourse from "./SearhCurriculum";
 import DialogEdit from "./DialogEdit";
-import { useSelector } from 'react-redux'
-import Snackbar from "shared/SnackBar/SnackBar"
-import { parseJwt } from "utils/getDataJWT"
+import { useSelector } from "react-redux";
+import Snackbar from "shared/SnackBar/SnackBar";
+import { parseJwt } from "utils/getDataJWT";
 
 export default function MaterialTableDemo(props: any) {
   const tableIcons = {
@@ -83,74 +83,72 @@ export default function MaterialTableDemo(props: any) {
   };
   const { useState } = React;
 
-
   const [open, setOpen] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
-  const [editData, setEditData] = useState<any>([])
+  const [editData, setEditData] = useState<any>([]);
   const handleClickOpen = () => {
     setOpen(true);
   };
-  const [value, setValue] = useState()
-  const [entries, setEntries] = useState<any>([])
-  const token = getCookie('token');
-
+  const [value, setValue] = useState();
+  const [entries, setEntries] = useState<any>([]);
+  const token = getCookie("token");
 
   const headers = {
     Authorization: `Bearer ${token}`,
-  }
+  };
 
   const { message, severity } = useSelector((state: any) => state.admin);
-  const [number, setNumber] = useState(0)
+  const [number, setNumber] = useState(0);
 
-  const platformid = parseJwt(token).unique_name
+  const platformid = parseJwt(token).unique_name;
   useEffect(() => {
     const fetch = async () => {
       try {
-        const response = await axios.get(`/Platforms/${platformid}/Curriculums/${value}/Courses`)
-        setEntries(response.data)
-
-
+        const response = await axios.get(
+          `/Platforms/${platformid}/Curriculums/${value}/Courses`
+        );
+        setEntries(response.data);
       } catch (err) {
-        setEntries([])
-        console.log(err)
+        setEntries([]);
+        console.log(err);
       }
-
-    }
-    fetch()
+    };
+    fetch();
     // eslint-disable-next-line
-  }, [message])
+  }, [message]);
   const onSubmit = async () => {
     if (value !== undefined) {
       try {
-        const response = await axios.get(`/Platforms/${platformid}/Curriculums/${value}/Courses`)
-        setEntries(response.data)
-
-
+        const response = await axios.get(
+          `/Platforms/${platformid}/Curriculums/${value}/Courses`
+        );
+        setEntries(response.data);
       } catch (err) {
-        setEntries([])
-        console.log(err)
+        setEntries([]);
+        console.log(err);
       }
-
     }
-
-
-  }
-
+  };
 
   return (
     <div>
       <CssBaseline />
-      {
-        message !== null && <Snackbar
-          message={message
-          }
+      {message !== null && (
+        <Snackbar
+          message={message}
           open={message !== null ? true : false}
           severity={severity}
         />
-      }
-      <Grid container direction="row" justify="flex-start" alignItems="center" style={{ margin: 20 }} >
+      )}
+      <Grid
+        container
+        direction="row"
+        justify="flex-start"
+        alignItems="center"
+        style={{ margin: 20 }}
+      >
         <SeacrchCourse setValue={setValue} />
-        <Button onClick={onSubmit} >ค้นหาหลักสูตร</Button>
+        <Button onClick={onSubmit}>ค้นหาหลักสูตร</Button>
       </Grid>
 
       <MaterialTable
@@ -164,7 +162,7 @@ export default function MaterialTableDemo(props: any) {
         icons={tableIcons}
         options={{
           pageSize: 20,
-          pageSizeOptions: [20, 50, 100]
+          pageSizeOptions: [20, 50, 100],
         }}
         actions={[
           {
@@ -183,35 +181,40 @@ export default function MaterialTableDemo(props: any) {
             icon: () => <Edit />,
             tooltip: "แก้ไข",
             onClick: (event, rowData) => {
-              setOpenEdit(true)
-              const save = rowData
-              setNumber(rowData.tableData.id + 1)
+              setOpenEdit(true);
+              const save = rowData;
+              setNumber(rowData.tableData.id + 1);
 
-              setEditData(save)
-
-
-
+              setEditData(save);
             },
-          }
+          },
         ]}
         editable={{
           onRowDelete: (oldData: any) =>
             new Promise((resolve) => {
               setTimeout(() => {
                 //@ts-ignore
-                resolve()
-                const data = [...entries]
-                data.splice(data.indexOf(oldData), 1)
+                resolve();
+                const data = [...entries];
+                data.splice(data.indexOf(oldData), 1);
                 axios
-                  .delete(`/Platforms/${platformid}/Curriculums/${value}/Courses/${oldData.id}`, { headers })
-                  .then((res) => console.log(res.data))
-                setEntries(data)
-              }, 600)
+                  .delete(
+                    `/Platforms/${platformid}/Curriculums/${value}/Courses/${oldData.id}`,
+                    { headers }
+                  )
+                  .then((res) => console.log(res.data));
+                setEntries(data);
+              }, 600);
             }),
-
         }}
       />
-      <DialogEdit open={openEdit} setOpen={setOpenEdit} data={editData} valueCurriculun={value} numberNo={number} />
+      <DialogEdit
+        open={openEdit}
+        setOpen={setOpenEdit}
+        data={editData}
+        valueCurriculun={value}
+        numberNo={number}
+      />
       <DialogAdd open={open} setOpen={setOpen} valueCurriculun={value} />
     </div>
   );

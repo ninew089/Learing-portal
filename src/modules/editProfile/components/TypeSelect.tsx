@@ -17,7 +17,7 @@ import { Controller } from "react-hook-form";
 
 import * as actions from "modules/infomation/actions";
 import { useDispatch, useSelector } from "react-redux";
-import { userTypeProps, typeUserProps } from "../typescript"
+import { userTypeProps, typeUserProps } from "../typescript";
 const useStyles = makeStyles((theme) => ({
   form: {
     marginTop: theme.spacing(4),
@@ -121,7 +121,10 @@ export default function SignIn(props: typeUserProps) {
       case 3:
         return (
           <div>
-            <Type3 formProps={formProps} name={"เจ้าหน้าที่ของรัฐในส่วนราชการต่าง ๆ"} />
+            <Type3
+              formProps={formProps}
+              name={"เจ้าหน้าที่ของรัฐในส่วนราชการต่าง ๆ"}
+            />
             <Detail123 formProps={formProps} />
           </div>
         );
@@ -135,7 +138,7 @@ export default function SignIn(props: typeUserProps) {
   return (
     <>
       <CssBaseline />
-      <div className={classes.form} >
+      <div className={classes.form}>
         <Typography component="h1" variant="h5" align="center">
           ข้อมูลการทำงาน
         </Typography>
@@ -149,7 +152,6 @@ export default function SignIn(props: typeUserProps) {
               InputLabelProps={{
                 className: classes.selectInput,
               }}
-
               select
               helperText={
                 formProps.errors.usertypeid &&
@@ -157,15 +159,16 @@ export default function SignIn(props: typeUserProps) {
               }
               error={!!formProps.errors.usertypeid}
             >
-              {userTypes.map((userType: userTypeProps, index: number) =>
-                (<MenuItem value={userType.id} key={index}>{userType.name}</MenuItem>)
-              )}
+              {userTypes.map((userType: userTypeProps, index: number) => (
+                <MenuItem value={userType.id} key={index}>
+                  {userType.name}
+                </MenuItem>
+              ))}
             </TextField>
           }
           name="usertypeid"
           rules={{ required: "กรุณาเลือกประเภท" }}
           control={formProps.control}
-
         />
 
         {renderTypeProps()}

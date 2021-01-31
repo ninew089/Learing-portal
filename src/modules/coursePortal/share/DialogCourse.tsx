@@ -139,7 +139,6 @@ export default function CustomizedDialogs({
     // eslint-disable-next-line
   }, []);
   const { curriculumscourse } = useSelector((state: any) => state.course);
-  console.log(curriculumscourse);
   const navToPage = () => {
     setOpen(false);
     if (isCurriculum) {
