@@ -16,6 +16,8 @@ import avatar from "assets/images/user.svg";
 import { getCookie } from "cookie/cookie";
 import { parseJwt } from "utils/getDataJWT";
 import { eraseCookie } from "cookie/cookie";
+import banner from "assets/images/OCSC-banner.png";
+
 import {
   RecentActors,
   LockRounded,
@@ -44,6 +46,9 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     color: "#fdfdfd",
+  },
+  index: {
+    fontWeight: 500,
   },
 }));
 
@@ -142,7 +147,9 @@ export default function TemporaryDrawer() {
         ) : (
           <>
             <ListItem button>
-              <ListItemText primary={`Learning Portal`} />
+              <ListItemText
+                primary={<img alt="" src={banner} width={"100%"} />}
+              />
             </ListItem>
             <NavLink to={`${path}/login`} className={classes.navLink}>
               <ListItem button>

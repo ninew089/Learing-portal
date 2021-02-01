@@ -76,7 +76,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontWeight: 700,
     color: "#132740",
     padding: 3,
-    width: 190,
+    maxWidth: 190,
     marginLeft: 8,
     marginBottom: 2,
   },

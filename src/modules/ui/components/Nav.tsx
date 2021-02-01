@@ -10,10 +10,9 @@ import {
   Box,
   Avatar,
   useMediaQuery,
-  Button,
 } from "@material-ui/core";
 import Drawer from "./Drawer";
-import { useHistory, useRouteMatch } from "react-router-dom";
+import { useRouteMatch } from "react-router-dom";
 import MenuList from "./MenuList";
 import banner from "assets/images/OCSC-banner.png";
 import { NavLink } from "react-router-dom";
@@ -24,7 +23,9 @@ import { getCookie } from "cookie/cookie";
 import { parseJwt } from "utils/getDataJWT";
 import * as actionsEdit from "modules/editProfile/actions";
 import { useDispatch, useSelector } from "react-redux";
-
+import { NavMenu, NavItem } from "@mui-treasury/components/menu/navigation";
+import { useLineNavigationMenuStyles } from "@mui-treasury/styles/navigationMenu/line";
+import amber from "@material-ui/core/colors/amber";
 const useStyles = makeStyles((theme) => ({
   title: {
     fontWeight: 700,
@@ -70,26 +71,17 @@ const useStyles = makeStyles((theme) => ({
       color: theme.palette.secondary.main,
     },
   },
-  selected: {
-    color: theme.palette.secondary.main,
+  navMenu: {
+    color: `${amber[500]}  !important`,
   },
-  selectedMain: {
-    fontWeight: 700,
-    fontSize: 16,
-    [theme.breakpoints.down("sm")]: {
-      fontWeight: 700,
-      fontSize: 12,
-    },
-    color: theme.palette.secondary.main,
+  navItem: {
+    color: `${theme.palette.common.white}  !important`,
   },
-  hide: {
-    display: "inline-block",
-    borderBottom: `0px solid ${theme.palette.secondary.main}`,
-    paddingBottom: "2px",
-    transition: "0.1s",
-    "&:hover": {
-      borderBottom: `3px solid ${theme.palette.secondary.main}`,
-    },
+  navItemActive: {
+    color: `${amber[500]}  !important`,
+  },
+  noDecorationLink: {
+    textDecoration: "none !important",
   },
 }));
 interface NavProps {
@@ -98,12 +90,8 @@ interface NavProps {
 export default function PersistentDrawerLeft(props: any) {
   const classes = useStyles();
   const theme = useTheme();
-  const history = useHistory();
   const { path } = useRouteMatch();
-  const navigatorToLogin = () => {
-    setActive(3);
-    history.push(`${path}/login`);
-  };
+
   const { pathname } = useLocation();
   const token = getCookie("token");
   const login = () => {
@@ -130,7 +118,6 @@ export default function PersistentDrawerLeft(props: any) {
     }
     // eslint-disable-next-line
   }, [id]);
-
   const { data } = useSelector((state: any) => state.edit);
 
   return (
@@ -144,7 +131,7 @@ export default function PersistentDrawerLeft(props: any) {
             alignItems="center"
           >
             <NavLink
-              to="/learning-portal"
+              to={`${path}`}
               style={{ color: "inherit", textDecoration: "inherit" }}
             >
               <img alt="" src={banner} width={matchesIspad ? 100 : 140} />
@@ -157,104 +144,95 @@ export default function PersistentDrawerLeft(props: any) {
             </Hidden>
           </Grid>
         </div>
-
-        {pathname === "/learning-portal" ? (
-          <>
-            <Hidden xsDown>
-              <NavLink
-                to="/learning-portal"
-                style={{
-                  color: "inherit",
-                  textDecoration: "inherit",
-                  marginLeft: 10,
-                }}
-              >
-                <div className={active === 0 ? classes.line : classes.hide}>
-                  <Box
+        <NavMenu
+          useStyles={useLineNavigationMenuStyles}
+          className={classes.navMenu}
+        >
+          {pathname === "/learning-portal" ? (
+            <>
+              <Hidden xsDown>
+                <NavLink
+                  to={`${path}`}
+                  className={classes.noDecorationLink}
+                  color="secondary"
+                >
+                  <NavItem
+                    active={active === 0}
                     className={
-                      active === 0 ? classes.selectedMain : classes.main
+                      active === 0 ? classes.navItemActive : classes.navItem
                     }
                     onClick={() => setActive(0)}
                   >
-                    หน้าหลัก
-                  </Box>
-                </div>
-              </NavLink>
-            </Hidden>
-            <ScrollTo selector={`#หมวดหมู่`} smooth>
-              <Button
-                className={active === 1 ? classes.selected : classes.button}
-                onClick={() => setActive(1)}
-              >
-                หมวดหมู่
-              </Button>
-            </ScrollTo>
-            <ScrollTo selector={`#หลักสูตร`} smooth>
-              <Button
-                className={active === 2 ? classes.selected : classes.button}
-                onClick={() => setActive(2)}
-              >
-                หลักสูตร
-              </Button>
-            </ScrollTo>
-            <Hidden xsDown>
-              <NavLink
-                to="/learning-portal/FAQ"
-                style={{
-                  color: "inherit",
-                  textDecoration: "inherit",
-                  marginLeft: 10,
-                }}
-              >
-                <div className={active === 4 ? classes.line : classes.hide}>
-                  <Box
-                    className={active === 4 ? classes.selected : classes.button}
+                    <Box>หน้าหลัก</Box>
+                  </NavItem>
+                </NavLink>
+              </Hidden>
+              <ScrollTo selector={`#หมวดหมู่`} smooth>
+                <NavItem
+                  active={active === 1}
+                  className={
+                    active === 1 ? classes.navItemActive : classes.navItem
+                  }
+                  onClick={() => setActive(1)}
+                >
+                  <Box>หมวดหมู่</Box>
+                </NavItem>
+              </ScrollTo>
+              <ScrollTo selector={`#หลักสูตร`} smooth>
+                <NavItem
+                  active={active === 2}
+                  className={
+                    active === 2 ? classes.navItemActive : classes.navItem
+                  }
+                  onClick={() => setActive(2)}
+                >
+                  <Box>หลักสูตร</Box>
+                </NavItem>
+              </ScrollTo>
+              <Hidden xsDown>
+                <NavLink
+                  to={`${path}/FAQ`}
+                  className={classes.noDecorationLink}
+                >
+                  <NavItem
+                    active={active === 4}
+                    className={
+                      active === 4 ? classes.navItemActive : classes.navItem
+                    }
                     onClick={() => setActive(4)}
                   >
-                    คำถามที่พบบ่อย
-                  </Box>
-                </div>
-              </NavLink>
-            </Hidden>
-          </>
-        ) : (
-          <>
-            <NavLink
-              to="/learning-portal"
-              style={{
-                color: "inherit",
-                textDecoration: "inherit",
-                marginLeft: 10,
-              }}
-            >
-              <div className={active === 0 ? classes.line : classes.hide}>
-                <Box
-                  className={active === 0 ? classes.selected : classes.button}
+                    <Box>คำถามที่พบบ่อย</Box>
+                  </NavItem>
+                </NavLink>
+              </Hidden>
+            </>
+          ) : (
+            <>
+              <NavLink to={`${path}`} className={classes.noDecorationLink}>
+                <NavItem
+                  active={active === 0}
+                  className={
+                    active === 0 ? classes.navItemActive : classes.navItem
+                  }
                   onClick={() => setActive(0)}
                 >
-                  หน้าหลัก
-                </Box>
-              </div>
-            </NavLink>
-            <NavLink
-              to="/learning-portal/FAQ"
-              style={{
-                color: "inherit",
-                textDecoration: "inherit",
-                marginLeft: 10,
-              }}
-            >
-              <div className={active === 4 ? classes.line : classes.hide}>
-                <Box
-                  className={active === 4 ? classes.selected : classes.button}
+                  <Box>หน้าหลัก</Box>
+                </NavItem>
+              </NavLink>
+              <NavLink to={`${path}/FAQ`} className={classes.noDecorationLink}>
+                <NavItem
+                  active={active === 4}
+                  className={
+                    active === 4 ? classes.navItemActive : classes.navItem
+                  }
                   onClick={() => setActive(4)}
                 >
-                  คำถามที่พบบ่อย
-                </Box>
-              </div>
-            </NavLink>
-          </>
-        )}
+                  <Box>คำถามที่พบบ่อย</Box>
+                </NavItem>
+              </NavLink>
+            </>
+          )}
+        </NavMenu>
 
         <Hidden smUp>
           <Drawer />
@@ -282,12 +260,25 @@ export default function PersistentDrawerLeft(props: any) {
         ) : (
           <>
             <Hidden xsDown>
-              <Button
-                className={active === 3 ? classes.selected : classes.button}
-                onClick={navigatorToLogin}
+              <NavMenu
+                useStyles={useLineNavigationMenuStyles}
+                className={classes.navMenu}
               >
-                ลงชื่อเข้าสู่ระบบ
-              </Button>
+                <NavLink
+                  to={`${path}/login`}
+                  className={classes.noDecorationLink}
+                >
+                  <NavItem
+                    active={active === 3}
+                    className={
+                      active === 3 ? classes.navItemActive : classes.navItem
+                    }
+                    onClick={() => setActive(3)}
+                  >
+                    <Box>ลงชื่อเข้าสู่ระบบ</Box>
+                  </NavItem>
+                </NavLink>
+              </NavMenu>
             </Hidden>
           </>
         )}
