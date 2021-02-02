@@ -127,7 +127,7 @@ export default function SignIn() {
   //const { message, status } = useSelector((state: any) => state.forgot);
   const onSubmitData = (data: any) => {
     const predata = JSON.parse(
-      `{"email":"${data.email}","dob":"${data.dob - 543}"}`
+      `{"email":"${data.email}","birthyear":"${data.dob}"}`
     );
     const action = actions.loadFORGOT(predata, data.userId);
     dispatch(action);
