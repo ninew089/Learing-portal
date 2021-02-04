@@ -1,11 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
-import { AiOutlineUser } from "react-icons/ai";
-import { RiLockPasswordLine } from "react-icons/ri";
-import img from "assets/images/OCSC-banner.png";
 
+import img from "assets/images/OCSC-banner.png";
+import {Visibility,VisibilityOff,Lock,AccountCircle} from '@material-ui/icons';
 import {
   Container,
   InputAdornment,
@@ -172,7 +171,7 @@ export default function SignIn() {
         .string()
         .required("กรุณากรอกเลขประจำตัวประจำตัวประชาชน")
         .matches(/^[0-9]{13}$/, "กรุณากรอกเป็นตัวเลข 13 หลัก")
-    /*    .test(
+   .test(
           "ตรวจสอบรหัสบัตรประชาชน",
           "กรอกเลขประจำตัวประชาชนผิด กรุณากรอกใหม่",
 
@@ -185,11 +184,11 @@ export default function SignIn() {
             }
             return true;
           }
-        )*/,
+        ),
       password: yup.string().required(),
     }),
   });
-  //const { status } = useSelector((state: any) => state.login);
+ 
   const { messageLogin } = useSelector((state: any) => state.login);
   const onLogin = (loginInfo: object) => {
 
@@ -198,7 +197,7 @@ export default function SignIn() {
     dispatch(actionLogin);
 
   };
-
+const [visible,setVisible]=useState(true)
   function randomState(length: any) {
     var result = '';
     var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -245,7 +244,7 @@ export default function SignIn() {
                 className: classes.input,
                 startAdornment: (
                   <InputAdornment position="start">
-                    <AiOutlineUser size={24} />
+                    <AccountCircle />
                   </InputAdornment>
                 ),
               }}
@@ -256,7 +255,7 @@ export default function SignIn() {
             <TextField
               className={classes.textfield}
               label="รหัสผ่าน"
-              type="password"
+              type={visible?"password":"string"}
               name="password"
               autoComplete="on"
               inputRef={register}
@@ -268,8 +267,13 @@ export default function SignIn() {
                 className: classes.input,
                 startAdornment: (
                   <InputAdornment position="start">
-                    <RiLockPasswordLine size={24} />
+                    <Lock  />
                   </InputAdornment>
+                ),
+                endAdornment: (
+                  <Button style={{borderRadius:100}} onClick={()=>setVisible(!visible)}>
+                   {visible? <Visibility />:<VisibilityOff/>}
+                  </Button>
                 ),
               }}
             />

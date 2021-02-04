@@ -8,7 +8,6 @@ import {
   Typography,
   Hidden,
   Box,
-  Avatar,
   useMediaQuery,
 } from "@material-ui/core";
 import Drawer from "./Drawer";
@@ -16,7 +15,6 @@ import { useRouteMatch } from "react-router-dom";
 import MenuList from "./MenuList";
 import banner from "assets/images/OCSC-banner.png";
 import { NavLink } from "react-router-dom";
-import avatar from "assets/images/user.svg";
 import ScrollTo from "react-scroll-into-view";
 import { useLocation } from "react-router-dom";
 import { getCookie } from "cookie/cookie";
@@ -26,6 +24,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavMenu, NavItem } from "@mui-treasury/components/menu/navigation";
 import { useLineNavigationMenuStyles } from "@mui-treasury/styles/navigationMenu/line";
 import amber from "@material-ui/core/colors/amber";
+import {
+  AccountCircle,
+
+} from "@material-ui/icons";
 const useStyles = makeStyles((theme) => ({
   title: {
     fontWeight: 700,
@@ -249,7 +251,7 @@ export default function PersistentDrawerLeft(props: any) {
                   marginLeft: 0,
                 }}
               />
-              <Avatar alt="Remy Sharp" src={avatar} />
+              <AccountCircle/>
               <Hidden xsDown>
                 <Box className={classes.name}>{data.firstName}</Box>
               </Hidden>

@@ -1,7 +1,7 @@
 import React from "react";
 
 import { makeStyles } from "@material-ui/core/styles";
-import { BiBookBookmark } from "react-icons/bi";
+import {LocalLibrary} from '@material-ui/icons';
 import img from "assets/images/01.jpg";
 
 const useStyles = makeStyles((theme) => ({
@@ -40,7 +40,7 @@ export default function GroupCourse(props: any) {
     <div className={classes.header}>
       <div className={classes.headering}>
         <div className={classes.content}>
-          <BiBookBookmark size={38} className={classes.icon} />
+          <LocalLibrary  className={classes.icon} />
           {text}
         </div>
       </div>

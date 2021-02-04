@@ -9,8 +9,7 @@ import {
 } from "@material-ui/core";
 import { resetPasswordProps } from "../tyscript";
 import { makeStyles } from "@material-ui/core/styles";
-import { RiLockPasswordLine } from "react-icons/ri";
-
+import {Lock} from '@material-ui/icons';
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
@@ -98,7 +97,7 @@ export default function SignIn() {
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
-                  <RiLockPasswordLine size={24} />
+                  <Lock />
                 </InputAdornment>
               ),
             }}
@@ -116,7 +115,7 @@ export default function SignIn() {
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
-                  <RiLockPasswordLine size={24} />
+                  <Lock />
                 </InputAdornment>
               ),
             }}
@@ -135,7 +134,7 @@ export default function SignIn() {
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
-                  <RiLockPasswordLine size={24} />
+                  <Lock  />
                 </InputAdornment>
               ),
             }}

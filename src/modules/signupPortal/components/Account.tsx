@@ -8,10 +8,14 @@ import {
   FormControl,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { RiLockPasswordLine } from "react-icons/ri";
-import { AiOutlineIdcard } from "react-icons/ai";
+
 import * as actions from "modules/infomation/actions";
 import { useDispatch } from "react-redux";
+
+import {
+  RecentActors,
+  LockRounded,
+} from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -162,7 +166,7 @@ export default function SignIn(props: any) {
               className: classes.input,
               startAdornment: (
                 <InputAdornment position="start">
-                  <AiOutlineIdcard size={24} />
+                  <RecentActors />
                 </InputAdornment>
               ),
             }}
@@ -183,7 +187,7 @@ export default function SignIn(props: any) {
               className: classes.input,
               startAdornment: (
                 <InputAdornment position="start">
-                  <RiLockPasswordLine size={24} />
+                  <LockRounded  />
                 </InputAdornment>
               ),
             }}
@@ -206,7 +210,7 @@ export default function SignIn(props: any) {
               className: classes.input,
               startAdornment: (
                 <InputAdornment position="start">
-                  <RiLockPasswordLine size={24} />
+                  <LockRounded />
                 </InputAdornment>
               ),
             }}

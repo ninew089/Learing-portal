@@ -10,7 +10,9 @@ import {
 } from "@material-ui/core";
 import Snackbar from "shared/SnackBar/SnackBar"
 import { makeStyles } from "@material-ui/core/styles";
-import { RiLockPasswordLine } from "react-icons/ri";
+import {
+  LockRounded,
+} from "@material-ui/icons";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { useDispatch, useSelector } from 'react-redux'
@@ -145,7 +147,7 @@ export default function SignIn() {
               className: classes.input,
               startAdornment: (
                 <InputAdornment position="start">
-                  <RiLockPasswordLine size={24} />
+                  <LockRounded  />
                 </InputAdornment>
               ),
             }}
@@ -168,7 +170,7 @@ export default function SignIn() {
               className: classes.input,
               startAdornment: (
                 <InputAdornment position="start">
-                  <RiLockPasswordLine size={24} />
+                  <LockRounded  />
                 </InputAdornment>
               ),
             }}
@@ -189,7 +191,7 @@ export default function SignIn() {
               className: classes.input,
               startAdornment: (
                 <InputAdornment position="start">
-                  <RiLockPasswordLine size={24} />
+                  <LockRounded  />
                 </InputAdornment>
               ),
             }}

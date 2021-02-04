@@ -6,12 +6,8 @@ import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { useHistory } from "react-router-dom";
 //@ts-ignore
 import SwitchToggle from "@mui-treasury/components/toggle/switch";
-import {
-  AiOutlineFolderOpen,
-  AiOutlineLogout,
-  AiOutlineEdit,
-} from "react-icons/ai";
-import { CgPassword } from "react-icons/cg";
+import {Lock,BorderColor,MeetingRoom,ChromeReaderMode} from '@material-ui/icons';
+
 import Menu from "@material-ui/core/Menu";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -88,19 +84,19 @@ export default function LongMenu() {
         }}
       >
         <MenuItem onClick={navigatorToeditProfile}>
-          <AiOutlineEdit className={classes.icons} />
+          <BorderColor className={classes.icons} />
           แก้ไขโปรไฟล์
         </MenuItem>
         <MenuItem onClick={navigatorToreset}>
-          <CgPassword className={classes.icons} />
+          <Lock className={classes.icons} />
           เปลี่ยนรหัสผ่าน
         </MenuItem>
         <MenuItem onClick={navigatorTohistory}>
-          <AiOutlineFolderOpen className={classes.icons} />
+          <ChromeReaderMode className={classes.icons} />
           ประกาศนียบัตร
         </MenuItem>
         <MenuItem onClick={onLogout}>
-          <AiOutlineLogout className={classes.icons} />
+          <MeetingRoom className={classes.icons} />
           ลงชื่อออก
         </MenuItem>
       </Menu>

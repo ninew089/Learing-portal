@@ -154,7 +154,7 @@ export default function CustomizedDialogs({
   const classes = useStyles();
   //  const { platformId, learningTopic, viewCount, point, satisfactionCount, code, learningObjective, link, thumbnail, courseCategoryId, name, id } = props;
   return (
-    <div>
+    <div key={data.name}>
       <Dialog
         onClose={handleClose}
         fullWidth

@@ -36,7 +36,6 @@
     "react-facebook": "^8.1.4",
     "react-helmet-async": "^1.0.7",
     "react-hook-form": "^5.7.2",
-    "react-icons": "^3.11.0",
     "react-reducer": "^1.0.0-beta.1",
     "react-redux": "^7.2.2",
     "react-router-dom": "^5.2.0",

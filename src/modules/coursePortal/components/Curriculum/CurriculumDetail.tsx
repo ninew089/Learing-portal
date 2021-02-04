@@ -280,6 +280,7 @@ export default function CurriculumDetailCard(props: CardProps) {
           setOpen={setOpen}
           data={props}
           isCurriculum={true}
+          key={props.name}
         />
       </div>
     </Suspense>

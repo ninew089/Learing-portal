@@ -284,6 +284,7 @@ export default function IconBreadcrumbs(props: CardProps) {
           setOpen={setOpen}
           data={props}
           isCurriculum={false}
+          key={props.name}
         />
       </div>
     </Suspense>

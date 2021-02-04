@@ -5,14 +5,12 @@ import Drawer from "@material-ui/core/Drawer";
 import Button from "@material-ui/core/Button";
 import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
-import { ListItem, Avatar } from "@material-ui/core";
+import { ListItem } from "@material-ui/core";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import { NavLink } from "react-router-dom";
-import { AiOutlineMenu } from "react-icons/ai";
 import { useRouteMatch } from "react-router-dom";
 import { useSelector } from "react-redux";
-import avatar from "assets/images/user.svg";
 import { getCookie } from "cookie/cookie";
 import { parseJwt } from "utils/getDataJWT";
 import { eraseCookie } from "cookie/cookie";
@@ -25,7 +23,7 @@ import {
   ExitToApp,
   Home,
   AccountCircle,
-  Help,
+  Help,Menu
 } from "@material-ui/icons";
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -110,7 +108,7 @@ export default function TemporaryDrawer() {
             <NavLink to={`${path}/login`} className={classes.navLink}>
               <ListItem button dense>
                 <ListItemIcon>
-                  <Avatar alt="" src={avatar} />
+                 <AccountCircle/>
                 </ListItemIcon>
                 <ListItemText
                   primary={`${data.title}${data.firstName} ${data.lastName}`}
@@ -198,7 +196,7 @@ export default function TemporaryDrawer() {
   return (
     <div>
       <Button onClick={toggleDrawer("right", true)} className={classes.button}>
-        <AiOutlineMenu />
+        <Menu />
       </Button>
       <Drawer
         anchor={"right"}
