@@ -165,7 +165,7 @@ export default function PersistentDrawerLeft(props: any) {
                     }
                     onClick={() => setActive(0)}
                   >
-                    <Box>หน้าหลัก</Box>
+                 หน้าหลัก
                   </NavItem>
                 </NavLink>
               </Hidden>
@@ -177,7 +177,7 @@ export default function PersistentDrawerLeft(props: any) {
                   }
                   onClick={() => setActive(1)}
                 >
-                  <Box>หมวดหมู่</Box>
+                หมวดหมู่
                 </NavItem>
               </ScrollTo>
               <ScrollTo selector={`#หลักสูตร`} smooth>
@@ -188,7 +188,7 @@ export default function PersistentDrawerLeft(props: any) {
                   }
                   onClick={() => setActive(2)}
                 >
-                  <Box>หลักสูตร</Box>
+                หลักสูตร
                 </NavItem>
               </ScrollTo>
               <Hidden xsDown>
@@ -203,7 +203,7 @@ export default function PersistentDrawerLeft(props: any) {
                     }
                     onClick={() => setActive(4)}
                   >
-                    <Box>คำถามที่พบบ่อย</Box>
+                   คำถามที่พบบ่อย
                   </NavItem>
                 </NavLink>
               </Hidden>
@@ -218,7 +218,7 @@ export default function PersistentDrawerLeft(props: any) {
                   }
                   onClick={() => setActive(0)}
                 >
-                  <Box>หน้าหลัก</Box>
+               หน้าหลัก
                 </NavItem>
               </NavLink>
               <NavLink to={`${path}/FAQ`} className={classes.noDecorationLink}>
@@ -229,7 +229,7 @@ export default function PersistentDrawerLeft(props: any) {
                   }
                   onClick={() => setActive(4)}
                 >
-                  <Box>คำถามที่พบบ่อย</Box>
+               คำถามที่พบบ่อย
                 </NavItem>
               </NavLink>
             </>
@@ -277,7 +277,7 @@ export default function PersistentDrawerLeft(props: any) {
                     }
                     onClick={() => setActive(3)}
                   >
-                    <Box>ลงชื่อเข้าสู่ระบบ</Box>
+                 ลงชื่อเข้าสู่ระบบ
                   </NavItem>
                 </NavLink>
               </NavMenu>

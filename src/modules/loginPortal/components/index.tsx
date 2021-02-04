@@ -289,12 +289,12 @@ const [visible,setVisible]=useState(true)
 
             <Grid container>
               <Grid item xs>
-                <NavLink to="/learning-portal/forget" className={classes.nav}>
+                <NavLink id="router-forgot" to="/learning-portal/forget" className={classes.nav}>
                   ลืมรหัสผ่าน?
                 </NavLink>
               </Grid>
               <Grid item>
-                <NavLink to="/learning-portal/signup" className={classes.nav}>
+                <NavLink id="router-signup" to="/learning-portal/signup" className={classes.nav}>
                   สมัครสมาชิก
                 </NavLink>
               </Grid>
