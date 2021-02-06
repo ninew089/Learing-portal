@@ -18,7 +18,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   root: {
     borderRadius: "0.5rem",
     padding: 10,
-
     "&:hover": {
       background: "#cccccc8a",
     },
@@ -27,11 +26,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
   card: {
     width: "100%",
-    // background: '#fdfdfd',
-
     minHeight: "420px",
-
-    //boxShadow: '4px 4px 4px 4px rgb(0 0 0 / 8%)',
     borderRadius: "0.5rem",
     [theme.breakpoints.up("sm")]: {
       transition: "0.4s",
