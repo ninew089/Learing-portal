@@ -99,9 +99,9 @@ export default function CourseCarousel(props: CourseCarouselProps) {
       <div>
         <Slider className={classes.slider}>
           {data!.map((item: any, index: number) => (
-            <Suspense key={isCurriculum ? "cur" + item.name : "corse" + item.name} fallback={<div></div>}>
+            <Suspense key={index} fallback={<div></div>}>
               <Slide index={index} className={classes.slide}>
-                <div className={classes.course} key={index} >
+                <div className={classes.course}  >
                   {isCurriculum ? (
                     <CurriculumDetail
 

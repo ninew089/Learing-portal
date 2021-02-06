@@ -136,7 +136,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     margin: 0,
   },
   boxshadow: {
-    //Horizontal Lengthpx,Vertical Lengt,Blur Radiuspx,Spread //6px -65px 2px -35px  #999999
     boxShadow: "1px -24px 1px -14px #58585861,4px -46px 3px -25px  #67676757",
     marginTop: 30,
     borderRadius: 10,
@@ -280,7 +279,6 @@ export default function CurriculumDetailCard(props: CardProps) {
           setOpen={setOpen}
           data={props}
           isCurriculum={true}
-          key={props.name}
         />
       </div>
     </Suspense>

@@ -155,7 +155,7 @@ export default function CustomizedDialogs({
   };
   const classes = useStyles();
   return (
-    <div key={isCurriculum ? "cur-dialog" + data.name : "course-dialog" + data.name}>
+    <div >
       <Dialog
         key={"course-dialog-props" + data.name}
         onClose={handleClose}
