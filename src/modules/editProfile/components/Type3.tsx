@@ -84,34 +84,35 @@ export default function SignIn(props: typeProps) {
     <>
       <FormControl fullWidth>
         <h4> {name}</h4>
-
-        <Controller
-          as={
-            <TextField
-              variant="outlined"
-              fullWidth
-              className={classes.textfield}
-              label="ประเภทเจ้าหน้าที่ของรัฐ"
-              InputLabelProps={{ className: classes.selectInput }}
-              select
-              helperText={
-                formProps.errors.jobtypeId &&
-                formProps.errors.jobtypeId.messageค
-              }
-              error={!!formProps.errors.jobtypeId}
-            >
-              {jobTypes3.map((jobType3: jobTypes3Props, index: number) => (
-                <MenuItem key={index} value={jobType3.id}>
-                  {jobType3.name}
-                </MenuItem>
-              ))}
-            </TextField>
-          }
-          name="jobtypeId"
-          rules={{ required: "กรุณาเลือกประเภทตำแหน่ง" }}
-          control={formProps.control}
-          å
-        />
+        {jobTypes3.length !== 0 &&
+          <Controller
+            as={
+              <TextField
+                variant="outlined"
+                fullWidth
+                className={classes.textfield}
+                label="ประเภทเจ้าหน้าที่ของรัฐ"
+                InputLabelProps={{ className: classes.selectInput }}
+                select
+                helperText={
+                  formProps.errors.jobtypeId &&
+                  formProps.errors.jobtypeId.messageค
+                }
+                error={!!formProps.errors.jobtypeId}
+              >
+                {jobTypes3.map((jobType3: jobTypes3Props, index: number) => (
+                  <MenuItem key={index} value={jobType3.id}>
+                    {jobType3.name}
+                  </MenuItem>
+                ))}
+              </TextField>
+            }
+            name="jobtypeId"
+            rules={{ required: "กรุณาเลือกประเภทตำแหน่ง" }}
+            control={formProps.control}
+            å
+          />
+        }
 
         <TextField
           fullWidth

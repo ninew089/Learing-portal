@@ -105,8 +105,9 @@ export default function Type1(props: typeProps) {
                 formProps.errors.jobtypeId && formProps.errors.jobtypeId.message
               }
               error={!!formProps.errors.jobtypeId}
+              defaultValue=""
             >
-              {" "}
+
               {jobTypes1.map((jobType1: jobTypes1Props, index: number) => (
                 <MenuItem key={index} value={jobType1.id}>
                   {jobType1.name}
@@ -134,6 +135,7 @@ export default function Type1(props: typeProps) {
             formProps.errors.jobTitle && formProps.errors.jobTitle.message
           }
           error={!!formProps.errors.jobTitle}
+          defaultValue=""
         />
 
         <Controller
@@ -152,6 +154,7 @@ export default function Type1(props: typeProps) {
                 formProps.errors.jobLevelid.message
               }
               error={!!formProps.errors.jobLevelid}
+              defaultValue=""
             >
               {jobLevels.map((jobLevel: jobLevelProps, index: number) => (
                 <MenuItem key={index} value={jobLevel.id}>

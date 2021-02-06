@@ -96,38 +96,40 @@ export default function SignIn(props: typeProps) {
     <>
       <FormControl fullWidth>
         <h4> {name}</h4>
+        {jobTypes2.length !== 0 &&
+          <Controller
+            as={
+              <TextField
+                variant="outlined"
+                className={classes.textfield}
+                label="ประเภทข้าราชการ"
+                InputLabelProps={{
+                  className: classes.selectInput,
+                }}
+                select
+                helperText={
+                  formProps.errors.jobtypeId && formProps.errors.jobtypeId.message
+                }
+                error={!!formProps.errors.jobtypeId}
+              >
+                {jobTypes2.map((jobType2: jobTypes2Props, index: number) => (
+                  <MenuItem
+                    className={classes.menu}
+                    key={index}
+                    value={jobType2.id}
+                  >
+                    {jobType2.name}
+                  </MenuItem>
+                ))}
+              </TextField>
+            }
+            name="jobtypeId"
+            rules={{ required: "กรุณาเลือกประเภทตำแหน่ง" }}
+            control={formProps.control}
+            defaultValue=""
+          />
+        }
 
-        <Controller
-          as={
-            <TextField
-              variant="outlined"
-              className={classes.textfield}
-              label="ประเภทข้าราชการ"
-              InputLabelProps={{
-                className: classes.selectInput,
-              }}
-              select
-              helperText={
-                formProps.errors.jobtypeId && formProps.errors.jobtypeId.message
-              }
-              error={!!formProps.errors.jobtypeId}
-            >
-              {jobTypes2.map((jobType2: jobTypes2Props, index: number) => (
-                <MenuItem
-                  className={classes.menu}
-                  key={index}
-                  value={jobType2.id}
-                >
-                  {jobType2.name}
-                </MenuItem>
-              ))}
-            </TextField>
-          }
-          name="jobtypeId"
-          rules={{ required: "กรุณาเลือกประเภทตำแหน่ง" }}
-          control={formProps.control}
-          defaultValue=""
-        />
 
         <TextField
           fullWidth

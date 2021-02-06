@@ -219,7 +219,7 @@ export default function IconBreadcrumbs(props: CardProps) {
                   style={{
                     background:
                       colorName[0][
-                        courseCategory !== undefined ? courseCategory : 0
+                      courseCategory !== undefined ? courseCategory : 0
                       ],
                   }}
                 />
@@ -284,7 +284,7 @@ export default function IconBreadcrumbs(props: CardProps) {
           setOpen={setOpen}
           data={props}
           isCurriculum={false}
-          key={props.name}
+          key={"course" + props.name}
         />
       </div>
     </Suspense>

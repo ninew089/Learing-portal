@@ -90,38 +90,39 @@ export default function SignIn(props: typeProps) {
     <>
       <FormControl fullWidth>
         <h4> {name}</h4>
-        <Controller
-          as={
-            <TextField
-              variant="outlined"
-              fullWidth
-              className={classes.textfield}
-              label="รัฐวิสากิจ"
-              InputLabelProps={{
-                className: classes.selectInput,
-              }}
-              select
-              helperText={
-                formProps.errors.stateEnterprisid &&
-                formProps.errors.stateEnterprisid.message
-              }
-              error={!!formProps.errors.stateEnterprisid}
-            >
-              {StateEnterprises.map(
-                (stateEnterprise: stateEnterpriseProps, index: number) => (
-                  <MenuItem value={stateEnterprise.id} key={index}>
-                    {stateEnterprise.name}
-                  </MenuItem>
-                )
-              )}
-            </TextField>
-          }
-          name="stateEnterprisid"
-          rules={{ required: "กรุณาเลือกอาชีพ" }}
-          control={formProps.control}
-          defaultValue=""
-        />
-
+        {StateEnterprises.length !== 0 &&
+          <Controller
+            as={
+              <TextField
+                variant="outlined"
+                fullWidth
+                className={classes.textfield}
+                label="รัฐวิสากิจ"
+                InputLabelProps={{
+                  className: classes.selectInput,
+                }}
+                select
+                helperText={
+                  formProps.errors.stateEnterprisid &&
+                  formProps.errors.stateEnterprisid.message
+                }
+                error={!!formProps.errors.stateEnterprisid}
+              >
+                {StateEnterprises.map(
+                  (stateEnterprise: stateEnterpriseProps, index: number) => (
+                    <MenuItem value={stateEnterprise.id} key={index}>
+                      {stateEnterprise.name}
+                    </MenuItem>
+                  )
+                )}
+              </TextField>
+            }
+            name="stateEnterprisid"
+            rules={{ required: "กรุณาเลือกอาชีพ" }}
+            control={formProps.control}
+            defaultValue=""
+          />
+        }
         <Date
           title={"วันที่เริ่มทำงาน"}
           register={formProps.register}

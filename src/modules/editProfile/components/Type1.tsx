@@ -89,41 +89,44 @@ export default function Type1(props: typeProps) {
     <>
       < FormControl fullWidth>
         <h4> {name}</h4>
+        {jobTypes1?.length !== 0 &&
 
-        <Controller
-          as={
-            <TextField
-              variant="outlined"
-              fullWidth
-              className={classes.textfield}
-              label="ประเภทตำแหน่ง"
-              InputLabelProps={{
-                className: classes.selectInput,
-              }}
-              select
-              defaultValue=""
-              helperText={
-                formProps.errors.jobtypeId && formProps.errors.jobtypeId.message
-              }
-              error={!!formProps.errors.jobtypeId}
-            >
+          <Controller
+            as={
+              <TextField
+                variant="outlined"
+                fullWidth
+                className={classes.textfield}
+                label="ประเภทตำแหน่ง"
+                InputLabelProps={{
+                  className: classes.selectInput,
+                }}
+                select
+                defaultValue=""
+                helperText={
+                  formProps.errors.jobtypeId && formProps.errors.jobtypeId.message
+                }
+                error={!!formProps.errors.jobtypeId}
+              >
 
-              {jobTypes1.map((jobType1: jobTypes1Props, index: number) => (
+                {jobTypes1.map((jobType1: jobTypes1Props, index: number) => (
 
-                < MenuItem key={index} value={jobType1.id}>
-                  {jobType1.name}
-                </MenuItem>
+                  < MenuItem key={index} value={jobType1.id}>
+                    {jobType1.name}
+                  </MenuItem>
 
-              ))}
+                ))}
 
-            </TextField>
-          }
-          name="jobtypeId"
+              </TextField>
+            }
+            name="jobtypeId"
+            defaultValue=""
+            rules={{ required: "กรุณาเลือกประเภทตำแหน่ง" }}
+            control={formProps.control}
 
-          rules={{ required: "กรุณาเลือกประเภทตำแหน่ง" }}
-          control={formProps.control}
+          />
+        }
 
-        />
         <TextField
           fullWidth
           label="ตำแหน่ง"
@@ -139,38 +142,40 @@ export default function Type1(props: typeProps) {
           }
           error={!!formProps.errors.jobTitle}
         />
+        {jobLevels?.length !== 0 &&
+          <Controller
+            as={
+              <TextField
+                variant="outlined"
+                fullWidth
+                className={classes.textfield}
+                label="ระดับ"
+                InputLabelProps={{
+                  className: classes.selectInput,
+                }}
+                defaultValue=""
+                select
+                helperText={
+                  formProps.errors.jobLevelid &&
+                  formProps.errors.jobLevelid.message
+                }
+                error={!!formProps.errors.jobLevelid}
+              >
+                {jobLevels.map((jobLevel: jobLevelProps, index: number) => (
+                  <MenuItem key={index} value={jobLevel.id}>
+                    {jobLevel.name}
+                  </MenuItem>
+                ))}
+              </TextField>
+            }
+            name="jobLevelid"
+            rules={{ required: "กรุณาเลือกระดับ" }}
+            control={formProps.control}
+            defaultValue=""
+          />
 
-        <Controller
-          as={
-            <TextField
-              variant="outlined"
-              fullWidth
-              className={classes.textfield}
-              label="ระดับ"
-              InputLabelProps={{
-                className: classes.selectInput,
-              }}
+        }
 
-
-              select
-              helperText={
-                formProps.errors.jobLevelid &&
-                formProps.errors.jobLevelid.message
-              }
-              error={!!formProps.errors.jobLevelid}
-            >
-              {jobLevels.map((jobLevel: jobLevelProps, index: number) => (
-                <MenuItem key={index} value={jobLevel.id}>
-                  {jobLevel.name}
-                </MenuItem>
-              ))}
-            </TextField>
-          }
-          name="jobLevelid"
-          rules={{ required: "กรุณาเลือกระดับ" }}
-          control={formProps.control}
-          defaultValue=""
-        />
       </FormControl>
 
     </>

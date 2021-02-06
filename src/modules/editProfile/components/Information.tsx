@@ -224,35 +224,39 @@ export default function SignIn(props: any) {
           />
         </div>
         <div className={classes.formControlDate}>
-          <Controller
-            as={
-              <TextField
-                variant="outlined"
-                fullWidth
-                className={classes.textfield}
-                label="ระดับการศึกษา"
-                InputLabelProps={{
-                  className: classes.selectInput,
-                }}
-                select
-                helperText={
-                  formProps.errors.educationid &&
-                  formProps.errors.educationid.message
-                }
-                error={!!formProps.errors.educationid}
-              >
-                {educations.map((education: any, index: number) => (
-                  <MenuItem key={index} value={education.id}>
-                    {education.name}
-                  </MenuItem>
-                ))}
-              </TextField>
-            }
-            name="educationid"
-            rules={{ required: "กรุณาเลือกระดับการศึกษา" }}
-            control={formProps.control}
-            defaultValue=""
-          />
+          {educations?.length !== 0 &&
+            <Controller
+              as={
+                <TextField
+                  variant="outlined"
+                  fullWidth
+                  className={classes.textfield}
+                  label="ระดับการศึกษา"
+                  InputLabelProps={{
+                    className: classes.selectInput,
+                  }}
+                  select
+                  helperText={
+                    formProps.errors.educationid &&
+                    formProps.errors.educationid.message
+                  }
+                  error={!!formProps.errors.educationid}
+                >
+                  {educations.map((education: any, index: number) => (
+                    <MenuItem key={index} value={education.id}>
+                      {education.name}
+                    </MenuItem>
+                  ))}
+                </TextField>
+              }
+              name="educationid"
+              rules={{ required: "กรุณาเลือกระดับการศึกษา" }}
+              control={formProps.control}
+              defaultValue=""
+            />
+
+          }
+
         </div>
 
         <FormControl className={classes.formControlInfo} fullWidth>

@@ -96,6 +96,7 @@ export default function SignIn(props: typeProps) {
               fullWidth
               className={classes.textfield}
               label="รัฐวิสากิจ"
+              defaultValue=""
               InputLabelProps={{
                 className: classes.selectInput,
               }}

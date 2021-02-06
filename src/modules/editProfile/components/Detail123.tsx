@@ -167,71 +167,78 @@ export default function SignIn(props: any) {
         register={formProps.register}
         name={"jobStartDate"}
       />
+      {Ministries?.length !== 0 &&
+        <Controller
+          as={
+            <TextField
+              variant="outlined"
+              fullWidth
+              className={classes.textfield}
+              label="กระทรวง"
+              defaultValue=""
+              InputLabelProps={{
+                className: classes.selectInput,
+              }}
+              select
+              helperText={
+                formProps.errors.MinistryId && formProps.errors.MinistryId.message
+              }
+              error={!!formProps.errors.MinistryId}
+            >
+              {Ministries.map((ministry: any, index: number) => (
+                <MenuItem
+                  className={classes.menu}
+                  key={index}
+                  value={ministry.id}
+                >
+                  {ministry.name}
+                </MenuItem>
+              ))}
+            </TextField>
+          }
+          name="MinistryId"
+          rules={{ required: "กรุณาเลือกประเภทตำแหน่ง" }}
+          control={formProps.control}
+          defaultValue=""
+        />
 
-      <Controller
-        as={
-          <TextField
-            variant="outlined"
-            fullWidth
-            className={classes.textfield}
-            label="กระทรวง"
-            InputLabelProps={{
-              className: classes.selectInput,
-            }}
-            select
-            helperText={
-              formProps.errors.MinistryId && formProps.errors.MinistryId.message
-            }
-            error={!!formProps.errors.MinistryId}
-          >
-            {Ministries.map((ministry: any, index: number) => (
-              <MenuItem
-                className={classes.menu}
-                key={index}
-                value={ministry.id}
-              >
-                {ministry.name}
-              </MenuItem>
-            ))}
-          </TextField>
-        }
-        name="MinistryId"
-        rules={{ required: "กรุณาเลือกประเภทตำแหน่ง" }}
-        control={formProps.control}
-        defaultValue=""
-      />
-      <Controller
-        as={
-          <TextField
-            variant="outlined"
-            fullWidth
-            className={classes.textfield}
-            label="กรมต้นสังกัด"
-            InputLabelProps={{
-              className: classes.selectInput,
-            }}
-            select
-            helperText={
-              formProps.errors.DepartmentId &&
-              formProps.errors.DepartmentId.message
-            }
-            error={!!formProps.errors.DepartmentId}
-          >
-            {Departments.map((department: any, index: number) => (
-              <MenuItem
-                className={classes.menu}
-                key={index}
-                value={department.id}
-              >
-                {department.name}
-              </MenuItem>
-            ))}
-          </TextField>
-        }
-        name="DepartmentId"
-        rules={{ required: "กรุณาเลือกกรมที่สังกัด" }}
-        control={formProps.control}
-      />
+      }
+      {Departments?.length !== 0 &&
+        <Controller
+          as={
+            <TextField
+              variant="outlined"
+              fullWidth
+              className={classes.textfield}
+              label="กรมต้นสังกัด"
+              InputLabelProps={{
+                className: classes.selectInput,
+              }}
+              select
+              defaultValue=""
+              helperText={
+                formProps.errors.DepartmentId &&
+                formProps.errors.DepartmentId.message
+              }
+              error={!!formProps.errors.DepartmentId}
+            >
+              {Departments.map((department: any, index: number) => (
+                <MenuItem
+                  className={classes.menu}
+                  key={index}
+                  value={department.id}
+                >
+                  {department.name}
+                </MenuItem>
+              ))}
+            </TextField>
+          }
+          name="DepartmentId"
+          rules={{ required: "กรุณาเลือกกรมที่สังกัด" }}
+          control={formProps.control}
+          defaultValue=""
+        />}
+
 
       <TextField
         fullWidth

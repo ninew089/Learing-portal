@@ -94,6 +94,7 @@ export default function SignIn(props: typeProps) {
             <TextField
               variant="outlined"
               fullWidth
+              defaultValue=""
               className={classes.textfield}
               label="อาชีพ"
               InputLabelProps={{

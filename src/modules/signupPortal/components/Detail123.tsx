@@ -163,6 +163,7 @@ export default function SignIn(props: any) {
           <TextField
             variant="outlined"
             fullWidth
+            defaultValue=""
             className={classes.textfield}
             label="กระทรวง"
             InputLabelProps={{
@@ -196,6 +197,7 @@ export default function SignIn(props: any) {
           <TextField
             variant="outlined"
             fullWidth
+            defaultValue=""
             className={classes.textfield}
             label="กรมต้นสังกัด"
             InputLabelProps={{
@@ -229,6 +231,7 @@ export default function SignIn(props: any) {
         fullWidth
         label="ชื่อส่วนราชการที่สังกัด"
         name="Division"
+        defaultValue=""
         variant="outlined"
         className={classes.textfield}
         InputProps={{

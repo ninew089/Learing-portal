@@ -33,7 +33,7 @@ function loadFORGOT(updateInfo: any, id: string) {
                 },
             });
             if (err.response.status === 404) {
-                const action = infoactions.loadMessage(`ไม่พบเลขประจำตัวประชาชน`, "error")
+                const action = infoactions.loadMessage(`ไม่พบข้อมูล`, "error")
                 dispatch(action)
             }
             else {

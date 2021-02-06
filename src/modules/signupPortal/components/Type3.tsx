@@ -91,6 +91,7 @@ export default function SignIn(props: typeProps) {
               variant="outlined"
               fullWidth
               className={classes.textfield}
+              defaultValue=""
               label="ประเภทเจ้าหน้าที่ของรัฐ"
               InputLabelProps={{ className: classes.selectInput }}
               select
@@ -119,6 +120,7 @@ export default function SignIn(props: typeProps) {
           label="ตำแหน่ง"
           name="jobTitle"
           variant="outlined"
+          defaultValue=""
           className={classes.textfield}
           InputProps={{
             className: classes.input,
@@ -134,6 +136,7 @@ export default function SignIn(props: typeProps) {
           label="ระดับ"
           name="jobLevel"
           variant="outlined"
+          defaultValue=""
           className={classes.textfield}
           InputProps={{ className: classes.input }}
           inputRef={formProps.register}

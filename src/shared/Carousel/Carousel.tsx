@@ -99,12 +99,12 @@ export default function CourseCarousel(props: CourseCarouselProps) {
       <div>
         <Slider className={classes.slider}>
           {data!.map((item: any, index: number) => (
-            <Suspense key={index} fallback={<div></div>}>
-              <Slide key={index} index={index} className={classes.slide}>
-                <div className={classes.course}>
+            <Suspense key={isCurriculum ? "cur" + item.name : "corse" + item.name} fallback={<div></div>}>
+              <Slide index={index} className={classes.slide}>
+                <div className={classes.course} key={index} >
                   {isCurriculum ? (
                     <CurriculumDetail
-                      key={index}
+
                       id={item.id}
                       learningTopic={item.learningTopic}
                       learningObjective={item.learningObjective}
@@ -122,26 +122,26 @@ export default function CourseCarousel(props: CourseCarouselProps) {
                       platformName={item.platformName}
                     />
                   ) : (
-                    <CourseDetail
-                      key={index}
-                      id={item.id}
-                      learningTopic={item.learningTopic}
-                      learningObjective={item.learningObjective}
-                      courseCategoryId={item.courseCategoryId}
-                      thumbNail={item.thumbNail}
-                      targetGroup={item.targetGroup}
-                      assessment={item.assessment}
-                      viewCount={item.viewCount}
-                      point={item.satisfactionSum / item.satisfactionCount}
-                      satisfactionCount={item.satisfactionCount}
-                      link={item.link}
-                      code={item.code}
-                      name={item.name}
-                      platformlogo={item.platformlogo}
-                      platformName={item.platformName}
-                      courseCategory={item.courseCategory}
-                    />
-                  )}
+                      <CourseDetail
+
+                        id={item.id}
+                        learningTopic={item.learningTopic}
+                        learningObjective={item.learningObjective}
+                        courseCategoryId={item.courseCategoryId}
+                        thumbNail={item.thumbNail}
+                        targetGroup={item.targetGroup}
+                        assessment={item.assessment}
+                        viewCount={item.viewCount}
+                        point={item.satisfactionSum / item.satisfactionCount}
+                        satisfactionCount={item.satisfactionCount}
+                        link={item.link}
+                        code={item.code}
+                        name={item.name}
+                        platformlogo={item.platformlogo}
+                        platformName={item.platformName}
+                        courseCategory={item.courseCategory}
+                      />
+                    )}
                 </div>
               </Slide>
             </Suspense>

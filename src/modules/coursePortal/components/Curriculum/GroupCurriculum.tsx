@@ -96,9 +96,8 @@ export default function SingleLineGridList(props: any) {
 
             {
               postsToShow.map((item: any, index: number) => (
-                <Grid item xs={12} sm={6} md={4} lg={3} xl={3} key={index}>
+                <Grid item xs={12} sm={6} md={4} lg={3} xl={3} key={index + "group"}>
                   <CourseDetail
-                    key={index}
                     id={item.id}
                     assessment={item.assessment}
                     targetGroup={item.targetGroup}

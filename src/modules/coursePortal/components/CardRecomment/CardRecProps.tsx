@@ -208,7 +208,7 @@ export default function SocialCard(props: any) {
               style={{
                 background:
                   colorName[0][
-                    data.courseCategory !== undefined ? data.courseCategory : 0
+                  data.courseCategory !== undefined ? data.courseCategory : 0
                   ],
               }}
             />
@@ -219,7 +219,7 @@ export default function SocialCard(props: any) {
         </Grid>
       </Grid>
 
-      <Dialog open={open} setOpen={setOpen} data={data} isCurriculum={false} />
+      <Dialog open={open} setOpen={setOpen} data={data} isCurriculum={false} key={data.name} />
     </>
   );
 }

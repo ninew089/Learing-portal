@@ -81,36 +81,38 @@ export default function SignIn(props: typeProps) {
     <>
       <FormControl fullWidth>
         <h4> {name}</h4>
-        <Controller
-          as={
-            <TextField
-              variant="outlined"
-              fullWidth
-              className={classes.textfield}
-              label="อาชีพ"
-              InputLabelProps={{
-                className: classes.selectInput,
-              }}
-              select
-              helperText={
-                formProps.errors.OccupationId &&
-                formProps.errors.OccupationId.message
-              }
-              error={!!formProps.errors.OccupationId}
-            >
-              {Occupations.map(
-                (Occupation: OccupationsProps, index: number) => (
-                  <MenuItem key={index} value={Occupation.id}>
-                    {Occupation.name}
-                  </MenuItem>
-                )
-              )}
-            </TextField>
-          }
-          name="OccupationId"
-          rules={{ required: "กรุณาเลือกอาชีพ" }}
-          control={formProps.control}
-        />
+        {Occupations.length !== 0 &&
+          <Controller
+            as={
+              <TextField
+                variant="outlined"
+                fullWidth
+                className={classes.textfield}
+                label="อาชีพ"
+                InputLabelProps={{
+                  className: classes.selectInput,
+                }}
+                select
+                helperText={
+                  formProps.errors.OccupationId &&
+                  formProps.errors.OccupationId.message
+                }
+                error={!!formProps.errors.OccupationId}
+              >
+                {Occupations.map(
+                  (Occupation: OccupationsProps, index: number) => (
+                    <MenuItem key={index} value={Occupation.id}>
+                      {Occupation.name}
+                    </MenuItem>
+                  )
+                )}
+              </TextField>
+            }
+            name="OccupationId"
+            rules={{ required: "กรุณาเลือกอาชีพ" }}
+            control={formProps.control}
+          />
+        }
 
         <FormControl fullWidth>
           <TextField

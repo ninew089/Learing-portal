@@ -142,34 +142,40 @@ export default function SignIn(props: typeUserProps) {
         <Typography component="h1" variant="h5" align="center">
           ข้อมูลการทำงาน
         </Typography>
-        <Controller
-          as={
-            <TextField
-              variant="outlined"
-              fullWidth
-              className={classes.textfield}
-              label="ประเภทข้าราชการ/เจ้าหน้าที่"
-              InputLabelProps={{
-                className: classes.selectInput,
-              }}
-              select
-              helperText={
-                formProps.errors.usertypeid &&
-                formProps.errors.usertypeid.message
-              }
-              error={!!formProps.errors.usertypeid}
-            >
-              {userTypes.map((userType: userTypeProps, index: number) => (
-                <MenuItem value={userType.id} key={index}>
-                  {userType.name}
-                </MenuItem>
-              ))}
-            </TextField>
-          }
-          name="usertypeid"
-          rules={{ required: "กรุณาเลือกประเภท" }}
-          control={formProps.control}
-        />
+        {userTypes.length !== 0 &&
+          <Controller
+            as={
+              <TextField
+                variant="outlined"
+                fullWidth
+                className={classes.textfield}
+                label="ประเภทข้าราชการ/เจ้าหน้าที่"
+                InputLabelProps={{
+                  className: classes.selectInput,
+                }}
+                defaultValue=""
+                select
+                helperText={
+                  formProps.errors.usertypeid &&
+                  formProps.errors.usertypeid.message
+                }
+                error={!!formProps.errors.usertypeid}
+              >
+                {userTypes.map((userType: userTypeProps, index: number) => (
+                  <MenuItem value={userType.id} key={index}>
+                    {userType.name}
+                  </MenuItem>
+                ))}
+              </TextField>
+            }
+            name="usertypeid"
+            rules={{ required: "กรุณาเลือกประเภท" }}
+            control={formProps.control}
+            defaultValue=""
+          />
+
+        }
+
 
         {renderTypeProps()}
       </div>

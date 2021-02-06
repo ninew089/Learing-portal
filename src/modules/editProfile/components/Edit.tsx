@@ -355,7 +355,6 @@ export default function Edit(props: any) {
 
             <Grid item xs={12}>
               <Box fontWeight="fontWeightBold" fontSize={18} textAlign="center">
-                {" "}
                 {data.title}
                 {data.firstName} {data.lastName}
               </Box>
