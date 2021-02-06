@@ -11,17 +11,26 @@ import { CardProps } from "./tyscript";
 const Dialog = lazy(() => import("../../share/DialogCourse"));
 
 const useStyles = makeStyles((theme: Theme) => ({
+  gridPlatform:{
+    marginTop:8,
+    marginBottom:8
+  },
   root: {
     borderRadius: "0.5rem",
     padding: 10,
+
     "&:hover": {
       background: "#cccccc8a",
     },
+   
   },
+
   card: {
     width: "100%",
     // background: '#fdfdfd',
-    minHeight: "480px",
+
+    minHeight: "420px",
+
     //boxShadow: '4px 4px 4px 4px rgb(0 0 0 / 8%)',
     borderRadius: "0.5rem",
     [theme.breakpoints.up("sm")]: {
@@ -127,7 +136,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     paddingRight: 14,
   },
   detail: {
-    marginBottom: 14,
+    marginBottom: 18,
   },
   submit: {
     padding: 0,
@@ -178,6 +187,7 @@ export default function CurriculumDetailCard(props: CardProps) {
 
   return (
     <Suspense fallback={renderLoader()}>
+ 
       <div className={classes.root}>
         <div className={classes.card}>
           <Grid
@@ -224,7 +234,7 @@ export default function CurriculumDetailCard(props: CardProps) {
                     />
                   )}
                 </Grid>
-              </Grid>
+                <Grid item xs={12} className={classes.gridPlatform}>
               <Grid
                 container
                 direction="column"
@@ -271,9 +281,13 @@ export default function CurriculumDetailCard(props: CardProps) {
                   </div>
                 </Grid>
               </Grid>
+              </Grid>
+              </Grid>
+           
             </div>
           </Grid>
         </div>
+
         <Dialog
           open={open}
           setOpen={setOpen}

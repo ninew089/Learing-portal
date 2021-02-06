@@ -48,8 +48,8 @@ const useStyles = makeStyles((theme: Theme) =>
     course: {
       width: "100%",
       padding: "0px",
-      paddingBottom: 0,
       height: "100%",
+
     },
     buttonBack: {
       outline: "none",

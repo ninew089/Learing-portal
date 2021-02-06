@@ -97,9 +97,9 @@ export default function MaterialTableDemo() {
         const response = await axios.get(
           `/Platforms/${platformid}/Curriculums`
         );
-        console.log(response.data);
         setEntries(response.data);
       } catch (err) {
+        setEntries([]);
         console.log(err);
       }
     };

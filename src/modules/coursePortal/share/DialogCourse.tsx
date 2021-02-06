@@ -85,7 +85,7 @@ const MuiDialogTitle = withStyles(styles)((props: DialogTitleProps) => {
   const { children, classes, onClose, ...other } = props;
   return (
     <DialogTitle disableTypography className={classes.root} {...other}>
-      <Typography variant="h6">{children}</Typography>
+      <Typography variant="h5">{children}</Typography>
       {onClose ? (
         <IconButton
           aria-label="close"
@@ -166,7 +166,7 @@ export default function CustomizedDialogs({
         open={open}
       >
         <MuiDialogTitle id="customized-dialog-title" onClose={handleClose}>
-          <Typography variant="h6">{data.name}</Typography>
+        {data.name}
         </MuiDialogTitle>
         <MuiDialogContent dividers>
           {isCurriculum && (
@@ -216,9 +216,9 @@ export default function CustomizedDialogs({
             </Grid>
           </Grid>
 
-          <Typography gutterBottom className={`color:'#90a0aa',fontWeigth:300`}>
+          <div className={`color:'#90a0aa',fontWeigth:300`}>
             <div dangerouslySetInnerHTML={{ __html: data.learningObjective }} />
-          </Typography>
+          </div>
           <Grid
             container
             direction="row"
@@ -235,9 +235,9 @@ export default function CustomizedDialogs({
             </Grid>
           </Grid>
 
-          <Typography gutterBottom>
+
             <div dangerouslySetInnerHTML={{ __html: data.learningTopic }} />
-          </Typography>
+
           <Grid
             container
             direction="row"
@@ -254,10 +254,9 @@ export default function CustomizedDialogs({
             </Grid>
           </Grid>
 
-          <Typography gutterBottom>
-            {" "}
+         
             <div dangerouslySetInnerHTML={{ __html: data.targetGroup }} />
-          </Typography>
+   
           <Grid
             container
             direction="row"
@@ -274,9 +273,8 @@ export default function CustomizedDialogs({
             </Grid>
           </Grid>
 
-          <Typography gutterBottom>
             <div dangerouslySetInnerHTML={{ __html: data.assessment }} />
-          </Typography>
+         
         </MuiDialogContent>
         <MuiDialogActions className={classes.action}>
           <Button onClick={navToPage} className={classes.button}>

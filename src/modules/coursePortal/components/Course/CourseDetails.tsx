@@ -10,16 +10,22 @@ const Dialog = lazy(() => import("../../share/DialogCourse"));
 const Rating = lazy(() => import("../../share/Rating"));
 
 const useStyles = makeStyles((theme) => ({
+  container:{
+   
+
+  },
   root: {
     borderRadius: "0.5rem",
     padding: 10,
     "&:hover": {
       background: "#cccccc8a",
     },
+    height:"100%"
+
   },
   card: {
     width: "100%",
-    minHeight: "460px",
+
     borderRadius: "0.5rem",
     [theme.breakpoints.up("sm")]: {
       transition: "0.4s",
@@ -179,6 +185,7 @@ export default function IconBreadcrumbs(props: CardProps) {
 
   return (
     <Suspense fallback={renderLoader()}>
+
       <div className={classes.root}>
         <div className={classes.card} onClick={onOpen}>
           <Grid container direction="column" justify="flex-start">
@@ -236,8 +243,7 @@ export default function IconBreadcrumbs(props: CardProps) {
                     )}
                   </div>
                 </Grid>
-              </Grid>
-              <Grid
+                <Grid
                 container
                 direction="row"
                 justify="flex-start"
@@ -276,6 +282,8 @@ export default function IconBreadcrumbs(props: CardProps) {
                   </Grid>
                 </Grid>
               </Grid>
+              </Grid>
+           
             </div>
           </Grid>
         </div>

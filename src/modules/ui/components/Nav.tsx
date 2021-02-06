@@ -134,7 +134,7 @@ export default function PersistentDrawerLeft(props: any) {
           >
             <NavLink
               to={`${path}`}
-              style={{ color: "inherit", textDecoration: "inherit" }}
+              className={classes.noDecorationLink}
             >
               <img alt="" src={banner} width={matchesIspad ? 100 : 140} />
             </NavLink>
@@ -159,6 +159,7 @@ export default function PersistentDrawerLeft(props: any) {
                   color="secondary"
                 >
                   <NavItem
+                  as={'div'}
                     active={active === 0}
                     className={
                       active === 0 ? classes.navItemActive : classes.navItem
@@ -171,6 +172,7 @@ export default function PersistentDrawerLeft(props: any) {
               </Hidden>
               <ScrollTo selector={`#หมวดหมู่`} smooth>
                 <NavItem
+                      as={'div'}
                   active={active === 1}
                   className={
                     active === 1 ? classes.navItemActive : classes.navItem
@@ -182,6 +184,7 @@ export default function PersistentDrawerLeft(props: any) {
               </ScrollTo>
               <ScrollTo selector={`#หลักสูตร`} smooth>
                 <NavItem
+                      as={'div'}
                   active={active === 2}
                   className={
                     active === 2 ? classes.navItemActive : classes.navItem
@@ -193,10 +196,12 @@ export default function PersistentDrawerLeft(props: any) {
               </ScrollTo>
               <Hidden xsDown>
                 <NavLink
+                    
                   to={`${path}/FAQ`}
                   className={classes.noDecorationLink}
                 >
                   <NavItem
+                        as={'div'}
                     active={active === 4}
                     className={
                       active === 4 ? classes.navItemActive : classes.navItem
@@ -212,6 +217,8 @@ export default function PersistentDrawerLeft(props: any) {
             <>
               <NavLink to={`${path}`} className={classes.noDecorationLink}>
                 <NavItem
+
+                      as={'div'}
                   active={active === 0}
                   className={
                     active === 0 ? classes.navItemActive : classes.navItem
@@ -223,6 +230,7 @@ export default function PersistentDrawerLeft(props: any) {
               </NavLink>
               <NavLink to={`${path}/FAQ`} className={classes.noDecorationLink}>
                 <NavItem
+                      as={'div'}
                   active={active === 4}
                   className={
                     active === 4 ? classes.navItemActive : classes.navItem
@@ -271,6 +279,7 @@ export default function PersistentDrawerLeft(props: any) {
                   className={classes.noDecorationLink}
                 >
                   <NavItem
+                        as={'div'}
                     active={active === 3}
                     className={
                       active === 3 ? classes.navItemActive : classes.navItem
