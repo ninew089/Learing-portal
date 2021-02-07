@@ -73,16 +73,15 @@ const LOAD_PLATFORM_FAILURE = "learning-portal/src/ui/LOAD_PLATFORM_FAILURE";
 
 const SELECT_PLATFORM = "learning-portal/src/ui/SELECT_PLATFORM";
 
-function selectpaltform(data?:string) {
+function selectpaltform(data?: string) {
   return async (dispatch: any) => {
-      dispatch({
-        type: SELECT_PLATFORM,
-        payload: {
-          selected_platform: data,
-        },
-      });
-    }
-
+    dispatch({
+      type: SELECT_PLATFORM,
+      payload: {
+        selected_platform: data,
+      },
+    });
+  };
 }
 function paltform() {
   return async (dispatch: any) => {

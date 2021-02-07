@@ -7,7 +7,7 @@ import * as actions from "../actions";
 import animation from "assets/gif/animation.gif";
 import animation00 from "assets/gif/animation00.gif";
 import Disqus from "modules/Disqus/index";
-import SelectPlatform from "../share/SelectPlatform"
+import SelectPlatform from "../share/SelectPlatform";
 
 import "assets/css/styles.css";
 
@@ -119,7 +119,6 @@ export default function Course() {
                   justify="flex-start"
                   alignItems="center"
                 >
-
                   <Grid item xs={12} sm={6} md={6} lg={6}>
                     <Grid
                       container
@@ -153,8 +152,13 @@ export default function Course() {
                       <img src={animation} alt="" width="100%" height="100%" />
                     </FadeInSection>
                   </Grid>
-                  <Grid container direction="row" justify="center" alignItems="center">
-                  <SelectPlatform/>
+                  <Grid
+                    container
+                    direction="row"
+                    justify="center"
+                    alignItems="center"
+                  >
+                    <SelectPlatform />
                   </Grid>
                   <Grid item xs={12} sm={12} md={12} lg={12}>
                     <AllCourse />

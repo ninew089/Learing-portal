@@ -119,7 +119,6 @@ export interface CustomizedDialogsProps {
   setOpen: any;
   data: any;
   isCurriculum: boolean;
-
 }
 
 export default function CustomizedDialogs({
@@ -127,7 +126,6 @@ export default function CustomizedDialogs({
   setOpen,
   data,
   isCurriculum,
-
 }: CustomizedDialogsProps) {
   const handleClose = () => {
     setOpen(false);
@@ -155,7 +153,7 @@ export default function CustomizedDialogs({
   };
   const classes = useStyles();
   return (
-    <div >
+    <div>
       <Dialog
         key={"course-dialog-props" + data.name}
         onClose={handleClose}
@@ -166,7 +164,7 @@ export default function CustomizedDialogs({
         open={open}
       >
         <MuiDialogTitle id="customized-dialog-title" onClose={handleClose}>
-        {data.name}
+          {data.name}
         </MuiDialogTitle>
         <MuiDialogContent dividers>
           {isCurriculum && (
@@ -235,8 +233,7 @@ export default function CustomizedDialogs({
             </Grid>
           </Grid>
 
-
-            <div dangerouslySetInnerHTML={{ __html: data.learningTopic }} />
+          <div dangerouslySetInnerHTML={{ __html: data.learningTopic }} />
 
           <Grid
             container
@@ -254,9 +251,8 @@ export default function CustomizedDialogs({
             </Grid>
           </Grid>
 
-         
-            <div dangerouslySetInnerHTML={{ __html: data.targetGroup }} />
-   
+          <div dangerouslySetInnerHTML={{ __html: data.targetGroup }} />
+
           <Grid
             container
             direction="row"
@@ -273,8 +269,7 @@ export default function CustomizedDialogs({
             </Grid>
           </Grid>
 
-            <div dangerouslySetInnerHTML={{ __html: data.assessment }} />
-         
+          <div dangerouslySetInnerHTML={{ __html: data.assessment }} />
         </MuiDialogContent>
         <MuiDialogActions className={classes.action}>
           <Button onClick={navToPage} className={classes.button}>

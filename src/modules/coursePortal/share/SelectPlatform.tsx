@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
-import {MenuItem,ListItemIcon,ListItemText} from "@material-ui/core";
+import { MenuItem, ListItemIcon, ListItemText } from "@material-ui/core";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import { useDispatch, useSelector } from "react-redux";
@@ -25,12 +25,11 @@ const useStyles = makeStyles((theme: Theme) =>
       marginLeft: 10,
       marginRight: 4,
     },
-    select:{
-        "&.MuiSelect-selectMenu":{
-            display:"inline-flex"
-        }
-    }
-  
+    select: {
+      "&.MuiSelect-selectMenu": {
+        display: "inline-flex",
+      },
+    },
   })
 );
 
@@ -41,22 +40,20 @@ export default function ControlledOpenSelect() {
   const { platform } = useSelector((state: any) => state.course);
   const [value, setValue] = useState<any>("");
 
-
   useEffect(() => {
     const action = actions.paltform();
     dispatch(action);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   useEffect(() => {
-    const action = actions.selectpaltform(value)
-        dispatch(action);
+    const action = actions.selectpaltform(value);
+    dispatch(action);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value]);
   const handleChange = (event: React.ChangeEvent<{ value: any }>) => {
-        setValue(event.target.value)
-        const action = actions.selectpaltform(event.target.value)
-        dispatch(action);
-
+    setValue(event.target.value);
+    const action = actions.selectpaltform(event.target.value);
+    dispatch(action);
   };
 
   const handleClose = () => {
@@ -68,45 +65,37 @@ export default function ControlledOpenSelect() {
   };
   return (
     <div>
-        {platform?.lenght!==0 &&
-        
-
-       
-      <FormControl className={classes.formControl}>
-        <InputLabel>เลือกหน่วยงาน</InputLabel>
-        <Select
-          open={open}
-          onClose={handleClose}
-          onOpen={handleOpen}
-          onChange={handleChange}
-          value={value}
-          defaultValue="ทั้งหมด"
- 
-        >
-          <MenuItem         value={"ทั้งหมด"}>ทั้งหมด</MenuItem>
-          {platform.map((item: any, index: number) => (
-            <MenuItem value={item.officialName} key={index} >
-                     <ListItemIcon>
-                     <div
+      {platform?.lenght !== 0 && (
+        <FormControl className={classes.formControl}>
+          <InputLabel>เลือกหน่วยงาน</InputLabel>
+          <Select
+            open={open}
+            onClose={handleClose}
+            onOpen={handleOpen}
+            onChange={handleChange}
+            value={value}
+            defaultValue="ทั้งหมด"
+          >
+            <MenuItem value={"ทั้งหมด"}>ทั้งหมด</MenuItem>
+            {platform.map((item: any, index: number) => (
+              <MenuItem value={item.officialName} key={index}>
+                <ListItemIcon>
+                  <div
                     style={{
                       backgroundImage: `url('${item.thumbnail}`,
                       backgroundSize: "cover",
                       padding: "10px",
                       backgroundPosition: " center center",
-                      margin:8
-              
+                      margin: 8,
                     }}
-                  />  
-          </ListItemIcon>
-          <ListItemText primary=         {item.officialName} />
-
-
-            </MenuItem>
-          ))}
-       
-        </Select>
-      </FormControl>
-}
+                  />
+                </ListItemIcon>
+                <ListItemText primary={item.officialName} />
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      )}
     </div>
   );
 }
