@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
+import {Tabs,Tab,Avatar} from "@material-ui/core";
+
+
 import axios from "axios";
 import Dialog from "./Dialog";
+import { appleTabsStylesHook } from '@mui-treasury/styles/tabs';
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -21,7 +23,8 @@ export default function VariantAvatars() {
   const [value, setValue] = React.useState(0);
   const [open, setOpen] = React.useState(false);
   const [data, setData] = useState<any>([]);
-
+  const tabsStyles = appleTabsStylesHook.useTabs();
+  const tabItemStyles = appleTabsStylesHook.useTabItem();
   useEffect(() => {
     const fetch = async () => {
       const { data } = await axios.get("/Platforms");
@@ -41,6 +44,7 @@ export default function VariantAvatars() {
       <div className={classes.root}>
         <Tabs
           value={value}
+          classes={tabsStyles}
           onChange={handleChange}
           variant="scrollable"
           scrollButtons="on"
@@ -55,15 +59,11 @@ export default function VariantAvatars() {
           {data.map((item: any, index: number) => (
             <Tab
               key={index}
+              classes={tabItemStyles}
+              onClick={handleClickOpen}
               icon={
-                <div
-                  style={{
-                    background: `url('${item.thumbnail}`,
-                    backgroundSize: "cover",
-                    padding: "30px",
-                  }}
-                  onClick={handleClickOpen}
-                />
+                <Avatar alt="Remy Sharp" src={item.thumbnail}  className={classes.rounded} />
+           
               }
             />
           ))}
