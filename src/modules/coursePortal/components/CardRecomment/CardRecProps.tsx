@@ -154,7 +154,7 @@ export default function SocialCard(props: any) {
 
      
           <Box fontSize={14} fontWeight={700} className={classes.name}>
-            {data.name} {data.platformName==="สำนักงาน ก.พ."&&<img src={banner} alt="welearn" width="40"/>} 
+            {data.name} 
           </Box>
       
           <Box fontSize={14} fontWeight={700} className={classes.name}>
@@ -191,7 +191,8 @@ export default function SocialCard(props: any) {
               </div>
             </Grid>
             <Grid item xs={6}>
-              <div className={classes.author}>{data.platformName}</div>
+         
+              <div className={classes.author}>{data.platformName} </div>
               <div className={classes.rating}>
                 <Rating
                   vote={data.satisfactionCount}
@@ -216,6 +217,7 @@ export default function SocialCard(props: any) {
                 </Typography>
               </Grid>
             </Grid>
+            {data.platformName==="สำนักงาน ก.พ."&&<img src={banner} alt="welearn" width="40" style={{marginBottom:8}}/>}
           </Grid>
 
           <Divider />

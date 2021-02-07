@@ -262,7 +262,7 @@ export default function IconBreadcrumbs(props: CardProps) {
 
                 </div>
                 <Grid item>
-                  <div className={classes.author}>{platformName} {platformName==="สำนักงาน ก.พ."&&<img src={banner} alt="welearn" width="40"/>} </div>
+                  <div className={classes.author}>{platformName} </div>
                   <div className={classes.rating}>
                     <Rating vote={satisfactionCount} point={point} />
                   </div>
@@ -284,6 +284,7 @@ export default function IconBreadcrumbs(props: CardProps) {
                   </Grid>
 
                 </Grid>
+                {platformName==="สำนักงาน ก.พ."&&<img src={banner} alt="welearn" width="40" style={{margin:8}}/>}
               </Grid>
               </Grid>
            

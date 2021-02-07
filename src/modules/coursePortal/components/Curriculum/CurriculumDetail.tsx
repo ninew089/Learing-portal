@@ -253,7 +253,7 @@ export default function CurriculumDetailCard(props: CardProps) {
                     />
                   </div>
                   <div>
-                    <div className={classes.author}>{platformName}     {platformName==="สำนักงาน ก.พ."&&<img src={banner} alt="welearn" width="40"/>}</div>
+                    <div className={classes.author}>{platformName} </div>
                     <div className={classes.rating}>
                       <Rating vote={satisfactionCount} point={point} />
                     </div>
@@ -274,7 +274,9 @@ export default function CurriculumDetailCard(props: CardProps) {
                       </Typography>
                     </Grid>
                   </div>
+                  {platformName==="สำนักงาน ก.พ."&&<img src={banner} alt="welearn" width="40" style={{margin:8}}/>}
                 </Grid>
+             
               </Grid>
               </Grid>
               </Grid>

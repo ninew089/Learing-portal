@@ -47,7 +47,11 @@ export default function ControlledOpenSelect() {
     dispatch(action);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
+  useEffect(() => {
+    const action = actions.selectpaltform(value)
+        dispatch(action);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [value]);
   const handleChange = (event: React.ChangeEvent<{ value: any }>) => {
         setValue(event.target.value)
         const action = actions.selectpaltform(event.target.value)

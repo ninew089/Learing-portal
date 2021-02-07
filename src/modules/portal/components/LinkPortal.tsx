@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import {Tabs,Tab,Avatar} from "@material-ui/core";
-
-
+import { makeStyles,useTheme } from "@material-ui/core/styles";
+import {Tabs,Tab,Avatar,Grid} from "@material-ui/core";
+//@ts-ignore
+import SwipeableViews from 'react-swipeable-views';
+import TabPanel from "./TabPlanel"
 import axios from "axios";
 import Dialog from "./Dialog";
 import { appleTabsStylesHook } from '@mui-treasury/styles/tabs';
+import {ContactPhoneOutlined ,Email,ImportContactsRounded} from "@material-ui/icons"
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -16,6 +18,25 @@ const useStyles = makeStyles((theme) => ({
     width: theme.spacing(7),
     height: theme.spacing(7),
   },
+  small: {
+    width: theme.spacing(4),
+    height: theme.spacing(4),
+    margin:8
+  },
+  title:{
+    fontSize:18,
+    fontWeight:900
+  },
+  content:{
+    fontSize:14,
+    fontWeight:500,
+    alignContent:"center"
+  },icon:{
+    fontSize:24,
+    margin:4
+  },center:{
+    alignContent:"center"
+  }
 }));
 
 export default function VariantAvatars() {
@@ -23,6 +44,7 @@ export default function VariantAvatars() {
   const [value, setValue] = React.useState(0);
   const [open, setOpen] = React.useState(false);
   const [data, setData] = useState<any>([]);
+  const theme = useTheme();
   const tabsStyles = appleTabsStylesHook.useTabs();
   const tabItemStyles = appleTabsStylesHook.useTabItem();
   useEffect(() => {
@@ -68,12 +90,93 @@ export default function VariantAvatars() {
             />
           ))}
         </Tabs>
-      </div>
-      <Dialog
+        <SwipeableViews
+        axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+        index={value}
+        onChangeIndex={handleChange}
+      >
+         {data.map((item: any, index: number) => (
+     <TabPanel value={value} index={index} dir={theme.direction}  key={index}>
+        <Grid container direction="row" justify="flex-start" alignItems="center">
+ <ImportContactsRounded className={classes.icon}/><h2>ช่องทางการติดต่อ
+   </h2>
+        </Grid>
+       <Grid container direction="row" justify="flex-start" alignItems="center">
+    <Grid item xs={12} className={classes.title}>
+    {item.officialName}
+      </Grid> 
+      <Grid item xs={12}  className={classes.content}> {item.abbreviation}
+      </Grid>
+      <Grid item xs={12}  className={classes.content}>
+      </Grid >
+      <Grid container direction="row" justify="flex-start" alignItems="center">
+    <ContactPhoneOutlined className={classes.icon}/>  : {item.phone} 
+    </Grid>
+   
+    <Grid container direction="row" justify="flex-start" alignItems="center">
+
+    <Email className={classes.icon}/> : {item.email}
+</Grid>
+
+
+</Grid>
+<Dialog
         open={open}
         setOpen={setOpen}
-        data={data !== undefined ? data[value] : null}
+        data={item}
       />
+   </TabPanel>
+
+         ))}
+   
+      </SwipeableViews>
+      </div>
+    
+   
     </>
   );
 }
+
+/*
+
+function a11yProps(index: any) {
+  return {
+    id: `full-width-tab-${index}`,
+    'aria-controls': `full-width-tabpanel-${index}`,
+  };
+}
+
+const useStyles = makeStyles((theme: Theme) => ({
+  root: {
+    backgroundColor: theme.palette.background.paper,
+    width: 500,
+  },
+}));
+
+export default function FullWidthTabs() {
+  const classes = useStyles();
+  const theme = useTheme();
+  const [value, setValue] = React.useState(0);
+
+
+
+  const handleChangeIndex = (index: number) => {
+    setValue(index);
+  };
+
+  return (
+
+
+      <SwipeableViews
+        axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+        index={value}
+        onChangeIndex={handleChangeIndex}
+      >
+        <TabPanel value={value} index={0} dir={theme.direction}>
+          Item One
+        </TabPanel>
+      </SwipeableViews>
+
+  );
+}
+*/
