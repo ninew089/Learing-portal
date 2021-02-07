@@ -71,6 +71,19 @@ const LOAD_PLATFORM_REQUEST = "learning-portal/src/ui/LOAD_PLATFORM_REQUEST";
 const LOAD_PLATFORM_SUCCESS = "learning-portal/src/ui/LOAD_PLATFORM_SUCCESS";
 const LOAD_PLATFORM_FAILURE = "learning-portal/src/ui/LOAD_PLATFORM_FAILURE";
 
+const SELECT_PLATFORM = "learning-portal/src/ui/SELECT_PLATFORM";
+
+function selectpaltform(data?:string) {
+  return async (dispatch: any) => {
+      dispatch({
+        type: SELECT_PLATFORM,
+        payload: {
+          selected_platform: data,
+        },
+      });
+    }
+
+}
 function paltform() {
   return async (dispatch: any) => {
     dispatch({ type: LOAD_PLATFORM_REQUEST });
@@ -322,6 +335,7 @@ function loadCourseCategories(id: any) {
 }
 
 export {
+  SELECT_PLATFORM,
   LOAD_COURSESCATEGORY_REQUEST,
   LOAD_COURSESCATEGORY_SUCCESS,
   LOAD_COURSESCATEGORY_FAILURE,
@@ -370,4 +384,5 @@ export {
   loadCourses,
   loadCurriculum,
   paltform,
+  selectpaltform,
 };

@@ -121,7 +121,7 @@ export default function MaterialTableDemo(props: any) {
               <h4>
                 {" "}
                 &nbsp;&nbsp;&nbsp;&nbsp; ชื่อ: {rowData.title}
-                {rowData.firstName} {rowData.lastname}
+                {rowData.firstname} {rowData.lastname}
               </h4>
 
               <h4>
@@ -129,29 +129,8 @@ export default function MaterialTableDemo(props: any) {
                 &nbsp;&nbsp;&nbsp;&nbsp;วันเปิดเรียน:{" "}
                 {formatDatetoThaiTest(rowData.createdate)}
               </h4>
-              <h4>
-                {" "}
-                &nbsp;&nbsp;&nbsp;&nbsp;วันที่เริ่มเรียน:{" "}
-                {formatDatetoThaiTest(rowData.startdate)}
-              </h4>
-
-              <h4>
-                {" "}
-                &nbsp;&nbsp;&nbsp;&nbsp;วันที่สำเร็จการศึกษา:{" "}
-                {formatDatetoThaiTest(rowData.enddate)}
-              </h4>
-
-              <h4>
-                {" "}
-                &nbsp;&nbsp;&nbsp;&nbsp;จำนวนชั่วโมงที่เข้าเรียน: {rowData.hour}
-              </h4>
-              <h4>
-                {" "}
-                &nbsp;&nbsp;&nbsp;&nbsp;คะแนนความพึงพอใจ:{" "}
-                {rowData.satisfactionscore}
-              </h4>
-
-              <h4> &nbsp;&nbsp;&nbsp;&nbsp;เกรด: {rowData.grade}</h4>
+              <h4> &nbsp;&nbsp;&nbsp;&nbsp;ผลการศึกษา: {rowData.pass?"ผ่าน":"ไม่ผ่าน"}</h4>
+              <h4> &nbsp;&nbsp;&nbsp;&nbsp;หมายเหตุ: {rowData.note}</h4>
             </div>
           );
         }}
@@ -179,7 +158,7 @@ export default function MaterialTableDemo(props: any) {
               <h4>
                 {" "}
                 &nbsp;&nbsp;&nbsp;&nbsp; ชื่อ: {rowData.title}
-                {rowData.firstName} {rowData.lastname}
+                {rowData.firstname} {rowData.lastname}
               </h4>
 
               <h4>
@@ -187,11 +166,7 @@ export default function MaterialTableDemo(props: any) {
                 &nbsp;&nbsp;&nbsp;&nbsp;วันเปิดเรียน:{" "}
                 {formatDatetoThaiTest(rowData.createdate)}
               </h4>
-              <h4>
-                {" "}
-                &nbsp;&nbsp;&nbsp;&nbsp;วันที่เริ่มเรียน:{" "}
-                {formatDatetoThaiTest(rowData.startdate)}
-              </h4>
+       
 
               <h4>
                 {" "}
@@ -199,17 +174,8 @@ export default function MaterialTableDemo(props: any) {
                 {formatDatetoThaiTest(rowData.enddate)}
               </h4>
 
-              <h4>
-                {" "}
-                &nbsp;&nbsp;&nbsp;&nbsp;จำนวนชั่วโมงที่เข้าเรียน: {rowData.hour}
-              </h4>
-              <h4>
-                {" "}
-                &nbsp;&nbsp;&nbsp;&nbsp;คะแนนความพึงพอใจ:{" "}
-                {rowData.satisfactionscore}
-              </h4>
-
-              <h4> &nbsp;&nbsp;&nbsp;&nbsp;เกรด: {rowData.grade}</h4>
+              <h4> &nbsp;&nbsp;&nbsp;&nbsp;ผลการศึกษา: {rowData.pass?"ผ่าน":"ไม่ผ่าน"}</h4>
+              <h4> &nbsp;&nbsp;&nbsp;&nbsp;หมายเหตุ: {rowData.note}</h4>
             </div>
           );
         }}

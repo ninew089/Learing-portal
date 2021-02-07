@@ -14,6 +14,7 @@ import ArrowBack from "@material-ui/icons/ArrowBackIosRounded";
 import { useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { CourseCarouselProps } from "./typescript";
+import {  useSelector } from "react-redux";
 
 const CourseDetail = lazy(
   () => import("modules/coursePortal/components/Course/CourseDetails")
@@ -85,6 +86,7 @@ export default function CourseCarousel(props: CourseCarouselProps) {
   const data = detail?.filter((item: any) => {
     return item.isShown === true;
   });
+  const { selected_platform } = useSelector((state: any) => state.course);
 
   return (
     <CarouselProvider
@@ -98,7 +100,11 @@ export default function CourseCarousel(props: CourseCarouselProps) {
     >
       <div>
         <Slider className={classes.slider}>
-          {data!.map((item: any, index: number) => (
+          {data!.filter(
+    (item: any) =>
+    selected_platform==="ทั้งหมด"||  selected_platform===null? item:
+      item.platformName.toLowerCase().includes(selected_platform)
+  ).map((item: any, index: number) => (
             <Suspense key={index} fallback={<div></div>}>
               <Slide index={index} className={classes.slide}>
                 <div className={classes.course}  >

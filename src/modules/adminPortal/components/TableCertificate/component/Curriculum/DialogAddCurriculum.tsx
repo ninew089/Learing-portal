@@ -22,6 +22,9 @@ import {
   Dialog,
   Button,
   MenuItem,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
 } from "@material-ui/core";
 import { useForm, Controller } from "react-hook-form";
 import * as yup from "yup";
@@ -132,17 +135,16 @@ export default function CustomizedDialogs({ open, setOpen }: DialogsProps) {
       firstName: yup.string().required(),
       lastName: yup.string().required(),
       startDate: yup.string().required(),
-      curriculumId: yup.number().required("กรุณาเลือกหลักสูตร"),
+      courseId: yup.number(),
       endDate: yup.string().required(),
+      pass: yup.boolean().required().transform((_, val) => (val === "ผ่าน" ? true : false)),
       hour: yup
         .number()
         .moreThan(0, "จำนวนต้องมากกว่า 1 ")
         .nullable(true)
         .transform((_, val) => (val === "" ? null : parseInt(val))),
-      grade: yup
-        .string()
-        .nullable(true)
-        .transform((_, val) => (val === "" ? null : val)),
+      note: yup
+        .string().transform((_, val) => (val === "" ? null : val)),
       satisfactionScore: yup
         .number()
         .moreThan(0, "คะแนนความพึงพอต้องอยู่ระหว่าง 1-5")
@@ -285,14 +287,34 @@ export default function CustomizedDialogs({ open, setOpen }: DialogsProps) {
                     helperText={errors.hour ? "กรอกจำนวนชั่วโมง" : ""}
                     error={!!errors.hour}
                   />
+                    <label> ผลการศึกษา</label>
+                     <Controller
+              as={
+                <RadioGroup aria-label="pass">
+                  <FormControlLabel
+                    value={"ผ่าน"}
+                    control={<Radio />}
+                    label="ผ่าน"
+                  />
+                  <FormControlLabel
+                    value={"ไม่ผ่าน"}
+                    control={<Radio />}
+                    label="ไม่ผ่าน"
+                  />
+                </RadioGroup>
+              }
+              name="pass"
+              control={control}
+            />
+            
                   <TextField
                     fullWidth
                     multiline
-                    label="เกรด"
-                    name="grade"
+                    label="หมายเหตุ"
+                    name="note"
                     inputRef={register}
-                    helperText={errors.grade ? "กรอกคะแนน" : ""}
-                    error={!!errors.grade}
+                    helperText={errors.note ? "กรอกหมายเหตุ" : ""}
+                    error={!!errors.note}
                   />
                   <TextField
                     fullWidth

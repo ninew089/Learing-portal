@@ -115,9 +115,17 @@ export default function PointNavigationMenu({ title }: { title: string }) {
 
   return (
     <>
-      <Box className={classes.box} fontWeight={700} fontSize="h4.fontSize">
-        {title}
+      <Grid
+        container
+        direction="row"
+        justify={"flex-start"}
+        alignItems="center"
+      >
+   <Box className={classes.box} fontWeight={700} fontSize="h4.fontSize">
+        {title}      
       </Box>
+      </Grid>
+   
 
       <Grid
         container
@@ -167,6 +175,7 @@ export default function PointNavigationMenu({ title }: { title: string }) {
             </IconButton>
           </Grid>
         ))}
+
       </Grid>
       <Suspense fallback={renderLoader()}>
         <Courses id={index} />

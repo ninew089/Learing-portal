@@ -5,6 +5,7 @@ import Dialog from "../../share/DialogCourse";
 import { useSelector } from "react-redux";
 import Rating from "../../share/Rating";
 import numberFormat from "utils/numberFormat";
+import banner from "assets/images/welearn.png";
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -126,7 +127,6 @@ export default function SocialCard(props: any) {
   const onSelected = () => {
     setOpen(true);
   };
-
   return (
     <>
       <Grid
@@ -151,6 +151,27 @@ export default function SocialCard(props: any) {
         </Grid>
 
         <Grid item xs={7}>
+
+     
+          <Box fontSize={14} fontWeight={700} className={classes.name}>
+            {data.name} {data.platformName==="สำนักงาน ก.พ."&&<img src={banner} alt="welearn" width="40"/>} 
+          </Box>
+      
+          <Box fontSize={14} fontWeight={700} className={classes.name}>
+            {data.code}
+          </Box>
+          <Box fontSize={12} fontWeight={700} className={classes.category}>
+            <div
+              className={classes.dot}
+              style={{
+                background:
+                  colorName[0][
+                  data.courseCategory !== undefined ? data.courseCategory : 0
+                  ],
+              }}
+            />
+            {data.courseCategory}
+          </Box>
           <Grid
             container
             justify="flex-start"
@@ -196,24 +217,6 @@ export default function SocialCard(props: any) {
               </Grid>
             </Grid>
           </Grid>
-          <Box fontSize={14} fontWeight={700} className={classes.name}>
-            {data.name}
-          </Box>
-          <Box fontSize={14} fontWeight={700} className={classes.name}>
-            {data.code}
-          </Box>
-          <Box fontSize={12} fontWeight={700} className={classes.category}>
-            <div
-              className={classes.dot}
-              style={{
-                background:
-                  colorName[0][
-                  data.courseCategory !== undefined ? data.courseCategory : 0
-                  ],
-              }}
-            />
-            {data.courseCategory}
-          </Box>
 
           <Divider />
         </Grid>

@@ -13,7 +13,7 @@ import {
 import Drawer from "./Drawer";
 import { useRouteMatch } from "react-router-dom";
 import MenuList from "./MenuList";
-import banner from "assets/images/OCSC-banner.png";
+import banner from "assets/images/welearn.png";
 import { NavLink } from "react-router-dom";
 import ScrollTo from "react-scroll-into-view";
 import { useLocation } from "react-router-dom";
@@ -141,7 +141,7 @@ export default function PersistentDrawerLeft(props: any) {
 
             <Hidden mdDown>
               <Typography variant="h6" noWrap className={classes.title}>
-                ศูนย์การเรียนรู้ทางสื่ออิเล็กทรอนิกส์แบบบูรณาการ
+              OCSC Learning Portal  ศูนย์การเรียนรู้ทางสื่ออิเล็กทรอนิกส์แบบบูรณาการ 
               </Typography>
             </Hidden>
           </Grid>

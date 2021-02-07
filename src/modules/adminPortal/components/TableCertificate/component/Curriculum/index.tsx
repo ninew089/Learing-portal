@@ -160,7 +160,7 @@ export default function ReportTable() {
             dateSetting: { locale: "th-TH" },
           },
           { title: "จำนวนชั่วโมง", field: "hour", type: "numeric" },
-          { title: "เกรด", field: "grade" },
+          { title: "ผลการศึกษา", field: "pass" },
           {
             title: "คะแนนความพึงพอใจ",
             field: "satisfactionScore",
@@ -178,6 +178,7 @@ export default function ReportTable() {
             editable: "never",
             dateSetting: { locale: "th-TH" },
           },
+                    { title: "หมายเหตุ", field: "note" },
           { title: "ผลการอนุมัติ", field: "approve", editable: "never" },
         ]}
         data={entriesCurriculum}

@@ -2,7 +2,7 @@ import React, { useState, lazy, Suspense } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, Grid, Box } from "@material-ui/core";
 import numberFormat from "utils/numberFormat";
-
+import banner from "assets/images/welearn.png";
 import { CardProps } from "./tyscript";
 import CardMedia from "@material-ui/core/CardMedia";
 import { useSelector } from "react-redux";
@@ -258,9 +258,11 @@ export default function IconBreadcrumbs(props: CardProps) {
                       backgroundPosition: " center center",
                     }}
                   />
+
+
                 </div>
                 <Grid item>
-                  <div className={classes.author}>{platformName}</div>
+                  <div className={classes.author}>{platformName} {platformName==="สำนักงาน ก.พ."&&<img src={banner} alt="welearn" width="40"/>} </div>
                   <div className={classes.rating}>
                     <Rating vote={satisfactionCount} point={point} />
                   </div>
@@ -280,6 +282,7 @@ export default function IconBreadcrumbs(props: CardProps) {
                       การดู {numberFormat(viewCount)} ครั้ง
                     </Typography>
                   </Grid>
+
                 </Grid>
               </Grid>
               </Grid>

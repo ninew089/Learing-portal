@@ -35,6 +35,7 @@ import {
   LOAD_PLATFORM_REQUEST,
   LOAD_PLATFORM_SUCCESS,
   LOAD_PLATFORM_FAILURE,
+  SELECT_PLATFORM
 } from "./actions";
 
 const initialState = {
@@ -70,10 +71,18 @@ const initialState = {
     },
   ],
   platform: [],
+  selected_platform: null
 };
 
 export default function (state = initialState, action: any) {
+  
   switch (action.type) {
+    case SELECT_PLATFORM:
+      return {
+        ...state,
+        selected_platform: action.payload.selected_platform,
+
+      };
     case LOAD_PLATFORM_REQUEST:
       return { ...state, platform: [] };
     case LOAD_PLATFORM_SUCCESS:
