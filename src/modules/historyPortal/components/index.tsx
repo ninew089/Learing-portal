@@ -109,6 +109,17 @@ export default function MaterialTableDemo(props: any) {
           { title: "รหัสรายวิชา", field: "courseid" },
           { title: "ชื่อรายวิชา", field: "course" },
           { title: "หน่วยงานที่ให้ประกาศนียบัตร", field: "platform" },
+          {
+            title: "ผลการศึกษา",
+            field: "pass",
+            render: (row) => {
+              return row.pass ? (
+                <div style={{ color: "#2E5E0B", fontWeight: 700 }}>ผ่าน</div>
+              ) : (
+                <div style={{ color: "#C52F2F", fontWeight: 700 }}>ไม่ผ่าน</div>
+              );
+            },
+          },
         ]}
         data={predata}
         detailPanel={(rowData) => {
@@ -127,9 +138,14 @@ export default function MaterialTableDemo(props: any) {
               <h4>
                 {" "}
                 &nbsp;&nbsp;&nbsp;&nbsp;วันเปิดเรียน:{" "}
-                {formatDatetoThaiTest(rowData.createdate)}
+                {formatDatetoThaiTest(rowData.startdate)}
               </h4>
-              <h4> &nbsp;&nbsp;&nbsp;&nbsp;ผลการศึกษา: {rowData.pass?"ผ่าน":"ไม่ผ่าน"}</h4>
+              <h4>
+                {" "}
+                &nbsp;&nbsp;&nbsp;&nbsp;วันที่สำเร็จการศึกษา:{" "}
+                {formatDatetoThaiTest(rowData.enddate)}
+              </h4>
+
               <h4> &nbsp;&nbsp;&nbsp;&nbsp;หมายเหตุ: {rowData.note}</h4>
             </div>
           );
@@ -144,8 +160,8 @@ export default function MaterialTableDemo(props: any) {
         columns={[
           { title: "รหัสหลักสูตร", field: "curriculumid" },
           { title: "ชื่อหลักสูตร", field: "curriculum" },
-
           { title: "หน่วยงานที่ให้ประกาศนียบัตร", field: "platform" },
+          { title: "ผลการศึกษา", field: "pass" },
         ]}
         data={predata1}
         detailPanel={(rowData) => {
@@ -164,9 +180,8 @@ export default function MaterialTableDemo(props: any) {
               <h4>
                 {" "}
                 &nbsp;&nbsp;&nbsp;&nbsp;วันเปิดเรียน:{" "}
-                {formatDatetoThaiTest(rowData.createdate)}
+                {formatDatetoThaiTest(rowData.startdate)}
               </h4>
-       
 
               <h4>
                 {" "}
@@ -174,7 +189,6 @@ export default function MaterialTableDemo(props: any) {
                 {formatDatetoThaiTest(rowData.enddate)}
               </h4>
 
-              <h4> &nbsp;&nbsp;&nbsp;&nbsp;ผลการศึกษา: {rowData.pass?"ผ่าน":"ไม่ผ่าน"}</h4>
               <h4> &nbsp;&nbsp;&nbsp;&nbsp;หมายเหตุ: {rowData.note}</h4>
             </div>
           );

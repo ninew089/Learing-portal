@@ -140,13 +140,16 @@ export default function CustomizedDialogs({ open, setOpen, data }: any) {
       startDate: yup.string().required(),
       courseId: yup.number(),
       endDate: yup.string().required(),
-      pass: yup.boolean().required().transform((_, val) => (val === "ผ่าน" ? true : false)),
+      pass: yup
+        .boolean()
+        .required()
+        .transform((_, val) => (val === "ผ่าน" ? true : false)),
       hour: yup
         .number()
         .moreThan(0, "จำนวนต้องมากกว่า 1 ")
         .nullable(true)
         .transform((_, val) => (val === "" ? null : parseInt(val))),
-      note: yup.string().transform((_, val) => (val === "" ? null : val)),
+      note: yup.string().nullable(),
       satisfactionScore: yup
         .number()
         .moreThan(0, "คะแนนความพึงพอต้องอยู่ระหว่าง 1-5")
@@ -275,6 +278,41 @@ export default function CustomizedDialogs({ open, setOpen, data }: any) {
                     value={data.endDate}
                   />
 
+                  {!!errors.pass ? (
+                    <label style={{ color: "red" }}> กรอกผลการศึกษา</label>
+                  ) : (
+                    <label> ผลการศึกษา</label>
+                  )}
+                  <Controller
+                    as={
+                      <RadioGroup aria-label="pass">
+                        <FormControlLabel
+                          value={"ผ่าน"}
+                          control={<Radio />}
+                          label="ผ่าน"
+                        />
+                        <FormControlLabel
+                          value={"ไม่ผ่าน"}
+                          control={<Radio />}
+                          label="ไม่ผ่าน"
+                        />
+                      </RadioGroup>
+                    }
+                    name="pass"
+                    control={control}
+                    defaultValue={data.pass ? "ผ่าน" : "ไม่ผ่าน"}
+                  />
+
+                  <TextField
+                    fullWidth
+                    multiline
+                    label="หมายเหตุ"
+                    name="note"
+                    inputRef={register}
+                    helperText={errors.note ? "กรอกหมายเหตุ" : ""}
+                    error={!!errors.note}
+                    defaultValue={data.note}
+                  />
                   <TextField
                     fullWidth
                     multiline
@@ -285,37 +323,6 @@ export default function CustomizedDialogs({ open, setOpen, data }: any) {
                     helperText={errors.hour ? "กรอกจำนวนชั่วโมง" : ""}
                     error={!!errors.hour}
                     defaultValue={data.hour}
-                  />
-                    <label> ผลการศึกษา</label>
-                     <Controller
-              as={
-                <RadioGroup aria-label="pass">
-                  <FormControlLabel
-                    value={"ผ่าน"}
-                    control={<Radio />}
-                    label="ผ่าน"
-                  />
-                  <FormControlLabel
-                    value={"ไม่ผ่าน"}
-                    control={<Radio />}
-                    label="ไม่ผ่าน"
-                  />
-                </RadioGroup>
-              }
-              name="pass"
-              control={control}
-              defaultValue={data.pass?"ผ่าน":"ไม่ผ่าน"}
-            />
-            
-                  <TextField
-                    fullWidth
-                    multiline
-                    label="หมายเหตุ"
-                    name="note"
-                    inputRef={register}
-                    helperText={errors.note ? "กรอกหมายเหตุ" : ""}
-                    error={!!errors.note}
-                    defaultValue={data.note}
                   />
                   <TextField
                     fullWidth

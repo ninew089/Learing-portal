@@ -155,8 +155,20 @@ export default function ReportTable() {
             type: "date",
             dateSetting: { locale: "th-TH" },
           },
+
+          {
+            title: "ผลการศึกษา",
+            field: "pass",
+            render: (row) => {
+              return row.pass ? (
+                <div style={{ color: "#2E5E0B", fontWeight: 700 }}>ผ่าน</div>
+              ) : (
+                <div style={{ color: "#C52F2F", fontWeight: 700 }}>ไม่ผ่าน</div>
+              );
+            },
+          },
+          { title: "หมายเหตุ", field: "note" },
           { title: "จำนวนชั่วโมง", field: "hour", type: "numeric" },
-          { title: "ผลการศึกษา", field: "pass" },
           {
             title: "คะแนนความพึงพอใจ",
             field: "satisfactionScore",
@@ -169,8 +181,19 @@ export default function ReportTable() {
             editable: "never",
             dateSetting: { locale: "th-TH" },
           },
-          { title: "หมายเหตุ", field: "note" },
-          { title: "ผลการอนุมัติ", field: "approve", editable: "never" },
+
+          {
+            title: "ผลการอนุมัติ",
+            field: "approve",
+            editable: "never",
+            render: (row) => {
+              return row.approve === 1 ? (
+                <div style={{ color: "#2E5E0B", fontWeight: 700 }}>ผ่าน</div>
+              ) : (
+                <div style={{ color: "#C52F2F", fontWeight: 700 }}>ไม่ผ่าน</div>
+              );
+            },
+          },
         ]}
         data={entries}
         actions={[

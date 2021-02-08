@@ -53,7 +53,7 @@ export function formatDatetoThai(date) {
   ];
   const mm = parseInt(res[0]);
   const yy = parseInt(res[2]) + 543;
-  const newDate = `${res[1]} ${m[mm - 1]} พ.ศ.${yy}`;
+  const newDate = `${res[1]} ${m[mm - 1]} ${yy}`;
   return newDate;
 }
 export function formatDatetoThaiTest(date) {
@@ -75,6 +75,6 @@ export function formatDatetoThaiTest(date) {
   const mm = parseInt(res[1]);
   const yy = parseInt(res[0]) + 543;
   const day = res[2].split("T00:00:00");
-  const newDate = `${day[0]} ${m[mm - 1]} พ.ศ.${yy}`;
+  const newDate = `${day[0]} ${m[mm - 1]} ${yy}`;
   return newDate;
 }
