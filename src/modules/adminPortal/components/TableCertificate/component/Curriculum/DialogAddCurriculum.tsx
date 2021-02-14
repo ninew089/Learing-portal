@@ -302,7 +302,15 @@ export default function CustomizedDialogs({ open, setOpen }: DialogsProps) {
                     name="pass"
                     control={control}
                   />
-
+                  <TextField
+                    fullWidth
+                    multiline
+                    label="หมายเหตุ"
+                    name="note"
+                    inputRef={register}
+                    helperText={errors.note ? "กรอกหมายเหตุ" : ""}
+                    error={!!errors.note}
+                  />
                   <TextField
                     fullWidth
                     multiline
@@ -313,15 +321,7 @@ export default function CustomizedDialogs({ open, setOpen }: DialogsProps) {
                     helperText={errors.hour ? "กรอกจำนวนชั่วโมง" : ""}
                     error={!!errors.hour}
                   />
-                  <TextField
-                    fullWidth
-                    multiline
-                    label="หมายเหตุ"
-                    name="note"
-                    inputRef={register}
-                    helperText={errors.note ? "กรอกหมายเหตุ" : ""}
-                    error={!!errors.note}
-                  />
+
                   <TextField
                     fullWidth
                     multiline

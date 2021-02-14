@@ -161,7 +161,17 @@ export default function MaterialTableDemo(props: any) {
           { title: "รหัสหลักสูตร", field: "curriculumid" },
           { title: "ชื่อหลักสูตร", field: "curriculum" },
           { title: "หน่วยงานที่ให้ประกาศนียบัตร", field: "platform" },
-          { title: "ผลการศึกษา", field: "pass" },
+          {
+            title: "ผลการศึกษา",
+            field: "pass",
+            render: (row) => {
+              return row.pass ? (
+                <div style={{ color: "#2E5E0B", fontWeight: 700 }}>ผ่าน</div>
+              ) : (
+                <div style={{ color: "#C52F2F", fontWeight: 700 }}>ไม่ผ่าน</div>
+              );
+            },
+          },
         ]}
         data={predata1}
         detailPanel={(rowData) => {

@@ -305,6 +305,16 @@ export default function CustomizedDialogs({ open, setOpen, data }: any) {
                   <TextField
                     fullWidth
                     multiline
+                    label="หมายเหตุ"
+                    name="note"
+                    inputRef={register}
+                    helperText={errors.note ? "กรอกหมายเหตุ" : ""}
+                    error={!!errors.note}
+                    defaultValue={data.note}
+                  />
+                  <TextField
+                    fullWidth
+                    multiline
                     label="จำนวนชั่วโมง"
                     name="hour"
                     type="number"
@@ -314,16 +324,6 @@ export default function CustomizedDialogs({ open, setOpen, data }: any) {
                     defaultValue={data.hour}
                   />
 
-                  <TextField
-                    fullWidth
-                    multiline
-                    label="หมายเหตุ"
-                    name="note"
-                    inputRef={register}
-                    helperText={errors.note ? "กรอกหมายเหตุ" : ""}
-                    error={!!errors.note}
-                    defaultValue={data.note}
-                  />
                   <TextField
                     fullWidth
                     multiline
