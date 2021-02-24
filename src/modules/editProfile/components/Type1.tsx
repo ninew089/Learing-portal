@@ -4,7 +4,7 @@ import { TextField, MenuItem, FormControl } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import * as actions from "modules/infomation/actions";
 import { useDispatch, useSelector } from "react-redux";
-import { jobTypes1Props, jobLevelProps, typeProps } from "../typescript"
+import { jobTypes1Props, jobLevelProps, typeProps } from "../typescript";
 const useStyles = makeStyles((theme) => ({
   input: {
     color: "#0f1626",
@@ -87,10 +87,9 @@ export default function Type1(props: typeProps) {
 
   return (
     <>
-      < FormControl fullWidth>
+      <FormControl fullWidth>
         <h4> {name}</h4>
-        {jobTypes1?.length !== 0 &&
-
+        {jobTypes1?.length !== 0 && (
           <Controller
             as={
               <TextField
@@ -104,28 +103,24 @@ export default function Type1(props: typeProps) {
                 select
                 defaultValue=""
                 helperText={
-                  formProps.errors.jobtypeId && formProps.errors.jobtypeId.message
+                  formProps.errors.jobtypeId &&
+                  formProps.errors.jobtypeId.message
                 }
                 error={!!formProps.errors.jobtypeId}
               >
-
                 {jobTypes1.map((jobType1: jobTypes1Props, index: number) => (
-
-                  < MenuItem key={index} value={jobType1.id}>
+                  <MenuItem key={index} value={jobType1.id}>
                     {jobType1.name}
                   </MenuItem>
-
                 ))}
-
               </TextField>
             }
             name="jobtypeId"
             defaultValue=""
             rules={{ required: "กรุณาเลือกประเภทตำแหน่ง" }}
             control={formProps.control}
-
           />
-        }
+        )}
 
         <TextField
           fullWidth
@@ -142,7 +137,7 @@ export default function Type1(props: typeProps) {
           }
           error={!!formProps.errors.jobTitle}
         />
-        {jobLevels?.length !== 0 &&
+        {jobLevels?.length !== 0 && (
           <Controller
             as={
               <TextField
@@ -161,11 +156,40 @@ export default function Type1(props: typeProps) {
                 }
                 error={!!formProps.errors.jobLevelid}
               >
-                {jobLevels.map((jobLevel: jobLevelProps, index: number) => (
-                  <MenuItem key={index} value={jobLevel.id}>
-                    {jobLevel.name}
-                  </MenuItem>
-                ))}
+                {jobLevels.map((jobLevel: jobLevelProps, index: number) => {
+                  if (
+                    formProps.getValues("jobtypeId") === 1 &&
+                    jobLevel.id > 0 &&
+                    jobLevel.id < 5
+                  ) {
+                    return (
+                      <MenuItem key={index} value={jobLevel.id}>
+                        {jobLevel.name}
+                      </MenuItem>
+                    );
+                  }
+                  if (
+                    formProps.getValues("jobtypeId") === 2 &&
+                    jobLevel.id > 4 &&
+                    jobLevel.id < 10
+                  ) {
+                    return (
+                      <MenuItem key={index} value={jobLevel.id}>
+                        {jobLevel.name}
+                      </MenuItem>
+                    );
+                  }
+                  if (
+                    formProps.getValues("jobtypeId") >= 3 &&
+                    jobLevel.id > 9
+                  ) {
+                    return (
+                      <MenuItem key={index} value={jobLevel.id}>
+                        {jobLevel.name}
+                      </MenuItem>
+                    );
+                  }
+                })}
               </TextField>
             }
             name="jobLevelid"
@@ -173,11 +197,8 @@ export default function Type1(props: typeProps) {
             control={formProps.control}
             defaultValue=""
           />
-
-        }
-
+        )}
       </FormControl>
-
     </>
   );
 }

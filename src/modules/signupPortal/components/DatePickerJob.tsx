@@ -104,6 +104,7 @@ function DateFnsLocalizationExample(props: any) {
         animateYearScrolling
         label={`${title}`}
         clearable
+        openTo="year"
         format={`dd MMMM ${parseInt(formatDate(selectedDate, "YYYY")) + 543}`}
         value={selectedDate}
         //@ts-ignore

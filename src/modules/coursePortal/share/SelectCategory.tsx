@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
+import { MenuItem, ListItemIcon, ListItemText } from "@material-ui/core";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import { useDispatch, useSelector } from "react-redux";
@@ -83,23 +83,38 @@ export default function ControlledOpenSelect() {
           onOpen={handleOpen}
           onChange={handleChange}
           value={value}
+          style={{
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            width: "320px",
+          }}
         >
-          <MenuItem value={-2}>ทังหมด</MenuItem>
+          <MenuItem value={-2} style={{ whiteSpace: "normal" }}>
+            <ListItemText primary={"ทังหมด"} />
+          </MenuItem>
           {categories.map((item: any, index: number) => (
-            <MenuItem value={item} key={index}>
-              <div
-                className={classes.dot}
-                style={{
-                  background:
-                    colorName[0][item.name !== undefined ? item.name : 0],
-                }}
-              />
-              {item.name}
+            <MenuItem value={item} key={index} style={{ whiteSpace: "normal" }}>
+              <ListItemIcon>
+                <div
+                  className={classes.dot}
+                  style={{
+                    background:
+                      colorName[0][item.name !== undefined ? item.name : 0],
+                    backgroundSize: "cover",
+                    padding: "2px",
+                    backgroundPosition: " center center",
+                    margin: 8,
+                  }}
+                />
+              </ListItemIcon>
+              <ListItemText primary={item.name} />
             </MenuItem>
           ))}
-          <MenuItem value={-1}>
-            <div className={classes.dot} style={{ background: "#f9b122" }} />
-            หลักสูตร
+          <MenuItem value={-1} style={{ whiteSpace: "normal" }}>
+            <ListItemIcon>
+              <div className={classes.dot} style={{ background: "#f9b122" }} />
+            </ListItemIcon>
+            <ListItemText primary={"หลักสูตร"} />
           </MenuItem>
         </Select>
       </FormControl>

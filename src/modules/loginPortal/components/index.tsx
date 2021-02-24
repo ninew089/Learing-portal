@@ -4,7 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 
 import img from "assets/images/OCSC-banner.png";
-import {Visibility,VisibilityOff,Lock,AccountCircle} from '@material-ui/icons';
+import {
+  Visibility,
+  VisibilityOff,
+  Lock,
+  AccountCircle,
+} from "@material-ui/icons";
 import {
   Container,
   InputAdornment,
@@ -12,7 +17,9 @@ import {
   CssBaseline,
   TextField,
   Grid,
-  Typography, FormHelperText, Toolbar
+  Typography,
+  FormHelperText,
+  Toolbar,
 } from "@material-ui/core";
 import { NavLink } from "react-router-dom";
 import * as actions from "../actions";
@@ -149,15 +156,17 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: "auto",
     marginRight: "auto",
     width: "50%",
-  }, messageLogin: {
+  },
+  messageLogin: {
     fontWeight: 600,
     fontSize: 14,
-    margin: 2
-  }, warring: {
+    margin: 2,
+  },
+  warring: {
     color: "red",
     textAlign: "center",
-    margin: 8
-  }
+    margin: 8,
+  },
 }));
 
 export default function SignIn() {
@@ -171,7 +180,7 @@ export default function SignIn() {
         .string()
         .required("กรุณากรอกเลขประจำตัวประจำตัวประชาชน")
         .matches(/^[0-9]{13}$/, "กรุณากรอกเป็นตัวเลข 13 หลัก")
-   .test(
+        .test(
           "ตรวจสอบรหัสบัตรประชาชน",
           "กรอกเลขประจำตัวประชาชนผิด กรุณากรอกใหม่",
 
@@ -188,19 +197,18 @@ export default function SignIn() {
       password: yup.string().required(),
     }),
   });
- 
+
   const { messageLogin } = useSelector((state: any) => state.login);
   const onLogin = (loginInfo: object) => {
-
-    const info = { ...loginInfo, role: 'user' };
+    const info = { ...loginInfo, role: "user" };
     const actionLogin = actions.loadLogin(info);
     dispatch(actionLogin);
-
   };
-const [visible,setVisible]=useState(true)
+  const [visible, setVisible] = useState(true);
   function randomState(length: any) {
-    var result = '';
-    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var result = "";
+    var characters =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     var charactersLength = characters.length;
     for (var i = 0; i < length; i++) {
       result += characters.charAt(Math.floor(Math.random() * charactersLength));
@@ -210,18 +218,25 @@ const [visible,setVisible]=useState(true)
 
   /*use this function when click the button "sign in with EDTA Connect"*/
   function redirect() {
-
     var res = "response_type=code";
-    var clientId = "&client_id=e45e0593-3b44-44b4-9d0b-37b71acb0a56";
-    var uri = "&redirect_uri=https://learn.ocsc.info/etda/callback.html";
+    var clientId = "&client_id=105c7cf7-a02d-48aa-84ba-1a861633ea7a";
+    var uri = "&redirect_uri=https://welearn.ocsc.go.th/etda/callback.html";
     var scope = "&scope=openid%20profile";
     var state = "&state=";
     var random = randomState(11);
     var prompt = "&prompt=login%20consent";
 
     document.cookie = "state=" + random;
-    window.open("https://openid1.digitalid.or.th/proxy/v1/list.htm?" + res + clientId + uri + scope + state + random + prompt);
-
+    window.open(
+      "https://proxy1.auth.teda.th/proxy/v1/list.htm?" +
+        res +
+        clientId +
+        uri +
+        scope +
+        state +
+        random +
+        prompt
+    );
   }
   return (
     <Container component="main" maxWidth="xs">
@@ -255,7 +270,7 @@ const [visible,setVisible]=useState(true)
             <TextField
               className={classes.textfield}
               label="รหัสผ่าน"
-              type={visible?"password":"string"}
+              type={visible ? "password" : "string"}
               name="password"
               autoComplete="on"
               inputRef={register}
@@ -267,17 +282,24 @@ const [visible,setVisible]=useState(true)
                 className: classes.input,
                 startAdornment: (
                   <InputAdornment position="start">
-                    <Lock  />
+                    <Lock />
                   </InputAdornment>
                 ),
                 endAdornment: (
-                  <Button style={{borderRadius:100}} onClick={()=>setVisible(!visible)}>
-                   {visible? <Visibility />:<VisibilityOff/>}
+                  <Button
+                    style={{ borderRadius: 100 }}
+                    onClick={() => setVisible(!visible)}
+                  >
+                    {visible ? <Visibility /> : <VisibilityOff />}
                   </Button>
                 ),
               }}
             />
-            {messageLogin && <FormHelperText error className={classes.messageLogin} >{messageLogin}</FormHelperText>}
+            {messageLogin && (
+              <FormHelperText error className={classes.messageLogin}>
+                {messageLogin}
+              </FormHelperText>
+            )}
             <Button
               type="submit"
               fullWidth
@@ -289,12 +311,20 @@ const [visible,setVisible]=useState(true)
 
             <Grid container>
               <Grid item xs>
-                <NavLink id="router-forgot" to="/learning-portal/forget" className={classes.nav}>
+                <NavLink
+                  id="router-forgot"
+                  to="/learning-portal/forget"
+                  className={classes.nav}
+                >
                   ลืมรหัสผ่าน?
                 </NavLink>
               </Grid>
               <Grid item>
-                <NavLink id="router-signup" to="/learning-portal/signup" className={classes.nav}>
+                <NavLink
+                  id="router-signup"
+                  to="/learning-portal/signup"
+                  className={classes.nav}
+                >
                   สมัครสมาชิก
                 </NavLink>
               </Grid>
@@ -310,10 +340,12 @@ const [visible,setVisible]=useState(true)
             <Button fullWidth className={classes.etda} onClick={redirect}>
               LOGIN WITH ETDA CONNECT
             </Button>
-            <div className={classes.warring} >ต้องสมัครสมาชิกก่อนใช้งาน ETDA CONNECT</div>
+            <div className={classes.warring}>
+              ต้องสมัครสมาชิกก่อนใช้งาน ETDA CONNECT
+            </div>
           </form>
         </div>
       </div>
-    </Container >
+    </Container>
   );
 }

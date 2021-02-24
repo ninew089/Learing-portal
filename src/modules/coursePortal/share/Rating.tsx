@@ -14,7 +14,7 @@ const useStyles = makeStyles({
 });
 
 export default function HoverRating(props: any) {
-  const { vote, point } = props;
+  const { vote, point, fontSize } = props;
   //const [value] = React.useState(4.5)
 
   const classes = useStyles();
@@ -27,6 +27,7 @@ export default function HoverRating(props: any) {
         size="small"
         value={point}
         precision={0.1}
+        style={{ fontSize: fontSize }}
       />
 
       <h5 className={classes.font}>( {vote} )</h5>

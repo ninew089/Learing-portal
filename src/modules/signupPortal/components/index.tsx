@@ -39,6 +39,8 @@ export default function SignIn() {
   const [type, setType] = React.useState<string>("");
   // eslint-disable-next-line
   const [mistry, setMistry] = React.useState<string>("");
+  // eslint-disable-next-line
+  const [level, setJoblevel] = React.useState<string>("");
 
   const accountForm = useForm<accountFormProps>({
     mode: "onChange",
@@ -119,24 +121,6 @@ export default function SignIn() {
         then: yup.string().required("กรุณากรอกตำแหน่ง"),
         otherwise: yup.string().nullable(),
       }),
-      jobLevelid: yup.string().when("usertypeid", {
-        is: (usertypeid) => {
-          switch (usertypeid) {
-            case "1":
-              return true;
-            case "2":
-              return false;
-            case "3":
-              return false;
-            case "5":
-              return false;
-            case "4":
-              return false;
-          }
-        },
-        then: yup.string().required("กรุณาเลือกระดับ"),
-        otherwise: yup.string().nullable(),
-      }),
 
       jobLevel: yup.string().when("usertypeid", {
         is: (usertypeid) => {
@@ -154,6 +138,25 @@ export default function SignIn() {
           }
         },
         then: yup.string().required("กรุณาเลือกประเภท"),
+        otherwise: yup.string().nullable(),
+      }),
+      jobLevelid: yup.string().when(["usertypeid", "jobtypeId"], {
+        is: (usertypeid, jobtypeId) => {
+          setJoblevel(jobtypeId);
+          switch (usertypeid) {
+            case "1":
+              return true;
+            case "2":
+              return false;
+            case "3":
+              return false;
+            case "5":
+              return false;
+            case "4":
+              return false;
+          }
+        },
+        then: yup.string().required("กรุณาเลือกระดับ"),
         otherwise: yup.string().nullable(),
       }),
 

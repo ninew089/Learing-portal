@@ -44,11 +44,11 @@ export default function APP() {
           boxShadow: "none",
         },
       },
-      MuiSelect:{
-        selectMenu:{
-          display:"inline-flex"
-
-      }}
+      MuiSelect: {
+        selectMenu: {
+          display: "inline-flex",
+        },
+      },
     },
   });
   const store = configureStore();

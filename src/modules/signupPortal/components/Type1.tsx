@@ -107,7 +107,6 @@ export default function Type1(props: typeProps) {
               error={!!formProps.errors.jobtypeId}
               defaultValue=""
             >
-
               {jobTypes1.map((jobType1: jobTypes1Props, index: number) => (
                 <MenuItem key={index} value={jobType1.id}>
                   {jobType1.name}
@@ -137,7 +136,6 @@ export default function Type1(props: typeProps) {
           error={!!formProps.errors.jobTitle}
           defaultValue=""
         />
-
         <Controller
           as={
             <TextField
@@ -156,11 +154,37 @@ export default function Type1(props: typeProps) {
               error={!!formProps.errors.jobLevelid}
               defaultValue=""
             >
-              {jobLevels.map((jobLevel: jobLevelProps, index: number) => (
-                <MenuItem key={index} value={jobLevel.id}>
-                  {jobLevel.name}
-                </MenuItem>
-              ))}
+              {jobLevels.map((jobLevel: jobLevelProps, index: number) => {
+                if (
+                  formProps.getValues("jobtypeId") === 1 &&
+                  jobLevel.id > 0 &&
+                  jobLevel.id < 5
+                ) {
+                  return (
+                    <MenuItem key={index} value={jobLevel.id}>
+                      {jobLevel.name}
+                    </MenuItem>
+                  );
+                }
+                if (
+                  formProps.getValues("jobtypeId") === 2 &&
+                  jobLevel.id > 4 &&
+                  jobLevel.id < 10
+                ) {
+                  return (
+                    <MenuItem key={index} value={jobLevel.id}>
+                      {jobLevel.name}
+                    </MenuItem>
+                  );
+                }
+                if (formProps.getValues("jobtypeId") >= 3 && jobLevel.id > 9) {
+                  return (
+                    <MenuItem key={index} value={jobLevel.id}>
+                      {jobLevel.name}
+                    </MenuItem>
+                  );
+                }
+              })}
             </TextField>
           }
           name="jobLevelid"

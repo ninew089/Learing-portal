@@ -188,9 +188,9 @@ export default function ReportTable() {
             editable: "never",
             render: (row) => {
               return row.approve === 1 ? (
-                <div style={{ color: "#2E5E0B", fontWeight: 700 }}>ผ่าน</div>
+                <div style={{ color: "#2E5E0B", fontWeight: 700 }}>อนุมัติ</div>
               ) : (
-                <div style={{ color: "#C52F2F", fontWeight: 700 }}>ไม่ผ่าน</div>
+                <div style={{ color: "#C52F2F", fontWeight: 700 }}>-</div>
               );
             },
           },

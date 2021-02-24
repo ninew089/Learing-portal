@@ -1,7 +1,7 @@
 import React from "react";
 
-import Avatar from "@material-ui/core/Avatar";
 import { makeStyles } from "@material-ui/core/styles";
+import { AccountCircle } from "@material-ui/icons";
 import {
   Container,
   Button,
@@ -10,7 +10,6 @@ import {
   Divider,
   Box,
 } from "@material-ui/core";
-import profilepicture from "assets/images/user.svg";
 import Information from "./Information";
 import TypeSelect from "./TypeSelect";
 import { useForm } from "react-hook-form";
@@ -40,22 +39,7 @@ const useStyles = makeStyles((theme) => ({
   },
   large: {
     align: "center",
-    [theme.breakpoints.only("xs")]: {
-      width: theme.spacing(18),
-      height: theme.spacing(18),
-    },
-    [theme.breakpoints.only("sm")]: {
-      width: theme.spacing(18),
-      height: theme.spacing(18),
-    },
-    [theme.breakpoints.only("md")]: {
-      width: theme.spacing(18),
-      height: theme.spacing(18),
-    },
-    [theme.breakpoints.only("lg")]: {
-      width: theme.spacing(24),
-      height: theme.spacing(24),
-    },
+    fontSize: 48,
   },
   form: {
     marginTop: 10,
@@ -72,7 +56,9 @@ export default function Edit(props: any) {
   const [types, setType] = React.useState<string>("");
   // eslint-disable-next-line
   const [mistry, setMistry] = React.useState<string>("");
-
+  // eslint-disable-next-line
+  const [level, setJoblevel] = React.useState<string>("");
+  
   const accountForm = useForm<accountFormProps>({
     mode: "onChange",
     defaultValues: {
@@ -145,8 +131,9 @@ export default function Edit(props: any) {
         then: yup.string().required("กรุณากรอกตำแหน่ง"),
         otherwise: yup.string().nullable(),
       }),
-      jobLevelid: yup.string().when("usertypeid", {
-        is: (usertypeid) => {
+      jobLevelid: yup.string().when(["usertypeid", "jobtypeId"], {
+        is: (usertypeid, jobtypeId) => {
+          setJoblevel(jobtypeId);
           switch (usertypeid) {
             case "1":
               return true;
@@ -163,7 +150,6 @@ export default function Edit(props: any) {
         then: yup.string().required("กรุณาเลือกระดับ"),
         otherwise: yup.string().nullable(),
       }),
-
       jobLevel: yup.string().when("usertypeid", {
         is: (usertypeid) => {
           switch (usertypeid) {
@@ -342,17 +328,10 @@ export default function Edit(props: any) {
       <Container component="main" maxWidth="sm" className={classes.paper}>
         <Grid container direction="row" justify="center" alignItems="center">
           <Box fontWeight="fontWeightBold" fontSize={24} textAlign="center">
-            {" "}
             โปรไฟล์
           </Box>
-
           <Grid container direction="row" justify="center" alignItems="center">
-            <Avatar
-              alt="Remy Sharp"
-              src={profilepicture}
-              className={classes.large}
-            />
-
+            <AccountCircle className={classes.large} />
             <Grid item xs={12}>
               <Box fontWeight="fontWeightBold" fontSize={18} textAlign="center">
                 {data.title}

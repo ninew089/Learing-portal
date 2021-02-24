@@ -14,7 +14,10 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     flexGrow: 1,
-    minHeight: `100vh`,
+    minHeight: `calc(100vh - 146px)`,
+    [theme.breakpoints.only("xs")]: {
+      minHeight: `100vh-56px`,
+    },
   },
   push: {
     height: "60px",
@@ -39,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 20,
     [theme.breakpoints.down("sm")]: {
       textAlign: "center",
-      fontSize: 14,
+      fontSize: 18,
     },
   },
 
@@ -100,7 +103,7 @@ export default function PersistentDrawerLeft(props: any) {
         <Routes />
       </Grid>
       <div className={classes.push} />
-      <Box p={5} className={classes.footer}>
+      <Box p={2} className={classes.footer}>
         <Grid
           container
           direction="row"

@@ -103,6 +103,7 @@ function DateFnsLocalizationExample(props: any) {
           className: classes.input,
           readOnly: true,
         }}
+        openTo="year"
         animateYearScrolling
         label={`${title}`}
         clearable

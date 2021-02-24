@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { makeStyles,useTheme } from "@material-ui/core/styles";
-import {Tabs,Tab,Avatar,Grid} from "@material-ui/core";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { Tabs, Tab, Avatar } from "@material-ui/core";
 //@ts-ignore
-import SwipeableViews from 'react-swipeable-views';
-import TabPanel from "./TabPlanel"
+import SwipeableViews from "react-swipeable-views";
+import TabPanel from "./TabPlanel";
 import axios from "axios";
 import Dialog from "./Dialog";
-import { appleTabsStylesHook } from '@mui-treasury/styles/tabs';
-import {ContactPhoneOutlined ,Email,ImportContactsRounded} from "@material-ui/icons"
+import { appleTabsStylesHook } from "@mui-treasury/styles/tabs";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -21,22 +21,24 @@ const useStyles = makeStyles((theme) => ({
   small: {
     width: theme.spacing(4),
     height: theme.spacing(4),
-    margin:8
+    margin: 8,
   },
-  title:{
-    fontSize:18,
-    fontWeight:900
+  title: {
+    fontSize: 18,
+    fontWeight: 900,
   },
-  content:{
-    fontSize:14,
-    fontWeight:500,
-    alignContent:"center"
-  },icon:{
-    fontSize:24,
-    margin:4
-  },center:{
-    alignContent:"center"
-  }
+  content: {
+    fontSize: 14,
+    fontWeight: 500,
+    alignContent: "center",
+  },
+  icon: {
+    fontSize: 24,
+    margin: 4,
+  },
+  center: {
+    alignContent: "center",
+  },
 }));
 
 export default function VariantAvatars() {
@@ -67,6 +69,7 @@ export default function VariantAvatars() {
         <Tabs
           value={value}
           classes={tabsStyles}
+          style={{ backgroundColor: "transparent" }}
           onChange={handleChange}
           variant="scrollable"
           scrollButtons="on"
@@ -84,55 +87,32 @@ export default function VariantAvatars() {
               classes={tabItemStyles}
               onClick={handleClickOpen}
               icon={
-                <Avatar alt="Remy Sharp" src={item.thumbnail}  className={classes.rounded} />
-           
+                <Avatar
+                  alt="Remy Sharp"
+                  src={item.thumbnail}
+                  className={classes.rounded}
+                />
               }
             />
           ))}
         </Tabs>
         <SwipeableViews
-        axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-        index={value}
-        onChangeIndex={handleChange}
-      >
-         {data.map((item: any, index: number) => (
-     <TabPanel value={value} index={index} dir={theme.direction}  key={index}>
-        <Grid container direction="row" justify="flex-start" alignItems="center">
- <ImportContactsRounded className={classes.icon}/><h2>ช่องทางการติดต่อ
-   </h2>
-        </Grid>
-       <Grid container direction="row" justify="flex-start" alignItems="center">
-    <Grid item xs={12} className={classes.title}>
-    {item.officialName}
-      </Grid> 
-      <Grid item xs={12}  className={classes.content}> {item.abbreviation}
-      </Grid>
-      <Grid item xs={12}  className={classes.content}>
-      </Grid >
-      <Grid container direction="row" justify="flex-start" alignItems="center">
-    <ContactPhoneOutlined className={classes.icon}/>  : {item.phone} 
-    </Grid>
-   
-    <Grid container direction="row" justify="flex-start" alignItems="center">
-
-    <Email className={classes.icon}/> : {item.email}
-</Grid>
-
-
-</Grid>
-<Dialog
-        open={open}
-        setOpen={setOpen}
-        data={item}
-      />
-   </TabPanel>
-
-         ))}
-   
-      </SwipeableViews>
+          axis={theme.direction === "rtl" ? "x-reverse" : "x"}
+          index={value}
+          onChangeIndex={handleChange}
+        >
+          {data.map((item: any, index: number) => (
+            <TabPanel
+              value={value}
+              index={index}
+              dir={theme.direction}
+              key={index}
+            >
+              <Dialog open={open} setOpen={setOpen} data={item} />
+            </TabPanel>
+          ))}
+        </SwipeableViews>
       </div>
-    
-   
     </>
   );
 }

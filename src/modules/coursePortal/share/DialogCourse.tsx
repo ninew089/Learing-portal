@@ -61,8 +61,8 @@ const styles = (theme: Theme) =>
       zIndex: 2,
       margin: 0,
       padding: theme.spacing(2),
-      //background: '#182437',
       color: "#1b1a1a",
+      minHeight: 180,
     },
     closeButton: {
       position: "absolute",
@@ -79,23 +79,49 @@ export interface DialogTitleProps extends WithStyles<typeof styles> {
   id: string;
   children: React.ReactNode;
   onClose: () => void;
+  image: string;
 }
 
 const MuiDialogTitle = withStyles(styles)((props: DialogTitleProps) => {
-  const { children, classes, onClose, ...other } = props;
+  const { children, classes, onClose, image, ...other } = props;
   return (
-    <DialogTitle disableTypography className={classes.root} {...other}>
-      <Typography variant="h5">{children}</Typography>
-      {onClose ? (
-        <IconButton
-          aria-label="close"
-          className={classes.closeButton}
-          onClick={onClose}
-        >
-          <CloseIcon />
-        </IconButton>
-      ) : null}
-    </DialogTitle>
+    <>
+      <DialogTitle
+        disableTypography
+        className={classes.root}
+        {...other}
+        style={{
+          background: `url(${image})`,
+          objectFit: "cover",
+          backgroundPosition: "center center",
+          filter: "brightness(0.7)",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
+        {onClose ? (
+          <IconButton
+            aria-label="close"
+            className={classes.closeButton}
+            onClick={onClose}
+          >
+            <CloseIcon />
+          </IconButton>
+        ) : null}
+      </DialogTitle>
+      <Typography
+        variant="h5"
+        style={{
+          position: "absolute",
+          top: 50,
+          left: 10,
+          textShadow: "rgb(0 0 0 / 40%) 0px 3px 3px",
+          color: "white",
+          zIndex: 2,
+        }}
+      >
+        {children}
+      </Typography>
+    </>
   );
 });
 
@@ -163,7 +189,11 @@ export default function CustomizedDialogs({
         aria-labelledby="customized-dialog-title"
         open={open}
       >
-        <MuiDialogTitle id="customized-dialog-title" onClose={handleClose}>
+        <MuiDialogTitle
+          id="customized-dialog-title"
+          onClose={handleClose}
+          image={data.thumbNail}
+        >
           {data.name}
         </MuiDialogTitle>
         <MuiDialogContent dividers>

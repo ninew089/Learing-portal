@@ -3,7 +3,6 @@ import * as actions from "../actions";
 import { useDispatch, useSelector } from "react-redux";
 import { Toolbar, Grid, CircularProgress } from "@material-ui/core";
 import Edit from "./Edit";
-
 import * as actionsInfo from "modules/infomation/actions";
 
 export default function Page() {

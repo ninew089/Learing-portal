@@ -1,13 +1,20 @@
 import React, { useState } from "react";
-import { Grid, Box, Divider, CardMedia, Typography } from "@material-ui/core";
+import { Grid, Box, Divider, CardMedia } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Dialog from "../../share/DialogCourse";
 import { useSelector } from "react-redux";
 import Rating from "../../share/Rating";
-import numberFormat from "utils/numberFormat";
 import banner from "assets/images/welearn.png";
 
 const useStyles = makeStyles((theme) => ({
+  contianer: {
+    position: "relative",
+  },
+  icon: {
+    position: "absolute",
+    bottom: 0,
+    right: 10,
+  },
   card: {
     marginTop: "10px",
     width: "95%",
@@ -60,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
     textOverflow: "ellipsis",
     WebkitBoxOrient: "vertical",
     [theme.breakpoints.down("sm")]: {
-      fontSize: "12px",
+      fontSize: "10px",
     },
   },
   items: {
@@ -88,6 +95,10 @@ const useStyles = makeStyles((theme) => ({
     display: "inline-block",
     marginLeft: 2,
     marginRight: 4,
+    [theme.breakpoints.only("xs")]: {
+      height: "6px",
+      width: "6px",
+    },
   },
   author: {
     overflow: "hidden",
@@ -95,8 +106,8 @@ const useStyles = makeStyles((theme) => ({
     textOverflow: "ellipsis",
     WebkitLineClamp: 1,
     WebkitBoxOrient: "vertical",
-    fontSize: "14px",
-    fontWeight: 700,
+    fontSize: "12px",
+    fontWeight: 500,
     color: "#132740",
     padding: 3,
     maxWidth: 128,
@@ -112,7 +123,10 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 6,
   },
   logo: {
-    margin: 8,
+    marginBottom: 4,
+    marginTop: 4,
+    marginLeft: 4,
+    marginRight: 0,
   },
   view: {
     fontSize: "8px",
@@ -138,21 +152,27 @@ export default function SocialCard(props: any) {
         onClick={onSelected}
       >
         <Grid item xs={5}>
-          <CardMedia
-            style={{
-              background: `url('${data.thumbNail}')`,
-              backgroundSize: "cover",
-              backgroundPosition: "center center",
-            }}
-            image={data.thumbNail}
-            className={classes.cardMedia}
-            title={data.name}
-          />
+          <div className={classes.contianer}>
+            <CardMedia
+              style={{
+                background: `url('${data.thumbNail}')`,
+                backgroundSize: "cover",
+                backgroundPosition: "center center",
+              }}
+              image={data.thumbNail}
+              className={classes.cardMedia}
+              title={data.name}
+            >
+              {data.platformName === "สำนักงาน ก.พ." && (
+                <div className={classes.icon}>
+                  <img src={banner} alt="welearn" width="28" />
+                </div>
+              )}
+            </CardMedia>
+          </div>
         </Grid>
 
         <Grid item xs={7}>
-
-
           <Box fontSize={14} fontWeight={700} className={classes.name}>
             {data.name}
           </Box>
@@ -161,22 +181,32 @@ export default function SocialCard(props: any) {
             {data.code}
           </Box>
           <Box fontSize={12} fontWeight={700} className={classes.category}>
-            <div
-              className={classes.dot}
-              style={{
-                background:
-                  colorName[0][
-                  data.courseCategory !== undefined ? data.courseCategory : 0
-                  ],
-              }}
-            />
-            {data.courseCategory}
+            <Grid container justify="flex-start" direction="row">
+              <Grid item xs={1}>
+                <div
+                  className={classes.dot}
+                  style={{
+                    background:
+                      colorName[0][
+                        data.courseCategory !== undefined
+                          ? data.courseCategory
+                          : 0
+                      ],
+                  }}
+                />
+              </Grid>
+
+              <Grid item xs={8}>
+                {data.courseCategory}
+              </Grid>
+            </Grid>
           </Box>
           <Grid
             container
             justify="flex-start"
-            alignItems="center"
+            alignItems="flex-start"
             direction="row"
+            style={{ marginTop: 4 }}
           >
             <Grid item>
               <div className={classes.logo}>
@@ -184,52 +214,35 @@ export default function SocialCard(props: any) {
                   style={{
                     backgroundImage: `url('${data.platformlogo}`,
                     backgroundSize: "cover",
-                    padding: "18px",
+                    padding: "14px",
                     backgroundPosition: " center center",
                   }}
                 />
               </div>
             </Grid>
-            <Grid item xs={6}>
-
+            <Grid item xs={7}>
               <div className={classes.author}>{data.platformName} </div>
               <div className={classes.rating}>
                 <Rating
+                  fontSize={14}
                   vote={data.satisfactionCount}
                   point={data.satisfactionSum / data.satisfactionCount}
                 />
               </div>
-              <Grid
-                container
-                direction="row"
-                justify="flex-start"
-                alignItems="flex-start"
-                className={classes.box}
-              >
-                <Typography
-                  variant="caption"
-                  align="left"
-                  component="span"
-                  color={"textSecondary"}
-                  className={classes.view}
-                >
-                  การดู {numberFormat(data.viewCount)} ครั้ง
-                </Typography>
-              </Grid>
-
             </Grid>
-
-
-          </Grid>
-          <Grid item >
-            {data.platformName === "สำนักงาน ก.พ." && <img src={banner} alt="welearn" width="40" style={{ marginLeft: 10 }} />}
           </Grid>
 
-          <Divider />
+          <Divider style={{ marginTop: 10 }} />
         </Grid>
       </Grid>
 
-      <Dialog open={open} setOpen={setOpen} data={data} isCurriculum={false} key={data.name} />
+      <Dialog
+        open={open}
+        setOpen={setOpen}
+        data={data}
+        isCurriculum={false}
+        key={data.name}
+      />
     </>
   );
 }

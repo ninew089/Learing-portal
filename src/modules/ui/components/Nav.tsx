@@ -24,10 +24,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavMenu, NavItem } from "@mui-treasury/components/menu/navigation";
 import { useLineNavigationMenuStyles } from "@mui-treasury/styles/navigationMenu/line";
 import amber from "@material-ui/core/colors/amber";
-import {
-  AccountCircle,
-
-} from "@material-ui/icons";
+import { AccountCircle } from "@material-ui/icons";
 const useStyles = makeStyles((theme) => ({
   title: {
     fontWeight: 700,
@@ -135,13 +132,15 @@ export default function PersistentDrawerLeft(props: any) {
             <NavLink
               to={`${path}`}
               className={classes.noDecorationLink}
+              style={{ marginBottom: 4, marginTop: 4 }}
             >
-              <img alt="" src={banner} width={matchesIspad ? 100 : 140} />
+              <img alt="" src={banner} width={matchesIspad ? 62 : 76} />
             </NavLink>
 
             <Hidden mdDown>
               <Typography variant="h6" noWrap className={classes.title}>
-              OCSC Learning Portal  ศูนย์การเรียนรู้ทางสื่ออิเล็กทรอนิกส์แบบบูรณาการ 
+                OCSC Learning Portal
+                ศูนย์การเรียนรู้ทางสื่ออิเล็กทรอนิกส์แบบบูรณาการ
               </Typography>
             </Hidden>
           </Grid>
@@ -159,56 +158,55 @@ export default function PersistentDrawerLeft(props: any) {
                   color="secondary"
                 >
                   <NavItem
-                  as={'div'}
+                    as={"div"}
                     active={active === 0}
                     className={
                       active === 0 ? classes.navItemActive : classes.navItem
                     }
                     onClick={() => setActive(0)}
                   >
-                 หน้าหลัก
+                    หน้าหลัก
                   </NavItem>
                 </NavLink>
               </Hidden>
               <ScrollTo selector={`#หมวดหมู่`} smooth>
                 <NavItem
-                      as={'div'}
+                  as={"div"}
                   active={active === 1}
                   className={
                     active === 1 ? classes.navItemActive : classes.navItem
                   }
                   onClick={() => setActive(1)}
                 >
-                หมวดหมู่
+                  หมวดหมู่
                 </NavItem>
               </ScrollTo>
               <ScrollTo selector={`#หลักสูตร`} smooth>
                 <NavItem
-                      as={'div'}
+                  as={"div"}
                   active={active === 2}
                   className={
                     active === 2 ? classes.navItemActive : classes.navItem
                   }
                   onClick={() => setActive(2)}
                 >
-                หลักสูตร
+                  หลักสูตร
                 </NavItem>
               </ScrollTo>
               <Hidden xsDown>
                 <NavLink
-                    
                   to={`${path}/FAQ`}
                   className={classes.noDecorationLink}
                 >
                   <NavItem
-                        as={'div'}
+                    as={"div"}
                     active={active === 4}
                     className={
                       active === 4 ? classes.navItemActive : classes.navItem
                     }
                     onClick={() => setActive(4)}
                   >
-                   คำถามที่พบบ่อย
+                    คำถามที่พบบ่อย
                   </NavItem>
                 </NavLink>
               </Hidden>
@@ -217,27 +215,26 @@ export default function PersistentDrawerLeft(props: any) {
             <>
               <NavLink to={`${path}`} className={classes.noDecorationLink}>
                 <NavItem
-
-                      as={'div'}
+                  as={"div"}
                   active={active === 0}
                   className={
                     active === 0 ? classes.navItemActive : classes.navItem
                   }
                   onClick={() => setActive(0)}
                 >
-               หน้าหลัก
+                  หน้าหลัก
                 </NavItem>
               </NavLink>
               <NavLink to={`${path}/FAQ`} className={classes.noDecorationLink}>
                 <NavItem
-                      as={'div'}
+                  as={"div"}
                   active={active === 4}
                   className={
                     active === 4 ? classes.navItemActive : classes.navItem
                   }
                   onClick={() => setActive(4)}
                 >
-               คำถามที่พบบ่อย
+                  คำถามที่พบบ่อย
                 </NavItem>
               </NavLink>
             </>
@@ -259,7 +256,7 @@ export default function PersistentDrawerLeft(props: any) {
                   marginLeft: 0,
                 }}
               />
-              <AccountCircle/>
+              <AccountCircle />
               <Hidden xsDown>
                 <Box className={classes.name}>{data.firstName}</Box>
               </Hidden>
@@ -279,14 +276,14 @@ export default function PersistentDrawerLeft(props: any) {
                   className={classes.noDecorationLink}
                 >
                   <NavItem
-                        as={'div'}
+                    as={"div"}
                     active={active === 3}
                     className={
                       active === 3 ? classes.navItemActive : classes.navItem
                     }
                     onClick={() => setActive(3)}
                   >
-                 ลงชื่อเข้าสู่ระบบ
+                    ลงชื่อเข้าสู่ระบบ
                   </NavItem>
                 </NavLink>
               </NavMenu>
