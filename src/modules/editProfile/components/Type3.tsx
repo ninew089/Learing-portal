@@ -8,7 +8,7 @@ import { jobTypes3Props, typeProps } from "../typescript";
 const useStyles = makeStyles((theme) => ({
   input: {
     color: "#0f1626",
-    fontWeight: 600,
+
     "& .MuiInputBase-root.MuiOutlineInput-root": {
       color: "#45A29E",
       borderColor: "#757575",
@@ -16,8 +16,6 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   selectInput: {
-    color: "#757575",
-    fontWeight: 600,
     "& .MuiInputBase-root.MuiOutlineInput-root": {
       color: "#45A29E",
       borderColor: "#757575",
@@ -84,7 +82,7 @@ export default function SignIn(props: typeProps) {
     <>
       <FormControl fullWidth>
         <h4> {name}</h4>
-        {jobTypes3.length !== 0 &&
+        {jobTypes3.length !== 0 && (
           <Controller
             as={
               <TextField
@@ -112,7 +110,7 @@ export default function SignIn(props: typeProps) {
             control={formProps.control}
             å
           />
-        }
+        )}
 
         <TextField
           fullWidth

@@ -7,8 +7,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { jobTypes3Props, typeProps } from "../typescript";
 const useStyles = makeStyles((theme) => ({
   input: {
-    color: "#0f1626",
-    fontWeight: 600,
     "& .MuiInputBase-root.MuiOutlineInput-root": {
       color: "#45A29E",
       borderColor: "#757575",

@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { Grid, Box, Divider, CardMedia } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import Dialog from "../../share/DialogCourse";
 import { useSelector } from "react-redux";
 import Rating from "../../share/Rating";
 import banner from "assets/images/welearn.png";
+import { useDispatch } from "react-redux";
+import * as actions from "../../actions";
 
 const useStyles = makeStyles((theme) => ({
   contianer: {
@@ -106,7 +107,7 @@ const useStyles = makeStyles((theme) => ({
     textOverflow: "ellipsis",
     WebkitLineClamp: 1,
     WebkitBoxOrient: "vertical",
-    fontSize: "12px",
+    fontSize: "10px",
     fontWeight: 500,
     color: "#132740",
     padding: 3,
@@ -136,10 +137,11 @@ const useStyles = makeStyles((theme) => ({
 export default function SocialCard(props: any) {
   const { data } = props;
   const classes = useStyles();
-  const [open, setOpen] = useState<boolean>(false);
+  const dispatch = useDispatch();
   const { colorName } = useSelector((state: any) => state.course);
   const onSelected = () => {
-    setOpen(true);
+    const action = actions.setDialog(data, false);
+    dispatch(action);
   };
   return (
     <>
@@ -173,14 +175,14 @@ export default function SocialCard(props: any) {
         </Grid>
 
         <Grid item xs={7}>
-          <Box fontSize={14} fontWeight={700} className={classes.name}>
+          <Box fontSize={14} fontWeight={600} className={classes.name}>
             {data.name}
           </Box>
 
-          <Box fontSize={14} fontWeight={700} className={classes.name}>
+          <Box fontSize={12} fontWeight={400} className={classes.name}>
             {data.code}
           </Box>
-          <Box fontSize={12} fontWeight={700} className={classes.category}>
+          <Box fontSize={12} fontWeight={400} className={classes.category}>
             <Grid container justify="flex-start" direction="row">
               <Grid item xs={1}>
                 <div
@@ -235,14 +237,6 @@ export default function SocialCard(props: any) {
           <Divider style={{ marginTop: 10 }} />
         </Grid>
       </Grid>
-
-      <Dialog
-        open={open}
-        setOpen={setOpen}
-        data={data}
-        isCurriculum={false}
-        key={data.name}
-      />
     </>
   );
 }

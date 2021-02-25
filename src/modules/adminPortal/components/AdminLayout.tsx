@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import clsx from "clsx";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-
 import {
   Drawer,
   CssBaseline,
@@ -13,7 +12,7 @@ import {
 } from "@material-ui/core";
 import { Menu, ChevronLeft, ChevronRight } from "@material-ui/icons";
 import { useDispatch } from "react-redux";
-
+import Welearn from "assets/images/welearn.png";
 import * as actions from "../actions";
 import Routes from "./Routes";
 import ListMenu from "./ListAdmin";
@@ -59,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(0, 1),
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
-    justifyContent: "flex-end",
+    justifyContent: "space-between",
   },
   content: {
     flexGrow: 1,
@@ -131,10 +130,12 @@ export default function PersistentDrawerLeft() {
         }}
       >
         <div className={classes.drawerHeader}>
+          <img src={Welearn} alt="welearn" width="80px" />
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === "ltr" ? <ChevronLeft /> : <ChevronRight />}
           </IconButton>
         </div>
+
         <Divider />
         <ListMenu />
       </Drawer>

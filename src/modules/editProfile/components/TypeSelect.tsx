@@ -25,8 +25,6 @@ const useStyles = makeStyles((theme) => ({
     width: "100%", // Fix IE 11 issue.
   },
   input: {
-    color: "#0f1626",
-    fontWeight: 600,
     "& .MuiInputBase-root.MuiOutlineInput-root": {
       color: "#45A29E",
       borderColor: "#757575",
@@ -34,8 +32,6 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   selectInput: {
-    color: "#757575",
-    fontWeight: 600,
     "& .MuiInputBase-root.MuiOutlineInput-root": {
       color: "#45A29E",
       borderColor: "#757575",
@@ -142,7 +138,7 @@ export default function SignIn(props: typeUserProps) {
         <Typography component="h1" variant="h5" align="center">
           ข้อมูลการทำงาน
         </Typography>
-        {userTypes.length !== 0 &&
+        {userTypes.length !== 0 && (
           <Controller
             as={
               <TextField
@@ -173,9 +169,7 @@ export default function SignIn(props: typeUserProps) {
             control={formProps.control}
             defaultValue=""
           />
-
-        }
-
+        )}
 
         {renderTypeProps()}
       </div>

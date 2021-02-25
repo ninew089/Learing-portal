@@ -4,11 +4,12 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Typography, Box, useMediaQuery } from "@material-ui/core";
 import Routes from "./Routes";
 import Nav from "./Nav";
-
+import Dialog from "modules/coursePortal/share/DialogGobal";
+import { useSelector } from "react-redux";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "block",
-    background: theme.palette.primary.light,
+    background: "#f5f5f5",
     width: "100%",
     overflowX: "hidden",
   },
@@ -23,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     height: "60px",
   },
   footer: {
-    background: "#01000e", //transparent
+    background: "#1c1c21", //transparent
     color: "#f3f3fb",
     backdropFilter: "blur(6px)",
   },
@@ -94,13 +95,17 @@ const useStyles = makeStyles((theme) => ({
 export default function PersistentDrawerLeft(props: any) {
   const classes = useStyles();
   const matches = useMediaQuery("(min-width:1060px)");
-
+  const { dialog, dialogData, isCurriculum } = useSelector(
+    (state: any) => state.course
+  );
   return (
     <div className={classes.root}>
       <Nav />
-
       <Grid className={clsx(classes.content)}>
         <Routes />
+        {dialog && (
+          <Dialog open={dialog} data={dialogData} isCurriculum={isCurriculum} />
+        )}
       </Grid>
       <div className={classes.push} />
       <Box p={2} className={classes.footer}>

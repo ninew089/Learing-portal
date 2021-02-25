@@ -1,5 +1,6 @@
 import axios from "axios";
-
+const SET_DIALOG = "learning-portal/src/ui/SET_DIALOG";
+const CLEAR_DIALOG = "learning-portal/src/ui/CLEAR_DIALOG";
 const LOAD_COURSESCATEGORY_REQUEST =
   "learning-portal/src/ui/LOAD_COURSESCATEGORY_REQUEST";
 const LOAD_COURSESCATEGORY_SUCCESS =
@@ -332,8 +333,22 @@ function loadCourseCategories(id: any) {
     }
   };
 }
+function setDialog(data: any, isCurriculum: boolean) {
+  return {
+    type: SET_DIALOG,
+    payload: { dialogData: data, isCurriculum: isCurriculum },
+  };
+}
+
+function clearDialog() {
+  return {
+    type: CLEAR_DIALOG,
+  };
+}
 
 export {
+  SET_DIALOG,
+  CLEAR_DIALOG,
   SELECT_PLATFORM,
   LOAD_COURSESCATEGORY_REQUEST,
   LOAD_COURSESCATEGORY_SUCCESS,
@@ -384,4 +399,6 @@ export {
   loadCurriculum,
   paltform,
   selectpaltform,
+  clearDialog,
+  setDialog,
 };

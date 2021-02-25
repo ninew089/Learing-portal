@@ -45,8 +45,6 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: 4,
   },
   selectInput: {
-    color: "#757575",
-    fontWeight: 600,
     "& .MuiInputBase-root.MuiOutlineInput-root": {
       color: "#45A29E",
       borderColor: "#757575",
@@ -55,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
   },
   input: {
     color: "#0f1626",
-    fontWeight: 600,
+
     "& .MuiInputBase-root.MuiOutlineInput-root": {
       color: "#45A29E",
       borderColor: "#757575",
@@ -167,7 +165,7 @@ export default function SignIn(props: any) {
         register={formProps.register}
         name={"jobStartDate"}
       />
-      {Ministries?.length !== 0 &&
+      {Ministries?.length !== 0 && (
         <Controller
           as={
             <TextField
@@ -181,7 +179,8 @@ export default function SignIn(props: any) {
               }}
               select
               helperText={
-                formProps.errors.MinistryId && formProps.errors.MinistryId.message
+                formProps.errors.MinistryId &&
+                formProps.errors.MinistryId.message
               }
               error={!!formProps.errors.MinistryId}
             >
@@ -201,9 +200,8 @@ export default function SignIn(props: any) {
           control={formProps.control}
           defaultValue=""
         />
-
-      }
-      {Departments?.length !== 0 &&
+      )}
+      {Departments?.length !== 0 && (
         <Controller
           as={
             <TextField
@@ -237,8 +235,8 @@ export default function SignIn(props: any) {
           rules={{ required: "กรุณาเลือกกรมที่สังกัด" }}
           control={formProps.control}
           defaultValue=""
-        />}
-
+        />
+      )}
 
       <TextField
         fullWidth

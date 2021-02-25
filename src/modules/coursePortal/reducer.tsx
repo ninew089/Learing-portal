@@ -36,6 +36,8 @@ import {
   LOAD_PLATFORM_SUCCESS,
   LOAD_PLATFORM_FAILURE,
   SELECT_PLATFORM,
+  SET_DIALOG,
+  CLEAR_DIALOG,
 } from "./actions";
 
 const initialState = {
@@ -72,10 +74,25 @@ const initialState = {
   ],
   platform: [],
   selected_platform: null,
+  dialog: false,
+  dialogData: [],
+  isCurriculum: null,
 };
 
 export default function (state = initialState, action: any) {
   switch (action.type) {
+    case SET_DIALOG:
+      return {
+        ...state,
+        dialog: true,
+        dialogData: action.payload.dialogData,
+        isCurriculum: action.payload.isCurriculum,
+      };
+    case CLEAR_DIALOG:
+      return {
+        ...state,
+        dialog: false,
+      };
     case SELECT_PLATFORM:
       return {
         ...state,

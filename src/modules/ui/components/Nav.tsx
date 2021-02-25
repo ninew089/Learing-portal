@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 10,
   },
   appBar: {
-    background: "#01000ef5",
+    background: "#000000e6",
     color: "#f3f3fb",
     backdropFilter: "blur(6px)",
     filter: "opacity(0.9)",
@@ -256,7 +256,7 @@ export default function PersistentDrawerLeft(props: any) {
                   marginLeft: 0,
                 }}
               />
-              <AccountCircle />
+              <AccountCircle style={{ color: "#ffa800", fontSize: "32px" }} />
               <Hidden xsDown>
                 <Box className={classes.name}>{data.firstName}</Box>
               </Hidden>

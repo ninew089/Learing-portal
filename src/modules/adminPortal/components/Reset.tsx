@@ -9,7 +9,7 @@ import {
 } from "@material-ui/core";
 import { resetPasswordProps } from "../tyscript";
 import { makeStyles } from "@material-ui/core/styles";
-import {Lock} from '@material-ui/icons';
+import { Lock } from "@material-ui/icons";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
@@ -38,13 +38,11 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(1),
   },
   container: {
-    background: "white",
     borderRadius: "10px",
     padding: "10px",
   },
   submit: {
     marginTop: "10px",
-    background: "lavender",
   },
 }));
 export default function SignIn() {
@@ -134,13 +132,18 @@ export default function SignIn() {
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
-                  <Lock  />
+                  <Lock />
                 </InputAdornment>
               ),
             }}
           />
 
-          <Button type="submit" fullWidth className={classes.submit}>
+          <Button
+            type="submit"
+            fullWidth
+            className={classes.submit}
+            variant="outlined"
+          >
             ส่งข้อมูล
           </Button>
         </form>

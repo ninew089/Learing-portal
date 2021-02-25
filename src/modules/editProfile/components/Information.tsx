@@ -52,8 +52,6 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: 4,
   },
   selectInput: {
-    color: "#757575",
-    fontWeight: 600,
     "& .MuiInputBase-root.MuiOutlineInput-root": {
       color: "#45A29E",
       borderColor: "#757575",
@@ -62,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
   },
   input: {
     color: "#0f1626",
-    fontWeight: 600,
+
     "& .MuiInputBase-root.MuiOutlineInput-root": {
       color: "#45A29E",
       borderColor: "#757575",
@@ -224,7 +222,7 @@ export default function SignIn(props: any) {
           />
         </div>
         <div className={classes.formControlDate}>
-          {educations?.length !== 0 &&
+          {educations?.length !== 0 && (
             <Controller
               as={
                 <TextField
@@ -254,9 +252,7 @@ export default function SignIn(props: any) {
               control={formProps.control}
               defaultValue=""
             />
-
-          }
-
+          )}
         </div>
 
         <FormControl className={classes.formControlInfo} fullWidth>

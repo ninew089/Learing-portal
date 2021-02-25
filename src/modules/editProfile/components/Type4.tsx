@@ -17,8 +17,6 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   selectInput: {
-    color: "#757575",
-    fontWeight: 600,
     "& .MuiInputBase-root.MuiOutlineInput-root": {
       color: "#45A29E",
       borderColor: "#757575",
@@ -81,7 +79,7 @@ export default function SignIn(props: typeProps) {
     <>
       <FormControl fullWidth>
         <h4> {name}</h4>
-        {Occupations.length !== 0 &&
+        {Occupations.length !== 0 && (
           <Controller
             as={
               <TextField
@@ -112,7 +110,7 @@ export default function SignIn(props: typeProps) {
             rules={{ required: "กรุณาเลือกอาชีพ" }}
             control={formProps.control}
           />
-        }
+        )}
 
         <FormControl fullWidth>
           <TextField

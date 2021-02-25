@@ -1,4 +1,4 @@
-import React, { useState, lazy, Suspense } from "react";
+import React, { Suspense } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, Grid, Box } from "@material-ui/core";
 import numberFormat from "utils/numberFormat";
@@ -7,13 +7,13 @@ import { Theme } from "@material-ui/core/styles";
 import banner from "assets/images/welearn.png";
 import CardMedia from "@material-ui/core/CardMedia";
 import { CardProps } from "./tyscript";
-
-const Dialog = lazy(() => import("../../share/DialogCourse"));
+import { useDispatch } from "react-redux";
+import * as actions from "../../actions";
 
 const useStyles = makeStyles((theme: Theme) => ({
-  gridPlatform:{
-    marginTop:8,
-    marginBottom:8
+  gridPlatform: {
+    marginTop: 8,
+    marginBottom: 8,
   },
   root: {
     borderRadius: "0.5rem",
@@ -21,7 +21,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     "&:hover": {
       background: "#cccccc8a",
     },
-   
   },
 
   card: {
@@ -65,7 +64,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     WebkitLineClamp: 1,
     WebkitBoxOrient: "vertical",
     fontSize: "1.2rem",
-    fontWeight: 700,
+    fontWeight: 600,
     color: "#132740",
     paddingLeft: 8,
     marginRight: 8,
@@ -174,15 +173,15 @@ export default function CurriculumDetailCard(props: CardProps) {
   } = props;
   const classes = useStyles();
 
-  const [open, setOpen] = useState<boolean>(false);
+  const dispatch = useDispatch();
   const onOpen = () => {
-    setOpen(true);
+    const action = actions.setDialog(props, true);
+    dispatch(action);
   };
   const renderLoader = () => <div></div>;
 
   return (
     <Suspense fallback={renderLoader()}>
- 
       <div className={classes.root}>
         <div className={classes.card}>
           <Grid
@@ -218,9 +217,22 @@ export default function CurriculumDetailCard(props: CardProps) {
                 alignItems="center"
                 className={classes.detail}
               >
-                <div className={classes.dot} />
-                <Box fontWeight={500}>หลักสูตร</Box>
-
+                <div
+                  style={{
+                    marginBottom: 10,
+                    display: "inline-flex",
+                  }}
+                >
+                  <Grid
+                    container
+                    direction="row"
+                    justify="flex-start"
+                    alignItems="center"
+                  >
+                    <div className={classes.dot} />
+                    <Box fontWeight={500}>หลักสูตร</Box>
+                  </Grid>
+                </div>
                 <Grid item xs={12}>
                   {learningObjective !== undefined && (
                     <div
@@ -230,67 +242,65 @@ export default function CurriculumDetailCard(props: CardProps) {
                   )}
                 </Grid>
                 <Grid item xs={12} className={classes.gridPlatform}>
-              <Grid
-                container
-                direction="column"
-                justify="space-around"
-                alignItems="center"
-              >
-                <Grid
-                  container
-                  direction="row"
-                  justify="flex-start"
-                  alignItems="center"
-                >
-                  <div className={classes.logo}>
-                    <div
-                      style={{
-                        backgroundImage: `url('${platformlogo}`,
-                        backgroundSize: "cover",
-                        padding: "30px",
-                        backgroundPosition: " center center",
-                      }}
-                    />
-                  </div>
-                  <div>
-                    <div className={classes.author}>{platformName} </div>
-                    <div className={classes.rating}>
-                      <Rating vote={satisfactionCount} point={point} />
-                    </div>
+                  <Grid
+                    container
+                    direction="column"
+                    justify="space-around"
+                    alignItems="center"
+                  >
                     <Grid
                       container
                       direction="row"
                       justify="flex-start"
-                      alignItems="flex-start"
-                      className={classes.box}
+                      alignItems="center"
                     >
-                      <Typography
-                        variant="caption"
-                        align="left"
-                        component="span"
-                        color={"textSecondary"}
-                      >
-                        การดู {numberFormat(viewCount)} ครั้ง
-                      </Typography>
+                      <div className={classes.logo}>
+                        <div
+                          style={{
+                            backgroundImage: `url('${platformlogo}`,
+                            backgroundSize: "cover",
+                            padding: "30px",
+                            backgroundPosition: " center center",
+                          }}
+                        />
+                      </div>
+                      <div>
+                        <div className={classes.author}>{platformName} </div>
+                        <div className={classes.rating}>
+                          <Rating vote={satisfactionCount} point={point} />
+                        </div>
+                        <Grid
+                          container
+                          direction="row"
+                          justify="flex-start"
+                          alignItems="flex-start"
+                          className={classes.box}
+                        >
+                          <Typography
+                            variant="caption"
+                            align="left"
+                            component="span"
+                            color={"textSecondary"}
+                          >
+                            การดู {numberFormat(viewCount)} ครั้ง
+                          </Typography>
+                        </Grid>
+                      </div>
+                      {platformName === "สำนักงาน ก.พ." && (
+                        <img
+                          src={banner}
+                          alt="welearn"
+                          width="40"
+                          style={{ margin: 8 }}
+                        />
+                      )}
                     </Grid>
-                  </div>
-                  {platformName==="สำนักงาน ก.พ."&&<img src={banner} alt="welearn" width="40" style={{margin:8}}/>}
+                  </Grid>
                 </Grid>
-             
               </Grid>
-              </Grid>
-              </Grid>
-           
             </div>
           </Grid>
         </div>
-
-        <Dialog
-          open={open}
-          setOpen={setOpen}
-          data={props}
-          isCurriculum={true}
-        />
       </div>
     </Suspense>
   );

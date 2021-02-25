@@ -1,27 +1,24 @@
-import React, { useState, lazy, Suspense } from "react";
+import React, { lazy, Suspense } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, Grid, Box } from "@material-ui/core";
 import numberFormat from "utils/numberFormat";
 import banner from "assets/images/welearn.png";
 import { CardProps } from "./tyscript";
 import CardMedia from "@material-ui/core/CardMedia";
-import { useSelector } from "react-redux";
-const Dialog = lazy(() => import("../../share/DialogCourse"));
+import { useSelector, useDispatch } from "react-redux";
+import * as actions from "../../actions";
+
 const Rating = lazy(() => import("../../share/Rating"));
 
 const useStyles = makeStyles((theme) => ({
-  container:{
-   
-
-  },
+  container: {},
   root: {
     borderRadius: "0.5rem",
     padding: 10,
     "&:hover": {
       background: "#cccccc8a",
     },
-    height:"100%"
-
+    height: "100%",
   },
   card: {
     width: "100%",
@@ -63,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
     WebkitLineClamp: 1,
     WebkitBoxOrient: "vertical",
     fontSize: "1.2rem",
-    fontWeight: 700,
+    fontWeight: 600,
     color: "#132740",
     paddingLeft: 8,
     marginRight: 8,
@@ -176,16 +173,17 @@ export default function IconBreadcrumbs(props: CardProps) {
   } = props;
   const classes = useStyles();
   const renderLoader = () => <div></div>;
-  const [open, setOpen] = useState<boolean>(false);
+
+  const dispatch = useDispatch();
   const onOpen = () => {
-    setOpen(true);
+    const action = actions.setDialog(props, false);
+    dispatch(action);
   };
 
   const { colorName } = useSelector((state: any) => state.course);
 
   return (
     <Suspense fallback={renderLoader()}>
-
       <div className={classes.root}>
         <div className={classes.card} onClick={onOpen}>
           <Grid container direction="column" justify="flex-start">
@@ -214,6 +212,7 @@ export default function IconBreadcrumbs(props: CardProps) {
               <Typography variant={"h4"} className={classes.subtitle}>
                 {code}
               </Typography>
+
               <Grid
                 container
                 direction="row"
@@ -222,17 +221,31 @@ export default function IconBreadcrumbs(props: CardProps) {
                 className={classes.detail}
               >
                 <div
-                  className={classes.dot}
                   style={{
-                    background:
-                      colorName[0][
-                      courseCategory !== undefined ? courseCategory : 0
-                      ],
+                    marginBottom: 10,
+                    display: "inline-flex",
                   }}
-                />
-                <Box fontWeight={500} className={classes.category}>
-                  {courseCategory}
-                </Box>
+                >
+                  <Grid
+                    container
+                    direction="row"
+                    justify="flex-start"
+                    alignItems="center"
+                  >
+                    <div
+                      className={classes.dot}
+                      style={{
+                        background:
+                          colorName[0][
+                            courseCategory !== undefined ? courseCategory : 0
+                          ],
+                      }}
+                    />
+                    <Box fontWeight={500} className={classes.category}>
+                      {courseCategory}
+                    </Box>
+                  </Grid>
+                </div>
                 <Grid item xs={12}>
                   <div>
                     {learningObjective !== undefined && (
@@ -244,59 +257,56 @@ export default function IconBreadcrumbs(props: CardProps) {
                   </div>
                 </Grid>
                 <Grid
-                container
-                direction="row"
-                justify="flex-start"
-                alignItems="center"
-              >
-                <div className={classes.logo}>
-                  <div
-                    style={{
-                      backgroundImage: `url('${platformlogo}`,
-                      backgroundSize: "cover",
-                      padding: "30px",
-                      backgroundPosition: " center center",
-                    }}
-                  />
-
-
-                </div>
-                <Grid item>
-                  <div className={classes.author}>{platformName} </div>
-                  <div className={classes.rating}>
-                    <Rating vote={satisfactionCount} point={point} />
+                  container
+                  direction="row"
+                  justify="flex-start"
+                  alignItems="center"
+                >
+                  <div className={classes.logo}>
+                    <div
+                      style={{
+                        backgroundImage: `url('${platformlogo}`,
+                        backgroundSize: "cover",
+                        padding: "30px",
+                        backgroundPosition: " center center",
+                      }}
+                    />
                   </div>
-                  <Grid
-                    container
-                    direction="row"
-                    justify="flex-start"
-                    alignItems="flex-start"
-                    className={classes.box}
-                  >
-                    <Typography
-                      variant="caption"
-                      align="left"
-                      component="span"
-                      color={"textSecondary"}
+                  <Grid item>
+                    <div className={classes.author}>{platformName} </div>
+                    <div className={classes.rating}>
+                      <Rating vote={satisfactionCount} point={point} />
+                    </div>
+                    <Grid
+                      container
+                      direction="row"
+                      justify="flex-start"
+                      alignItems="flex-start"
+                      className={classes.box}
                     >
-                      การดู {numberFormat(viewCount)} ครั้ง
-                    </Typography>
+                      <Typography
+                        variant="caption"
+                        align="left"
+                        component="span"
+                        color={"textSecondary"}
+                      >
+                        การดู {numberFormat(viewCount)} ครั้ง
+                      </Typography>
+                    </Grid>
                   </Grid>
-
+                  {platformName === "สำนักงาน ก.พ." && (
+                    <img
+                      src={banner}
+                      alt="welearn"
+                      width="40"
+                      style={{ margin: 8 }}
+                    />
+                  )}
                 </Grid>
-                {platformName==="สำนักงาน ก.พ."&&<img src={banner} alt="welearn" width="40" style={{margin:8}}/>}
               </Grid>
-              </Grid>
-           
             </div>
           </Grid>
         </div>
-        <Dialog
-          open={open}
-          setOpen={setOpen}
-          data={props}
-          isCurriculum={false}
-        />
       </div>
     </Suspense>
   );

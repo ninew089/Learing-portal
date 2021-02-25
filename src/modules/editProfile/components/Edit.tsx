@@ -2,14 +2,7 @@ import React from "react";
 
 import { makeStyles } from "@material-ui/core/styles";
 import { AccountCircle } from "@material-ui/icons";
-import {
-  Container,
-  Button,
-  Toolbar,
-  Grid,
-  Divider,
-  Box,
-} from "@material-ui/core";
+import { Container, Button, Grid, Divider, Box } from "@material-ui/core";
 import Information from "./Information";
 import TypeSelect from "./TypeSelect";
 import { useForm } from "react-hook-form";
@@ -40,6 +33,9 @@ const useStyles = makeStyles((theme) => ({
   large: {
     align: "center",
     fontSize: 48,
+    [theme.breakpoints.up("sm")]: {
+      fontSize: 72,
+    },
   },
   form: {
     marginTop: 10,
@@ -58,7 +54,7 @@ export default function Edit(props: any) {
   const [mistry, setMistry] = React.useState<string>("");
   // eslint-disable-next-line
   const [level, setJoblevel] = React.useState<string>("");
-  
+
   const accountForm = useForm<accountFormProps>({
     mode: "onChange",
     defaultValues: {
@@ -333,11 +329,16 @@ export default function Edit(props: any) {
           <Grid container direction="row" justify="center" alignItems="center">
             <AccountCircle className={classes.large} />
             <Grid item xs={12}>
-              <Box fontWeight="fontWeightBold" fontSize={18} textAlign="center">
+              <Box
+                m={2}
+                fontWeight="fontWeightBold"
+                fontSize={18}
+                textAlign="center"
+              >
                 {data.title}
                 {data.firstName} {data.lastName}
               </Box>
-              <Toolbar />
+
               <Divider variant="middle" />
             </Grid>
           </Grid>

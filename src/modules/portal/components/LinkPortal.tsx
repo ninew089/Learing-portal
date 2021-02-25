@@ -6,7 +6,7 @@ import SwipeableViews from "react-swipeable-views";
 import TabPanel from "./TabPlanel";
 import axios from "axios";
 import Dialog from "./Dialog";
-import { appleTabsStylesHook } from "@mui-treasury/styles/tabs";
+import { twitterTabsStylesHook } from "@mui-treasury/styles/tabs";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -47,8 +47,8 @@ export default function VariantAvatars() {
   const [open, setOpen] = React.useState(false);
   const [data, setData] = useState<any>([]);
   const theme = useTheme();
-  const tabsStyles = appleTabsStylesHook.useTabs();
-  const tabItemStyles = appleTabsStylesHook.useTabItem();
+  const tabsStyles = twitterTabsStylesHook.useTabs();
+  const tabItemStyles = twitterTabsStylesHook.useTabItem();
   useEffect(() => {
     const fetch = async () => {
       const { data } = await axios.get("/Platforms");
@@ -72,14 +72,10 @@ export default function VariantAvatars() {
           style={{ backgroundColor: "transparent" }}
           onChange={handleChange}
           variant="scrollable"
-          scrollButtons="on"
-          TabIndicatorProps={{
-            style: {
-              background: "none",
-            },
-          }}
-          indicatorColor={undefined}
-          textColor="primary"
+          //scrollButtons="on"
+
+          // indicatorColor={"secondary"}
+          //  textColor="primary"
         >
           {data.map((item: any, index: number) => (
             <Tab

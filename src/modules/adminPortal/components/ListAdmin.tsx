@@ -9,11 +9,17 @@ import {
   ListItemText,
 } from "@material-ui/core";
 import { useSelector } from "react-redux";
-
 import { NavLink } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 
-import {Lock,MeetingRoom,AllInbox,Home,PersonAdd,AccountCircle} from '@material-ui/icons';
+import {
+  Lock,
+  MeetingRoom,
+  AllInbox,
+  Home,
+  PersonAdd,
+  AccountCircle,
+} from "@material-ui/icons";
 import { useRouteMatch } from "react-router-dom";
 import { eraseCookie } from "cookie/cookie";
 const useStyles = makeStyles({
@@ -42,7 +48,7 @@ export default function PersistentDrawerLeft() {
       <List>
         <ListItem key={"Admin"}>
           <ListItemIcon>
-            <AccountCircle  />
+            <AccountCircle />
           </ListItemIcon>
           <ListItemText
             primary={`${profile.title}${profile.firstName} ${profile.lastName}`}
@@ -59,7 +65,7 @@ export default function PersistentDrawerLeft() {
         <NavLink to={`${path}`} className={classes.nav}>
           <ListItem button key={"Main"}>
             <ListItemIcon>
-              <Home  />
+              <Home />
             </ListItemIcon>
             <ListItemText primary={"หน้าหลัก"} />
           </ListItem>
@@ -100,7 +106,7 @@ export default function PersistentDrawerLeft() {
         <NavLink to={`${path}/coursecertificate`} className={classes.nav}>
           <ListItem button key={"person"}>
             <ListItemIcon>
-              <AllInbox  />
+              <AllInbox />
             </ListItemIcon>
             <ListItemText primary={"ประกาศนียบัตร"} />
           </ListItem>
@@ -111,7 +117,7 @@ export default function PersistentDrawerLeft() {
         <NavLink to={`${path}/person`} className={classes.nav}>
           <ListItem button key={"person"}>
             <ListItemIcon>
-              <PersonAdd  />
+              <PersonAdd />
             </ListItemIcon>
             <ListItemText primary={"แก้ไขข้อมูลส่วนบุคคล"} />
           </ListItem>
@@ -119,7 +125,7 @@ export default function PersistentDrawerLeft() {
         <NavLink to={`${path}/reset`} className={classes.nav}>
           <ListItem button key={"เปลี่ยนรหัสผ่าน"}>
             <ListItemIcon>
-              <Lock  />
+              <Lock />
             </ListItemIcon>
             <ListItemText primary={"เปลี่ยนรหัสผ่าน"} />
           </ListItem>
@@ -127,7 +133,7 @@ export default function PersistentDrawerLeft() {
 
         <ListItem button key={"ลงชื่ออก"} onClick={onLogout}>
           <ListItemIcon>
-            <MeetingRoom  />
+            <MeetingRoom />
           </ListItemIcon>
           <ListItemText primary={"ลงชื่อออก"} />
         </ListItem>

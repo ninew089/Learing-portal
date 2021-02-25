@@ -93,7 +93,7 @@ export default function ControlledOpenSelect() {
             <ListItemText primary={"ทังหมด"} />
           </MenuItem>
           {categories.map((item: any, index: number) => (
-            <MenuItem value={item} key={index} style={{ whiteSpace: "normal" }}>
+            <MenuItem value={item} key={index}>
               <ListItemIcon>
                 <div
                   className={classes.dot}
@@ -107,7 +107,10 @@ export default function ControlledOpenSelect() {
                   }}
                 />
               </ListItemIcon>
-              <ListItemText primary={item.name} />
+              <ListItemText
+                primary={item.name}
+                style={{ whiteSpace: "normal" }}
+              />
             </MenuItem>
           ))}
           <MenuItem value={-1} style={{ whiteSpace: "normal" }}>

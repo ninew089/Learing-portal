@@ -19,8 +19,6 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   selectInput: {
-    color: "#757575",
-    fontWeight: 600,
     "& .MuiInputBase-root.MuiOutlineInput-root": {
       color: "#45A29E",
       borderColor: "#757575",
@@ -96,7 +94,7 @@ export default function SignIn(props: typeProps) {
     <>
       <FormControl fullWidth>
         <h4> {name}</h4>
-        {jobTypes2.length !== 0 &&
+        {jobTypes2.length !== 0 && (
           <Controller
             as={
               <TextField
@@ -108,7 +106,8 @@ export default function SignIn(props: typeProps) {
                 }}
                 select
                 helperText={
-                  formProps.errors.jobtypeId && formProps.errors.jobtypeId.message
+                  formProps.errors.jobtypeId &&
+                  formProps.errors.jobtypeId.message
                 }
                 error={!!formProps.errors.jobtypeId}
               >
@@ -128,8 +127,7 @@ export default function SignIn(props: typeProps) {
             control={formProps.control}
             defaultValue=""
           />
-        }
-
+        )}
 
         <TextField
           fullWidth

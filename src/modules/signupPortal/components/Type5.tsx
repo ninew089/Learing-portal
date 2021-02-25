@@ -10,8 +10,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { stateEnterpriseProps, typeProps } from "../typescript";
 const useStyles = makeStyles((theme) => ({
   input: {
-    color: "#0f1626",
-    fontWeight: 600,
     "& .MuiInputBase-root.MuiOutlineInput-root": {
       color: "#45A29E",
       borderColor: "#757575",
@@ -19,8 +17,6 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   selectInput: {
-    color: "#757575",
-    fontWeight: 600,
     "& .MuiInputBase-root.MuiOutlineInput-root": {
       color: "#45A29E",
       borderColor: "#757575",

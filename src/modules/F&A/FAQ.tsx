@@ -15,7 +15,7 @@ export default function FAQ() {
   const classes = useStyles();
   return (
     <>
-      <Container maxWidth="md">
+      <Container maxWidth="sm">
         <Paper variant="outlined" className={classes.root}>
           <Box fontWeight={700} fontSize={24} margin={4}>
             คำถามที่พบบ่อย ?

@@ -30,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
   input: {
     color: "#0f1626",
     fontWeight: 700,
+    letterSpacing: 1,
     "& .MuiInputBase-root.MuiOutlineInput-root": {
       color: "#45A29E",
       borderColor: "#757575",
@@ -141,13 +142,13 @@ const useStyles = makeStyles((theme) => ({
     textDecoration: "inherit",
   },
   form: {
-    background: "white",
+    // background: "white",
     borderRadius: "10px",
     height: "100%",
     marginTop: "20px",
   },
   font: {
-    fontWeight: 700,
+    fontWeight: 600,
     color: "#0f1726",
   },
   image: {
@@ -246,7 +247,7 @@ export default function SignIn() {
         <div className={classes.paper}>
           <img alt="banner" src={img} className={classes.image} />
           <Typography component="h1" variant="h5" className={classes.font}>
-            Learning Portal
+            OCSC Learning Portal
           </Typography>
           <form className={classes.form} noValidate>
             <TextField
