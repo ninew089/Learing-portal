@@ -15,7 +15,7 @@ import * as yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import * as actions from "../../../actions";
 
-import Snackbar from "modules/compoenent/atomic/SnackBar/SnackBar";
+import Snackbar from "modules/compoenent/atomic/SnackBar";
 
 const useStyles = makeStyles((theme) => ({
   paper: {

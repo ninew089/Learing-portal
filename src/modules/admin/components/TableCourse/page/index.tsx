@@ -22,7 +22,7 @@ import DialogEdit from "../components/DialogEdit";
 import { getCookie } from "cookie/cookie";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import Snackbar from "modules/compoenent/atomic/SnackBar/SnackBar";
+import Snackbar from "modules/compoenent/atomic/SnackBar";
 import { parseJwt } from "utils/getDataJWT";
 
 export default function MaterialTableDemo() {

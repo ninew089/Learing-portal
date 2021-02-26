@@ -19,7 +19,7 @@ import { getCookie } from "cookie/cookie";
 import MaterialTable from "material-table";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Snackbar from "modules/compoenent/atomic/SnackBar/SnackBar";
+import Snackbar from "modules/compoenent/atomic/SnackBar";
 import { curriculumCertificateProps } from "../../typescript";
 import { forwardRef } from "react";
 import * as actions from "../../../../actions";

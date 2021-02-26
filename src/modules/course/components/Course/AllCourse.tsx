@@ -10,9 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import * as actions from "../../actions";
 import { useRouteMatch, useHistory } from "react-router-dom";
 
-const Carousel = lazy(
-  () => import("modules/compoenent/atomic/Carousel/Carousel")
-);
+const Carousel = lazy(() => import("modules/compoenent/atomic/Carousel"));
 
 export default function GroupCourse() {
   const { path } = useRouteMatch();

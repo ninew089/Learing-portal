@@ -23,7 +23,7 @@ import { parseJwt } from "utils/getDataJWT";
 import { getCookie } from "cookie/cookie";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import Snackbar from "modules/compoenent/atomic/SnackBar/SnackBar";
+import Snackbar from "modules/compoenent/atomic/SnackBar";
 
 export default function MaterialTableDemo() {
   const tableIcons = {

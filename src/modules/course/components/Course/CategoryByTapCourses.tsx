@@ -13,9 +13,7 @@ import queryString from "query-string";
 import { useDispatch, useSelector } from "react-redux";
 import * as actions from "../../actions";
 
-const CourseCarousel = lazy(
-  () => import("modules/compoenent/atomic/Carousel/Carousel")
-);
+const CourseCarousel = lazy(() => import("modules/compoenent/atomic/Carousel"));
 
 export default function SingleLineGridList(props: { id: number }) {
   const useStyles = makeStyles((theme: Theme) =>

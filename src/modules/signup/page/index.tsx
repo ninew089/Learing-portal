@@ -1,5 +1,5 @@
 import React from "react";
-import Snackbar from "modules/compoenent/atomic/SnackBar/SnackBar";
+import Snackbar from "modules/compoenent/atomic/SnackBar";
 import { Container, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Account from "../components/Account";
@@ -7,11 +7,12 @@ import Information from "../components/Information";
 import TypeSelect from "../components/TypeSelect";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
-import * as actions from "../actions";
-import { useDispatch, useSelector } from "react-redux";
+
+import { useSelector } from "react-redux";
+
 import { info } from "utils/formatInfomation";
 import { accountFormProps } from "../typescript";
-
+import ShowInfoDialog from "../components/ShowInfo/ShowInfoDialog";
 const useStyles = makeStyles((theme) => ({
   paper: {
     background: "white",
@@ -291,16 +292,13 @@ export default function SignIn() {
     }),
   });
 
-  const dispatch = useDispatch();
-  //const [data, setData] = useState([])
-  //const [open, setOpen] = useState(false)
+  const [data, setData] = React.useState([]);
+  const [open, setOpen] = React.useState(false);
 
   const onSubmitData = (data: any) => {
     const preinfo = info(data);
-    //setData(preinfo)
-    //setOpen(true)
-    const action = actions.loadSignUp(preinfo);
-    dispatch(action);
+    setData(preinfo);
+    setOpen(true);
   };
 
   const { message, severity } = useSelector((state: any) => state.infomation);
@@ -314,6 +312,7 @@ export default function SignIn() {
           severity={severity}
         />
       )}
+
       <form onSubmit={accountForm.handleSubmit(onSubmitData)}>
         <Container component="main" maxWidth="xs" className={classes.paper}>
           <Account formProps={accountForm} />
@@ -326,6 +325,7 @@ export default function SignIn() {
           </Container>
         </Container>
       </form>
+      <ShowInfoDialog open={open} setOpen={setOpen} data={data} />
     </>
   );
 }

@@ -9,15 +9,22 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import * as actions from "../actions";
 import { useDispatch, useSelector } from "react-redux";
-import Snackbar from "modules/compoenent/atomic/SnackBar/SnackBar";
+import Snackbar from "modules/compoenent/atomic/SnackBar";
 import { infoEdit } from "utils/formatInfomation";
 import { accountFormProps } from "../typescript";
+import { getCookie } from "cookie/cookie";
+import { parseJwt } from "utils/getDataJWT";
+
 const useStyles = makeStyles((theme) => ({
   paper: {
     background: "white",
     borderRadius: "10px",
     padding: "24px",
     marginTop: 40,
+  },
+  uid: {
+    color: theme.palette.primary.main,
+    fontWeight: 400,
   },
   submit: {
     marginTop: "10px",
@@ -31,6 +38,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   large: {
+    color: theme.palette.primary.main,
     align: "center",
     fontSize: 48,
     [theme.breakpoints.up("sm")]: {
@@ -337,6 +345,10 @@ export default function Edit(props: any) {
               >
                 {data.title}
                 {data.firstName} {data.lastName}
+                <div className={classes.uid}>
+                  {" "}
+                  {parseJwt(getCookie("token")).unique_name}
+                </div>
               </Box>
 
               <Divider variant="middle" />

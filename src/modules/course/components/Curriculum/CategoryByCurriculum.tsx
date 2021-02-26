@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import * as actions from "../../actions";
 
 const CurriculumCarousel = lazy(
-  () => import("modules/compoenent/atomic/Carousel/Carousel")
+  () => import("modules/compoenent/atomic/Carousel")
 );
 
 export default function SingleLineGridList(props: { title: string }) {

@@ -8,7 +8,7 @@ import {
   InputAdornment,
   Toolbar,
 } from "@material-ui/core";
-import Snackbar from "modules/compoenent/atomic/SnackBar/SnackBar";
+import Snackbar from "modules/compoenent/atomic/SnackBar";
 import { makeStyles } from "@material-ui/core/styles";
 import { LockRounded } from "@material-ui/icons";
 import { useForm } from "react-hook-form";
@@ -27,46 +27,6 @@ const useStyles = makeStyles((theme) => ({
   },
   textfield: {
     marginTop: 10,
-    "& .MuiFormHelperText-root.Mui-error ": {
-      color: "ff533d",
-      fontWeight: 600,
-      borderWidth: "1px",
-    },
-    "& .MuiInput-underline.Mui-error:after": {
-      borderColor: "ff533d",
-      borderWidth: "1px",
-    },
-    "& label.MuiFormLabel-root": {
-      fontWeight: 600,
-      "&:after .Mui-error": {
-        borderColor: "#ff533d",
-        borderWidth: "1px",
-      },
-    },
-    "& label.Mui-focused": {
-      color: "#132740",
-    },
-    "& .MuiInput-underline:after": {
-      borderBottomColor: "#b7b7b7",
-    },
-    "& .MuiOutlinedInput-root": {
-      "& fieldset": {
-        borderColor: "#b7b7b7",
-        borderWidth: "1px",
-      },
-      "&:hover fieldset": {
-        borderColor: "#a8c6ff",
-        borderWidth: "3px",
-      },
-      "&.Mui-focused fieldset": {
-        borderColor: "#a8c6ff",
-        borderWidth: "3px",
-      },
-      "&.Mui-error .MuiOutlinedInput-notchedOutline": {
-        borderColor: "#ff533d",
-        borderWidth: "1px",
-      },
-    },
   },
   paper: {
     display: "flex",

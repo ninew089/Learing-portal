@@ -67,46 +67,6 @@ const useStyles = makeStyles((theme) => ({
   },
   textfield: {
     marginTop: 10,
-    "& .MuiFormHelperText-root.Mui-error ": {
-      color: "ff533d",
-      fontWeight: 600,
-      borderWidth: "1px",
-    },
-    "& .MuiInput-underline.Mui-error:after": {
-      borderColor: "ff533d",
-      borderWidth: "1px",
-    },
-    "& label.MuiFormLabel-root": {
-      fontWeight: 600,
-      "&:after .Mui-error": {
-        borderColor: "#ff533d",
-        borderWidth: "1px",
-      },
-    },
-    "& label.Mui-focused": {
-      color: "#132740",
-    },
-    "& .MuiInput-underline:after": {
-      borderBottomColor: theme.palette.secondary.main,
-    },
-    "& .MuiOutlinedInput-root": {
-      "& fieldset": {
-        borderColor: theme.palette.secondary.main,
-        borderWidth: "1px",
-      },
-      "&:hover fieldset": {
-        borderColor: "#a8c6ff",
-        borderWidth: "3px",
-      },
-      "&.Mui-focused fieldset": {
-        borderColor: "#a8c6ff",
-        borderWidth: "3px",
-      },
-      "&.Mui-error .MuiOutlinedInput-notchedOutline": {
-        borderColor: "#ff533d",
-        borderWidth: "1px",
-      },
-    },
   },
   form: {
     marginTop: theme.spacing(4),

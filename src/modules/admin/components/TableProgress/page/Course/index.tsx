@@ -23,7 +23,7 @@ import axios from "axios";
 import { forwardRef } from "react";
 import * as actions from "../../../../actions";
 import { useDispatch, useSelector } from "react-redux";
-import Snackbar from "modules/compoenent/atomic/SnackBar/SnackBar";
+import Snackbar from "modules/compoenent/atomic/SnackBar";
 import { parseJwt } from "utils/getDataJWT";
 import DialogAdd from "../../Course/DialogAdd";
 import DialogEdit from "../../Course/DialogEdit";

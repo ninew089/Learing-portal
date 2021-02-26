@@ -11,7 +11,7 @@ import Container from "@material-ui/core/Container";
 import * as actions from "../../actions";
 import * as yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
-import Snackbar from "modules/compoenent/atomic/SnackBar/SnackBar";
+import Snackbar from "modules/compoenent/atomic/SnackBar";
 
 const useStyles = makeStyles((theme) => ({
   root: { marginTop: "8rem", background: theme.palette.primary.light },

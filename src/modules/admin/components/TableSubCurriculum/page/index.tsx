@@ -24,7 +24,7 @@ import RefreshIcon from "@material-ui/icons/Refresh";
 import SeacrchCourse from "../components/SearhCurriculum";
 import DialogEdit from "../components/DialogEdit";
 import { useSelector } from "react-redux";
-import Snackbar from "modules/compoenent/atomic/SnackBar/SnackBar";
+import Snackbar from "modules/compoenent/atomic/SnackBar";
 import { parseJwt } from "utils/getDataJWT";
 
 export default function MaterialTableDemo(props: any) {

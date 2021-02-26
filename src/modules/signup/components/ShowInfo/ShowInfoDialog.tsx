@@ -1,12 +1,31 @@
 import React from "react";
-import Button from "@material-ui/core/Button";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Grid,
+} from "@material-ui/core";
+import Alert from "@material-ui/lab/Alert";
 
-import { useSelector } from "react-redux";
+import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
+import * as actions from "../../actions";
+import { useDispatch } from "react-redux";
+import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    container: {
+      display: "inline-flex",
+    },
+    title: {
+      fontWeight: 700,
+      marginRight: 10,
+      color: "#222",
+    },
+  })
+);
 export default function ResponsiveDialog({
   open,
   setOpen,
@@ -16,36 +35,17 @@ export default function ResponsiveDialog({
   setOpen: any;
   data: any;
 }) {
-  const { educations } = useSelector((state: any) => state.infomation);
-
-  const showEducation = educations.filter(
-    (education: any) => education.id === data.educationid
-  );
-
+  const classes = useStyles();
+  const dispatch = useDispatch();
   const handleClose = () => {
     setOpen(false);
   };
-  /*
-     "id": "${id}",
-          "usertypeid": ${parseInt(signUpInfo.usertypeid)},
-          "title": "${signUpInfo.title}",
-          "firstname": "${signUpInfo.name}",
-          "lastname": "${signUpInfo.lastname}",
-          "gender": "${signUpInfo.gender}",
-          "educationid": ${parseInt(signUpInfo.educationid)},
-          "birthyear": "${signUpInfo.birthyear}",
-          "email": "${signUpInfo.email}",
-          "password": "${signUpInfo.password}",
-          "user1":{
-          "id":"${id}",
-          "jobtypeid": ${parseInt(signUpInfo.jobtypeId)},
-          "jobtitle": "${signUpInfo.jobTitle}",
-          "joblevelid":${parseInt(signUpInfo.jobLevelid)},
-          "ministryid" :${parseInt(signUpInfo.MinistryId)},
-          "departmentid": ${parseInt(signUpInfo.DepartmentId)},
-          "division": "${signUpInfo.Division}",
-          "jobstartdate": "${formatDate(signUpInfo.jobStartDate)}"
-    */
+  const handleSubmit = () => {
+    const action = actions.loadSignUp(data);
+    dispatch(action);
+    setOpen(false);
+  };
+
   return (
     <div>
       <Dialog
@@ -53,40 +53,65 @@ export default function ResponsiveDialog({
         onClose={handleClose}
         aria-labelledby="responsive-dialog-title"
       >
-        <DialogTitle id="responsive-dialog-title">
-          {"ข้อมูลการสมัคร"}
+        <DialogTitle id="responsive-dialog-title" style={{ fontWeight: 400 }}>
+          <Grid container alignItems="center">
+            <ChatBubbleOutlineIcon style={{ marginRight: 10 }} />{" "}
+            ยืนยันการสมัครสมาชิก
+          </Grid>
         </DialogTitle>
         <DialogContent>
-          <DialogContentText color="primary">
-            ชื่อ: {data.title}
-            {data.firstname} นามสกุล: {data.lastname}
+          <DialogContentText>
+            <div className={classes.container}>
+              <div className={classes.title}>ชื่อ: </div>
+              {data.title}
+              {data.firstname}
+            </div>
           </DialogContentText>
-          <DialogContentText color="primary">
-            เลขที่บัตรประชาชน:{data.id}
+          <DialogContentText>
+            <div className={classes.container}>
+              <div className={classes.title}>นามสกุล:</div>
+              {data.lastname}
+            </div>
           </DialogContentText>
-          <DialogContentText color="primary">
-            ปีเกิด:{data.birthyear}
+          <DialogContentText>
+            <div className={classes.container}>
+              <div className={classes.title}> เลขที่บัตรประชาชน: </div>
+              {data.id}
+            </div>
           </DialogContentText>
-          <DialogContentText color="primary">
-            เพศ: {data.gender}
+          <DialogContentText>
+            <div className={classes.container}>
+              <div className={classes.title}>ปีเกิด: </div>
+              {data.birthyear}
+            </div>
           </DialogContentText>
-          <DialogContentText color="primary">
-            ระดับการศึกษา:{showEducation[0]?.name}
+          <DialogContentText>
+            <div className={classes.container}>
+              <div className={classes.title}>อีเมล:</div>
+              {data.email}
+            </div>
           </DialogContentText>
-          <DialogContentText color="primary">
-            อีเมล:{data.email}
-          </DialogContentText>
-
-          <DialogContentText color="error">
-            โปรดตรวจสอบข้อมูลให้ถูกต้อง
+          <DialogContentText>
+            <Alert severity={"warning"}>โปรดตรวจสอบข้อมูลให้ถูกต้อง</Alert>
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={handleClose} color="primary">
+          <Button
+            autoFocus
+            onClick={handleClose}
+            color="inherit"
+            style={{ color: "#d0473f" }}
+            variant="text"
+          >
             แก้ไขข้อมูล
           </Button>
-          <Button onClick={handleClose} color="primary" autoFocus>
-            ตกลง
+          <Button
+            onClick={handleSubmit}
+            style={{ background: "#009829", color: "white" }}
+            autoFocus
+            variant="contained"
+          >
+            ยืนยัน
           </Button>
         </DialogActions>
       </Dialog>
