@@ -8,7 +8,7 @@ import {
   ButtonNext,
   DotGroup,
 } from "pure-react-carousel";
-import "assets/css/slide.css";
+
 import "pure-react-carousel/dist/react-carousel.es.css";
 import ArrowForward from "@material-ui/icons/ArrowForwardIosRounded";
 import ArrowBack from "@material-ui/icons/ArrowBackIosRounded";
@@ -27,7 +27,6 @@ const useStyles = makeStyles((theme: Theme) =>
       width: "100%",
     },
     slider: {
-      //maxWidth: "1200px",
       outline: "none",
     },
     slide: {

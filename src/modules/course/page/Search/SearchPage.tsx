@@ -19,6 +19,12 @@ const useStyles = makeStyles((theme) => ({
       padding: "0 !important",
     },
   },
+  text: {
+    "& .MuiInputLabel-outlined": {
+      paddingLeft: 8,
+      top: "-4px",
+    },
+  },
 }));
 
 export default function SignIn() {
@@ -43,6 +49,7 @@ export default function SignIn() {
         name="userId"
         variant="outlined"
         value={value || ""}
+        className={classes.text}
         onChange={handlerSearch}
         InputProps={{
           className: classes.input,

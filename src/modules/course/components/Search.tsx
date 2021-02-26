@@ -8,6 +8,7 @@ const useStyles = makeStyles((theme) => ({
   input: {
     color: "#0f1626",
     background: "white",
+    paddingLeft: 10,
     fontWeight: 700,
     borderRadius: 100,
     "& .MuiInputBase-root.MuiOutlineInput-root": {
@@ -17,6 +18,12 @@ const useStyles = makeStyles((theme) => ({
     },
     "& .MuiInputBase-root.MuiOutlinedInput-root": {
       padding: "0 !important",
+    },
+  },
+  text: {
+    "& .MuiInputLabel-outlined": {
+      paddingLeft: 8,
+      top: "-4px",
     },
   },
 }));
@@ -38,6 +45,7 @@ export default function SignIn() {
         label="ค้นหารายวิชา"
         name="userId"
         variant="outlined"
+        className={classes.text}
         value={value}
         onChange={handlerSearch}
         InputProps={{
