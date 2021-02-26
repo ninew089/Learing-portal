@@ -27,7 +27,7 @@ import amber from "@material-ui/core/colors/amber";
 import { AccountCircle } from "@material-ui/icons";
 const useStyles = makeStyles((theme) => ({
   title: {
-    fontWeight: 700,
+    fontWeight: 500,
     flexGrow: 1,
     display: "flex",
     marginLeft: 10,
@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   name: {
-    fontWeight: 700,
+    fontWeight: 500,
     fontSize: 16,
     marginLeft: 10,
     whiteSpace: "nowrap",
@@ -49,10 +49,10 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: "75ch",
   },
   main: {
-    fontWeight: 700,
+    fontWeight: 500,
     fontSize: 16,
     [theme.breakpoints.down("sm")]: {
-      fontWeight: 700,
+      fontWeight: 500,
       fontSize: 12,
     },
     "&:hover": {

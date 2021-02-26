@@ -9,7 +9,7 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import * as actions from "../actions";
 import { useDispatch, useSelector } from "react-redux";
-import Snackbar from "shared/SnackBar/SnackBar";
+import Snackbar from "modules/compoenent/atomic/SnackBar/SnackBar";
 import { infoEdit } from "utils/formatInfomation";
 import { accountFormProps } from "../typescript";
 const useStyles = makeStyles((theme) => ({

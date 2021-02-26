@@ -1,8 +1,8 @@
 import React from "react";
 import Layout from "./modules/ui/components/Layout";
 import { Helmet, HelmetProvider } from "react-helmet-async";
-import Admin from "./modules/adminPortal/components/LoginAdmin";
-import AdminRoute from "./modules/adminPortal/components/AdminLayout";
+import Admin from "./modules/admin/components/Login";
+import AdminRoute from "./modules/admin/ui/AdminLayout";
 
 import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import { Route, Switch } from "react-router-dom";
@@ -23,8 +23,9 @@ export default function APP() {
     },
     palette: {
       primary: {
-        main: "#142840",
+        main: "#ffc107",
         light: "#f5f5f5",
+        dark: "#142840",
       },
       secondary: {
         main: "#f9b122",

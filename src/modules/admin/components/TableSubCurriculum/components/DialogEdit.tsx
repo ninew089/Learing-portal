@@ -1,0 +1,196 @@
+import React, { useEffect, useState } from "react";
+
+import {
+  createStyles,
+  Theme,
+  withStyles,
+  makeStyles,
+} from "@material-ui/core/styles";
+
+import CloseIcon from "@material-ui/icons/Close";
+
+import {
+  Container,
+  CssBaseline,
+  IconButton,
+  Typography,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Dialog,
+  Button,
+  TextField,
+} from "@material-ui/core";
+
+import { useDispatch } from "react-redux";
+import * as actions from "modules/course/actions";
+import * as actionsCourse from "../../../actions";
+import { openEditProps, DialogTitleProps } from "../typescript";
+const styles = (theme: Theme) =>
+  createStyles({
+    root: {
+      margin: 0,
+      padding: theme.spacing(2),
+    },
+    closeButton: {
+      position: "absolute",
+      right: theme.spacing(1),
+      top: theme.spacing(1),
+      color: theme.palette.grey[500],
+    },
+  });
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    paper: {
+      marginTop: theme.spacing(8),
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+    },
+    avatar: {
+      margin: theme.spacing(1),
+      backgroundColor: theme.palette.secondary.main,
+    },
+    form: {
+      width: "100%", // Fix IE 11 issue.
+      marginTop: theme.spacing(1),
+    },
+    submit: {
+      margin: theme.spacing(3, 0, 2),
+    },
+    margin: {
+      margin: theme.spacing(1),
+      padding: theme.spacing(1),
+    },
+    button: {
+      display: "block",
+      marginTop: theme.spacing(2),
+    },
+    formControl: {
+      margin: theme.spacing(2),
+      minWidth: 120,
+    },
+    formControlInfo: {
+      margin: theme.spacing(2),
+      paddingRight: theme.spacing(4),
+    },
+    container: {
+      background: "white",
+      borderRadius: "10px",
+      padding: "10px",
+    },
+  })
+);
+
+const MuiDialogTitle = withStyles(styles)((props: DialogTitleProps) => {
+  const { children, classes, onClose, ...other } = props;
+  return (
+    <DialogTitle disableTypography className={classes.root} {...other}>
+      <Typography variant="h6">{children}</Typography>
+      {onClose ? (
+        <IconButton
+          aria-label="close"
+          className={classes.closeButton}
+          onClick={onClose}
+        >
+          <CloseIcon />
+        </IconButton>
+      ) : null}
+    </DialogTitle>
+  );
+});
+
+const MuiDialogContent = withStyles((theme) => ({
+  root: {
+    padding: theme.spacing(2),
+  },
+}))(DialogContent);
+
+const MuiDialogActions = withStyles((theme) => ({
+  root: {
+    margin: 0,
+    padding: theme.spacing(1),
+  },
+}))(DialogActions);
+
+export default function CustomizedDialogs({
+  open,
+  setOpen,
+  data,
+  valueCurriculun,
+}: openEditProps) {
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const classes = useStyles();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const action = actions.loadCourseCategory();
+    dispatch(action);
+    if (!isNaN(data.no!)) {
+      setValue(data.no);
+    }
+    // eslint-disable-next-line
+  }, [data.tableData?.id]);
+  const [value, setValue] = useState("");
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(event.target.value);
+  };
+
+  const onSubmitData = () => {
+    const no = parseInt(value);
+    const actionCourse = actionsCourse.loadEditSubCurriculum(
+      valueCurriculun,
+      data.id,
+      no
+    );
+    dispatch(actionCourse);
+    handleClose();
+  };
+
+  return (
+    <div>
+      <Dialog
+        onClose={handleClose}
+        fullWidth
+        maxWidth="lg"
+        aria-labelledby="customized-dialog-title"
+        open={open}
+      >
+        <MuiDialogTitle id="customized-dialog-title" onClose={handleClose}>
+          <Typography variant="h6">{data.name}</Typography>
+        </MuiDialogTitle>
+        <MuiDialogContent dividers>
+          <Container
+            component="main"
+            maxWidth="lg"
+            className={classes.container}
+          >
+            <CssBaseline />
+            <div className={classes.paper}>
+              <Typography component="h1" variant="h5">
+                ข้อมูลรายวิชาในหลักสูตร
+              </Typography>
+              <TextField
+                id="standard-name"
+                label="ลำดับที่"
+                value={value}
+                onChange={handleChange}
+              />
+            </div>
+          </Container>
+        </MuiDialogContent>
+        <MuiDialogActions>
+          {value !== undefined && (
+            <Button color="primary" fullWidth onClick={onSubmitData}>
+              ส่งข้อมูล
+            </Button>
+          )}
+        </MuiDialogActions>
+      </Dialog>
+    </div>
+  );
+}

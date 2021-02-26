@@ -1,13 +1,13 @@
 import React from "react";
-import SignupRoutes from "modules/signupPortal/components/index";
-import CourseRoutes from "modules/coursePortal/components/Routes";
-import LoginRoutes from "modules/loginPortal/components/index";
-import ResetRoutes from "modules/resetPortal/components/index";
-import HistoryRoutes from "modules/historyPortal/components/index";
-import ForgetRoutes from "modules/forgetPassword/components/index";
-import Edit from "modules/editProfile/components/index";
-import FAQ from "modules/F&A/FAQ";
-import Page404 from "modules/404page/component/404";
+import SignupRoutes from "modules/signup/page";
+import CourseRoutes from "modules/course/components/Routes";
+import LoginRoutes from "modules/login/page";
+import ResetRoutes from "modules/reset/page";
+import HistoryRoutes from "modules/history/page";
+import ForgetRoutes from "modules/forgetPassword/page";
+import Edit from "modules/editProfile/page";
+import FAQ from "modules/F&A/page";
+import Page404 from "modules/404page/page/404";
 import { Redirect, Route, Switch, useRouteMatch } from "react-router-dom";
 import Scroll from "./Scroll";
 import PrivateRoute from "auth/PrivateRouter";
@@ -16,7 +16,7 @@ import PublicLoginRouter from "auth/PublicLoginRouter";
 import { Toolbar } from "@material-ui/core";
 import { useSelector } from "react-redux";
 
-import Page500 from "modules/404page/component/500";
+import Page500 from "modules/404page/page/500";
 export default function Router() {
   const { path } = useRouteMatch();
   const { isErrorCourse } = useSelector((state: any) => state.course);

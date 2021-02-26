@@ -23,7 +23,8 @@ import {
   ExitToApp,
   Home,
   AccountCircle,
-  Help,Menu
+  Help,
+  Menu,
 } from "@material-ui/icons";
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -108,7 +109,7 @@ export default function TemporaryDrawer() {
             <NavLink to={`${path}/login`} className={classes.navLink}>
               <ListItem button dense>
                 <ListItemIcon>
-                 <AccountCircle/>
+                  <AccountCircle />
                 </ListItemIcon>
                 <ListItemText
                   primary={`${data.title}${data.firstName} ${data.lastName}`}

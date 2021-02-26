@@ -1,5 +1,5 @@
 import React from "react";
-import Forget from "./index";
+import Forget from "../page/index";
 
 import { Route, Switch, useRouteMatch } from "react-router-dom";
 

@@ -6,7 +6,12 @@ import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { useHistory } from "react-router-dom";
 //@ts-ignore
 import SwitchToggle from "@mui-treasury/components/toggle/switch";
-import {Lock,BorderColor,MeetingRoom,ChromeReaderMode} from '@material-ui/icons';
+import {
+  Lock,
+  BorderColor,
+  MeetingRoom,
+  ChromeReaderMode,
+} from "@material-ui/icons";
 
 import Menu from "@material-ui/core/Menu";
 
