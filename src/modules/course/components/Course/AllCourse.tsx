@@ -46,12 +46,13 @@ export default function GroupCourse() {
       <Divider style={{ marginBottom: 20 }} />
 
       <Grid container direction="row" alignItems="center" justify="center">
-        {isLoadingCourses && (
+        {isLoadingCourses ? (
           <CircularProgress color="secondary" style={{ margin: 20 }} />
+        ) : (
+          <Suspense fallback={renderLoader()}>
+            <Carousel detail={courses} isCurriculum={false} />
+          </Suspense>
         )}
-        <Suspense fallback={renderLoader()}>
-          <Carousel detail={courses} isCurriculum={false} />
-        </Suspense>
       </Grid>
     </Box>
   );

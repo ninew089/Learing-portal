@@ -98,13 +98,13 @@ export default function SingleLineGridList(props: { id: number }) {
       </Grid>
       <Divider style={{ marginBottom: 20 }} />
       <Grid container direction="row" alignItems="center" justify={"center"}>
-        <Suspense fallback={renderLoader()}>
-          {isLoadingCourseCategories ? (
-            <CircularProgress color="secondary" style={{ margin: 20 }} />
-          ) : (
+        {isLoadingCourseCategories ? (
+          <CircularProgress color="secondary" style={{ margin: 20 }} />
+        ) : (
+          <Suspense fallback={renderLoader()}>
             <CourseCarousel isCurriculum={false} detail={courseCategories} />
-          )}
-        </Suspense>
+          </Suspense>
+        )}
       </Grid>
     </Box>
   );

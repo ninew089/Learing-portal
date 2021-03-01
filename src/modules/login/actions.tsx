@@ -26,7 +26,7 @@ function loadLogin(userInfo: any) {
       });
 
       setCookie("token", result.data.token, 3);
-
+      dispatch({ type: CLEAR_MESSAGE_LOGIN });
       dispatch(push("/learning-portal"));
     } catch (err) {
       if (err.response.status === 401) {

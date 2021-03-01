@@ -34,7 +34,7 @@ export default function ControlledOpenSelect() {
   const [open, setOpen] = React.useState(false);
   const dispatch = useDispatch();
   const { categories, colorName } = useSelector((state: any) => state.course);
-  const [value, setValue] = useState<any>({});
+  const [value, setValue] = useState<any>("");
   const history = useHistory();
 
   useEffect(() => {
@@ -72,55 +72,65 @@ export default function ControlledOpenSelect() {
   const handleOpen = () => {
     setOpen(true);
   };
-
   return (
     <div>
-      <FormControl className={classes.formControl}>
-        <InputLabel>เลือกหมวดหมู่</InputLabel>
-        <Select
-          open={open}
-          onClose={handleClose}
-          onOpen={handleOpen}
-          onChange={handleChange}
-          value={value}
-          style={{
-            overflow: "hidden",
-            textOverflow: "ellipsis",
-            width: "320px",
-          }}
-        >
-          <MenuItem value={-2} style={{ whiteSpace: "normal" }}>
-            <ListItemText primary={"ทังหมด"} />
-          </MenuItem>
-          {categories.map((item: any, index: number) => (
-            <MenuItem value={item} key={index}>
+      {categories.length !== 0 && (
+        <FormControl className={classes.formControl}>
+          <InputLabel>เลือกหมวดหมู่</InputLabel>
+
+          <Select
+            open={open}
+            onClose={handleClose}
+            onOpen={handleOpen}
+            onChange={handleChange}
+            value={value}
+            style={{
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              width: "320px",
+            }}
+          >
+            <MenuItem value={-2} style={{ whiteSpace: "normal" }}>
+              <ListItemText primary={"ทังหมด"} />
+            </MenuItem>
+            {categories.map((item: any, index: number) => (
+              <MenuItem value={item} key={index}>
+                <ListItemIcon>
+                  <div
+                    style={{
+                      height: "10px",
+                      width: "10px",
+                      borderRadius: "50%",
+                      display: "inline-block",
+                      marginLeft: 10,
+                      marginRight: 4,
+                      background:
+                        colorName[0][
+                          item.name !== undefined ? item.name : "#222"
+                        ],
+                      padding: "2px",
+                      margin: 8,
+                    }}
+                  />
+                </ListItemIcon>
+                <ListItemText
+                  primary={item.name}
+                  style={{ whiteSpace: "normal" }}
+                />
+              </MenuItem>
+            ))}
+            <MenuItem value={-1} style={{ whiteSpace: "normal" }}>
               <ListItemIcon>
                 <div
                   className={classes.dot}
-                  style={{
-                    background:
-                      colorName[0][item.name !== undefined ? item.name : 0],
-                    backgroundSize: "cover",
-                    padding: "2px",
-                    backgroundPosition: " center center",
-                    margin: 8,
-                  }}
+                  style={{ background: "#f9b122" }}
                 />
               </ListItemIcon>
-              <ListItemText
-                primary={item.name}
-                style={{ whiteSpace: "normal" }}
-              />
+              <ListItemText primary={"หลักสูตร"} />
             </MenuItem>
-          ))}
-          <MenuItem value={-1} style={{ whiteSpace: "normal" }}>
-            <ListItemIcon>
-              <div className={classes.dot} style={{ background: "#f9b122" }} />
-            </ListItemIcon>
-            <ListItemText primary={"หลักสูตร"} />
-          </MenuItem>
-        </Select>
-      </FormControl>
+          </Select>
+        </FormControl>
+      )}
     </div>
   );
 }

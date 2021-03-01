@@ -23,7 +23,6 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 40,
   },
   uid: {
-    color: theme.palette.primary.main,
     fontWeight: 400,
   },
   submit: {

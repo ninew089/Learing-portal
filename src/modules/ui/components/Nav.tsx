@@ -11,12 +11,11 @@ import {
   useMediaQuery,
 } from "@material-ui/core";
 import Drawer from "./Drawer";
-import { useRouteMatch } from "react-router-dom";
+import { useRouteMatch, useLocation } from "react-router-dom";
 import MenuList from "./MenuList";
 import banner from "assets/images/welearn.png";
 import { NavLink } from "react-router-dom";
 import ScrollTo from "react-scroll-into-view";
-import { useLocation } from "react-router-dom";
 import { getCookie } from "cookie/cookie";
 import { parseJwt } from "utils/getDataJWT";
 import * as actionsEdit from "modules/editProfile/actions";
@@ -25,6 +24,7 @@ import { NavMenu, NavItem } from "@mui-treasury/components/menu/navigation";
 import { useLineNavigationMenuStyles } from "@mui-treasury/styles/navigationMenu/line";
 import amber from "@material-ui/core/colors/amber";
 import { AccountCircle } from "@material-ui/icons";
+
 const useStyles = makeStyles((theme) => ({
   title: {
     fontWeight: 500,
@@ -106,8 +106,9 @@ export default function PersistentDrawerLeft(props: any) {
 
     return false;
   };
+
   const matchesIspad = useMediaQuery(theme.breakpoints.down("md"));
-  const [active, setActive] = useState<number>(0);
+  const [active, setActive] = useState<any>(0);
   const dispatch = useDispatch();
   const id = parseJwt(token).unique_name;
   useEffect(() => {
@@ -117,6 +118,16 @@ export default function PersistentDrawerLeft(props: any) {
     }
     // eslint-disable-next-line
   }, [id]);
+
+  useEffect(() => {
+    if (pathname !== "/learning-portal") {
+      setActive(null);
+    }
+    if (pathname === "/learning-portal/FAQ") {
+      setActive(4);
+    }
+  }, [pathname]);
+
   const { data } = useSelector((state: any) => state.edit);
 
   return (

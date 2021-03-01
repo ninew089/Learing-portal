@@ -1,5 +1,5 @@
 import React, { useEffect, lazy, Suspense, useState, useRef } from "react";
-import { Grid, Box, Container } from "@material-ui/core";
+import { Grid, Box, Container, CircularProgress } from "@material-ui/core";
 import { useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { useDispatch, useSelector } from "react-redux";
@@ -109,12 +109,29 @@ export default function Course() {
                 justify="center"
                 alignItems="center"
               >
-                <Grid item xs={12} sm={6} md={6} lg={6}>
-                  <SocialCardDemo title={"อันดับยอดฮิต"} data={toprate} />
-                </Grid>
-                <Grid item xs={12} sm={6} md={6} lg={6}>
-                  <SocialCardDemo title={"รายการแนะนำ"} data={recommemded} />
-                </Grid>
+                {toprate.length !== 0 && recommemded.length !== 0 ? (
+                  <>
+                    <Grid item xs={12} sm={6} md={6} lg={6}>
+                      <SocialCardDemo title={"อันดับยอดฮิต"} data={toprate} />
+                    </Grid>
+                    <Grid item xs={12} sm={6} md={6} lg={6}>
+                      <SocialCardDemo
+                        title={"รายการแนะนำ"}
+                        data={recommemded}
+                      />
+                    </Grid>
+                  </>
+                ) : (
+                  <Grid
+                    container
+                    direction="row"
+                    justify="center"
+                    alignItems="center"
+                  >
+                    <CircularProgress color="primary" />
+                  </Grid>
+                )}
+
                 <Grid
                   container
                   direction="row"
