@@ -105,6 +105,13 @@ export default function MaterialTableDemo(props: any) {
         icons={tableIcons}
         title="รายวิชา"
         tableRef={tableRef}
+        localization={{
+          toolbar: {
+            searchPlaceholder: "ค้นหารายวิชา",
+            searchTooltip: "ค้นหารายวิชา",
+          },
+          body: { emptyDataSourceMessage: "ไม่พบข้อมูล" },
+        }}
         columns={[
           { title: "รหัสรายวิชา", field: "courseid" },
           { title: "ชื่อรายวิชา", field: "course" },
@@ -157,6 +164,13 @@ export default function MaterialTableDemo(props: any) {
         icons={tableIcons}
         title="หลักสูตร"
         tableRef={tableRef}
+        localization={{
+          toolbar: {
+            searchPlaceholder: "ค้นหาหลักสูตร",
+            searchTooltip: "ค้นหาหลักสูตร",
+          },
+          body: { emptyDataSourceMessage: "ไม่พบข้อมูล" },
+        }}
         columns={[
           { title: "รหัสหลักสูตร", field: "curriculumid" },
           { title: "ชื่อหลักสูตร", field: "curriculum" },

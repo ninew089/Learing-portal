@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     marginTop: 2,
-    maxWidth: "220px",
+    maxWidth: "280px",
     overflow: "hidden",
     textOverflow: "ellipsis",
     whiteSpace: "nowrap",

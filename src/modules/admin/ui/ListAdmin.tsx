@@ -131,11 +131,11 @@ export default function PersistentDrawerLeft() {
           </ListItem>
         </NavLink>
 
-        <ListItem button key={"ลงชื่ออก"} onClick={onLogout}>
+        <ListItem button key={"ออกจากระบบ"} onClick={onLogout}>
           <ListItemIcon>
             <MeetingRoom />
           </ListItemIcon>
-          <ListItemText primary={"ลงชื่อออก"} />
+          <ListItemText primary={"ออกจากระบบ"} />
         </ListItem>
       </List>
     </div>

@@ -111,7 +111,7 @@ export default function SignIn() {
             ลืมรหัสผ่าน
           </Typography>
           <Typography component="h1" variant="subtitle2" align="left">
-            &nbsp; &nbsp;หากลืมรหัสผ่านในการลงชื่อเข้าใช้
+            &nbsp; &nbsp;หากลืมรหัสผ่านในการเข้าสู่ระบบเข้าใช้
             กรุณากรอกเลขประจำตัวประชาชน ปีเกิด และ อีเมลที่ใช้สมัคร
           </Typography>
           <TextField

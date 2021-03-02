@@ -19,12 +19,7 @@ const useStyles = makeStyles((theme) => ({
       padding: "0 !important",
     },
   },
-  text: {
-    "& .MuiInputLabel-outlined": {
-      paddingLeft: 8,
-      top: "-4px",
-    },
-  },
+  text: {},
 }));
 
 export default function SignIn() {

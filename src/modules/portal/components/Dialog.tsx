@@ -26,7 +26,9 @@ export default function AlertDialog(props: any) {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {`กำลังเข้าสู่ ${data ? data.officialName : "กำลังโหลดข้อมูล"}`}
+          {`กำลังเข้าสู่แพล็ตฟอร์มการเรียนรู้ ${
+            data ? data.officialName : "กำลังโหลดข้อมูล"
+          }`}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
@@ -36,10 +38,15 @@ export default function AlertDialog(props: any) {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={handleClose} color="inherit">
             กลับ
           </Button>
-          <Button onClick={handleAgree} color="primary" autoFocus>
+          <Button
+            onClick={handleAgree}
+            color="primary"
+            variant="contained"
+            autoFocus
+          >
             ตกลง
           </Button>
         </DialogActions>

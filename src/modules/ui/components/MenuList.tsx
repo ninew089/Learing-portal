@@ -7,10 +7,10 @@ import { useHistory } from "react-router-dom";
 //@ts-ignore
 import SwitchToggle from "@mui-treasury/components/toggle/switch";
 import {
-  Lock,
-  BorderColor,
-  MeetingRoom,
+  LockRounded,
+  MeetingRoomRounded,
   ChromeReaderMode,
+  CreateRounded,
 } from "@material-ui/icons";
 
 import Menu from "@material-ui/core/Menu";
@@ -89,11 +89,11 @@ export default function LongMenu() {
         }}
       >
         <MenuItem onClick={navigatorToeditProfile}>
-          <BorderColor className={classes.icons} />
-          แก้ไขโปรไฟล์
+          <CreateRounded className={classes.icons} />
+          แก้ไขข้อมูลส่วนบุคคล
         </MenuItem>
         <MenuItem onClick={navigatorToreset}>
-          <Lock className={classes.icons} />
+          <LockRounded className={classes.icons} />
           เปลี่ยนรหัสผ่าน
         </MenuItem>
         <MenuItem onClick={navigatorTohistory}>
@@ -101,8 +101,8 @@ export default function LongMenu() {
           ประกาศนียบัตร
         </MenuItem>
         <MenuItem onClick={onLogout}>
-          <MeetingRoom className={classes.icons} />
-          ลงชื่อออก
+          <MeetingRoomRounded className={classes.icons} />
+          ออกจากระบบ
         </MenuItem>
       </Menu>
     </div>

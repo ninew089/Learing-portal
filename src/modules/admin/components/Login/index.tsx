@@ -194,7 +194,7 @@ export default function SignIn() {
                   variant="contained"
                   className={classes.submit}
                 >
-                  ลงชื่อเข้าสู่ระบบ
+                  เข้าสู่ระบบ
                 </Button>
               </div>
             </form>

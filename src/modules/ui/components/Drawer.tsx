@@ -17,14 +17,14 @@ import { eraseCookie } from "cookie/cookie";
 import banner from "assets/images/welearn.png";
 
 import {
-  RecentActors,
+  CreateRounded,
   LockRounded,
-  CardMembership,
-  ExitToApp,
+  ChromeReaderMode,
   Home,
   AccountCircle,
   Help,
   Menu,
+  MeetingRoomRounded,
 } from "@material-ui/icons";
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -120,9 +120,9 @@ export default function TemporaryDrawer() {
             <NavLink to={`${path}/edit`} className={classes.navLink}>
               <ListItem button>
                 <ListItemIcon>
-                  <RecentActors />
+                  <CreateRounded />
                 </ListItemIcon>
-                <ListItemText primary={"แก้ไขโปรไฟล์"} />
+                <ListItemText primary={"แก้ไขข้อมูลส่วนบุคคล"} />
               </ListItem>
             </NavLink>
             <NavLink to={`${path}/reset`} className={classes.navLink}>
@@ -136,7 +136,7 @@ export default function TemporaryDrawer() {
             <NavLink to={`${path}/history`} className={classes.navLink}>
               <ListItem button>
                 <ListItemIcon>
-                  <CardMembership />
+                  <ChromeReaderMode />
                 </ListItemIcon>
                 <ListItemText primary={"ประกาศนียบัตร"} />
               </ListItem>
@@ -182,9 +182,9 @@ export default function TemporaryDrawer() {
           <NavLink to={`${path}`} className={classes.navLink}>
             <ListItem button onClick={onLogout}>
               <ListItemIcon>
-                <ExitToApp />
+                <MeetingRoomRounded />
               </ListItemIcon>
-              <ListItemText primary={"ลงชื่อออก"} />
+              <ListItemText primary={"ออกจากระบบ"} />
             </ListItem>
           </NavLink>
         ) : (

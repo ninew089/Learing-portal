@@ -294,7 +294,7 @@ export default function PersistentDrawerLeft(props: any) {
                     }
                     onClick={() => setActive(3)}
                   >
-                    ลงชื่อเข้าสู่ระบบ
+                    เข้าสู่ระบบ
                   </NavItem>
                 </NavLink>
               </NavMenu>

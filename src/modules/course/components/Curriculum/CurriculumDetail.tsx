@@ -57,11 +57,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   title: {
     marginTop: 4,
-    maxWidth: "220px",
+    maxWidth: "280px",
     overflow: "hidden",
     textOverflow: "ellipsis",
     whiteSpace: "nowrap",
-    WebkitLineClamp: 1,
+    WebkitLineClamp: 2,
     WebkitBoxOrient: "vertical",
     fontSize: "1.2rem",
     fontWeight: 600,
