@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "block",
-    background: "#f5f5f5",
+    background: "#fff",
     width: "100%",
     overflowX: "hidden",
   },

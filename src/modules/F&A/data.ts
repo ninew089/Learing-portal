@@ -1,4 +1,4 @@
-import howToRegister from "assets/images/HowToRegister.jpg";
+import howToRegister from "assets/images/HowToRegister.webp";
 export const data = [
   {
     question: "ขั้นตอนการสมัคร",

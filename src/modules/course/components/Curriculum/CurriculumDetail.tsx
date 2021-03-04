@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Typography, Grid, Box } from "@material-ui/core";
+import { Typography, Grid, Chip } from "@material-ui/core";
 import numberFormat from "utils/numberFormat";
 import Rating from "../../share/Rating";
 import { Theme } from "@material-ui/core/styles";
@@ -9,6 +9,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import { CardProps } from "./tyscript";
 import { useDispatch } from "react-redux";
 import * as actions from "../../actions";
+import FiberManualRecordRounded from "@material-ui/icons/FiberManualRecordRounded";
 
 const useStyles = makeStyles((theme: Theme) => ({
   gridPlatform: {
@@ -104,13 +105,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginRight: 10,
   },
   dot: {
-    height: "10px",
-    width: "10px",
-    backgroundColor: theme.palette.secondary.main,
-    borderRadius: "50%",
-    display: "inline-block",
-    marginLeft: 8,
-    marginRight: 4,
+    color: theme.palette.secondary.main,
   },
   rating: {
     paddingLeft: 8,
@@ -229,8 +224,23 @@ export default function CurriculumDetailCard(props: CardProps) {
                     justify="flex-start"
                     alignItems="center"
                   >
-                    <div className={classes.dot} />
-                    <Box fontWeight={500}>หลักสูตร</Box>
+                    <Chip
+                      icon={
+                        <FiberManualRecordRounded
+                          style={{
+                            color: "white",
+                          }}
+                        />
+                      }
+                      label={"หลักสูตร"}
+                      style={{
+                        maxWidth: 200,
+                        color: "white",
+                      }}
+                      color="secondary"
+                      size="small"
+                      // variant="outlined"
+                    />
                   </Grid>
                 </div>
                 <Grid item xs={12}>

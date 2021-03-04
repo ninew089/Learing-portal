@@ -14,14 +14,14 @@ const initialState = {
 export default function (state = initialState, action: any) {
   switch (action.type) {
     case LOAD_LOGIN_REQUEST:
-      return { ...state, isLoading: true, users: [], messageLogin: [] };
+      return { ...state, isLoading: true, users: [], messageLogin: null };
     case LOAD_LOGIN_SUCCESS:
       return {
         ...state,
         isLoading: false,
         users: action.payload.user,
         status: action.payload.status,
-        messageLogin: action.payload.messageLogin,
+        messageLogin: null,
       };
     case LOAD_LOGIN_FAILURE:
       return {

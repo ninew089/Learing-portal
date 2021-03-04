@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { Button, Box } from "@material-ui/core";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import img from "assets/images/OCSC-banner.png";
+import img from "assets/images/welearn.png";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";

@@ -1,4 +1,4 @@
-import React, { useEffect, Suspense, lazy, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Grid,
   Divider,
@@ -13,14 +13,12 @@ import { useLocation } from "react-router-dom";
 import { parse } from "query-string";
 import { useDispatch, useSelector } from "react-redux";
 import * as actions from "../../actions";
-import searchNotfound from "assets/gif/somethingbroken.gif";
+import searchNotfound from "assets/images/nodata.webp";
 import Search from "./SearchPage";
 
-const CourseDetail = lazy(
-  () => import("../../components/Course/CourseDetails")
-);
-const Header = lazy(() => import("../../share/Header"));
-const SelectCategory = lazy(() => import("../../share/SelectCategory"));
+import CourseDetail from "../../components/Course/CourseDetails";
+import Header from "../../share/Header";
+import SelectCategory from "../../share/SelectCategory";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -96,10 +94,8 @@ export default function GroupCourse(props: any) {
     // eslint-disable-next-line
   }, [q]);
 
-  const renderLoader = () => <div></div>;
-
   return (
-    <Suspense fallback={renderLoader()}>
+    <>
       <Header text={"ค้นหารายวิชา"} />
 
       <div className={classes.root}>
@@ -186,6 +182,6 @@ export default function GroupCourse(props: any) {
           )}
         </Container>
       </div>
-    </Suspense>
+    </>
   );
 }

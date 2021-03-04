@@ -2,7 +2,7 @@ import React from "react";
 
 import { makeStyles } from "@material-ui/core/styles";
 import { LocalLibrary } from "@material-ui/icons";
-import img from "assets/images/01.jpg";
+import img from "assets/images/01.webp";
 
 const useStyles = makeStyles((theme) => ({
   header: {

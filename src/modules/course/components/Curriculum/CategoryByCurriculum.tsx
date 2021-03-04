@@ -1,4 +1,4 @@
-import React, { useEffect, lazy, Suspense } from "react";
+import React, { useEffect } from "react";
 import {
   Grid,
   Divider,
@@ -13,9 +13,7 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from "react-redux";
 import * as actions from "../../actions";
 
-const CurriculumCarousel = lazy(
-  () => import("modules/compoenent/atomic/Carousel")
-);
+import CurriculumCarousel from "modules/compoenent/atomic/Carousel";
 
 export default function SingleLineGridList(props: { title: string }) {
   const useStyles = makeStyles((theme: Theme) =>
@@ -61,39 +59,35 @@ export default function SingleLineGridList(props: { title: string }) {
     (state: any) => state.course
   );
 
-  const renderLoader = () => <div></div>;
-
   return (
-    <Suspense fallback={renderLoader()}>
-      <Box className={classes.box}>
-        <Grid
-          container
-          direction="row"
-          alignItems="center"
-          justify="space-between"
+    <Box className={classes.box}>
+      <Grid
+        container
+        direction="row"
+        alignItems="center"
+        justify="space-between"
+      >
+        <Box
+          p={2}
+          fontWeight={700}
+          style={{ color: "rgb(19 39 64)" }}
+          fontSize="h4.fontSize"
         >
-          <Box
-            p={2}
-            fontWeight={700}
-            style={{ color: "rgb(19 39 64)" }}
-            fontSize="h4.fontSize"
-          >
-            {title}
-          </Box>
-          <Button onClick={Next} style={{ color: "#0f1626" }}>
-            ดูเพิ่มเติม
-          </Button>
-        </Grid>
-        <Divider style={{ marginBottom: 20 }} />
+          {title}
+        </Box>
+        <Button onClick={Next} style={{ color: "#0f1626" }}>
+          ดูเพิ่มเติม
+        </Button>
+      </Grid>
+      <Divider style={{ marginBottom: 20 }} />
 
-        <Grid container direction="row" alignItems="center" justify={"center"}>
-          {isLoadingCurriculums ? (
-            <CircularProgress color="secondary" style={{ margin: 20 }} />
-          ) : (
-            <CurriculumCarousel isCurriculum={true} detail={curriculums} />
-          )}
-        </Grid>
-      </Box>
-    </Suspense>
+      <Grid container direction="row" alignItems="center" justify={"center"}>
+        {isLoadingCurriculums ? (
+          <CircularProgress color="secondary" style={{ margin: 20 }} />
+        ) : (
+          <CurriculumCarousel isCurriculum={true} detail={curriculums} />
+        )}
+      </Grid>
+    </Box>
   );
 }

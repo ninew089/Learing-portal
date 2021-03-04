@@ -2,7 +2,7 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { NavLink } from "react-router-dom";
-import notFound from "assets/images/404.gif";
+import notFound from "assets/images/404.webp";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 

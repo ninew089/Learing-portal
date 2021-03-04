@@ -4,7 +4,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import searchNotfound from "assets/gif/somethingbroken.gif";
+import searchNotfound from "assets/images/nodata.webp";
 
 const useStyles = makeStyles((theme) => ({
   paper: {

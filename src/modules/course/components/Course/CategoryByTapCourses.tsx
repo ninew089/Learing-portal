@@ -1,4 +1,4 @@
-import React, { useEffect, Suspense, lazy } from "react";
+import React, { useEffect } from "react";
 import {
   Grid,
   Divider,
@@ -13,7 +13,7 @@ import queryString from "query-string";
 import { useDispatch, useSelector } from "react-redux";
 import * as actions from "../../actions";
 
-const CourseCarousel = lazy(() => import("modules/compoenent/atomic/Carousel"));
+import CourseCarousel from "modules/compoenent/atomic/Carousel";
 
 export default function SingleLineGridList(props: { id: number }) {
   const useStyles = makeStyles((theme: Theme) =>
@@ -69,8 +69,6 @@ export default function SingleLineGridList(props: { id: number }) {
     (state: any) => state.course
   );
 
-  const renderLoader = () => <div></div>;
-
   useEffect(() => {
     const action = actions.loadCourseCategories(
       parsed.category === undefined ? 1 : parsed.category
@@ -101,9 +99,7 @@ export default function SingleLineGridList(props: { id: number }) {
         {isLoadingCourseCategories ? (
           <CircularProgress color="secondary" style={{ margin: 20 }} />
         ) : (
-          <Suspense fallback={renderLoader()}>
-            <CourseCarousel isCurriculum={false} detail={courseCategories} />
-          </Suspense>
+          <CourseCarousel isCurriculum={false} detail={courseCategories} />
         )}
       </Grid>
     </Box>

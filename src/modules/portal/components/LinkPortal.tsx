@@ -39,6 +39,11 @@ const useStyles = makeStyles((theme) => ({
   center: {
     alignContent: "center",
   },
+  button: {
+    "&:hover": {
+      color: "white",
+    },
+  },
 }));
 
 export default function VariantAvatars() {
@@ -104,7 +109,12 @@ export default function VariantAvatars() {
               dir={theme.direction}
               key={index}
             >
-              <Dialog open={open} setOpen={setOpen} data={item} />
+              <Dialog
+                open={open}
+                setOpen={setOpen}
+                data={item}
+                classes={classes}
+              />
             </TabPanel>
           ))}
         </SwipeableViews>

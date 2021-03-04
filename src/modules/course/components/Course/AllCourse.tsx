@@ -1,4 +1,4 @@
-import React, { useEffect, Suspense, lazy } from "react";
+import React, { useEffect } from "react";
 import {
   Grid,
   Divider,
@@ -9,8 +9,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import * as actions from "../../actions";
 import { useRouteMatch, useHistory } from "react-router-dom";
-
-const Carousel = lazy(() => import("modules/compoenent/atomic/Carousel"));
+import Carousel from "modules/compoenent/atomic/Carousel";
 
 export default function GroupCourse() {
   const { path } = useRouteMatch();
@@ -30,8 +29,6 @@ export default function GroupCourse() {
     // eslint-disable-next-line
   }, []);
 
-  const renderLoader = () => <div></div>;
-
   return (
     <Box>
       <Grid
@@ -49,9 +46,7 @@ export default function GroupCourse() {
         {isLoadingCourses ? (
           <CircularProgress color="secondary" style={{ margin: 20 }} />
         ) : (
-          <Suspense fallback={renderLoader()}>
-            <Carousel detail={courses} isCurriculum={false} />
-          </Suspense>
+          <Carousel detail={courses} isCurriculum={false} />
         )}
       </Grid>
     </Box>

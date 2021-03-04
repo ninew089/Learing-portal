@@ -7,7 +7,7 @@ import Select from "@material-ui/core/Select";
 import { useDispatch, useSelector } from "react-redux";
 import * as actions from "../actions";
 import { useHistory } from "react-router-dom";
-
+import FiberManualRecordRounded from "@material-ui/icons/FiberManualRecordRounded";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     button: {
@@ -96,20 +96,12 @@ export default function ControlledOpenSelect() {
             {categories.map((item: any, index: number) => (
               <MenuItem value={item} key={index}>
                 <ListItemIcon>
-                  <div
+                  <FiberManualRecordRounded
                     style={{
-                      height: "10px",
-                      width: "10px",
-                      borderRadius: "50%",
-                      display: "inline-block",
-                      marginLeft: 10,
-                      marginRight: 4,
-                      background:
+                      color:
                         colorName[0][
                           item.name !== undefined ? item.name : "#222"
                         ],
-                      padding: "2px",
-                      margin: 8,
                     }}
                   />
                 </ListItemIcon>
@@ -121,9 +113,10 @@ export default function ControlledOpenSelect() {
             ))}
             <MenuItem value={-1} style={{ whiteSpace: "normal" }}>
               <ListItemIcon>
-                <div
-                  className={classes.dot}
-                  style={{ background: "#f9b122" }}
+                <FiberManualRecordRounded
+                  style={{
+                    color: "#f9b122",
+                  }}
                 />
               </ListItemIcon>
               <ListItemText primary={"หลักสูตร"} />

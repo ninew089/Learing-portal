@@ -1,12 +1,12 @@
 import React from "react";
-import { Grid, Box, Divider, CardMedia } from "@material-ui/core";
+import { Grid, Box, Divider, CardMedia, Chip } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useSelector } from "react-redux";
 import Rating from "../../share/Rating";
 import banner from "assets/images/welearn.png";
 import { useDispatch } from "react-redux";
 import * as actions from "../../actions";
-
+import FiberManualRecordRounded from "@material-ui/icons/FiberManualRecordRounded";
 const useStyles = makeStyles((theme) => ({
   contianer: {
     position: "relative",
@@ -184,22 +184,33 @@ export default function SocialCard(props: any) {
           </Box>
           <Box fontSize={12} fontWeight={400} className={classes.category}>
             <Grid container justify="flex-start" direction="row">
-              <Grid item xs={1}>
-                <div
-                  className={classes.dot}
+              <Grid item xs={6}>
+                <Chip
+                  icon={
+                    <FiberManualRecordRounded
+                      fontSize="small"
+                      style={{
+                        color: "white",
+                        fontSize: 10,
+                      }}
+                    />
+                  }
+                  label={data.courseCategory}
                   style={{
+                    fontSize: 10,
                     background:
                       colorName[0][
                         data.courseCategory !== undefined
                           ? data.courseCategory
                           : 0
                       ],
+                    maxWidth: 140,
+                    color: "white",
                   }}
+                  //color="secondary"
+                  size="small"
+                  // variant="outlined"
                 />
-              </Grid>
-
-              <Grid item xs={8}>
-                {data.courseCategory}
               </Grid>
             </Grid>
           </Box>

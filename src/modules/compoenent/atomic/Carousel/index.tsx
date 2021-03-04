@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import React from "react";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import {
   CarouselProvider,
@@ -15,13 +15,8 @@ import { useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { CourseCarouselProps } from "./typescript";
 import { useSelector } from "react-redux";
-
-const CourseDetail = lazy(
-  () => import("modules/course/components/Course/CourseDetails")
-);
-const CurriculumDetail = lazy(
-  () => import("modules/course/components/Curriculum/CurriculumDetail")
-);
+import CourseDetail from "modules/course/components/Course/CourseDetails";
+import CurriculumDetail from "modules/course/components/Curriculum/CurriculumDetail";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -117,54 +112,52 @@ export default function CourseCarousel(props: CourseCarouselProps) {
                         .includes(selected_platform)
                 )
                 .map((item: any, index: number) => (
-                  <Suspense key={index} fallback={<div></div>}>
-                    <Slide index={index} className={classes.slide}>
-                      <div className={classes.course}>
-                        {isCurriculum ? (
-                          <CurriculumDetail
-                            id={item.id}
-                            learningTopic={item.learningTopic}
-                            learningObjective={item.learningObjective}
-                            courseCategoryId={item.courseCategoryId}
-                            thumbNail={item.thumbNail}
-                            targetGroup={item.targetGroup}
-                            assessment={item.assessment}
-                            viewCount={item.viewCount}
-                            point={
-                              item.satisfactionSum / item.satisfactionCount
-                            }
-                            satisfactionCount={item.satisfactionCount}
-                            link={item.link}
-                            code={item.code}
-                            name={item.name}
-                            platformlogo={item.platformlogo}
-                            platformName={item.platformName}
-                          />
-                        ) : (
-                          <CourseDetail
-                            id={item.id}
-                            learningTopic={item.learningTopic}
-                            learningObjective={item.learningObjective}
-                            courseCategoryId={item.courseCategoryId}
-                            thumbNail={item.thumbNail}
-                            targetGroup={item.targetGroup}
-                            assessment={item.assessment}
-                            viewCount={item.viewCount}
-                            point={
-                              item.satisfactionSum / item.satisfactionCount
-                            }
-                            satisfactionCount={item.satisfactionCount}
-                            link={item.link}
-                            code={item.code}
-                            name={item.name}
-                            platformlogo={item.platformlogo}
-                            platformName={item.platformName}
-                            courseCategory={item.courseCategory}
-                          />
-                        )}
-                      </div>
-                    </Slide>
-                  </Suspense>
+                  <Slide
+                    key={item.learningTopic + index}
+                    index={index}
+                    className={classes.slide}
+                  >
+                    <div className={classes.course}>
+                      {isCurriculum ? (
+                        <CurriculumDetail
+                          id={item.id}
+                          learningTopic={item.learningTopic}
+                          learningObjective={item.learningObjective}
+                          courseCategoryId={item.courseCategoryId}
+                          thumbNail={item.thumbNail}
+                          targetGroup={item.targetGroup}
+                          assessment={item.assessment}
+                          viewCount={item.viewCount}
+                          point={item.satisfactionSum / item.satisfactionCount}
+                          satisfactionCount={item.satisfactionCount}
+                          link={item.link}
+                          code={item.code}
+                          name={item.name}
+                          platformlogo={item.platformlogo}
+                          platformName={item.platformName}
+                        />
+                      ) : (
+                        <CourseDetail
+                          id={item.id}
+                          learningTopic={item.learningTopic}
+                          learningObjective={item.learningObjective}
+                          courseCategoryId={item.courseCategoryId}
+                          thumbNail={item.thumbNail}
+                          targetGroup={item.targetGroup}
+                          assessment={item.assessment}
+                          viewCount={item.viewCount}
+                          point={item.satisfactionSum / item.satisfactionCount}
+                          satisfactionCount={item.satisfactionCount}
+                          link={item.link}
+                          code={item.code}
+                          name={item.name}
+                          platformlogo={item.platformlogo}
+                          platformName={item.platformName}
+                          courseCategory={item.courseCategory}
+                        />
+                      )}
+                    </div>
+                  </Slide>
                 ))}
             </Slider>
 

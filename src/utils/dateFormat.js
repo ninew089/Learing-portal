@@ -34,28 +34,6 @@ export function formatDate(s) {
   return newDate;
 }
 
-export function formatDatetoThai(date) {
-  const datetime = new Date(date).toLocaleDateString();
-  const res = datetime.split("/");
-  const m = [
-    "มกราคม",
-    "กุมภาพันธ์",
-    "มีนาคม",
-    "เมษายน",
-    "พฤษภาคม",
-    "มิถุนายน",
-    "กรกฎาคม",
-    "สิงหาคม",
-    "กันยายน",
-    "ตุลาคม",
-    "พฤศจิกายน",
-    "ธันวาคม",
-  ];
-  const mm = parseInt(res[0]);
-  const yy = parseInt(res[2]) + 543;
-  const newDate = `${res[1]} ${m[mm - 1]} ${yy}`;
-  return newDate;
-}
 export function formatDatetoThaiTest(date) {
   const res = date.split("-");
   const m = [

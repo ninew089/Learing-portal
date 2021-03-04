@@ -1,4 +1,4 @@
-import React, { useEffect, Suspense, lazy } from "react";
+import React, { useEffect } from "react";
 import { Box, Grid, IconButton, useMediaQuery } from "@material-ui/core";
 import { useHistory, useRouteMatch, useLocation } from "react-router-dom";
 import {
@@ -10,8 +10,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import * as actions from "../../actions";
 import { parse } from "query-string";
-
-const Courses = lazy(() => import("./CategoryByTapCourses"));
+import Courses from "./CategoryByTapCourses";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -96,7 +95,7 @@ export default function PointNavigationMenu({ title }: { title: string }) {
       return "bold";
     }
   };
-  const renderLoader = () => <div></div>;
+
   const dispatch = useDispatch();
   const { categories } = useSelector((state: any) => state.course);
   const theme = useTheme();
@@ -175,9 +174,7 @@ export default function PointNavigationMenu({ title }: { title: string }) {
           </Grid>
         ))}
       </Grid>
-      <Suspense fallback={renderLoader()}>
-        <Courses id={index} />
-      </Suspense>
+      <Courses id={index} />
     </>
   );
 }

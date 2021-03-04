@@ -1,14 +1,14 @@
-import React, { lazy, Suspense } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Typography, Grid, Box } from "@material-ui/core";
+import { Typography, Grid, Chip } from "@material-ui/core";
 import numberFormat from "utils/numberFormat";
 import banner from "assets/images/welearn.png";
 import { CardProps } from "./tyscript";
 import CardMedia from "@material-ui/core/CardMedia";
 import { useSelector, useDispatch } from "react-redux";
 import * as actions from "../../actions";
-
-const Rating = lazy(() => import("../../share/Rating"));
+import FiberManualRecordRounded from "@material-ui/icons/FiberManualRecordRounded";
+import Rating from "../../share/Rating";
 
 const useStyles = makeStyles((theme) => ({
   container: {},
@@ -72,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
     whiteSpace: "nowrap",
     WebkitLineClamp: 1,
     WebkitBoxOrient: "vertical",
-    fontSize: "1rem",
+    fontSize: "0.9rem",
     fontWeight: 500,
     color: "#132740",
     paddingLeft: 8,
@@ -119,7 +119,7 @@ const useStyles = makeStyles((theme) => ({
     overflow: "hidden",
     display: "-webkit-box",
     textOverflow: "ellipsis",
-    WebkitLineClamp: 3,
+    WebkitLineClamp: 2,
     WebkitBoxOrient: "vertical",
     fontSize: "12px",
     color: "#434a54",
@@ -172,66 +172,84 @@ export default function IconBreadcrumbs(props: CardProps) {
     courseCategory,
   } = props;
   const classes = useStyles();
-  const renderLoader = () => <div></div>;
-
   const dispatch = useDispatch();
   const onOpen = () => {
     const action = actions.setDialog(props, false);
     dispatch(action);
   };
-
   const { colorName } = useSelector((state: any) => state.course);
 
   return (
-    <Suspense fallback={renderLoader()}>
-      <div className={classes.root}>
-        <div className={classes.card} onClick={onOpen}>
-          <Grid container direction="column" justify="flex-start">
-            <div style={{ display: "block" }}>
+    <div className={classes.root}>
+      <div className={classes.card} onClick={onOpen}>
+        <Grid container direction="column" justify="flex-start">
+          <div style={{ display: "block" }}>
+            <div
+              style={{
+                width: "100%",
+                backgroundSize: "cover",
+                backgroundPosition: "center center",
+                borderRadius: "10px",
+              }}
+            />
+            <CardMedia
+              style={{
+                background: `url('${thumbNail}')`,
+                backgroundSize: "cover",
+                backgroundPosition: "center center",
+              }}
+              image={thumbNail}
+              className={classes.cardMedia}
+              title={name}
+            />
+            <Typography variant={"h2"} className={classes.title}>
+              {name}
+            </Typography>
+            <Typography variant={"h4"} className={classes.subtitle}>
+              {code}
+            </Typography>
+
+            <Grid
+              container
+              direction="row"
+              justify="flex-start"
+              alignItems="center"
+              className={classes.detail}
+            >
               <div
                 style={{
-                  width: "100%",
-                  backgroundSize: "cover",
-                  backgroundPosition: "center center",
-                  borderRadius: "10px",
+                  marginBottom: 10,
+                  display: "inline-flex",
                 }}
-              />
-              <CardMedia
-                style={{
-                  background: `url('${thumbNail}')`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center center",
-                }}
-                image={thumbNail}
-                className={classes.cardMedia}
-                title={name}
-              />
-              <Typography variant={"h2"} className={classes.title}>
-                {name}
-              </Typography>
-              <Typography variant={"h4"} className={classes.subtitle}>
-                {code}
-              </Typography>
-
-              <Grid
-                container
-                direction="row"
-                justify="flex-start"
-                alignItems="center"
-                className={classes.detail}
               >
-                <div
-                  style={{
-                    marginBottom: 10,
-                    display: "inline-flex",
-                  }}
+                <Grid
+                  container
+                  direction="row"
+                  justify="flex-start"
+                  alignItems="center"
                 >
-                  <Grid
-                    container
-                    direction="row"
-                    justify="flex-start"
-                    alignItems="center"
-                  >
+                  <Chip
+                    icon={
+                      <FiberManualRecordRounded
+                        style={{
+                          color: "white",
+                        }}
+                      />
+                    }
+                    label={courseCategory}
+                    style={{
+                      background:
+                        colorName[0][
+                          courseCategory !== undefined ? courseCategory : 0
+                        ],
+                      maxWidth: 200,
+                      color: "white",
+                    }}
+                    //color="secondary"
+                    size="small"
+                    // variant="outlined"
+                  />
+                  {/*
                     <div
                       className={classes.dot}
                       style={{
@@ -243,71 +261,70 @@ export default function IconBreadcrumbs(props: CardProps) {
                     />
                     <Box fontWeight={500} className={classes.category}>
                       {courseCategory}
-                    </Box>
-                  </Grid>
-                </div>
-                <Grid item xs={12}>
-                  <div>
-                    {learningObjective !== undefined && (
-                      <div
-                        className={classes.caption}
-                        dangerouslySetInnerHTML={{ __html: learningObjective }}
-                      />
-                    )}
-                  </div>
+                    </Box> */}
                 </Grid>
-                <Grid
-                  container
-                  direction="row"
-                  justify="flex-start"
-                  alignItems="center"
-                >
-                  <div className={classes.logo}>
+              </div>
+              <Grid item xs={12}>
+                <div>
+                  {learningObjective !== undefined && (
                     <div
-                      style={{
-                        backgroundImage: `url('${platformlogo}`,
-                        backgroundSize: "cover",
-                        padding: "30px",
-                        backgroundPosition: " center center",
-                      }}
-                    />
-                  </div>
-                  <Grid item>
-                    <div className={classes.author}>{platformName} </div>
-                    <div className={classes.rating}>
-                      <Rating vote={satisfactionCount} point={point} />
-                    </div>
-                    <Grid
-                      container
-                      direction="row"
-                      justify="flex-start"
-                      alignItems="flex-start"
-                      className={classes.box}
-                    >
-                      <Typography
-                        variant="caption"
-                        align="left"
-                        component="span"
-                        color={"textSecondary"}
-                      >
-                        การดู {numberFormat(viewCount)} ครั้ง
-                      </Typography>
-                    </Grid>
-                  </Grid>
-                  {platformName === "สำนักงาน ก.พ." && (
-                    <img
-                      src={banner}
-                      alt="welearn"
-                      width="40"
-                      style={{ margin: 8 }}
+                      className={classes.caption}
+                      dangerouslySetInnerHTML={{ __html: learningObjective }}
                     />
                   )}
-                </Grid>
+                </div>
               </Grid>
-            </div>
-          </Grid>
-        </div>
+              <Grid
+                container
+                direction="row"
+                justify="flex-start"
+                alignItems="center"
+              >
+                <div className={classes.logo}>
+                  <div
+                    style={{
+                      backgroundImage: `url('${platformlogo}`,
+                      backgroundSize: "cover",
+                      padding: "30px",
+                      backgroundPosition: " center center",
+                    }}
+                  />
+                </div>
+                <Grid item>
+                  <div className={classes.author}>{platformName} </div>
+                  <div className={classes.rating}>
+                    <Rating vote={satisfactionCount} point={point} />
+                  </div>
+                  <Grid
+                    container
+                    direction="row"
+                    justify="flex-start"
+                    alignItems="flex-start"
+                    className={classes.box}
+                  >
+                    <Typography
+                      variant="caption"
+                      align="left"
+                      component="span"
+                      color={"textSecondary"}
+                    >
+                      การดู {numberFormat(viewCount)} ครั้ง
+                    </Typography>
+                  </Grid>
+                </Grid>
+                {platformName === "สำนักงาน ก.พ." && (
+                  <img
+                    src={banner}
+                    alt="welearn"
+                    width="40"
+                    style={{ margin: 8 }}
+                  />
+                )}
+              </Grid>
+            </Grid>
+          </div>
+        </Grid>
       </div>
-    </Suspense>
+    </div>
   );
 }
