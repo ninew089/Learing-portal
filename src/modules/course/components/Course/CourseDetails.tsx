@@ -2,7 +2,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, Grid, Chip } from "@material-ui/core";
 import numberFormat from "utils/numberFormat";
-import banner from "assets/images/welearn.png";
+import banner from "assets/images/welearn_logo.webp";
 import { CardProps } from "./tyscript";
 import CardMedia from "@material-ui/core/CardMedia";
 import { useSelector, useDispatch } from "react-redux";
@@ -19,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
       background: "#cccccc8a",
     },
     height: "100%",
+    maxWidth: 300,
   },
   card: {
     width: "100%",
@@ -52,17 +53,17 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "0.5rem",
   },
   title: {
-    marginTop: 2,
-    maxWidth: "280px",
+    marginTop: 4,
     overflow: "hidden",
+    maxWidth: 270,
     textOverflow: "ellipsis",
     whiteSpace: "nowrap",
-    WebkitLineClamp: 1,
-    WebkitBoxOrient: "vertical",
+    //  WebkitLineClamp: 1,
+    // WebkitBoxOrient: "vertical",
     fontSize: "1.2rem",
     fontWeight: 600,
     color: "#132740",
-    paddingLeft: 8,
+
     marginRight: 8,
     marginBottom: 10,
   },
@@ -202,9 +203,9 @@ export default function IconBreadcrumbs(props: CardProps) {
               className={classes.cardMedia}
               title={name}
             />
-            <Typography variant={"h2"} className={classes.title}>
-              {name}
-            </Typography>
+
+            <div className={classes.title}>{name}</div>
+
             <Typography variant={"h4"} className={classes.subtitle}>
               {code}
             </Typography>

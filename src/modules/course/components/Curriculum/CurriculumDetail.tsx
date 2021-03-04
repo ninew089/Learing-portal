@@ -4,7 +4,8 @@ import { Typography, Grid, Chip } from "@material-ui/core";
 import numberFormat from "utils/numberFormat";
 import Rating from "../../share/Rating";
 import { Theme } from "@material-ui/core/styles";
-import banner from "assets/images/welearn.png";
+
+import banner from "assets/images/welearn_logo.webp";
 import CardMedia from "@material-ui/core/CardMedia";
 import { CardProps } from "./tyscript";
 import { useDispatch } from "react-redux";

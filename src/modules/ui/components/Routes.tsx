@@ -12,7 +12,6 @@ import { Redirect, Route, Switch, useRouteMatch } from "react-router-dom";
 import Scroll from "./Scroll";
 import PrivateRoute from "auth/PrivateRouter";
 import PublicLoginRouter from "auth/PublicLoginRouter";
-
 import { Toolbar } from "@material-ui/core";
 import { useSelector } from "react-redux";
 
@@ -62,8 +61,10 @@ export default function Router() {
           <Toolbar />
           <CourseRoutes></CourseRoutes>
         </Route>
+
         <Route path={`${path}`}>
-          <CourseRoutes></CourseRoutes>
+          <Toolbar />
+          <CourseRoutes />
         </Route>
 
         <Route path="*">

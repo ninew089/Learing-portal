@@ -11,7 +11,7 @@ import Snackbar from "modules/compoenent/atomic/SnackBar";
 import { makeStyles } from "@material-ui/core/styles";
 import { Mail, RecentActors } from "@material-ui/icons";
 
-import Dateth from "../components/DateTh";
+import { DateTh } from "modules/compoenent/atomic/DatePicker";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { useSelector, useDispatch } from "react-redux";
@@ -132,7 +132,7 @@ export default function SignIn() {
               ),
             }}
           />
-          <Dateth title={"ปีเกิด"} register={register} name={"dob"} />
+          <DateTh title={"ปีเกิด"} register={register} name={"dob"} />
 
           <TextField
             variant="outlined"

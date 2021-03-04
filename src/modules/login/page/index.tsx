@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import Alert from "modules/compoenent/atomic/Alert";
-import img from "assets/images/welearn.png";
+import img from "assets/images/welearn_logo.webp";
 import {
   Visibility,
   VisibilityOff,

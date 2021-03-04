@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-import Date from "./DatePicker";
+import { DateTh } from "modules/compoenent/atomic/DatePicker";
 import { Controller } from "react-hook-form";
 import {
   Typography,
@@ -143,7 +143,7 @@ export default function SignIn(props: any) {
         </FormControl>
 
         <div className={classes.formControlDate}>
-          <Date
+          <DateTh
             title={"ปีเกิด"}
             register={formProps.register}
             name={"birthyear"}

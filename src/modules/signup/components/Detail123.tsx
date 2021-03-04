@@ -2,7 +2,8 @@ import React, { useEffect } from "react";
 import { TextField, MenuItem, FormControl } from "@material-ui/core";
 import { Controller } from "react-hook-form";
 import { makeStyles } from "@material-ui/core/styles";
-import Date from "./DatePickerJob";
+
+import { DateThPicker } from "modules/compoenent/atomic/DatePicker";
 import * as actions from "modules/infomation/actions";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -108,7 +109,7 @@ export default function SignIn(props: any) {
         </h4>
       </FormControl>
 
-      <Date
+      <DateThPicker
         title={"วันที่รับราชการ"}
         register={formProps.register}
         name={"jobStartDate"}

@@ -3,7 +3,7 @@ import { Grid, Box, Divider, CardMedia, Chip } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useSelector } from "react-redux";
 import Rating from "../../share/Rating";
-import banner from "assets/images/welearn.png";
+import banner from "assets/images/welearn_logo.webp";
 import { useDispatch } from "react-redux";
 import * as actions from "../../actions";
 import FiberManualRecordRounded from "@material-ui/icons/FiberManualRecordRounded";

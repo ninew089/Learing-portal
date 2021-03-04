@@ -14,7 +14,7 @@ import { useSelector } from "react-redux";
 import { getCookie } from "cookie/cookie";
 import { parseJwt } from "utils/getDataJWT";
 import { eraseCookie } from "cookie/cookie";
-import banner from "assets/images/welearn.png";
+import banner from "assets/images/welearn_logo.webp";
 
 import {
   CreateRounded,

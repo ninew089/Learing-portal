@@ -215,7 +215,6 @@ export default function Course() {
               <Grid item xs={12} sm={12} md={12} lg={12}>
                 <Curriculum title={"หลักสูตร"} />
               </Grid>
-
               <Facebook />
             </Grid>
           </Grid>

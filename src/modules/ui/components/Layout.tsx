@@ -103,6 +103,7 @@ export default function PersistentDrawerLeft(props: any) {
       <Nav />
       <Grid className={clsx(classes.content)}>
         <Routes />
+
         {dialog && (
           <Dialog open={dialog} data={dialogData} isCurriculum={isCurriculum} />
         )}

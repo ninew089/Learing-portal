@@ -1,8 +1,8 @@
 import React from "react";
-import Layout from "./modules/ui/components/Layout";
+import Layout from "modules/ui/components/Layout";
 import { Helmet, HelmetProvider } from "react-helmet-async";
-import Admin from "./modules/admin/components/Login";
-import AdminRoute from "./modules/admin/ui/AdminLayout";
+import Admin from "modules/admin/components/Login";
+import AdminRoute from "modules/admin/ui/AdminLayout";
 
 import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import { Route, Switch } from "react-router-dom";
@@ -69,7 +69,7 @@ export default function APP() {
           <meta property="og:type" content="website" />
           <meta
             property="og:url"
-            content="https://learn.ocsc.info/learning-portal"
+            content="https://welearn.ocsc.go.th/learning-portal/"
           />
           <meta property="og:title" content="OCSC Learning Portal" />
           <meta
@@ -81,7 +81,7 @@ export default function APP() {
           <meta property="twitter:card" content="summary_large_image" />
           <meta
             property="twitter:url"
-            content="https://learn.ocsc.info/learning-portal"
+            content="https://welearn.ocsc.go.th/learning-portal/"
           />
           <meta property="twitter:title" content="OCSC Learning Portal" />
           <meta

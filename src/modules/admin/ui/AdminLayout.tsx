@@ -12,7 +12,7 @@ import {
 } from "@material-ui/core";
 import { Menu, ChevronLeft, ChevronRight } from "@material-ui/icons";
 import { useDispatch } from "react-redux";
-import Welearn from "assets/images/welearn.png";
+import Welearn from "assets/images/welearn_logo.webp";
 import * as actions from "../actions";
 import Routes from "./Routes";
 import ListMenu from "./ListAdmin";

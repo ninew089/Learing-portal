@@ -136,7 +136,7 @@ export default function GroupCourse(props: any) {
               >
                 <h2>ขออภัยค่ะ หารายวิชาไม่พบ {q}</h2>
 
-                <img src={searchNotfound} alt="" width="400px" height="400px" />
+                <img src={searchNotfound} alt="" width="100%" height="400px" />
               </Grid>
             )}
             {postsToShow.map((item: any, index: number) => (

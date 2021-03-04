@@ -13,7 +13,7 @@ import {
 import Drawer from "./Drawer";
 import { useRouteMatch, useLocation } from "react-router-dom";
 import MenuList from "./MenuList";
-import banner from "assets/images/welearn.png";
+import banner from "assets/images/welearn_logo.webp";
 import { NavLink } from "react-router-dom";
 import ScrollTo from "react-scroll-into-view";
 import { getCookie } from "cookie/cookie";
