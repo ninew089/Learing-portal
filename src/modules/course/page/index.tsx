@@ -65,7 +65,7 @@ export default function Course() {
   const { toprate, recommemded } = useSelector((state: any) => state.course);
 
   return (
-    <>
+    <React.Fragment>
       <Relation />
       <Container maxWidth="lg">
         <div
@@ -200,6 +200,6 @@ export default function Course() {
         </Grid>
         <Facebook />
       </Container>
-    </>
+    </React.Fragment>
   );
 }

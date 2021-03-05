@@ -22,7 +22,7 @@ const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
-    background: theme.palette.primary.light,
+    background: "#fff",
   },
   appBar: {
     background: "#0055af",

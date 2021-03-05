@@ -27,19 +27,6 @@ const theme = createMuiTheme({
     },
   },
   overrides: {
-    MuiTab: {
-      root: {
-        minWidth: 100,
-        "@media (min-width: 0px)": {
-          minWidth: 80,
-        },
-      },
-    },
-    MuiFab: {
-      root: {
-        boxShadow: "none",
-      },
-    },
     MuiSelect: {
       selectMenu: {
         display: "inline-flex",
@@ -49,29 +36,25 @@ const theme = createMuiTheme({
 });
 export default function APP() {
   const store = configureStore();
-
   return (
     <Provider store={store}>
       <ConnectedRouter history={history}>
-        <Switch>
-          <PriveRouterAdmin
-            path="/learning-portal/admin/main"
-            component={AdminRoute}
-          />
-
-          <Route exact path="/learning-portal/admin">
-            <ThemeProvider theme={theme}>
-              <CssBaseline />
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <Switch>
+            <PriveRouterAdmin
+              path="/learning-portal/admin/main"
+              component={AdminRoute}
+            />
+            <Route exact path="/learning-portal/admin">
               <Admin />
-            </ThemeProvider>
-          </Route>
-          <Route path="/learning-portal">
-            <ThemeProvider theme={theme}>
-              <CssBaseline />
+            </Route>
+
+            <Route path="/learning-portal">
               <Layout />
-            </ThemeProvider>
-          </Route>
-        </Switch>
+            </Route>
+          </Switch>
+        </ThemeProvider>
       </ConnectedRouter>
     </Provider>
   );

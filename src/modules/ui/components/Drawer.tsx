@@ -11,9 +11,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import { NavLink } from "react-router-dom";
 import { useRouteMatch } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { getCookie } from "cookie/cookie";
-import { parseJwt } from "utils/getDataJWT";
-import { eraseCookie } from "cookie/cookie";
+import { eraseCookie, login } from "cookie/cookie";
 import banner from "assets/images/welearn_logo.webp";
 
 import {
@@ -75,20 +73,6 @@ export default function TemporaryDrawer() {
 
   const { path } = useRouteMatch();
 
-  const login = () => {
-    const token = getCookie("token");
-    if (token === null) {
-      return false;
-    }
-    if (
-      (token !== "" || token !== undefined) &&
-      parseJwt(token).role === "user"
-    ) {
-      return true;
-    }
-
-    return false;
-  };
   const onLogout = () => {
     eraseCookie("token");
     window.location.reload();
@@ -105,7 +89,7 @@ export default function TemporaryDrawer() {
     >
       <List>
         {login() ? (
-          <>
+          <React.Fragment>
             <NavLink to={`${path}/login`} className={classes.navLink}>
               <ListItem button dense>
                 <ListItemIcon>
@@ -142,9 +126,9 @@ export default function TemporaryDrawer() {
               </ListItem>
             </NavLink>
             <Divider />
-          </>
+          </React.Fragment>
         ) : (
-          <>
+          <React.Fragment>
             <ListItem button>
               <ListItemText
                 primary={<img alt="" src={banner} width={"100%"} />}
@@ -158,7 +142,7 @@ export default function TemporaryDrawer() {
                 <ListItemText primary={"เข้าสู่ระบบ"} />
               </ListItem>
             </NavLink>
-          </>
+          </React.Fragment>
         )}
 
         <NavLink to={`${path}`} className={classes.navLink}>

@@ -7,16 +7,15 @@ import {
   Grid,
   Typography,
   Hidden,
-  Box,
   useMediaQuery,
 } from "@material-ui/core";
 import Drawer from "./Drawer";
-import { useRouteMatch, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import MenuList from "./MenuList";
 import banner from "assets/images/welearn_logo.webp";
 import { NavLink } from "react-router-dom";
 import ScrollTo from "react-scroll-into-view";
-import { getCookie } from "cookie/cookie";
+import { getCookie, login } from "cookie/cookie";
 import { parseJwt } from "utils/getDataJWT";
 import * as actionsEdit from "modules/editProfile/actions";
 import { useDispatch, useSelector } from "react-redux";
@@ -89,23 +88,8 @@ interface NavProps {
 export default function PersistentDrawerLeft(props: any) {
   const classes = useStyles();
   const theme = useTheme();
-  const { path } = useRouteMatch();
-
   const { pathname } = useLocation();
   const token = getCookie("token");
-  const login = () => {
-    if (token === null) {
-      return false;
-    }
-    if (
-      (token !== "" || token !== undefined) &&
-      parseJwt(token).role === "user"
-    ) {
-      return true;
-    }
-
-    return false;
-  };
 
   const matchesIspad = useMediaQuery(theme.breakpoints.down("md"));
   const [active, setActive] = useState<any>(0);
@@ -129,6 +113,28 @@ export default function PersistentDrawerLeft(props: any) {
   }, [pathname]);
 
   const { data } = useSelector((state: any) => state.edit);
+  const NavProp = ({
+    to,
+    state,
+    title,
+  }: {
+    to: any;
+    state: any;
+    title: any;
+  }) => {
+    return (
+      <NavLink to={to} className={classes.noDecorationLink} color="secondary">
+        <NavItem
+          as={"div"}
+          active={active === state}
+          className={active === state ? classes.navItemActive : classes.navItem}
+          onClick={() => setActive(state)}
+        >
+          {title}
+        </NavItem>
+      </NavLink>
+    );
+  };
 
   return (
     <AppBar position="fixed" className={clsx(classes.appBar)} elevation={0}>
@@ -141,15 +147,15 @@ export default function PersistentDrawerLeft(props: any) {
             alignItems="center"
           >
             <NavLink
-              to={`${path}`}
+              to={`/learning-portal`}
               className={classes.noDecorationLink}
               style={{ marginBottom: 4, marginTop: 4 }}
             >
               <img
                 alt=""
                 src={banner}
-                width={matchesIspad ? "62px" : "76px"}
-                height="40px"
+                width={matchesIspad ? "63px" : "76px"}
+                height={"32px"}
               />
             </NavLink>
 
@@ -166,94 +172,33 @@ export default function PersistentDrawerLeft(props: any) {
           className={classes.navMenu}
         >
           {pathname === "/learning-portal" ? (
-            <>
+            <React.Fragment>
               <Hidden xsDown>
-                <NavLink
-                  to={`${path}`}
-                  className={classes.noDecorationLink}
-                  color="secondary"
-                >
-                  <NavItem
-                    as={"div"}
-                    active={active === 0}
-                    className={
-                      active === 0 ? classes.navItemActive : classes.navItem
-                    }
-                    onClick={() => setActive(0)}
-                  >
-                    หน้าหลัก
-                  </NavItem>
-                </NavLink>
+                <NavProp to={`/learning-portal`} state={0} title={`หน้าหลัก`} />
               </Hidden>
               <ScrollTo selector={`#หมวดหมู่`} smooth>
-                <NavItem
-                  as={"div"}
-                  active={active === 1}
-                  className={
-                    active === 1 ? classes.navItemActive : classes.navItem
-                  }
-                  onClick={() => setActive(1)}
-                >
-                  หมวดหมู่
-                </NavItem>
+                <NavProp to={`/learning-portal`} state={1} title={`หมวดหมู่`} />
               </ScrollTo>
               <ScrollTo selector={`#หลักสูตร`} smooth>
-                <NavItem
-                  as={"div"}
-                  active={active === 2}
-                  className={
-                    active === 2 ? classes.navItemActive : classes.navItem
-                  }
-                  onClick={() => setActive(2)}
-                >
-                  หลักสูตร
-                </NavItem>
+                <NavProp to={`/learning-portal`} state={2} title={`หลักสูตร`} />
               </ScrollTo>
               <Hidden xsDown>
-                <NavLink
-                  to={`${path}/FAQ`}
-                  className={classes.noDecorationLink}
-                >
-                  <NavItem
-                    as={"div"}
-                    active={active === 4}
-                    className={
-                      active === 4 ? classes.navItemActive : classes.navItem
-                    }
-                    onClick={() => setActive(4)}
-                  >
-                    คำถามที่พบบ่อย
-                  </NavItem>
-                </NavLink>
+                <NavProp
+                  to={`/learning-portal/FAQ`}
+                  state={4}
+                  title={`คำถามที่พบบ่อย`}
+                />
               </Hidden>
-            </>
+            </React.Fragment>
           ) : (
-            <>
-              <NavLink to={`${path}`} className={classes.noDecorationLink}>
-                <NavItem
-                  as={"div"}
-                  active={active === 0}
-                  className={
-                    active === 0 ? classes.navItemActive : classes.navItem
-                  }
-                  onClick={() => setActive(0)}
-                >
-                  หน้าหลัก
-                </NavItem>
-              </NavLink>
-              <NavLink to={`${path}/FAQ`} className={classes.noDecorationLink}>
-                <NavItem
-                  as={"div"}
-                  active={active === 4}
-                  className={
-                    active === 4 ? classes.navItemActive : classes.navItem
-                  }
-                  onClick={() => setActive(4)}
-                >
-                  คำถามที่พบบ่อย
-                </NavItem>
-              </NavLink>
-            </>
+            <React.Fragment>
+              <NavProp to={`/learning-portal`} state={0} title={`หน้าหลัก`} />
+              <NavProp
+                to={`/learning-portal/FAQ`}
+                state={4}
+                title={`คำถามที่พบบ่อย`}
+              />
+            </React.Fragment>
           )}
         </NavMenu>
 
@@ -261,7 +206,7 @@ export default function PersistentDrawerLeft(props: any) {
           <Drawer />
         </Hidden>
         {login() ? (
-          <>
+          <React.Fragment>
             <Hidden xsDown>
               <Typography
                 style={{
@@ -273,38 +218,25 @@ export default function PersistentDrawerLeft(props: any) {
                 }}
               />
               <AccountCircle style={{ color: "#ffa800", fontSize: "32px" }} />
-              <Hidden xsDown>
-                <Box className={classes.name}>{data.firstName}</Box>
-              </Hidden>
-
+              <div className={classes.name}>{data.firstName}</div>
               <MenuList />
             </Hidden>
-          </>
+          </React.Fragment>
         ) : (
-          <>
+          <React.Fragment>
             <Hidden xsDown>
               <NavMenu
                 useStyles={useLineNavigationMenuStyles}
                 className={classes.navMenu}
               >
-                <NavLink
-                  to={`${path}/login`}
-                  className={classes.noDecorationLink}
-                >
-                  <NavItem
-                    as={"div"}
-                    active={active === 3}
-                    className={
-                      active === 3 ? classes.navItemActive : classes.navItem
-                    }
-                    onClick={() => setActive(3)}
-                  >
-                    เข้าสู่ระบบ
-                  </NavItem>
-                </NavLink>
+                <NavProp
+                  to={`/learning-portal/login`}
+                  state={null}
+                  title={`เข้าสู่ระบบ`}
+                />
               </NavMenu>
             </Hidden>
-          </>
+          </React.Fragment>
         )}
       </Toolbar>
     </AppBar>
