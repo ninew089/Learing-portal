@@ -34,6 +34,11 @@ export default function SignIn() {
   const navToSearch = () => {
     history.push(`/learning-portal/search?q=${value.toLowerCase()}`);
   };
+  const handleKeyPress = (event: any) => {
+    if (event.key === "Enter") {
+      history.push(`/learning-portal/search?q=${value.toLowerCase()}`);
+    }
+  };
   return (
     <Grid container direction="row" justify="center" alignItems="center">
       <TextField
@@ -43,6 +48,7 @@ export default function SignIn() {
         className={classes.text}
         value={value}
         onChange={handlerSearch}
+        onKeyPress={handleKeyPress}
         InputProps={{
           className: classes.input,
           endAdornment: (
