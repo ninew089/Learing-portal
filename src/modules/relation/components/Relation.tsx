@@ -135,7 +135,7 @@ export default function CourseCarousel() {
                         <div
                           style={{
                             position: "relative",
-                            width: "100vw",
+                            width: "100%",
                             minHeight: "400px",
                           }}
                         >

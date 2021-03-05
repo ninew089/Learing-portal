@@ -71,53 +71,51 @@ export default function VariantAvatars() {
 
   return (
     <>
-      <div className={classes.root}>
-        <Tabs
-          value={value}
-          classes={tabsStyles}
-          style={{ backgroundColor: "transparent" }}
-          onChange={handleChange}
-          variant="scrollable"
-        >
-          {data.map((item: any, index: number) => (
-            <Tab
-              key={index}
-              classes={tabItemStyles}
-              onClick={handleClickOpen}
-              icon={
-                <img
-                  width="56px"
-                  height="56px"
-                  alt={item.name}
-                  src={item.thumbnail}
-                  className={classes.rounded}
-                />
-              }
-            />
-          ))}
-        </Tabs>
-        <SwipeableViews
-          axis={theme.direction === "rtl" ? "x-reverse" : "x"}
-          index={value}
-          onChangeIndex={handleChange}
-        >
-          {data.map((item: any, index: number) => (
-            <TabPanel
-              value={value}
-              index={index}
-              dir={theme.direction}
-              key={index}
-            >
-              <Dialog
-                open={open}
-                setOpen={setOpen}
-                data={item}
-                classes={classes}
+      <Tabs
+        value={value}
+        classes={tabsStyles}
+        style={{ backgroundColor: "transparent" }}
+        onChange={handleChange}
+        variant="scrollable"
+      >
+        {data.map((item: any, index: number) => (
+          <Tab
+            key={index}
+            classes={tabItemStyles}
+            onClick={handleClickOpen}
+            icon={
+              <img
+                width="56px"
+                height="56px"
+                alt={item.name}
+                src={item.thumbnail}
+                className={classes.rounded}
               />
-            </TabPanel>
-          ))}
-        </SwipeableViews>
-      </div>
+            }
+          />
+        ))}
+      </Tabs>
+      <SwipeableViews
+        axis={theme.direction === "rtl" ? "x-reverse" : "x"}
+        index={value}
+        onChangeIndex={handleChange}
+      >
+        {data.map((item: any, index: number) => (
+          <TabPanel
+            value={value}
+            index={index}
+            dir={theme.direction}
+            key={index}
+          >
+            <Dialog
+              open={open}
+              setOpen={setOpen}
+              data={item}
+              classes={classes}
+            />
+          </TabPanel>
+        ))}
+      </SwipeableViews>
     </>
   );
 }

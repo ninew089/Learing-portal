@@ -101,13 +101,13 @@ export default function PersistentDrawerLeft(props: any) {
   return (
     <div className={classes.root}>
       <Nav />
-      <Grid className={clsx(classes.content)}>
+      <div className={clsx(classes.content)}>
         <Routes />
 
         {dialog && (
           <Dialog open={dialog} data={dialogData} isCurriculum={isCurriculum} />
         )}
-      </Grid>
+      </div>
       <div className={classes.push} />
       <Box p={2} className={classes.footer}>
         <Grid

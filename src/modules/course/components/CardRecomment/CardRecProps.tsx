@@ -13,8 +13,8 @@ const useStyles = makeStyles((theme) => ({
   },
   icon: {
     position: "absolute",
-    bottom: 0,
-    right: 10,
+    bottom: 10,
+    right: 15,
   },
   card: {
     marginTop: "10px",
@@ -167,7 +167,7 @@ export default function SocialCard(props: any) {
           >
             {data.platformName === "สำนักงาน ก.พ." && (
               <div className={classes.icon}>
-                <img src={banner} alt="welearn" width="28" />
+                <img src={banner} alt="welearn" width="28px" height="15px" />
               </div>
             )}
           </CardMedia>

@@ -14,12 +14,10 @@ import PrivateRoute from "auth/PrivateRouter";
 import PublicLoginRouter from "auth/PublicLoginRouter";
 import { Toolbar } from "@material-ui/core";
 import { useSelector } from "react-redux";
-
 import Page500 from "modules/404page/page/500";
 export default function Router() {
   const { path } = useRouteMatch();
   const { isErrorCourse } = useSelector((state: any) => state.course);
-
   const { isErrorProfile } = useSelector((state: any) => state.edit);
 
   return (
@@ -64,6 +62,7 @@ export default function Router() {
 
         <Route path={`${path}`}>
           <Toolbar />
+
           <CourseRoutes />
         </Route>
 

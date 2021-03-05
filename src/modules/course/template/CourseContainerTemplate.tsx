@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  Grid,
-  Divider,
-  Box,
-  Button,
-  CircularProgress,
-} from "@material-ui/core";
+import { Grid, Divider, Button, CircularProgress } from "@material-ui/core";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import CourseCarousel from "modules/compoenent/atomic/Carousel";
 
@@ -48,7 +42,7 @@ export default function SingleLineGridList({
   const classes = useStyles();
 
   return (
-    <Box className={classes.box}>
+    <>
       <Grid
         container
         direction="row"
@@ -71,6 +65,6 @@ export default function SingleLineGridList({
           />
         )}
       </Grid>
-    </Box>
+    </>
   );
 }

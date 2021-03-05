@@ -192,102 +192,71 @@ export default function CurriculumDetailCard(props: CardProps) {
         </div>
         <div className={classes.title}>{name}</div>
         <div className={classes.subtitle}>{code}</div>
-        <Grid
-          container
-          direction="row"
-          justify="flex-start"
-          alignItems="center"
-          className={classes.detail}
-        >
-          <div
-            style={{
-              marginBottom: 10,
-              display: "inline-flex",
-            }}
-          >
-            <Chip
-              icon={
-                <FiberManualRecordRounded
-                  style={{
-                    color: "white",
-                  }}
-                />
-              }
-              label={"หลักสูตร"}
+
+        <Chip
+          icon={
+            <FiberManualRecordRounded
               style={{
-                maxWidth: 200,
                 color: "white",
               }}
-              color="secondary"
-              size="small"
-              // variant="outlined"
             />
-          </div>
-          <Grid item xs={12}>
-            {learningObjective !== undefined && (
-              <div
-                className={classes.caption}
-                dangerouslySetInnerHTML={{ __html: learningObjective }}
-              />
-            )}
+          }
+          label={"หลักสูตร"}
+          style={{
+            maxWidth: 200,
+            color: "white",
+          }}
+          color="secondary"
+          size="small"
+        />
+
+        {learningObjective !== undefined && (
+          <div
+            className={classes.caption}
+            dangerouslySetInnerHTML={{ __html: learningObjective }}
+          />
+        )}
+
+        <Grid
+          container
+          justify="flex-start"
+          alignItems="flex-start"
+          direction="row"
+          style={{ marginTop: 4 }}
+        >
+          <div
+            className={classes.logo}
+            style={{
+              backgroundImage: `url('${platformlogo}`,
+              backgroundSize: "cover",
+              padding: "14px",
+              backgroundPosition: " center center",
+            }}
+          />
+          <Grid item xs={7}>
+            <div className={classes.author}>{platformName}</div>
+            <div className={classes.rating}>
+              <Rating fontSize={14} vote={satisfactionCount} point={point} />
+            </div>
           </Grid>
-          <Grid item xs={12} className={classes.gridPlatform}>
-            <Grid
-              container
-              direction="column"
-              justify="space-around"
-              alignItems="center"
-            >
-              <Grid
-                container
-                direction="row"
-                justify="flex-start"
-                alignItems="center"
-              >
-                <div className={classes.logo}>
-                  <div
-                    style={{
-                      backgroundImage: `url('${platformlogo}`,
-                      backgroundSize: "cover",
-                      padding: "30px",
-                      backgroundPosition: " center center",
-                    }}
-                  />
-                </div>
-                <div>
-                  <div className={classes.author}>{platformName} </div>
-                  <div className={classes.rating}>
-                    <Rating vote={satisfactionCount} point={point} />
-                  </div>
-                  <Grid
-                    container
-                    direction="row"
-                    justify="flex-start"
-                    alignItems="flex-start"
-                    className={classes.box}
-                  >
-                    <Typography
-                      variant="caption"
-                      align="left"
-                      component="span"
-                      color={"textSecondary"}
-                    >
-                      การดู {numberFormat(viewCount)} ครั้ง
-                    </Typography>
-                  </Grid>
-                </div>
-                {platformName === "สำนักงาน ก.พ." && (
-                  <img
-                    src={banner}
-                    alt="welearn"
-                    width="40px"
-                    height="16px"
-                    style={{ margin: 8 }}
-                  />
-                )}
-              </Grid>
-            </Grid>
-          </Grid>
+          {platformName === "สำนักงาน ก.พ." && (
+            <img
+              src={banner}
+              alt="welearn"
+              width="40px"
+              height="16px"
+              style={{ margin: 8 }}
+            />
+          )}
+          <Typography
+            variant="caption"
+            align="left"
+            component="span"
+            color={"textSecondary"}
+            style={{ marginLeft: 52 }}
+          >
+            การดู {numberFormat(viewCount)} ครั้ง
+          </Typography>
         </Grid>
       </div>
     </div>
