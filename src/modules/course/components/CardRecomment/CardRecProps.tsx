@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Box, Divider, CardMedia, Chip } from "@material-ui/core";
+import { Grid, Divider, CardMedia, Chip } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useSelector } from "react-redux";
 import Rating from "../../share/Rating";
@@ -62,6 +62,20 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   name: {
+    fontSize: 14,
+    fontWeight: 600,
+    color: theme.palette.primary.dark,
+    overflow: "hidden",
+    display: "-webkit-box",
+    textOverflow: "ellipsis",
+    WebkitBoxOrient: "vertical",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "10px",
+    },
+  },
+  code: {
+    fontSize: 12,
+    fontWeight: 400,
     color: theme.palette.primary.dark,
     overflow: "hidden",
     display: "-webkit-box",
@@ -87,19 +101,6 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: theme.shape.borderRadius,
     boxShadow:
       "0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)",
-  },
-  dot: {
-    height: "10px",
-    width: "10px",
-    backgroundColor: "#cfcde6",
-    borderRadius: "50%",
-    display: "inline-block",
-    marginLeft: 2,
-    marginRight: 4,
-    [theme.breakpoints.only("xs")]: {
-      height: "6px",
-      width: "6px",
-    },
   },
   author: {
     overflow: "hidden",
@@ -153,67 +154,50 @@ export default function SocialCard(props: any) {
         className={classes.items}
         onClick={onSelected}
       >
-        <Grid item xs={5}>
-          <div className={classes.contianer}>
-            <CardMedia
-              style={{
-                background: `url('${data.thumbNail}')`,
-                backgroundSize: "cover",
-                backgroundPosition: "center center",
-              }}
-              image={data.thumbNail}
-              className={classes.cardMedia}
-              title={data.name}
-            >
-              {data.platformName === "สำนักงาน ก.พ." && (
-                <div className={classes.icon}>
-                  <img src={banner} alt="welearn" width="28" />
-                </div>
-              )}
-            </CardMedia>
-          </div>
+        <Grid item xs={5} className={classes.contianer}>
+          <CardMedia
+            style={{
+              background: `url('${data.thumbNail}')`,
+              backgroundSize: "cover",
+              backgroundPosition: "center center",
+            }}
+            image={data.thumbNail}
+            className={classes.cardMedia}
+            title={data.name}
+          >
+            {data.platformName === "สำนักงาน ก.พ." && (
+              <div className={classes.icon}>
+                <img src={banner} alt="welearn" width="28" />
+              </div>
+            )}
+          </CardMedia>
         </Grid>
 
         <Grid item xs={7}>
-          <Box fontSize={14} fontWeight={600} className={classes.name}>
-            {data.name}
-          </Box>
-
-          <Box fontSize={12} fontWeight={400} className={classes.name}>
-            {data.code}
-          </Box>
-          <Box fontSize={12} fontWeight={400} className={classes.category}>
-            <Grid container justify="flex-start" direction="row">
-              <Grid item xs={6}>
-                <Chip
-                  icon={
-                    <FiberManualRecordRounded
-                      fontSize="small"
-                      style={{
-                        color: "white",
-                        fontSize: 10,
-                      }}
-                    />
-                  }
-                  label={data.courseCategory}
-                  style={{
-                    fontSize: 10,
-                    background:
-                      colorName[0][
-                        data.courseCategory !== undefined
-                          ? data.courseCategory
-                          : 0
-                      ],
-                    maxWidth: 140,
-                    color: "white",
-                  }}
-                  //color="secondary"
-                  size="small"
-                  // variant="outlined"
-                />
-              </Grid>
-            </Grid>
-          </Box>
+          <div className={classes.name}>{data.name}</div>
+          <div className={classes.code}> {data.code}</div>
+          <Chip
+            icon={
+              <FiberManualRecordRounded
+                fontSize="small"
+                style={{
+                  color: "white",
+                  fontSize: 10,
+                }}
+              />
+            }
+            label={data.courseCategory}
+            style={{
+              fontSize: 10,
+              background:
+                colorName[0][
+                  data.courseCategory !== undefined ? data.courseCategory : 0
+                ],
+              maxWidth: 140,
+              color: "white",
+            }}
+            size="small"
+          />
           <Grid
             container
             justify="flex-start"
@@ -221,18 +205,15 @@ export default function SocialCard(props: any) {
             direction="row"
             style={{ marginTop: 4 }}
           >
-            <Grid item>
-              <div className={classes.logo}>
-                <div
-                  style={{
-                    backgroundImage: `url('${data.platformlogo}`,
-                    backgroundSize: "cover",
-                    padding: "14px",
-                    backgroundPosition: " center center",
-                  }}
-                />
-              </div>
-            </Grid>
+            <div
+              className={classes.logo}
+              style={{
+                backgroundImage: `url('${data.platformlogo}`,
+                backgroundSize: "cover",
+                padding: "14px",
+                backgroundPosition: " center center",
+              }}
+            />
             <Grid item xs={7}>
               <div className={classes.author}>{data.platformName} </div>
               <div className={classes.rating}>

@@ -1,5 +1,4 @@
 import { createStore, applyMiddleware } from "redux";
-import { composeWithDevTools } from "redux-devtools-extension";
 import reduxThunk from "redux-thunk";
 import { createBrowserHistory } from "history";
 import { routerMiddleware } from "connected-react-router";
@@ -12,7 +11,7 @@ function configureStore(initialState) {
   const store = createStore(
     createRootReducer(history),
     initialState,
-    composeWithDevTools(applyMiddleware(...middleware))
+    applyMiddleware(...middleware)
   );
 
   return store;

@@ -90,6 +90,7 @@ export default function Course() {
         <Container>
           <Grid container direction="row" justify="center" alignItems="center">
             <Portal />
+
             <Grid
               container
               direction="row"
@@ -115,7 +116,6 @@ export default function Course() {
                   <CircularProgress color="primary" />
                 </Grid>
               )}
-
               <Grid
                 container
                 direction="row"
@@ -149,29 +149,23 @@ export default function Course() {
                     </FadeInSection>
                   </Grid>
                 </Grid>
-
                 <Grid item xs={12} sm={6} md={6} lg={6}>
                   <FadeInSection key={"img"}>
                     <img src={animation} alt="" width="100%" height="100%" />
                   </FadeInSection>
                 </Grid>
-                <Grid
-                  container
-                  direction="row"
-                  justify="center"
-                  alignItems="center"
-                >
-                  <SelectPlatform />
-                </Grid>
-                <Grid item xs={12} sm={12} md={12} lg={12}>
-                  <AllCourse />
-                </Grid>
               </Grid>
+              <Grid
+                container
+                direction="row"
+                justify="center"
+                alignItems="center"
+              >
+                <SelectPlatform />
+              </Grid>
+              <AllCourse />
               <div id="หมวดหมู่" />
-              <Grid item xs={12} sm={12} md={12} lg={12}>
-                <TapsCourse title={"หมวดหมู่"} />
-              </Grid>
-
+              <TapsCourse title={"หมวดหมู่"} />
               <Grid
                 container
                 direction="row"

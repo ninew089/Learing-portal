@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-import { Tabs, Tab, Avatar } from "@material-ui/core";
+import { Tabs, Tab } from "@material-ui/core";
 //@ts-ignore
 import SwipeableViews from "react-swipeable-views";
 import TabPanel from "./TabPlanel";
@@ -17,6 +17,7 @@ const useStyles = makeStyles((theme) => ({
   rounded: {
     width: theme.spacing(7),
     height: theme.spacing(7),
+    borderRadius: 360,
   },
   small: {
     width: theme.spacing(4),
@@ -77,10 +78,6 @@ export default function VariantAvatars() {
           style={{ backgroundColor: "transparent" }}
           onChange={handleChange}
           variant="scrollable"
-          //scrollButtons="on"
-
-          // indicatorColor={"secondary"}
-          //  textColor="primary"
         >
           {data.map((item: any, index: number) => (
             <Tab
@@ -88,8 +85,10 @@ export default function VariantAvatars() {
               classes={tabItemStyles}
               onClick={handleClickOpen}
               icon={
-                <Avatar
-                  alt="Remy Sharp"
+                <img
+                  width="56px"
+                  height="56px"
+                  alt={item.name}
                   src={item.thumbnail}
                   className={classes.rounded}
                 />
@@ -122,47 +121,3 @@ export default function VariantAvatars() {
     </>
   );
 }
-
-/*
-
-function a11yProps(index: any) {
-  return {
-    id: `full-width-tab-${index}`,
-    'aria-controls': `full-width-tabpanel-${index}`,
-  };
-}
-
-const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    backgroundColor: theme.palette.background.paper,
-    width: 500,
-  },
-}));
-
-export default function FullWidthTabs() {
-  const classes = useStyles();
-  const theme = useTheme();
-  const [value, setValue] = React.useState(0);
-
-
-
-  const handleChangeIndex = (index: number) => {
-    setValue(index);
-  };
-
-  return (
-
-
-      <SwipeableViews
-        axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-        index={value}
-        onChangeIndex={handleChangeIndex}
-      >
-        <TabPanel value={value} index={0} dir={theme.direction}>
-          Item One
-        </TabPanel>
-      </SwipeableViews>
-
-  );
-}
-*/

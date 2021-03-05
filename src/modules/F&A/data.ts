@@ -4,7 +4,6 @@ export const data = [
     question: "ขั้นตอนการสมัคร",
     answer: `
         <img alt="" src=${howToRegister} width="100%" height="100%"/>
-        
         `,
   },
   {

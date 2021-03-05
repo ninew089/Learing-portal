@@ -145,7 +145,12 @@ export default function PersistentDrawerLeft(props: any) {
               className={classes.noDecorationLink}
               style={{ marginBottom: 4, marginTop: 4 }}
             >
-              <img alt="" src={banner} width={matchesIspad ? 62 : 76} />
+              <img
+                alt=""
+                src={banner}
+                width={matchesIspad ? "62px" : "76px"}
+                height="40px"
+              />
             </NavLink>
 
             <Hidden mdDown>

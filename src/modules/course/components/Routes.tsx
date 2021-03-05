@@ -9,27 +9,25 @@ import Search from "../page/Search";
 
 export default function Routes() {
   return (
-    <>
-      <Switch>
-        <Route path={`/learning-portal/search`}>
-          <Search />
-        </Route>
-        <Route path={`/learning-portal/curriculum`}>
-          <GroupCurriculum />
-        </Route>
-        <Route path="/learning-portal/courses">
-          <GroupAllCourse />
-        </Route>
-        <Route path="/learning-portal/course">
-          <GroupCourse />
-        </Route>
-        <Route exact path="/learning-portal">
-          <Course />
-        </Route>
-        <Route path="*">
-          <Page404 />
-        </Route>
-      </Switch>
-    </>
+    <Switch>
+      <Route path={`/learning-portal/search`}>
+        <Search />
+      </Route>
+      <Route path={`/learning-portal/curriculum`}>
+        <GroupCurriculum />
+      </Route>
+      <Route path="/learning-portal/courses">
+        <GroupAllCourse />
+      </Route>
+      <Route path="/learning-portal/course">
+        <GroupCourse />
+      </Route>
+      <Route exact path="/learning-portal">
+        <Course />
+      </Route>
+      <Route path="*">
+        <Page404 />
+      </Route>
+    </Switch>
   );
 }

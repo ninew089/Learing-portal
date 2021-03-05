@@ -15,21 +15,11 @@ const useStyles = makeStyles({
 
 export default function HoverRating(props: any) {
   const { vote, point, fontSize } = props;
-  //const [value] = React.useState(4.5)
-
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-      <Rating
-        name="hover-feedback"
-        readOnly
-        size="small"
-        value={point}
-        precision={0.1}
-        style={{ fontSize: fontSize }}
-      />
-
+      <Rating readOnly value={point} style={{ fontSize: fontSize }} />
       <h5 className={classes.font}>( {vote} )</h5>
     </div>
   );
