@@ -280,7 +280,8 @@ export default function CurriculumDetailCard(props: CardProps) {
                   <img
                     src={banner}
                     alt="welearn"
-                    width="40"
+                    width="40px"
+                    height="16px"
                     style={{ margin: 8 }}
                   />
                 )}
