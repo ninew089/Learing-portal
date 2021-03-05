@@ -1,42 +1,10 @@
 import React, { useEffect } from "react";
-import {
-  Grid,
-  Divider,
-  Box,
-  Button,
-  CircularProgress,
-} from "@material-ui/core";
-
+import CourseContainerTemplate from "../../template/CourseContainerTemplate";
 import { useHistory, useRouteMatch } from "react-router-dom";
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-
 import { useDispatch, useSelector } from "react-redux";
 import * as actions from "../../actions";
 
-import CurriculumCarousel from "modules/compoenent/atomic/Carousel";
-
 export default function SingleLineGridList(props: { title: string }) {
-  const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-      line: {
-        display: "inline-block",
-        borderBottom: `3px solid ${theme.palette.secondary.main}`,
-        paddingBottom: "2px",
-      },
-      button: {
-        float: "right",
-      },
-      box: {
-        borderRadius: "0 0 10px 10px",
-        paddingRight: 8,
-        marginBottom: 10,
-        paddingBottom: 10,
-        width: "100%",
-        marginTop: 10,
-      },
-    })
-  );
-
   const { title } = props;
   const history = useHistory();
   const { path } = useRouteMatch();
@@ -46,7 +14,6 @@ export default function SingleLineGridList(props: { title: string }) {
   const Next = () => {
     setTimeout(() => filterCoursebyCategory("หลักสูตร"), 1000);
   };
-  const classes = useStyles();
 
   useEffect(() => {
     const actionCurriculums = actions.loadCurriculums("shown");
@@ -60,34 +27,12 @@ export default function SingleLineGridList(props: { title: string }) {
   );
 
   return (
-    <Box className={classes.box}>
-      <Grid
-        container
-        direction="row"
-        alignItems="center"
-        justify="space-between"
-      >
-        <Box
-          p={2}
-          fontWeight={700}
-          style={{ color: "rgb(19 39 64)" }}
-          fontSize="h4.fontSize"
-        >
-          {title}
-        </Box>
-        <Button onClick={Next} style={{ color: "#0f1626" }}>
-          ดูเพิ่มเติม
-        </Button>
-      </Grid>
-      <Divider style={{ marginBottom: 20 }} />
-
-      <Grid container direction="row" alignItems="center" justify={"center"}>
-        {isLoadingCurriculums ? (
-          <CircularProgress color="secondary" style={{ margin: 20 }} />
-        ) : (
-          <CurriculumCarousel isCurriculum={true} detail={curriculums} />
-        )}
-      </Grid>
-    </Box>
+    <CourseContainerTemplate
+      name={title}
+      Next={Next}
+      isLoadingCourseCategories={isLoadingCurriculums}
+      courseCategories={curriculums}
+      isCurriculum={true}
+    />
   );
 }
