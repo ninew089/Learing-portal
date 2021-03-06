@@ -73,8 +73,8 @@ export default function VariantAvatars() {
     <>
       {data.length === 0 ? (
         <Skeleton
-          width={"100vw"}
-          height={"30px"}
+          width={"80vw"}
+          height={"100px"}
           style={{ marginBottom: 10 }}
         />
       ) : (
