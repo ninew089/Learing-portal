@@ -7,7 +7,7 @@ import TabPanel from "./TabPlanel";
 import axios from "axios";
 import Dialog from "./Dialog";
 import { twitterTabsStylesHook } from "@mui-treasury/styles/tabs";
-
+import Skeleton from "@material-ui/lab/Skeleton";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -71,30 +71,38 @@ export default function VariantAvatars() {
 
   return (
     <>
-      <Tabs
-        value={value}
-        classes={tabsStyles}
-        style={{ backgroundColor: "transparent" }}
-        onChange={handleChange}
-        variant="scrollable"
-      >
-        {data.map((item: any, index: number) => (
-          <Tab
-            key={index}
-            classes={tabItemStyles}
-            onClick={handleClickOpen}
-            icon={
-              <img
-                width="56px"
-                height="56px"
-                alt={item.name}
-                src={item.thumbnail}
-                className={classes.rounded}
-              />
-            }
-          />
-        ))}
-      </Tabs>
+      {data.length === 0 ? (
+        <Skeleton
+          width={"100vw"}
+          height={"30px"}
+          style={{ marginBottom: 10 }}
+        />
+      ) : (
+        <Tabs
+          value={value}
+          classes={tabsStyles}
+          style={{ backgroundColor: "transparent" }}
+          onChange={handleChange}
+          variant="scrollable"
+        >
+          {data.map((item: any, index: number) => (
+            <Tab
+              key={index}
+              classes={tabItemStyles}
+              onClick={handleClickOpen}
+              icon={
+                <img
+                  width="56px"
+                  height="56px"
+                  alt={item.name}
+                  src={item.thumbnail}
+                  className={classes.rounded}
+                />
+              }
+            />
+          ))}
+        </Tabs>
+      )}
       <SwipeableViews
         axis={theme.direction === "rtl" ? "x-reverse" : "x"}
         index={value}

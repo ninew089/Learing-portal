@@ -14,30 +14,14 @@ export default function RouteAdmin() {
 
   return (
     <Switch>
-      <Route exact path={`${path}/reset`}>
-        <Reset></Reset>
-      </Route>
-      <Route exact path={`${path}/person`}>
-        <Person></Person>
-      </Route>
-      <Route path={`${path}/progress`}>
-        <Progress></Progress>
-      </Route>
-      <Route exact path={`${path}/curriculm`}>
-        <Curriculum></Curriculum>
-      </Route>
-      <Route exact path={`${path}/subcurriculum`}>
-        <SubCurriculum></SubCurriculum>
-      </Route>
-      <Route exact path={`${path}/course`}>
-        <Course></Course>
-      </Route>
-      <Route exact path={`${path}/course`}>
-        <Law />
-      </Route>
-      <Route path={`${path}/coursecertificate`}>
-        <CourseCertificate></CourseCertificate>
-      </Route>
+      <Route exact path={`${path}/reset`} component={Reset} />
+      <Route exact path={`${path}/person`} component={Person} />
+      <Route path={`${path}/progress`} component={Progress} />
+      <Route exact path={`${path}/curriculm`} component={Curriculum} />
+      <Route exact path={`${path}/subcurriculum`} component={SubCurriculum} />
+      <Route exact path={`${path}/course`} component={Course} />
+      <Route path={`${path}/coursecertificate`} component={CourseCertificate} />
+      <Route exact path={`${path}`} component={Law} />
     </Switch>
   );
 }

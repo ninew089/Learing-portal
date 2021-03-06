@@ -1,26 +1,25 @@
 import React, { useEffect, useState, useRef } from "react";
-import {
-  Grid,
-  Box,
-  CircularProgress,
-  Container,
-  useMediaQuery,
-} from "@material-ui/core";
-import Relation from "modules/relation/components/Relation";
+import { Grid, Box, Container, useMediaQuery } from "@material-ui/core";
+import Skeleton from "@material-ui/lab/Skeleton";
 import { useTheme } from "@material-ui/core/styles";
-import { useDispatch, useSelector } from "react-redux";
-import * as actions from "../actions";
-import SelectPlatform from "../share/SelectPlatform";
-import animation from "assets/images/learn.webp";
-import animation00 from "assets/images/welearn.webp";
-import "assets/css/styles.css";
+
+import Relation from "modules/relation/components/Relation";
 import Portal from "modules/portal/components/LinkPortal";
+import Facebook from "modules/facebook/components/FaceBook";
+
 import TapsCourse from "../components/Course/TapsCourse";
 import AllCourse from "../components/Course/AllCourse";
 import SocialCardDemo from "../components/CardRecomment/CardRecomment";
 import GroupSearch from "../components/Search";
 import Curriculum from "../components/Curriculum/CategoryByCurriculum";
-import Facebook from "modules/facebook/components/FaceBook";
+
+import { useDispatch, useSelector } from "react-redux";
+import * as actions from "../actions";
+import SelectPlatform from "../share/SelectPlatform";
+
+import animation from "assets/images/learn.webp";
+import animation00 from "assets/images/welearn.webp";
+import "assets/css/styles.css";
 
 function FadeInSection(props: any) {
   const [isVisible, setVisible] = useState(false);
@@ -94,22 +93,39 @@ export default function Course() {
 
         <Grid container direction="row" justify="center" alignItems="center">
           {toprate.length !== 0 && recommemded.length !== 0 ? (
-            <>
+            <React.Fragment>
               <Grid item xs={12} sm={6} md={6} lg={6}>
                 <SocialCardDemo title={"อันดับยอดฮิต"} data={toprate} />
               </Grid>
               <Grid item xs={12} sm={6} md={6} lg={6}>
                 <SocialCardDemo title={"รายการแนะนำ"} data={recommemded} />
               </Grid>
-            </>
+            </React.Fragment>
           ) : (
             <Grid
               container
               direction="row"
-              justify="center"
+              justify="space-around"
               alignItems="center"
             >
-              <CircularProgress color="primary" />
+              <Grid item xs={3}>
+                <Skeleton animation="wave" variant="rect" height={190} />
+                <Skeleton
+                  animation="wave"
+                  height={10}
+                  style={{ marginBottom: 6 }}
+                />
+                <Skeleton animation="wave" height={10} width="80%" />
+              </Grid>
+              <Grid item xs={3}>
+                <Skeleton animation="wave" variant="rect" height={190} />
+                <Skeleton
+                  animation="wave"
+                  height={10}
+                  style={{ marginBottom: 6 }}
+                />
+                <Skeleton animation="wave" height={10} width="80%" />
+              </Grid>
             </Grid>
           )}
         </Grid>

@@ -13,64 +13,73 @@ import Scroll from "./Scroll";
 import PrivateRoute from "auth/PrivateRouter";
 import PublicLoginRouter from "auth/PublicLoginRouter";
 import { Toolbar } from "@material-ui/core";
-import { useSelector } from "react-redux";
-import Page500 from "modules/404page/page/500";
-export default function Router() {
-  const { isErrorCourse } = useSelector((state: any) => state.course);
-  const { isErrorProfile } = useSelector((state: any) => state.edit);
+import Course from "modules/course/page";
+import GroupCurriculum from "modules/course/page/GroupCurriculum/GroupCurriculum";
+import GroupCourse from "modules/course/page/GroupCourse/GroupCourse";
 
+import GroupAllCourse from "modules/course/page/GroupAllCourse/GroupAllCourse";
+import Search from "modules/course/page/Search";
+export default function Router() {
   return (
     <React.Fragment>
+      <Toolbar />
       <Scroll />
       <Switch>
-        <Route path={`/learning-portal/community/plugins/comments`}>
-          <Redirect to={`/learning-portal`} />
-        </Route>
-        <Route path={`/learning-portal/500`}>
-          <Page500 />
-        </Route>
-        {(isErrorProfile > 404 || isErrorCourse > 404) && (
-          <Redirect to={`/learning-portal/500`} />
-        )}
-        <Route path={`/learning-portal/FAQ`}>
-          <Toolbar />
-          <FAQ />
-        </Route>
-        <Route path={`/learning-portal/signup`}>
-          <Toolbar />
-          <SignupRoutes />
-        </Route>
-
-        <PrivateRoute path={`/learning-portal/edit`} component={Edit} />
+        <Redirect
+          exact
+          from={`/learning-portal/community/plugins/comments`}
+          to={`/learning-portal`}
+        />
+        <Route exact path={`/learning-portal/FAQ`} component={FAQ} />
+        <Route
+          exact
+          path={`/learning-portal/signup`}
+          component={SignupRoutes}
+        />
+        <PrivateRoute exact path={`/learning-portal/edit`} component={Edit} />
         <PrivateRoute
+          exact
           path={`/learning-portal/history`}
           component={HistoryRoutes}
         />
-        <PrivateRoute path={`/learning-portal/reset`} component={ResetRoutes} />
-        <Route path={`/learning-portal/signup`}>
-          <Toolbar />
-          <SignupRoutes />
-        </Route>
+        <PrivateRoute
+          exact
+          path={`/learning-portal/reset`}
+          component={ResetRoutes}
+        />
+        <Route
+          exact
+          path={`/learning-portal/signup`}
+          component={SignupRoutes}
+        />
         <PublicLoginRouter
           path={`/learning-portal/login`}
           component={LoginRoutes}
         />
-
-        <Route path={`/learning-portal/forget`}>
-          <Toolbar />
-          <ForgetRoutes />
-        </Route>
-        <Route path={`/learning-portal/course`}>
-          <Toolbar />
-          <CourseRoutes></CourseRoutes>
-        </Route>
-        <Route path={`/learning-portal`}>
-          <Toolbar />
-          <CourseRoutes />
-        </Route>
-        <Route path="*">
-          <Page404 />
-        </Route>
+        <Route
+          exact
+          path={`/learning-portal/forget`}
+          component={ForgetRoutes}
+        />
+        <Route
+          exact
+          path={`/learning-portal/course`}
+          component={CourseRoutes}
+        />
+        <Route exact path={`/learning-portal/search`} component={Search} />
+        <Route
+          exact
+          path={`/learning-portal/curriculum`}
+          component={GroupCurriculum}
+        />
+        <Route
+          exact
+          path={"/learning-portal/courses"}
+          component={GroupAllCourse}
+        />
+        <Route exact path="/learning-portal/course" component={GroupCourse} />
+        <Route exact path="/learning-portal" component={Course} />
+        <Route exact path="*" component={Page404} />
       </Switch>
     </React.Fragment>
   );

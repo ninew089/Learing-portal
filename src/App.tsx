@@ -1,5 +1,5 @@
 import React from "react";
-import Layout from "modules/ui/components/Layout";
+import LayoutRoute from "modules/ui/components/Layout";
 
 import Admin from "modules/admin/components/Login";
 import AdminRoute from "modules/admin/ui/AdminLayout";
@@ -41,18 +41,14 @@ export default function APP() {
       <ConnectedRouter history={history}>
         <ThemeProvider theme={theme}>
           <CssBaseline />
+
           <Switch>
             <PriveRouterAdmin
               path="/learning-portal/admin/main"
               component={AdminRoute}
             />
-            <Route exact path="/learning-portal/admin">
-              <Admin />
-            </Route>
-
-            <Route path="/learning-portal">
-              <Layout />
-            </Route>
+            <Route exact path="/learning-portal/admin" component={Admin} />
+            <LayoutRoute />
           </Switch>
         </ThemeProvider>
       </ConnectedRouter>

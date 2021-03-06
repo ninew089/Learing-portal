@@ -1,8 +1,8 @@
 import React from "react";
-import { Grid, Divider, Button, CircularProgress } from "@material-ui/core";
+import { Grid, Divider, Button } from "@material-ui/core";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import CourseCarousel from "modules/compoenent/atomic/Carousel";
-
+import Skeleton from "@material-ui/lab/Skeleton";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     line: {
@@ -55,9 +55,48 @@ export default function SingleLineGridList({
         </Button>
       </Grid>
       <Divider style={{ marginBottom: 20 }} />
-      <Grid container direction="row" alignItems="center" justify={"center"}>
+      <Grid
+        container
+        direction="row"
+        alignItems="center"
+        justify={"center"}
+        style={{ paddingRight: 10, paddingLeft: 10 }}
+      >
         {isLoadingCourseCategories ? (
-          <CircularProgress color="secondary" style={{ margin: 20 }} />
+          <Grid
+            container
+            direction="row"
+            justify="space-around"
+            alignItems="center"
+          >
+            <Grid item xs={3}>
+              <Skeleton animation="wave" height={190} />
+              <Skeleton
+                animation="wave"
+                height={10}
+                style={{ marginBottom: 6 }}
+              />
+              <Skeleton animation="wave" height={10} width="80%" />
+            </Grid>
+            <Grid item xs={3}>
+              <Skeleton animation="wave" height={190} />
+              <Skeleton
+                animation="wave"
+                height={10}
+                style={{ marginBottom: 6 }}
+              />
+              <Skeleton animation="wave" height={10} width="80%" />
+            </Grid>
+            <Grid item xs={3}>
+              <Skeleton animation="wave" height={190} />
+              <Skeleton
+                animation="wave"
+                height={10}
+                style={{ marginBottom: 6 }}
+              />
+              <Skeleton animation="wave" height={10} width="80%" />
+            </Grid>
+          </Grid>
         ) : (
           <CourseCarousel
             isCurriculum={isCurriculum}

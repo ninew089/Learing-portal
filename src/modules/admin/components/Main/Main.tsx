@@ -3,7 +3,12 @@ import React from "react";
 export default function componentName() {
   return (
     <div
-      style={{ background: "#ab987a", width: "100%", paddingTop: 400 }}
+      style={{
+        background: "#fff",
+        width: "100%",
+        paddingTop: 400,
+        height: "100vh",
+      }}
     ></div>
   );
 }

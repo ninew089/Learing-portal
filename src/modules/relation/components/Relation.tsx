@@ -8,7 +8,6 @@ import {
   ButtonNext,
   DotGroup,
 } from "pure-react-carousel";
-import { Grid, CircularProgress } from "@material-ui/core";
 import "pure-react-carousel/dist/react-carousel.es.css";
 import ArrowForward from "@material-ui/icons/ArrowForwardIosRounded";
 import ArrowBack from "@material-ui/icons/ArrowBackIosRounded";
@@ -16,7 +15,7 @@ import { Link } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
 import * as actions from "../actions";
 import { amber, grey } from "@material-ui/core/colors";
-
+import Skeleton from "@material-ui/lab/Skeleton";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     carousel: {
@@ -131,31 +130,26 @@ export default function CourseCarousel() {
                             backgroundImage: `url(${imageUrl})`,
                             backgroundSize: "cover",
                             backgroundPosition: "center center",
+                            position: "relative",
+                            width: "100%",
+                            minHeight: "300px",
                           }}
                         >
                           <div
                             style={{
-                              position: "relative",
-                              width: "100%",
-                              minHeight: "400px",
+                              position: "absolute",
+                              top: "70%",
+                              transform: "translate(-50%, -50%)",
+                              left: "50%",
+                              marginRight: "-50%",
+                              margin: 0,
+                              textShadow: "0px 3px 3px rgba(0, 0, 0, 0.4)",
+                              color: "white",
+                              fontSize: "24px",
+                              textAlign: "center",
                             }}
                           >
-                            <div
-                              style={{
-                                position: "absolute",
-                                top: "70%",
-                                transform: "translate(-50%, -50%)",
-                                left: "50%",
-                                marginRight: "-50%",
-                                margin: 0,
-                                textShadow: "0px 3px 3px rgba(0, 0, 0, 0.4)",
-                                color: "white",
-                                fontSize: "24px",
-                                textAlign: "center",
-                              }}
-                            >
-                              {headline}
-                            </div>
+                            {headline}
                           </div>
                         </div>
                       </Link>
@@ -177,9 +171,7 @@ export default function CourseCarousel() {
           </div>
         </CarouselProvider>
       ) : (
-        <Grid container direction="row" justify="center" alignItems="center">
-          <CircularProgress color="primary" />
-        </Grid>
+        <Skeleton width={"100vw"} height={"300px"} />
       )}
     </>
   );
