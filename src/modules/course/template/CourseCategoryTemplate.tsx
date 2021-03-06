@@ -70,18 +70,17 @@ export default function CourseCategoryTemplate({
     <>
       <Header text={"รายวิชา"} />
       <div>
-        <Grid container direction="row" alignItems="center">
-          <Grid
-            container
-            className={classes.content}
-            direction="row"
-            alignItems="center"
-            justify={"space-between"}
-          >
-            <h2>{title}</h2>
-            <SelectCategory />
-          </Grid>
+        <Grid
+          container
+          className={classes.content}
+          direction="row"
+          alignItems="center"
+          justify={"space-between"}
+        >
+          <h2>{title}</h2>
+          <SelectCategory />
         </Grid>
+
         <Divider style={{ marginBottom: 20 }} />
 
         <Container maxWidth="lg">

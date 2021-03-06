@@ -1,6 +1,6 @@
 import React from "react";
 import SignupRoutes from "modules/signup/page";
-import CourseRoutes from "modules/course/components/Routes";
+
 import LoginRoutes from "modules/login/page";
 import ResetRoutes from "modules/reset/page";
 import HistoryRoutes from "modules/history/page";
@@ -31,11 +31,6 @@ export default function Router() {
           to={`/learning-portal`}
         />
         <Route exact path={`/learning-portal/FAQ`} component={FAQ} />
-        <Route
-          exact
-          path={`/learning-portal/signup`}
-          component={SignupRoutes}
-        />
         <PrivateRoute exact path={`/learning-portal/edit`} component={Edit} />
         <PrivateRoute
           exact
@@ -53,6 +48,7 @@ export default function Router() {
           component={SignupRoutes}
         />
         <PublicLoginRouter
+          exact
           path={`/learning-portal/login`}
           component={LoginRoutes}
         />
@@ -60,11 +56,6 @@ export default function Router() {
           exact
           path={`/learning-portal/forget`}
           component={ForgetRoutes}
-        />
-        <Route
-          exact
-          path={`/learning-portal/course`}
-          component={CourseRoutes}
         />
         <Route exact path={`/learning-portal/search`} component={Search} />
         <Route

@@ -1,17 +1,21 @@
 import React from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
-import Drawer from "@material-ui/core/Drawer";
-import Button from "@material-ui/core/Button";
-import List from "@material-ui/core/List";
-import Divider from "@material-ui/core/Divider";
-import { ListItem } from "@material-ui/core";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
+
+import {
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Divider,
+  List,
+  Button,
+  Drawer,
+} from "@material-ui/core";
+
 import { NavLink } from "react-router-dom";
-import { useRouteMatch } from "react-router-dom";
+
 import { useSelector } from "react-redux";
-import { eraseCookie, login } from "cookie/cookie";
+import { eraseCookie, getCookie } from "cookie/cookie";
 import banner from "assets/images/welearn_logo.webp";
 
 import {
@@ -71,112 +75,11 @@ export default function TemporaryDrawer() {
     setState({ ...state, [anchor]: open });
   };
 
-  const { path } = useRouteMatch();
-
   const onLogout = () => {
     eraseCookie("token");
     window.location.reload();
   };
   const { data } = useSelector((state: any) => state.edit);
-  const list = (anchor: Anchor) => (
-    <div
-      className={clsx(classes.list, {
-        [classes.fullList]: anchor === "top" || anchor === "bottom",
-      })}
-      role="presentation"
-      onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
-    >
-      <List>
-        {login() ? (
-          <React.Fragment>
-            <NavLink to={`${path}/login`} className={classes.navLink}>
-              <ListItem button dense>
-                <ListItemIcon>
-                  <AccountCircle />
-                </ListItemIcon>
-                <ListItemText
-                  primary={`${data.title}${data.firstName} ${data.lastName}`}
-                />
-              </ListItem>
-            </NavLink>
-            <Divider />
-            <NavLink to={`${path}/edit`} className={classes.navLink}>
-              <ListItem button>
-                <ListItemIcon>
-                  <CreateRounded />
-                </ListItemIcon>
-                <ListItemText primary={"แก้ไขข้อมูลส่วนบุคคล"} />
-              </ListItem>
-            </NavLink>
-            <NavLink to={`${path}/reset`} className={classes.navLink}>
-              <ListItem button>
-                <ListItemIcon>
-                  <LockRounded />
-                </ListItemIcon>
-                <ListItemText primary={"เปลี่ยนรหัสผ่าน"} />
-              </ListItem>
-            </NavLink>
-            <NavLink to={`${path}/history`} className={classes.navLink}>
-              <ListItem button>
-                <ListItemIcon>
-                  <ChromeReaderMode />
-                </ListItemIcon>
-                <ListItemText primary={"ประกาศนียบัตร"} />
-              </ListItem>
-            </NavLink>
-            <Divider />
-          </React.Fragment>
-        ) : (
-          <React.Fragment>
-            <ListItem button>
-              <ListItemText
-                primary={<img alt="" src={banner} width={"100%"} />}
-              />
-            </ListItem>
-            <NavLink to={`${path}/login`} className={classes.navLink}>
-              <ListItem button>
-                <ListItemIcon>
-                  <AccountCircle />
-                </ListItemIcon>
-                <ListItemText primary={"เข้าสู่ระบบ"} />
-              </ListItem>
-            </NavLink>
-          </React.Fragment>
-        )}
-
-        <NavLink to={`${path}`} className={classes.navLink}>
-          <ListItem button>
-            <ListItemIcon>
-              <Home />
-            </ListItemIcon>
-            <ListItemText primary={"หน้าหลัก"} />
-          </ListItem>
-        </NavLink>
-        <NavLink to={`${path}/FAQ`} className={classes.navLink}>
-          <ListItem button>
-            <ListItemIcon>
-              <Help />
-            </ListItemIcon>
-            <ListItemText primary={"คำถามที่พบบ่อย"} />
-          </ListItem>
-        </NavLink>
-        <Divider />
-        {login() ? (
-          <NavLink to={`${path}`} className={classes.navLink}>
-            <ListItem button onClick={onLogout}>
-              <ListItemIcon>
-                <MeetingRoomRounded />
-              </ListItemIcon>
-              <ListItemText primary={"ออกจากระบบ"} />
-            </ListItem>
-          </NavLink>
-        ) : (
-          ""
-        )}
-      </List>
-    </div>
-  );
 
   return (
     <div>
@@ -188,7 +91,114 @@ export default function TemporaryDrawer() {
         open={state["right"]}
         onClose={toggleDrawer("right", false)}
       >
-        {list("right")}
+        <div
+          className={clsx(classes.list)}
+          role="presentation"
+          onClick={toggleDrawer("right", false)}
+          onKeyDown={toggleDrawer("right", false)}
+        >
+          <List>
+            {getCookie("token") ? (
+              <React.Fragment>
+                <ListItem button dense>
+                  <ListItemIcon>
+                    <AccountCircle />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={`${data.title}${data.firstName} ${data.lastName}`}
+                  />
+                </ListItem>
+
+                <Divider />
+
+                <ListItem
+                  button
+                  component={NavLink}
+                  to={`/learning-portal/edit`}
+                >
+                  <ListItemIcon>
+                    <CreateRounded />
+                  </ListItemIcon>
+                  <ListItemText primary={"แก้ไขข้อมูลส่วนบุคคล"} />
+                </ListItem>
+
+                <ListItem
+                  button
+                  component={NavLink}
+                  to={`/learning-portal/reset`}
+                >
+                  <ListItemIcon>
+                    <LockRounded />
+                  </ListItemIcon>
+                  <ListItemText primary={"เปลี่ยนรหัสผ่าน"} />
+                </ListItem>
+
+                <ListItem
+                  button
+                  component={NavLink}
+                  to={`/learning-portal/history`}
+                >
+                  <ListItemIcon>
+                    <ChromeReaderMode />
+                  </ListItemIcon>
+                  <ListItemText primary={"ประกาศนียบัตร"} />
+                </ListItem>
+
+                <Divider />
+              </React.Fragment>
+            ) : (
+              <React.Fragment>
+                <ListItem button>
+                  <ListItemText
+                    primary={<img alt="" src={banner} width={"80%"} />}
+                  />
+                </ListItem>
+
+                <ListItem
+                  button
+                  component={NavLink}
+                  to={`/learning-portal/login`}
+                >
+                  <ListItemIcon>
+                    <AccountCircle />
+                  </ListItemIcon>
+                  <ListItemText primary={"เข้าสู่ระบบ"} />
+                </ListItem>
+              </React.Fragment>
+            )}
+
+            <ListItem button component={NavLink} to={`/learning-portal`}>
+              <ListItemIcon>
+                <Home />
+              </ListItemIcon>
+              <ListItemText primary={"หน้าหลัก"} />
+            </ListItem>
+
+            <ListItem button component={NavLink} to={`/learning-portal/FAQ`}>
+              <ListItemIcon>
+                <Help />
+              </ListItemIcon>
+              <ListItemText primary={"คำถามที่พบบ่อย"} />
+            </ListItem>
+
+            <Divider />
+            {getCookie("token") ? (
+              <ListItem
+                button
+                onClick={onLogout}
+                component={NavLink}
+                to={`/learning-portal`}
+              >
+                <ListItemIcon>
+                  <MeetingRoomRounded />
+                </ListItemIcon>
+                <ListItemText primary={"ออกจากระบบ"} />
+              </ListItem>
+            ) : (
+              ""
+            )}
+          </List>
+        </div>
       </Drawer>
     </div>
   );

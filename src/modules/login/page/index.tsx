@@ -137,21 +137,7 @@ export default function SignIn() {
       userId: yup
         .string()
         .required("กรุณากรอกเลขประจำตัวประจำตัวประชาชน")
-        .matches(/^[0-9]{13}$/, "กรุณากรอกเป็นตัวเลข 13 หลัก")
-        .test(
-          "ตรวจสอบรหัสบัตรประชาชน",
-          "กรอกเลขประจำตัวประชาชนผิด กรุณากรอกใหม่",
-
-          function (item: any) {
-            var i, sum;
-            for (i = 0, sum = 0; i < 12; i++)
-              sum += parseFloat(item.charAt(i)) * (13 - i);
-            if ((11 - (sum % 11)) % 10 !== parseFloat(item.charAt(12))) {
-              return false;
-            }
-            return true;
-          }
-        ),
+        .matches(/^[0-9]{13}$/, "กรุณากรอกเป็นตัวเลข 13 หลัก"),
       password: yup.string().required(),
     }),
   });

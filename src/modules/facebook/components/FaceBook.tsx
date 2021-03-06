@@ -3,7 +3,7 @@ import { facebookProps } from "./tyscript";
 // @ts-ignore
 import { FacebookProvider, Comments, Login } from "react-facebook";
 import { Button } from "@material-ui/core";
-import {Facebook} from '@material-ui/icons';
+import { Facebook } from "@material-ui/icons";
 import "assets/css/facebook.css";
 class FacebookComponent extends Component {
   handleError = (error: any) => {
@@ -21,7 +21,7 @@ class FacebookComponent extends Component {
               <span onClick={handleClick}>
                 {data === undefined ? (
                   <Button style={{ background: "#3b5998", color: "#f5f5f5" }}>
-                    <Facebook  style={{ marginRight: 10 }} />
+                    <Facebook style={{ marginRight: 10 }} />
                     {loading ? <span>Loading...</span> : "Login with Facebook"}
                   </Button>
                 ) : (

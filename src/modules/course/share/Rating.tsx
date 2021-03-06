@@ -10,6 +10,7 @@ const useStyles = makeStyles({
   },
   font: {
     whiteSpace: "nowrap",
+    fontSize: 8,
   },
 });
 
@@ -20,7 +21,9 @@ export default function HoverRating(props: any) {
   return (
     <div className={classes.root}>
       <Rating readOnly value={point} style={{ fontSize: fontSize }} />
-      <h5 className={classes.font}>( {vote} )</h5>
+      <div className={classes.font} style={{ fontSize: 8 }}>
+        ( {vote} )
+      </div>
     </div>
   );
 }

@@ -41,16 +41,14 @@ export default function APP() {
       <CssBaseline />
       <Provider store={store}>
         <ConnectedRouter history={history}>
-          <>
-            <Switch>
-              <PriveRouterAdmin
-                path="/learning-portal/admin/main"
-                component={AdminRoute}
-              />
-              <Route exact path="/learning-portal/admin" component={Admin} />
-              <LayoutRoute />
-            </Switch>
-          </>
+          <Switch>
+            <PriveRouterAdmin
+              path="/learning-portal/admin/main"
+              component={AdminRoute}
+            />
+            <Route exact path="/learning-portal/admin" component={Admin} />
+            <LayoutRoute />
+          </Switch>
         </ConnectedRouter>
       </Provider>
     </ThemeProvider>

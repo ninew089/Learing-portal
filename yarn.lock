@@ -1835,20 +1835,6 @@
   dependencies:
     "@types/react" "^16"
 
-"@types/react-helmet@^6.1.0":
-  version "6.1.0"
-  resolved "https://registry.yarnpkg.com/@types/react-helmet/-/react-helmet-6.1.0.tgz"
-  integrity sha512-PYRoU1XJFOzQ3BHvWL1T8iDNbRjdMDJMT5hFmZKGbsq09kbSqJy61uwEpTrbTNWDopVphUT34zUSVLK9pjsgYQ==
-  dependencies:
-    "@types/react" "*"
-
-"@types/react-lottie@^1.2.5":
-  version "1.2.5"
-  resolved "https://registry.yarnpkg.com/@types/react-lottie/-/react-lottie-1.2.5.tgz"
-  integrity sha512-g5c7r0VN8g0hLsFEtR71ZFDWDp6niY4D/7llcAcLjV3LpaoyANmaQ9jispskWpkAUP+NYQcFllMtoGIWUM6VRw==
-  dependencies:
-    "@types/react" "*"
-
 "@types/react-redux@^7.1.9":
   version "7.1.15"
   resolved "https://registry.yarnpkg.com/@types/react-redux/-/react-redux-7.1.15.tgz"
@@ -9085,11 +9071,6 @@ prepend-http@^1.0.0:
   resolved "https://registry.yarnpkg.com/prepend-http/-/prepend-http-1.0.4.tgz"
   integrity sha1-1PRWKwzjaW5BrFLQ4ALlemNdxtw=
 
-prettier@2.2.1:
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.2.1.tgz"
-  integrity sha512-PqyhM2yCjg/oKkFPtTGUojv7gnZAoG80ttl45O6x2Ug/rMJw4wcc9k6aaf2hibP7BGVCCM33gZoGjyvt9mm16Q==
-
 pretty-bytes@^5.1.0:
   version "5.5.0"
   resolved "https://registry.yarnpkg.com/pretty-bytes/-/pretty-bytes-5.5.0.tgz"
@@ -9585,11 +9566,6 @@ react-scripts@3.4.3:
     workbox-webpack-plugin "4.3.1"
   optionalDependencies:
     fsevents "2.1.2"
-
-react-scroll-into-view@^1.8.2:
-  version "1.8.2"
-  resolved "https://registry.yarnpkg.com/react-scroll-into-view/-/react-scroll-into-view-1.8.2.tgz"
-  integrity sha512-tYY3TEjFFFazKSx05DElH750WB4cxxSU5mkD27eFxI2JIUpMuySsBEy9q6D7DM8VjjlMjT4KKo4dKcoNENatdg==
 
 react-spinner-children@^1.0.8:
   version "1.0.8"

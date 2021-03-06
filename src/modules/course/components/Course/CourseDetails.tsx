@@ -57,8 +57,6 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 270,
     textOverflow: "ellipsis",
     whiteSpace: "nowrap",
-    //  WebkitLineClamp: 1,
-    // WebkitBoxOrient: "vertical",
     fontSize: "1.2rem",
     fontWeight: 600,
     color: "#132740",
@@ -176,7 +174,7 @@ export default function IconBreadcrumbs(props: CardProps) {
     dispatch(action);
   };
   const { colorName } = useSelector((state: any) => state.course);
-
+  const RatingProps = React.memo(Rating);
   return (
     <div className={classes.root}>
       <div
@@ -239,7 +237,11 @@ export default function IconBreadcrumbs(props: CardProps) {
           <Grid item xs={7}>
             <div className={classes.author}>{platformName}</div>
             <div className={classes.rating}>
-              <Rating fontSize={14} vote={satisfactionCount} point={point} />
+              <RatingProps
+                fontSize={14}
+                vote={satisfactionCount}
+                point={point}
+              />
             </div>
           </Grid>
           {platformName === "สำนักงาน ก.พ." && (

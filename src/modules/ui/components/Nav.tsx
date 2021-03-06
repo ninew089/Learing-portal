@@ -5,23 +5,21 @@ import {
   AppBar,
   Toolbar,
   Grid,
-  Typography,
   Hidden,
   useMediaQuery,
+  Container,
+  Button,
 } from "@material-ui/core";
 import Drawer from "./Drawer";
-import { useLocation } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 import MenuList from "./MenuList";
 import banner from "assets/images/welearn_logo.webp";
 import { NavLink } from "react-router-dom";
-import ScrollTo from "react-scroll-into-view";
-import { getCookie, login } from "cookie/cookie";
-import { parseJwt } from "utils/getDataJWT";
+import { getCookie } from "cookie/cookie";
 import * as actionsEdit from "modules/editProfile/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { NavMenu, NavItem } from "@mui-treasury/components/menu/navigation";
 import { useLineNavigationMenuStyles } from "@mui-treasury/styles/navigationMenu/line";
-import amber from "@material-ui/core/colors/amber";
 import { AccountCircle } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
@@ -30,14 +28,14 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     display: "flex",
     marginLeft: 10,
+    fontSize: 16,
   },
   appBar: {
-    background: "#000000e6",
-    color: "#f3f3fb",
+    background: "#222",
+    color: theme.palette.primary.light,
     backdropFilter: "blur(6px)",
     filter: "opacity(0.9)",
   },
-
   name: {
     fontWeight: 500,
     fontSize: 16,
@@ -55,28 +53,18 @@ const useStyles = makeStyles((theme) => ({
       fontSize: 12,
     },
     "&:hover": {
-      color: theme.palette.secondary.main,
+      color: theme.palette.primary.light,
     },
   },
-  line: {
-    display: "inline-block",
-    borderBottom: `3px solid ${theme.palette.secondary.main}`,
-    paddingBottom: "2px",
-  },
-  button: {
-    color: "#fdfdfd",
-    "&:hover": {
-      color: theme.palette.secondary.main,
-    },
-  },
+
   navMenu: {
-    color: `${amber[500]}  !important`,
+    color: `${theme.palette.primary.main}  !important`,
   },
   navItem: {
-    color: `${theme.palette.common.white}  !important`,
+    color: `${theme.palette.primary.light}  !important`,
   },
   navItemActive: {
-    color: `${amber[500]}  !important`,
+    color: `${theme.palette.primary.main}  !important`,
   },
   noDecorationLink: {
     textDecoration: "none !important",
@@ -86,6 +74,7 @@ interface NavProps {
   onClick: () => void;
 }
 export default function PersistentDrawerLeft(props: any) {
+  const history = useHistory();
   const classes = useStyles();
   const theme = useTheme();
   const { pathname } = useLocation();
@@ -94,151 +83,118 @@ export default function PersistentDrawerLeft(props: any) {
   const matchesIspad = useMediaQuery(theme.breakpoints.down("md"));
   const [active, setActive] = useState<any>(0);
   const dispatch = useDispatch();
-  const id = parseJwt(token).unique_name;
+
   useEffect(() => {
-    if (login()) {
+    if (token) {
       const actionProfile = actionsEdit.loadGetProfile();
       dispatch(actionProfile);
     }
     // eslint-disable-next-line
-  }, [id]);
+  }, [token]);
 
   useEffect(() => {
-    if (pathname !== "/learning-portal") {
+    if (
+      pathname !== "/learning-portal" &&
+      pathname !== "/learning-portal/FAQ"
+    ) {
       setActive(null);
-    }
-    if (pathname === "/learning-portal/FAQ") {
-      setActive(4);
     }
   }, [pathname]);
 
   const { data } = useSelector((state: any) => state.edit);
-  const NavProp = ({
-    to,
-    state,
-    title,
-  }: {
-    to: any;
-    state: any;
-    title: any;
-  }) => {
-    return (
-      <NavLink to={to} className={classes.noDecorationLink} color="secondary">
-        <NavItem
-          as={"div"}
-          active={active === state}
-          className={active === state ? classes.navItemActive : classes.navItem}
-          onClick={() => setActive(state)}
-        >
-          {title}
-        </NavItem>
-      </NavLink>
-    );
-  };
+
+  const NavProp = React.memo(
+    ({ to, state, title }: { to: any; state: any; title: any }) => {
+      return (
+        <NavLink to={to} className={classes.noDecorationLink} color="secondary">
+          <NavItem
+            as={"div"}
+            active={active === state}
+            className={
+              active === state ? classes.navItemActive : classes.navItem
+            }
+            onClick={() => setActive(state)}
+          >
+            {title}
+          </NavItem>
+        </NavLink>
+      );
+    }
+  );
 
   return (
     <AppBar position="fixed" className={clsx(classes.appBar)} elevation={0}>
-      <Toolbar>
-        <div className={classes.title}>
-          <Grid
-            container
-            direction="row"
-            justify="flex-start"
-            alignItems="center"
-          >
-            <NavLink
-              to={`/learning-portal`}
-              className={classes.noDecorationLink}
-              style={{ marginBottom: 4, marginTop: 4 }}
+      <Container>
+        <Toolbar>
+          <div className={classes.title}>
+            <Grid
+              container
+              direction="row"
+              justify="flex-start"
+              alignItems="center"
             >
-              <img
-                alt=""
-                src={banner}
-                width={matchesIspad ? "63px" : "76px"}
-                height={"32px"}
-              />
-            </NavLink>
-
-            <Hidden mdDown>
-              <Typography variant="h6" noWrap className={classes.title}>
-                OCSC Learning Portal
-                ศูนย์การเรียนรู้ทางสื่ออิเล็กทรอนิกส์แบบบูรณาการ
-              </Typography>
-            </Hidden>
-          </Grid>
-        </div>
-        <NavMenu
-          useStyles={useLineNavigationMenuStyles}
-          className={classes.navMenu}
-        >
-          {pathname === "/learning-portal" ? (
-            <React.Fragment>
-              <Hidden xsDown>
-                <NavProp to={`/learning-portal`} state={0} title={`หน้าหลัก`} />
-              </Hidden>
-              <ScrollTo selector={`#หมวดหมู่`} smooth>
-                <NavProp to={`/learning-portal`} state={1} title={`หมวดหมู่`} />
-              </ScrollTo>
-              <ScrollTo selector={`#หลักสูตร`} smooth>
-                <NavProp to={`/learning-portal`} state={2} title={`หลักสูตร`} />
-              </ScrollTo>
-              <Hidden xsDown>
-                <NavProp
-                  to={`/learning-portal/FAQ`}
-                  state={4}
-                  title={`คำถามที่พบบ่อย`}
+              <NavLink
+                to={`/learning-portal`}
+                className={classes.noDecorationLink}
+              >
+                <img
+                  alt=""
+                  src={banner}
+                  width={matchesIspad ? "43px" : "60px"}
+                  height={"25px"}
                 />
+              </NavLink>
+
+              <Hidden mdDown>
+                <div className={classes.title}>
+                  OCSC Learning Portal
+                  ศูนย์การเรียนรู้ทางสื่ออิเล็กทรอนิกส์แบบบูรณาการ
+                </div>
               </Hidden>
-            </React.Fragment>
-          ) : (
-            <React.Fragment>
+            </Grid>
+          </div>
+          <NavMenu
+            useStyles={useLineNavigationMenuStyles}
+            className={classes.navMenu}
+          >
+            <Hidden xsDown>
               <NavProp to={`/learning-portal`} state={0} title={`หน้าหลัก`} />
               <NavProp
                 to={`/learning-portal/FAQ`}
-                state={4}
+                state={2}
                 title={`คำถามที่พบบ่อย`}
               />
-            </React.Fragment>
-          )}
-        </NavMenu>
-
-        <Hidden smUp>
-          <Drawer />
-        </Hidden>
-        {login() ? (
-          <React.Fragment>
-            <Hidden xsDown>
-              <Typography
-                style={{
-                  borderRight: "0.1em solid white",
-                  padding: "1em",
-                  marginRight: 10,
-                  paddingLeft: 0,
-                  marginLeft: 0,
+              <Button
+                variant="contained"
+                color="secondary"
+                style={{ borderRadius: 40 }}
+                onClick={() => {
+                  if (token === null) {
+                    history.push("/learning-portal/login");
+                  }
                 }}
-              />
-              <AccountCircle style={{ color: "#ffa800", fontSize: "32px" }} />
-              <div className={classes.name}>{data.firstName}</div>
-              <MenuList />
-            </Hidden>
-          </React.Fragment>
-        ) : (
-          <React.Fragment>
-            <Hidden xsDown>
-              <NavMenu
-                useStyles={useLineNavigationMenuStyles}
-                className={classes.navMenu}
               >
-                <NavProp
-                  to={`/learning-portal/login`}
-                  state={null}
-                  title={`เข้าสู่ระบบ`}
-                />
-              </NavMenu>
+                {token ? (
+                  <>
+                    <AccountCircle style={{ marginRight: 8 }} />
+                    <div className={classes.name}>{data.firstName}</div>
+                    <MenuList />
+                  </>
+                ) : (
+                  "เข้าสู่ระบบ"
+                )}
+              </Button>
             </Hidden>
-          </React.Fragment>
-        )}
-      </Toolbar>
+          </NavMenu>
+          <Hidden smUp>
+            <Drawer />
+          </Hidden>
+        </Toolbar>
+      </Container>
     </AppBar>
   );
 }
+
+/*
+
+*/

@@ -174,7 +174,7 @@ export default function CurriculumDetailCard(props: CardProps) {
     const action = actions.setDialog(props, true);
     dispatch(action);
   };
-
+  const RatingProps = React.memo(Rating);
   return (
     <div className={classes.root}>
       <div className={classes.card} onClick={onOpen}>
@@ -236,7 +236,11 @@ export default function CurriculumDetailCard(props: CardProps) {
           <Grid item xs={7}>
             <div className={classes.author}>{platformName}</div>
             <div className={classes.rating}>
-              <Rating fontSize={14} vote={satisfactionCount} point={point} />
+              <RatingProps
+                fontSize={14}
+                vote={satisfactionCount}
+                point={point}
+              />
             </div>
           </Grid>
           {platformName === "สำนักงาน ก.พ." && (

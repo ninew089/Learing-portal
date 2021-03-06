@@ -72,9 +72,10 @@ export default function LongMenu() {
         aria-label="more"
         aria-controls={open ? "menu-list-grow" : undefined}
         aria-haspopup="true"
+        style={{ padding: 0 }}
         onClick={handleClick}
       >
-        <SwitchToggle toggled={open} style={{ color: "#fdfdfd" }} />
+        <SwitchToggle toggled={open} />
       </IconButton>
       <Menu
         id="long-menu"

@@ -16,22 +16,7 @@ const useStyles = makeStyles((theme) => ({
     bottom: 10,
     right: 15,
   },
-  card: {
-    marginTop: "10px",
-    width: "95%",
-    borderRadius: 16,
-    [theme.breakpoints.only("xs")]: {
-      width: "100%",
-    },
-  },
-  header: {
-    fontFamily: "Barlow, san-serif",
-  },
-  headline: {
-    color: theme.palette.primary.dark,
-    fontSize: "1.25rem",
-    fontWeight: 600,
-  },
+
   link: {
     color: "#2281bb",
     padding: "0 0.25rem",
@@ -87,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
   },
   items: {
     marginBottom: 4,
-    transition: "transform 0.7s ease-in-out",
+    transition: "transform 0.3s ease-in-out",
     "&:hover": {
       transform: "scale(1.05)",
     },
@@ -97,7 +82,7 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: "0 4px 4px 0 #BDC9D7",
   },
   cardMedia: {
-    paddingTop: "75%", // 4:3
+    paddingTop: "68%",
     borderRadius: theme.shape.borderRadius,
     boxShadow:
       "0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)",
@@ -144,6 +129,7 @@ export default function SocialCard(props: any) {
     const action = actions.setDialog(data, false);
     dispatch(action);
   };
+  const RatingProps = React.memo(Rating);
   return (
     <>
       <Grid
@@ -173,7 +159,7 @@ export default function SocialCard(props: any) {
           </CardMedia>
         </Grid>
 
-        <Grid item xs={7}>
+        <Grid item>
           <div className={classes.name}>{data.name}</div>
           <div className={classes.code}> {data.code}</div>
           <Chip
@@ -217,7 +203,7 @@ export default function SocialCard(props: any) {
             <Grid item xs={7}>
               <div className={classes.author}>{data.platformName} </div>
               <div className={classes.rating}>
-                <Rating
+                <RatingProps
                   fontSize={14}
                   vote={data.satisfactionCount}
                   point={data.satisfactionSum / data.satisfactionCount}

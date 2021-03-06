@@ -131,7 +131,6 @@ export default function CourseCarousel() {
                             backgroundSize: "cover",
                             backgroundPosition: "center center",
                             position: "relative",
-                            width: "100%",
                             minHeight: "300px",
                           }}
                         >

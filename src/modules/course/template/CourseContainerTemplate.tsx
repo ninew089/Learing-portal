@@ -70,7 +70,7 @@ export default function SingleLineGridList({
             alignItems="center"
           >
             <Grid item xs={3}>
-              <Skeleton animation="wave" height={190} />
+              <Skeleton animation="wave" height={240} />
               <Skeleton
                 animation="wave"
                 height={10}
@@ -79,7 +79,7 @@ export default function SingleLineGridList({
               <Skeleton animation="wave" height={10} width="80%" />
             </Grid>
             <Grid item xs={3}>
-              <Skeleton animation="wave" height={190} />
+              <Skeleton animation="wave" height={240} />
               <Skeleton
                 animation="wave"
                 height={10}
@@ -88,7 +88,7 @@ export default function SingleLineGridList({
               <Skeleton animation="wave" height={10} width="80%" />
             </Grid>
             <Grid item xs={3}>
-              <Skeleton animation="wave" height={190} />
+              <Skeleton animation="wave" height={240} />
               <Skeleton
                 animation="wave"
                 height={10}

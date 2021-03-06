@@ -1,4 +1,3 @@
-import { parseJwt } from "utils/getDataJWT";
 function setCookie(name: string, value: string, hours: number) {
   var expires = "";
   if (hours) {
@@ -22,14 +21,7 @@ function eraseCookie(name: string) {
   document.cookie = name + "=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
 }
 const login = () => {
-  const token = getCookie("token");
-  if (token === null) {
-    return false;
-  }
-  if (
-    (token !== "" || token !== undefined) &&
-    parseJwt(token).role === "user"
-  ) {
+  if (getCookie("token")) {
     return true;
   }
 

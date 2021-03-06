@@ -69,24 +69,12 @@ export default function Course() {
       <Container maxWidth="lg">
         <div
           style={{
-            position: "sticky",
-            top: 56,
-            bottom: 20,
-            paddingTop: "8px",
-            paddingLeft: 4,
-            width: "100%",
-            zIndex: 5,
+            marginLeft: "auto",
+            marginRight: "auto",
+            padding: 10,
           }}
         >
-          <Grid
-            container
-            direction="row"
-            justify="center"
-            alignItems="center"
-            style={{ padding: 10 }}
-          >
-            <GroupSearch />
-          </Grid>
+          <GroupSearch />
         </div>
 
         <Portal />
@@ -94,10 +82,10 @@ export default function Course() {
         <Grid container direction="row" justify="center" alignItems="center">
           {toprate.length !== 0 && recommemded.length !== 0 ? (
             <React.Fragment>
-              <Grid item xs={12} sm={6} md={6} lg={6}>
+              <Grid item xs={12} sm={6}>
                 <SocialCardDemo title={"อันดับยอดฮิต"} data={toprate} />
               </Grid>
-              <Grid item xs={12} sm={6} md={6} lg={6}>
+              <Grid item xs={12} sm={6}>
                 <SocialCardDemo title={"รายการแนะนำ"} data={recommemded} />
               </Grid>
             </React.Fragment>
@@ -105,10 +93,11 @@ export default function Course() {
             <Grid
               container
               direction="row"
-              justify="space-around"
+              justify="center"
               alignItems="center"
+              spacing={2}
             >
-              <Grid item xs={3}>
+              <Grid item xs={12} sm={3}>
                 <Skeleton animation="wave" variant="rect" height={190} />
                 <Skeleton
                   animation="wave"
@@ -117,7 +106,7 @@ export default function Course() {
                 />
                 <Skeleton animation="wave" height={10} width="80%" />
               </Grid>
-              <Grid item xs={3}>
+              <Grid item xs={12} sm={3}>
                 <Skeleton animation="wave" variant="rect" height={190} />
                 <Skeleton
                   animation="wave"
@@ -126,7 +115,7 @@ export default function Course() {
                 />
                 <Skeleton animation="wave" height={10} width="80%" />
               </Grid>
-              <Grid item xs={3}>
+              <Grid item xs={12} sm={3}>
                 <Skeleton animation="wave" variant="rect" height={190} />
                 <Skeleton
                   animation="wave"
@@ -137,13 +126,6 @@ export default function Course() {
               </Grid>
             </Grid>
           )}
-        </Grid>
-        <Grid
-          container
-          direction="row"
-          justify="flex-start"
-          alignItems="center"
-        >
           <Grid item xs={12} sm={6} md={6} lg={6}>
             <Grid
               container
@@ -178,20 +160,26 @@ export default function Course() {
           </Grid>
         </Grid>
 
-        <Grid container direction="row" justify="center" alignItems="center">
+        <div
+          style={{
+            textAlign: "center",
+            padding: 10,
+          }}
+        >
           <SelectPlatform />
-        </Grid>
+        </div>
+
         <AllCourse />
-        <div id="หมวดหมู่" />
+
         <TapsCourse title={"หมวดหมู่"} />
         <Grid container direction="row" justify="center" alignItems="center">
-          <Grid item xs={12} sm={4} md={4} lg={4}>
+          <Grid item xs={12} sm={4}>
             <FadeInSection key={"image"}>
               <img src={animation00} alt="" width="100%" height="100%" />
             </FadeInSection>
           </Grid>
 
-          <Grid item xs={12} sm={6} md={6} lg={6}>
+          <Grid item xs={12} sm={6}>
             <Grid
               container
               direction="row"
@@ -219,10 +207,8 @@ export default function Course() {
           </Grid>
         </Grid>
 
-        <div id="หลักสูตร" />
-        <Grid item xs={12} sm={12} md={12} lg={12}>
-          <Curriculum title={"หลักสูตร"} />
-        </Grid>
+        <Curriculum title={"หลักสูตร"} />
+
         <Facebook />
       </Container>
     </React.Fragment>

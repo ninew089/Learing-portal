@@ -8,6 +8,7 @@ const initialState = {
   isLoading: false,
   users: [],
   status: [],
+  login: false,
   messageLogin: null,
 };
 
@@ -22,6 +23,7 @@ export default function (state = initialState, action: any) {
         users: action.payload.user,
         status: action.payload.status,
         messageLogin: null,
+        login: true,
       };
     case LOAD_LOGIN_FAILURE:
       return {
@@ -29,6 +31,7 @@ export default function (state = initialState, action: any) {
         isLoading: false,
         status: action.payload.status,
         messageLogin: action.payload.messageLogin,
+        login: false,
       };
     case CLEAR_MESSAGE_LOGIN:
       return { ...state, messageLogin: null };
