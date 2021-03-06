@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) =>
       display: "inline-flex",
     },
     title: {
-      fontWeight: 700,
+      fontWeight: 600,
       marginRight: 10,
       color: "#222",
     },
@@ -53,7 +53,7 @@ export default function ResponsiveDialog({
         onClose={handleClose}
         aria-labelledby="responsive-dialog-title"
       >
-        <DialogTitle id="responsive-dialog-title" style={{ fontWeight: 400 }}>
+        <DialogTitle id="responsive-dialog-title" style={{ fontWeight: 500 }}>
           <Grid container alignItems="center">
             <ChatBubbleOutlineIcon style={{ marginRight: 10 }} />{" "}
             ยืนยันการสมัครสมาชิก

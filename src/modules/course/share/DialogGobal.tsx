@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     margin: 4,
     padding: 4,
-    fontWeight: 700,
+    fontWeight: 600,
     fontSize: 16,
   },
   action: {

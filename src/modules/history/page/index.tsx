@@ -121,9 +121,9 @@ export default function MaterialTableDemo(props: any) {
             field: "pass",
             render: (row) => {
               return row.pass ? (
-                <div style={{ color: "#2E5E0B", fontWeight: 700 }}>ผ่าน</div>
+                <div style={{ color: "#2E5E0B", fontWeight: 600 }}>ผ่าน</div>
               ) : (
-                <div style={{ color: "#C52F2F", fontWeight: 700 }}>ไม่ผ่าน</div>
+                <div style={{ color: "#C52F2F", fontWeight: 600 }}>ไม่ผ่าน</div>
               );
             },
           },
@@ -180,9 +180,9 @@ export default function MaterialTableDemo(props: any) {
             field: "pass",
             render: (row) => {
               return row.pass ? (
-                <div style={{ color: "#2E5E0B", fontWeight: 700 }}>ผ่าน</div>
+                <div style={{ color: "#2E5E0B", fontWeight: 600 }}>ผ่าน</div>
               ) : (
-                <div style={{ color: "#C52F2F", fontWeight: 700 }}>ไม่ผ่าน</div>
+                <div style={{ color: "#C52F2F", fontWeight: 600 }}>ไม่ผ่าน</div>
               );
             },
           },

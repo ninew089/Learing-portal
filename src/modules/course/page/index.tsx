@@ -126,6 +126,15 @@ export default function Course() {
                 />
                 <Skeleton animation="wave" height={10} width="80%" />
               </Grid>
+              <Grid item xs={3}>
+                <Skeleton animation="wave" variant="rect" height={190} />
+                <Skeleton
+                  animation="wave"
+                  height={10}
+                  style={{ marginBottom: 6 }}
+                />
+                <Skeleton animation="wave" height={10} width="80%" />
+              </Grid>
             </Grid>
           )}
         </Grid>
@@ -152,7 +161,7 @@ export default function Course() {
                   OCSC Learning Portal
                 </Box>
                 <Box
-                  fontWeight={400}
+                  fontWeight={500}
                   textAlign="center"
                   fontSize={matches ? 12 : 16}
                 >
@@ -198,7 +207,7 @@ export default function Course() {
                   หลักสูตรที่เราคัดสรรมาเพื่อคุณ
                 </Box>
                 <Box
-                  fontWeight={400}
+                  fontWeight={500}
                   textAlign="center"
                   fontSize={matches ? 10 : 16}
                 >

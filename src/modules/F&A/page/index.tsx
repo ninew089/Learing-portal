@@ -17,7 +17,7 @@ export default function FAQ() {
     <>
       <Container maxWidth="sm">
         <Paper variant="outlined" className={classes.root}>
-          <Box fontWeight={700} fontSize={24} margin={4}>
+          <Box fontWeight={600} fontSize={24} margin={4}>
             คำถามที่พบบ่อย ?
           </Box>
 

@@ -35,11 +35,11 @@ const useStyles = makeStyles((theme) => ({
   },
   input: {
     color: "#0f1626",
-    fontWeight: 700,
+    fontWeight: 600,
     "& .MuiInputBase-root.MuiOutlineInput-root": {
       color: "#45A29E",
       borderColor: "#757575",
-      fontWeight: 700,
+      fontWeight: 600,
     },
   },
   textfield: {
@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(1),
     "& .MuiFormHelperText-root.Mui-error ": {
       color: "ff533d",
-      fontWeight: 700,
+      fontWeight: 600,
       borderWidth: "3px",
     },
     "& .MuiInput-underline.Mui-error:after": {
@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
       borderWidth: "3px",
     },
     "& label.MuiFormLabel-root": {
-      fontWeight: 700,
+      fontWeight: 600,
       "&:after .Mui-error": {
         borderColor: "#ff533d",
         borderWidth: "3px",
@@ -93,7 +93,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 10,
   },
   title: {
-    fontWeight: 700,
+    fontWeight: 600,
     margin: 10,
   },
   image: {

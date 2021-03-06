@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
   ocsc: {
     textAlign: "center",
     color: theme.palette.primary.light,
-    fontWeight: 400,
+    fontWeight: 500,
     fontSize: 20,
     [theme.breakpoints.down("sm")]: {
       fontSize: 18,
@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   color: {
     textAlign: "center",
     color: theme.palette.secondary.light,
-    fontWeight: 400,
+    fontWeight: 500,
     fontSize: 16,
     [theme.breakpoints.down("sm")]: {
       fontSize: 10,
@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
   },
   color1: {
     textAlign: "center",
-    fontWeight: 400,
+    fontWeight: 500,
     fontSize: 16,
     color: theme.palette.primary.light,
     [theme.breakpoints.down("sm")]: {

@@ -120,7 +120,7 @@ export default function PointNavigationMenu({ title }: { title: string }) {
         justify={"flex-start"}
         alignItems="center"
       >
-        <Box className={classes.box} fontWeight={700} fontSize="h4.fontSize">
+        <Box className={classes.box} fontWeight={600} fontSize="h4.fontSize">
           {title}
         </Box>
       </Grid>

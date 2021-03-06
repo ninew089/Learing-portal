@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     fontSize: 18,
-    fontWeight: 900,
+    fontWeight: 600,
   },
   content: {
     fontSize: 14,

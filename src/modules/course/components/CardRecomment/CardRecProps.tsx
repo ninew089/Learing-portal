@@ -75,7 +75,7 @@ const useStyles = makeStyles((theme) => ({
   },
   code: {
     fontSize: 12,
-    fontWeight: 400,
+    fontWeight: 500,
     color: theme.palette.primary.dark,
     overflow: "hidden",
     display: "-webkit-box",

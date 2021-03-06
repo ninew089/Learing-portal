@@ -28,12 +28,12 @@ import * as yup from "yup";
 const useStyles = makeStyles((theme) => ({
   input: {
     color: "#0f1626",
-    fontWeight: 700,
+    fontWeight: 600,
     letterSpacing: 1,
     "& .MuiInputBase-root.MuiOutlineInput-root": {
       color: "#45A29E",
       borderColor: "#757575",
-      fontWeight: 700,
+      fontWeight: 600,
     },
   },
   textfield: {

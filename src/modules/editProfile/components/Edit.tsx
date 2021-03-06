@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 40,
   },
   uid: {
-    fontWeight: 400,
+    fontWeight: 500,
   },
   submit: {
     marginTop: "10px",

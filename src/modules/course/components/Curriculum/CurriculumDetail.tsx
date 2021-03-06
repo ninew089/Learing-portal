@@ -78,7 +78,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     WebkitLineClamp: 1,
     WebkitBoxOrient: "vertical",
     fontSize: "14px",
-    fontWeight: 700,
+    fontWeight: 600,
     color: "#132740",
     padding: 3,
     maxWidth: 190,

@@ -37,21 +37,22 @@ const theme = createMuiTheme({
 export default function APP() {
   const store = configureStore();
   return (
-    <Provider store={store}>
-      <ConnectedRouter history={history}>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-
-          <Switch>
-            <PriveRouterAdmin
-              path="/learning-portal/admin/main"
-              component={AdminRoute}
-            />
-            <Route exact path="/learning-portal/admin" component={Admin} />
-            <LayoutRoute />
-          </Switch>
-        </ThemeProvider>
-      </ConnectedRouter>
-    </Provider>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Provider store={store}>
+        <ConnectedRouter history={history}>
+          <>
+            <Switch>
+              <PriveRouterAdmin
+                path="/learning-portal/admin/main"
+                component={AdminRoute}
+              />
+              <Route exact path="/learning-portal/admin" component={Admin} />
+              <LayoutRoute />
+            </Switch>
+          </>
+        </ConnectedRouter>
+      </Provider>
+    </ThemeProvider>
   );
 }

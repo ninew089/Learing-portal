@@ -9,12 +9,12 @@ const useStyles = makeStyles((theme) => ({
     color: "#0f1626",
     background: "white",
     paddingLeft: 10,
-    fontWeight: 700,
+    fontWeight: 600,
     borderRadius: 100,
     "& .MuiInputBase-root.MuiOutlineInput-root": {
       color: "#45A29E",
       borderColor: "#757575",
-      fontWeight: 700,
+      fontWeight: 600,
     },
     "& .MuiInputBase-root.MuiOutlinedInput-root": {
       padding: "0 !important",
