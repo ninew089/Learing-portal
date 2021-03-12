@@ -30,6 +30,25 @@ class LocalizedUtils extends DateFnsUtils {
     });
   }
 }
+class LocalizedUtilsData extends DateFnsUtils {
+  getDatePickerHeaderText(date: Date) {
+    return format(date, `dd MMMM ${parseInt(formatDate(date, "YYYY")) + 543}`, {
+      locale: this.locale,
+    });
+  }
+
+  getCalendarHeaderText(date: Date) {
+    return format(date, `MMMM `, {
+      locale: this.locale,
+    });
+  }
+
+  getYearText(date: Date) {
+    return format(date, `พ.ศ. ${parseInt(formatDate(date, "YYYY")) + 543}`, {
+      locale: this.locale,
+    });
+  }
+}
 const useStyles = makeStyles((theme) => ({
   input: {
     color: "#0f1626",
@@ -52,7 +71,7 @@ export function DateThPicker(props: any) {
   const classes = useStyles();
 
   return (
-    <MuiPickersUtilsProvider utils={LocalizedUtils} locale={th}>
+    <MuiPickersUtilsProvider utils={LocalizedUtilsData} locale={th}>
       <KeyboardDatePicker
         name={`${name}`}
         fullWidth
@@ -166,7 +185,7 @@ export function DatePickerJob(props: any) {
   const classes = useStyles();
 
   return (
-    <MuiPickersUtilsProvider utils={LocalizedUtils} locale={th}>
+    <MuiPickersUtilsProvider utils={LocalizedUtilsData} locale={th}>
       <KeyboardDatePicker
         name={`${name}`}
         fullWidth
