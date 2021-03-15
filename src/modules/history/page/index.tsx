@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import MaterialTable from "material-table";
 import { forwardRef } from "react";
-import { CssBaseline, Toolbar } from "@material-ui/core";
+import { CssBaseline, Toolbar, Container } from "@material-ui/core";
 import {
   AddBox,
   ArrowDownward,
@@ -96,7 +96,7 @@ export default function MaterialTableDemo(props: any) {
   const predata1 = [...curriculumcertificate];
 
   return (
-    <div>
+    <Container>
       <Toolbar />
 
       <CssBaseline />
@@ -131,29 +131,26 @@ export default function MaterialTableDemo(props: any) {
         data={predata}
         detailPanel={(rowData) => {
           return (
-            <div>
-              <h4>
-                &nbsp;&nbsp;&nbsp;&nbsp; เลขประจำตัวประชาชน: {rowData.userid}{" "}
-              </h4>
+            <div style={{ margin: 20 }}>
+              <div style={{ fontSize: "12px" }}>
+                เลขประจำตัวประชาชน: {rowData.userid}
+              </div>
 
-              <h4>
-                {" "}
-                &nbsp;&nbsp;&nbsp;&nbsp; ชื่อ: {rowData.title}
+              <div style={{ fontSize: "12px" }}>
+                ชื่อ: {rowData.title}
                 {rowData.firstname} {rowData.lastname}
-              </h4>
+              </div>
 
-              <h4>
-                {" "}
-                &nbsp;&nbsp;&nbsp;&nbsp;วันเปิดเรียน:{" "}
+              <div style={{ fontSize: "12px" }}>
+                วันเปิดเรียน:
                 {formatDatetoThaiTest(rowData.startdate)}
-              </h4>
-              <h4>
-                {" "}
-                &nbsp;&nbsp;&nbsp;&nbsp;วันที่สำเร็จการศึกษา:{" "}
+              </div>
+              <div style={{ fontSize: "12px" }}>
+                วันที่สำเร็จการศึกษา:
                 {formatDatetoThaiTest(rowData.enddate)}
-              </h4>
+              </div>
 
-              <h4> &nbsp;&nbsp;&nbsp;&nbsp;หมายเหตุ: {rowData.note}</h4>
+              <div style={{ fontSize: "12px" }}>หมายเหตุ: {rowData.note}</div>
             </div>
           );
         }}
@@ -190,35 +187,33 @@ export default function MaterialTableDemo(props: any) {
         data={predata1}
         detailPanel={(rowData) => {
           return (
-            <div>
-              <h4>
-                &nbsp;&nbsp;&nbsp;&nbsp; เลขประจำตัวประชาชน: {rowData.userid}
-              </h4>
+            <div style={{ margin: 20 }}>
+              <div style={{ fontSize: "12px" }}>
+                เลขประจำตัวประชาชน: {rowData.userid}
+              </div>
 
-              <h4>
+              <div style={{ fontSize: "12px" }}>
                 {" "}
-                &nbsp;&nbsp;&nbsp;&nbsp; ชื่อ: {rowData.title}
+                ชื่อ: {rowData.title}
                 {rowData.firstname} {rowData.lastname}
-              </h4>
+              </div>
 
-              <h4>
+              <div style={{ fontSize: "12px" }}>
                 {" "}
-                &nbsp;&nbsp;&nbsp;&nbsp;วันเปิดเรียน:{" "}
-                {formatDatetoThaiTest(rowData.startdate)}
-              </h4>
+                วันเปิดเรียน: {formatDatetoThaiTest(rowData.startdate)}
+              </div>
 
-              <h4>
+              <div style={{ fontSize: "12px" }}>
                 {" "}
-                &nbsp;&nbsp;&nbsp;&nbsp;วันที่สำเร็จการศึกษา:{" "}
-                {formatDatetoThaiTest(rowData.enddate)}
-              </h4>
+                วันที่สำเร็จการศึกษา: {formatDatetoThaiTest(rowData.enddate)}
+              </div>
 
-              <h4> &nbsp;&nbsp;&nbsp;&nbsp;หมายเหตุ: {rowData.note}</h4>
+              <div style={{ fontSize: "12px" }}> หมายเหตุ: {rowData.note}</div>
             </div>
           );
         }}
         onRowClick={(event, rowData, togglePanel: any) => togglePanel()}
       />
-    </div>
+    </Container>
   );
 }
