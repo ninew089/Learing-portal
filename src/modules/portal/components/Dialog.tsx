@@ -33,9 +33,7 @@ export default function AlertDialog(props: any) {
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            {`คุณกำลังเข้าสู่ เว็บ ${
-              data ? data.link : ""
-            } หากต้องการเข้าสู่เว็บไซต์นี้กดตกลงหากไม่ต้องการกดกลับ`}
+            {`คุณกำลังเข้าสู่ เว็บ ${data ? data.link : ""}`}
           </DialogContentText>
         </DialogContent>
         <DialogActions>

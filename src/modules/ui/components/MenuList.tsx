@@ -1,5 +1,4 @@
 import React from "react";
-import { IconButton } from "@material-ui/core";
 import MenuItem from "@material-ui/core/MenuItem";
 import { eraseCookie } from "cookie/cookie";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
@@ -35,18 +34,17 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 );
-export default function LongMenu() {
+export default function LongMenu({
+  open,
+  setAnchorEl,
+  anchorEl,
+}: {
+  open: any;
+  anchorEl: any;
+  setAnchorEl: any;
+}) {
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
 
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
   const history = useHistory();
   const path = "/learning-portal";
   const navigatorToeditProfile = () => {
@@ -68,21 +66,13 @@ export default function LongMenu() {
   };
   return (
     <div>
-      <IconButton
-        aria-label="more"
-        aria-controls={open ? "menu-list-grow" : undefined}
-        aria-haspopup="true"
-        style={{ padding: 0 }}
-        onClick={handleClick}
-      >
-        <SwitchToggle toggled={open} />
-      </IconButton>
+      <SwitchToggle toggled={open} />
+
       <Menu
         id="long-menu"
         anchorEl={anchorEl}
         keepMounted
         open={open}
-        onClose={handleClose}
         PaperProps={{
           style: {
             marginTop: "2.8rem",

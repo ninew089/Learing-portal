@@ -136,7 +136,7 @@ export default function SocialCard(props: any) {
         container
         justify="flex-start"
         alignItems="center"
-        spacing={2}
+        spacing={1}
         className={classes.items}
         onClick={onSelected}
       >
@@ -159,7 +159,7 @@ export default function SocialCard(props: any) {
           </CardMedia>
         </Grid>
 
-        <Grid item>
+        <Grid item xs={6}>
           <div className={classes.name}>{data.name}</div>
           <div className={classes.code}> {data.code}</div>
           <Chip

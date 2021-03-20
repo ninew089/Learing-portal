@@ -115,15 +115,14 @@ const useStyles = makeStyles((theme: Theme) => ({
     margin: 8,
   },
   caption: {
+    marginTop: 8,
     overflow: "hidden",
     display: "-webkit-box",
     textOverflow: "ellipsis",
-    WebkitLineClamp: 3,
+    WebkitLineClamp: 2,
     WebkitBoxOrient: "vertical",
     fontSize: "12px",
     color: "#434a54",
-    paddingLeft: 14,
-    paddingRight: 14,
   },
   detail: {
     marginBottom: 18,
@@ -153,6 +152,15 @@ const useStyles = makeStyles((theme: Theme) => ({
     boxShadow:
       "0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)",
   },
+  contianer: {
+    position: "relative",
+  },
+  icon: {
+    position: "absolute",
+    bottom: 10,
+    right: 15,
+    zIndex: 9999999,
+  },
 }));
 
 export default function CurriculumDetailCard(props: CardProps) {
@@ -179,16 +187,42 @@ export default function CurriculumDetailCard(props: CardProps) {
     <div className={classes.root}>
       <div className={classes.card} onClick={onOpen}>
         <div className={classes.boxshadow}>
-          <CardMedia
-            style={{
-              background: `url('${thumbNail}')`,
-              backgroundSize: "cover",
-              backgroundPosition: "center center",
-            }}
-            image={thumbNail}
-            className={classes.cardMedia}
-            title={name}
-          />
+          <div className={classes.contianer}>
+            <CardMedia
+              style={{
+                backgroundImage: `url('${thumbNail}')`,
+                backgroundSize: "cover",
+                backgroundPosition: "center center",
+              }}
+              image={thumbNail}
+              className={classes.cardMedia}
+              title={name}
+            >
+              {platformName === "สำนักงาน ก.พ." && (
+                <div
+                  style={{
+                    position: "absolute",
+                    bottom: 0,
+                    right: 0,
+                    height: 60,
+                    width: "100%",
+                    borderRadius: "0px 0px 4px 4px",
+                    background:
+                      " linear-gradient(0deg, rgba(0,0,0,0.520045518207283) 0%, rgba(0,0,0,0.4164040616246498) 4%, rgba(0,0,0,0.27914915966386555) 35%, rgba(255,255,255,0) 100%)",
+                  }}
+                >
+                  <div className={classes.icon}>
+                    <img
+                      src={banner}
+                      alt="welearn"
+                      width="28px"
+                      height="15px"
+                    />
+                  </div>
+                </div>
+              )}
+            </CardMedia>
+          </div>
         </div>
         <div className={classes.title}>{name}</div>
         <div className={classes.subtitle}>{code}</div>
@@ -243,15 +277,7 @@ export default function CurriculumDetailCard(props: CardProps) {
               />
             </div>
           </Grid>
-          {platformName === "สำนักงาน ก.พ." && (
-            <img
-              src={banner}
-              alt="welearn"
-              width="40px"
-              height="16px"
-              style={{ margin: 8 }}
-            />
-          )}
+
           <Typography
             variant="caption"
             align="left"

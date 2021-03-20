@@ -102,6 +102,17 @@ export default function PersistentDrawerLeft(props: any) {
   }, [pathname]);
 
   const { data } = useSelector((state: any) => state.edit);
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [open, setOpen] = React.useState(false);
+
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    if (token === null) {
+      history.push("/learning-portal/login");
+    } else {
+      setAnchorEl(event.currentTarget);
+      setOpen(!open);
+    }
+  };
 
   const NavProp = React.memo(
     ({ to, state, title }: { to: any; state: any; title: any }) => {
@@ -168,17 +179,22 @@ export default function PersistentDrawerLeft(props: any) {
                 variant="contained"
                 color="secondary"
                 style={{ borderRadius: 40 }}
-                onClick={() => {
-                  if (token === null) {
-                    history.push("/learning-portal/login");
-                  }
-                }}
+                aria-label="more"
+                aria-controls={open ? "menu-list-grow" : undefined}
+                aria-haspopup="true"
+                // style={{ padding: 0 }}
+                //onClick={handleClick}
+                onClick={handleClick}
               >
                 {token ? (
                   <>
                     <AccountCircle style={{ marginRight: 8 }} />
                     <div className={classes.name}>{data.firstName}</div>
-                    <MenuList />
+                    <MenuList
+                      open={open}
+                      setAnchorEl={setAnchorEl}
+                      anchorEl={anchorEl}
+                    />
                   </>
                 ) : (
                   "เข้าสู่ระบบ"
