@@ -4,7 +4,7 @@ import { Grid, useMediaQuery, Container } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   footer: {
-    background: "#1c1c21",
+    background: "#1959bd",
     color: "#f3f3fb",
     paddingTop: "20px",
     paddingBottom: "20px",

@@ -2,7 +2,6 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, Grid, Chip } from "@material-ui/core";
 import numberFormat from "utils/numberFormat";
-import banner from "assets/images/welearn_logo.webp";
 import { CardProps } from "./tyscript";
 import CardMedia from "@material-ui/core/CardMedia";
 import { useSelector, useDispatch } from "react-redux";
@@ -152,14 +151,6 @@ const useStyles = makeStyles((theme) => ({
     boxShadow:
       "0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)",
   },
-  contianer: {
-    position: "relative",
-  },
-  icon: {
-    position: "absolute",
-    bottom: 10,
-    right: 15,
-  },
 }));
 
 export default function IconBreadcrumbs(props: CardProps) {
@@ -190,37 +181,16 @@ export default function IconBreadcrumbs(props: CardProps) {
         onClick={onOpen}
         style={{ display: "block" }}
       >
-        <div className={classes.contianer}>
-          <CardMedia
-            style={{
-              background: `url('${thumbNail}')`,
-              backgroundSize: "cover",
-              backgroundPosition: "center center",
-            }}
-            image={thumbNail}
-            className={classes.cardMedia}
-            title={name}
-          >
-            {platformName === "สำนักงาน ก.พ." && (
-              <div
-                style={{
-                  position: "absolute",
-                  bottom: 0,
-                  right: 0,
-                  height: 60,
-                  width: "100%",
-                  borderRadius: "0px 0px 4px 4px",
-                  background:
-                    " linear-gradient(0deg, rgba(0,0,0,0.520045518207283) 0%, rgba(0,0,0,0.4164040616246498) 4%, rgba(0,0,0,0.27914915966386555) 35%, rgba(255,255,255,0) 100%)",
-                }}
-              >
-                <div className={classes.icon}>
-                  <img src={banner} alt="welearn" width="28px" height="15px" />
-                </div>
-              </div>
-            )}
-          </CardMedia>
-        </div>
+        <CardMedia
+          style={{
+            background: `url('${thumbNail}')`,
+            backgroundSize: "cover",
+            backgroundPosition: "center center",
+          }}
+          image={thumbNail}
+          className={classes.cardMedia}
+          title={name}
+        />
 
         <div className={classes.title}>{name}</div>
         <div className={classes.subtitle}>{code}</div>

@@ -6,7 +6,7 @@ import { useTheme } from "@material-ui/core/styles";
 import Relation from "modules/relation/components/Relation";
 import Portal from "modules/portal/components/LinkPortal";
 import Facebook from "modules/facebook/components/FaceBook";
-
+import banner from "assets/images/banner.webp";
 import TapsCourse from "../components/Course/TapsCourse";
 import AllCourse from "../components/Course/AllCourse";
 import SocialCardDemo from "../components/CardRecomment/CardRecomment";
@@ -65,8 +65,20 @@ export default function Course() {
 
   return (
     <React.Fragment>
-      <Relation />
+      <div
+        style={{
+          backgroundImage: `url(${banner})`,
+          width: "100vw",
+          minHeight: 370,
+          position: "relative",
+          backgroundSize: "cover",
+          backdropFilter: "blur(1px)",
+          zIndex: 1,
+          backgroundPosition: "center center",
+        }}
+      />
       <Container maxWidth="lg">
+        <Relation />
         <div
           style={{
             marginLeft: "auto",

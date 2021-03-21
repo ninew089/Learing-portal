@@ -13,7 +13,7 @@ import {
 import Drawer from "./Drawer";
 import { useLocation, useHistory } from "react-router-dom";
 import MenuList from "./MenuList";
-import banner from "assets/images/welearn_logo.webp";
+import banner from "assets/images/logo.webp";
 import { NavLink } from "react-router-dom";
 import { getCookie } from "cookie/cookie";
 import * as actionsEdit from "modules/editProfile/actions";
@@ -31,8 +31,8 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 16,
   },
   appBar: {
-    background: "#222",
-    color: theme.palette.primary.light,
+    background: "#fff",
+    color: theme.palette.primary.dark,
     backdropFilter: "blur(6px)",
     filter: "opacity(0.9)",
   },
@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
     color: `${theme.palette.primary.main}  !important`,
   },
   navItem: {
-    color: `${theme.palette.primary.light}  !important`,
+    color: `${theme.palette.primary.dark}  !important`,
   },
   navItemActive: {
     color: `${theme.palette.primary.main}  !important`,
@@ -178,7 +178,7 @@ export default function PersistentDrawerLeft(props: any) {
               <Button
                 variant="contained"
                 color="secondary"
-                style={{ borderRadius: 40 }}
+                style={{ borderRadius: 40, boxShadow: "none" }}
                 aria-label="more"
                 aria-controls={open ? "menu-list-grow" : undefined}
                 aria-haspopup="true"

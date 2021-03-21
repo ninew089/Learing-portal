@@ -3,7 +3,6 @@ import { Grid, Divider, CardMedia, Chip } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useSelector } from "react-redux";
 import Rating from "../../share/Rating";
-import banner from "assets/images/welearn_logo.webp";
 import { useDispatch } from "react-redux";
 import * as actions from "../../actions";
 import FiberManualRecordRounded from "@material-ui/icons/FiberManualRecordRounded";
@@ -150,13 +149,7 @@ export default function SocialCard(props: any) {
             image={data.thumbNail}
             className={classes.cardMedia}
             title={data.name}
-          >
-            {data.platformName === "สำนักงาน ก.พ." && (
-              <div className={classes.icon}>
-                <img src={banner} alt="welearn" width="28px" height="15px" />
-              </div>
-            )}
-          </CardMedia>
+          />
         </Grid>
 
         <Grid item xs={6}>
