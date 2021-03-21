@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Grid, Box, Container, useMediaQuery } from "@material-ui/core";
 import Skeleton from "@material-ui/lab/Skeleton";
-import { useTheme } from "@material-ui/core/styles";
+import { useTheme, makeStyles } from "@material-ui/core/styles";
 
 import Relation from "modules/relation/components/Relation";
 import Portal from "modules/portal/components/LinkPortal";
@@ -46,11 +46,31 @@ function FadeInSection(props: any) {
     </div>
   );
 }
-
+const useStyles = makeStyles((theme) => ({
+  header: {
+    backgroundImage: `url(${banner})`,
+    width: "100vw",
+    [theme.breakpoints.only("xs")]: {
+      minHeight: 140,
+    },
+    [theme.breakpoints.only("sm")]: {
+      minHeight: 200,
+    },
+    [theme.breakpoints.only("md")]: {
+      minHeight: 240,
+    },
+    minHeight: 370,
+    position: "relative",
+    backgroundSize: "cover",
+    backdropFilter: "blur(1px)",
+    zIndex: 1,
+    backgroundPosition: "center center",
+  },
+}));
 export default function Course() {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.only("xs"));
-
+  const classes = useStyles();
   useEffect(() => {
     const actionTopRate = actions.loadTopRate();
     dispatch(actionTopRate);
@@ -65,18 +85,7 @@ export default function Course() {
 
   return (
     <React.Fragment>
-      <div
-        style={{
-          backgroundImage: `url(${banner})`,
-          width: "100vw",
-          minHeight: 370,
-          position: "relative",
-          backgroundSize: "cover",
-          backdropFilter: "blur(1px)",
-          zIndex: 1,
-          backgroundPosition: "center center",
-        }}
-      />
+      <div className={classes.header} />
       <Container maxWidth="lg">
         <Relation />
         <div
