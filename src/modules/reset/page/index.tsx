@@ -56,13 +56,12 @@ export default function SignIn() {
   const { register, handleSubmit, errors } = useForm({
     mode: "onChange",
     validationSchema: yup.object().shape({
-      pwd: yup.string().required(),
-      pwd1: yup.string().required(),
+      pwd: yup.string().required("กรุณากรอกรหัสผ่านเดิม"),
+      pwd1: yup.string().required("กรุณากรอกรหัสผ่านใหม่"),
       pwd2: yup
         .string()
-        .required()
-        .oneOf([yup.ref("pwd1")], "กรุณากรอกรหัสให้เหมือนกัน")
-        .required("กรุณากรอกรหัสผ่านใหม่"),
+        .required("กรุณากรอกรหัสผ่านใหม่")
+        .oneOf([yup.ref("pwd1")], "กรุณากรอกรหัสให้เหมือนกัน"),
     }),
   });
   const dispatch = useDispatch();
@@ -108,7 +107,7 @@ export default function SignIn() {
               ),
             }}
             inputRef={register}
-            helperText={errors.pwd ? "กรอกรหัสผ่าน" : ""}
+            helperText={errors.pwd?.message}
             error={!!errors.pwd}
           />
 
@@ -119,7 +118,7 @@ export default function SignIn() {
             label="รหัสผ่านใหม่"
             name="pwd1"
             inputRef={register}
-            helperText={errors.pwd1 ? "กรอกรหัสผ่าน" : ""}
+            helperText={errors.pwd1?.message}
             error={!!errors.pwd1}
             type="password"
             InputProps={{
@@ -140,7 +139,7 @@ export default function SignIn() {
             label="รหัสผ่านใหม่"
             name="pwd2"
             inputRef={register}
-            helperText={errors.pwd2 ? "กรอกรหัสผ่าน" : ""}
+            helperText={errors.pwd2?.message}
             error={!!errors.pwd2}
             type="password"
             InputProps={{

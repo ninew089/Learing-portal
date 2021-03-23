@@ -20,7 +20,6 @@ import ViewColumn from "@material-ui/icons/ViewColumn";
 import DialogAdd from "../components/DialogAdd";
 import { getCookie } from "cookie/cookie";
 import axios from "axios";
-import RefreshIcon from "@material-ui/icons/Refresh";
 import SeacrchCourse from "../components/SearhCurriculum";
 import DialogEdit from "../components/DialogEdit";
 import { useSelector } from "react-redux";
@@ -165,7 +164,6 @@ export default function MaterialTableDemo(props: any) {
           pageSizeOptions: [20, 50, 100],
         }}
         actions={[
-     
           {
             icon: () => <AddBox />,
             tooltip: "เพิ่ม",

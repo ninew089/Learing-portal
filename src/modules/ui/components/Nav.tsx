@@ -151,8 +151,8 @@ export default function PersistentDrawerLeft(props: any) {
                 <img
                   alt=""
                   src={banner}
-                  width={matchesIspad ? "43px" : "60px"}
-                  height={"25px"}
+                  width={matchesIspad ? "80px" : "120px"}
+                  height={matchesIspad ? "24px" : "40px"}
                 />
               </NavLink>
 
