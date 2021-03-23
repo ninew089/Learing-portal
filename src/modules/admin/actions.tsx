@@ -110,14 +110,14 @@ function loadEditCurriculumProgress(CourseProgresses: any, id: any) {
             dispatch({
                 type: LOAD_CURRICULUMPROGRESSEDIT_SUCCESS,
                 payload: {
-                    curriculumprogressEditMessage: "แก้ไขประกาศนียบัตรสำเร็จ",
+                    curriculumprogressEditMessage: "แก้ไขความก้าวหน้าหลักสูตรสำเร็จ",
                     curriculumprogressEditStatus: result.status
                 }
             })
             dispatch({
                 type: LOAD_MESSAGE,
                 payload: {
-                    message: `แก้ไขประกาศนียบัตรสำเร็จ`,
+                    message: `แก้ไขความก้าวหน้าหลักสูตรสำเร็จ`,
                     severity: "success"
                 }
             })
@@ -152,14 +152,14 @@ function loadAddCurriculumProgress(CourseProgresses: any) {
             dispatch({
                 type: LOAD_CURRICULUMPROGRESSADD_SUCCESS,
                 payload: {
-                    progressAddMessage: "เพิ่มประกาศนียบัตรสำเร็จ",
+                    progressAddMessage: "เพิ่มความก้าวหน้าหลักสูตรสำเร็จ",
                     progressAddStatus: result.status
                 }
             })
             dispatch({
                 type: LOAD_MESSAGE,
                 payload: {
-                    message: `เพิ่มประกาศนียบัตรสำเร็จ`,
+                    message: `เพิ่มควาก้าวหน้าหลักสูตรสำเร็จ`,
                     severity: "success"
                 }
             })
@@ -197,14 +197,14 @@ function loadEditProgress(CourseProgresses: any, id: any) {
             dispatch({
                 type: LOAD_PROGRESSEDIT_SUCCESS,
                 payload: {
-                    progressEditMessage: "แก้ไขประกาศนียบัตรสำเร็จ",
+                    progressEditMessage: "แก้ไขความก้าวหน้ารายวิชาสำเร็จ",
                     progressEditStatus: result.status
                 }
             })
             dispatch({
                 type: LOAD_MESSAGE,
                 payload: {
-                    message: `แก้ไขประกาศนียบัตรสำเร็จ`,
+                    message: `แก้ไขความก้าวหน้ารายวิชาสำเร็จ`,
                     severity: "success"
                 }
             })
@@ -239,14 +239,14 @@ function loadAddProgress(CourseProgresses: any) {
             dispatch({
                 type: LOAD_PROGRESSADD_SUCCESS,
                 payload: {
-                    progressAddMessage: "เพิ่มประกาศนียบัตรสำเร็จ",
+                    progressAddMessage: "เพิ่มความก้าวหน้ารายวิชาสำเร็จ",
                     progressAddStatus: result.status
                 }
             })
             dispatch({
                 type: LOAD_MESSAGE,
                 payload: {
-                    message: `เพิ่มประกาศนียบัตรสำเร็จ`,
+                    message: `เพิ่มความก้าวหน้ารายวิชาสำเร็จ`,
                     severity: "success"
                 }
             })

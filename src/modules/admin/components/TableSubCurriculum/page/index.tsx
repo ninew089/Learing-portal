@@ -165,12 +165,7 @@ export default function MaterialTableDemo(props: any) {
           pageSizeOptions: [20, 50, 100],
         }}
         actions={[
-          {
-            icon: () => <RefreshIcon />,
-            tooltip: "รีเฟลส",
-            isFreeAction: true,
-            onClick: onSubmit,
-          },
+     
           {
             icon: () => <AddBox />,
             tooltip: "เพิ่ม",

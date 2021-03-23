@@ -61,7 +61,7 @@ export default function SignIn() {
       pwd2: yup
         .string()
         .required()
-        .oneOf([yup.ref("pwd2")], "กรุณากรอกรหัสให้เหมือนกัน")
+        .oneOf([yup.ref("pwd1")], "กรุณากรอกรหัสให้เหมือนกัน")
         .required("กรุณากรอกรหัสผ่านใหม่"),
     }),
   });
