@@ -195,7 +195,7 @@ export default function CustomizedDialogs({ open, setOpen }: openProps) {
             <CssBaseline />
             <div className={classes.paper}>
               <Typography component="h1" variant="h5">
-                ข้อมูลรายวิชา
+                ข้อมูลหลักสูตร
               </Typography>
               <form className={classes.form} noValidate>
                 <FormControl className={classes.formControlInfo} fullWidth>

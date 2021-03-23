@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "1ef972027e19fbc740e98a0b3ebd5350",
+    "revision": "8f3be95cc9396d98393db093d14b3921",
     "url": "/learning-portal/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/learning-portal/static/css/2.5a56e992.chunk.css"
   },
   {
-    "revision": "53c6ae7618ff7312667c",
+    "revision": "ae384bb81ec8c12e89b4",
     "url": "/learning-portal/static/css/main.898f808c.chunk.css"
   },
   {
@@ -44,8 +44,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/learning-portal/static/js/5.78b80a01.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "53c6ae7618ff7312667c",
-    "url": "/learning-portal/static/js/main.d509cd11.chunk.js"
+    "revision": "ae384bb81ec8c12e89b4",
+    "url": "/learning-portal/static/js/main.f12ab3a9.chunk.js"
   },
   {
     "revision": "eedfc0acc6a24d0ae10d",
