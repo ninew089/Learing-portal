@@ -119,7 +119,12 @@ export default function Course() {
               spacing={2}
             >
               <Grid item xs={12} sm={3}>
-                <Skeleton animation="wave" variant="rect" height={190} />
+                <Skeleton
+                  animation="wave"
+                  variant="rect"
+                  height={190}
+                  style={{ borderRadius: 8 }}
+                />
                 <Skeleton
                   animation="wave"
                   height={10}
@@ -128,7 +133,12 @@ export default function Course() {
                 <Skeleton animation="wave" height={10} width="80%" />
               </Grid>
               <Grid item xs={12} sm={3}>
-                <Skeleton animation="wave" variant="rect" height={190} />
+                <Skeleton
+                  animation="wave"
+                  variant="rect"
+                  height={190}
+                  style={{ borderRadius: 8 }}
+                />
                 <Skeleton
                   animation="wave"
                   height={10}
@@ -137,7 +147,12 @@ export default function Course() {
                 <Skeleton animation="wave" height={10} width="80%" />
               </Grid>
               <Grid item xs={12} sm={3}>
-                <Skeleton animation="wave" variant="rect" height={190} />
+                <Skeleton
+                  animation="wave"
+                  variant="rect"
+                  height={190}
+                  style={{ borderRadius: 8 }}
+                />
                 <Skeleton
                   animation="wave"
                   height={10}

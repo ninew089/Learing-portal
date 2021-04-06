@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/learning-portal/static/css/main.898f808c.chunk.css",
-    "main.js": "/learning-portal/static/js/main.f12ab3a9.chunk.js",
-    "main.js.map": "/learning-portal/static/js/main.f12ab3a9.chunk.js.map",
+    "main.js": "/learning-portal/static/js/main.0a98b657.chunk.js",
+    "main.js.map": "/learning-portal/static/js/main.0a98b657.chunk.js.map",
     "runtime-main.js": "/learning-portal/static/js/runtime-main.8fbb33d4.js",
     "runtime-main.js.map": "/learning-portal/static/js/runtime-main.8fbb33d4.js.map",
     "static/css/2.5a56e992.chunk.css": "/learning-portal/static/css/2.5a56e992.chunk.css",
@@ -15,7 +15,7 @@
     "static/js/5.78b80a01.chunk.js": "/learning-portal/static/js/5.78b80a01.chunk.js",
     "static/js/5.78b80a01.chunk.js.map": "/learning-portal/static/js/5.78b80a01.chunk.js.map",
     "index.html": "/learning-portal/index.html",
-    "precache-manifest.568e99e85c85e520fae8056148ac6320.js": "/learning-portal/precache-manifest.568e99e85c85e520fae8056148ac6320.js",
+    "precache-manifest.79762312ef25508c549d297b03ed5be1.js": "/learning-portal/precache-manifest.79762312ef25508c549d297b03ed5be1.js",
     "service-worker.js": "/learning-portal/service-worker.js",
     "static/css/2.5a56e992.chunk.css.map": "/learning-portal/static/css/2.5a56e992.chunk.css.map",
     "static/css/main.898f808c.chunk.css.map": "/learning-portal/static/css/main.898f808c.chunk.css.map",
@@ -38,6 +38,6 @@
     "static/css/2.5a56e992.chunk.css",
     "static/js/2.722afafc.chunk.js",
     "static/css/main.898f808c.chunk.css",
-    "static/js/main.f12ab3a9.chunk.js"
+    "static/js/main.0a98b657.chunk.js"
   ]
 }

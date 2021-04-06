@@ -84,7 +84,7 @@ export default function TemporaryDrawer() {
   return (
     <div>
       <Button onClick={toggleDrawer("right", true)} className={classes.button}>
-        <Menu />
+        <Menu color="primary" />
       </Button>
       <Drawer
         anchor={"right"}
