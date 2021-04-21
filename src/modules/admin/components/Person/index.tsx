@@ -16,7 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Snackbar from "modules/compoenent/atomic/SnackBar";
 
 const useStyles = makeStyles((theme) => ({
-  root: { marginTop: "2rem", background: theme.palette.primary.light },
+  root: { marginTop: "2rem" },
   paper: {
     display: "flex",
     flexDirection: "column",

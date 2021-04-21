@@ -10,9 +10,10 @@ import {
   Divider,
   IconButton,
 } from "@material-ui/core";
+import { useSelector } from "react-redux";
 import { Menu, ChevronLeft, ChevronRight } from "@material-ui/icons";
 import { useDispatch } from "react-redux";
-import Welearn from "assets/images/welearn_logo.webp";
+
 import * as actions from "../actions";
 import Routes from "./Routes";
 import ListMenu from "./ListAdmin";
@@ -81,7 +82,8 @@ export default function PersistentDrawerLeft() {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-
+  const { profile } = useSelector((state: any) => state.admin);
+  console.log(profile);
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -130,7 +132,7 @@ export default function PersistentDrawerLeft() {
         }}
       >
         <div className={classes.drawerHeader}>
-          <img src={Welearn} alt="welearn" width="80px" />
+          <img src={profile.thumbnail} alt="welearn" width="80px" />
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === "ltr" ? <ChevronLeft /> : <ChevronRight />}
           </IconButton>

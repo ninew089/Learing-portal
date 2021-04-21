@@ -15,10 +15,14 @@ import { makeStyles } from "@material-ui/core/styles";
 import {
   Lock,
   MeetingRoom,
-  AllInbox,
   Home,
   PersonAdd,
   AccountCircle,
+  CollectionsBookmark,
+  LibraryBooks,
+  MenuBook,
+  BarChart,
+  CardMembership,
 } from "@material-ui/icons";
 import { useRouteMatch } from "react-router-dom";
 import { eraseCookie } from "cookie/cookie";
@@ -73,7 +77,7 @@ export default function PersistentDrawerLeft() {
         <NavLink to={`${path}/course`} className={classes.nav}>
           <ListItem button key={"รายวิชา"}>
             <ListItemIcon>
-              <AllInbox />
+              <LibraryBooks />
             </ListItemIcon>
             <ListItemText primary={"รายวิชา"} />
           </ListItem>
@@ -81,7 +85,7 @@ export default function PersistentDrawerLeft() {
         <NavLink to={`${path}/curriculm`} className={classes.nav}>
           <ListItem button key={"หลักสูตร"}>
             <ListItemIcon>
-              <AllInbox />
+              <CollectionsBookmark />
             </ListItemIcon>
             <ListItemText primary={"หลักสูตร"} />
           </ListItem>
@@ -89,7 +93,7 @@ export default function PersistentDrawerLeft() {
         <NavLink to={`${path}/subcurriculum`} className={classes.nav}>
           <ListItem button>
             <ListItemIcon>
-              <AllInbox />
+              <MenuBook />
             </ListItemIcon>
             <ListItemText primary={"รายวิชาในหลักสูตร"} />
           </ListItem>
@@ -97,7 +101,7 @@ export default function PersistentDrawerLeft() {
         <NavLink to={`${path}/progress`} className={classes.nav}>
           <ListItem button key={"ความก้าวหน้า"}>
             <ListItemIcon>
-              <AllInbox />
+              <BarChart />
             </ListItemIcon>
             <ListItemText primary={"ความก้าวหน้า"} />
           </ListItem>
@@ -106,7 +110,7 @@ export default function PersistentDrawerLeft() {
         <NavLink to={`${path}/coursecertificate`} className={classes.nav}>
           <ListItem button key={"person"}>
             <ListItemIcon>
-              <AllInbox />
+              <CardMembership />
             </ListItemIcon>
             <ListItemText primary={"ประกาศนียบัตร"} />
           </ListItem>
