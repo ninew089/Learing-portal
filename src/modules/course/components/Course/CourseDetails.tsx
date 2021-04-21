@@ -140,7 +140,7 @@ const useStyles = makeStyles((theme) => ({
   },
   boxshadow: {
     //Horizontal Lengthpx,Vertical Lengt,Blur Radiuspx,Spread //6px -65px 2px -35px  #999999
-    backgroundPosition: "center center",
+
     boxShadow: "1px -24px 0px -14px #aaaaaa,4px -45px 1px -25px  #999999",
     marginTop: 30,
     borderRadius: "px",
@@ -183,9 +183,7 @@ export default function IconBreadcrumbs(props: CardProps) {
       >
         <CardMedia
           style={{
-            background: `url('${thumbNail}')`,
-            backgroundSize: "cover",
-            backgroundPosition: "center center",
+            background: `url('${thumbNail}') cover center center`,
           }}
           image={thumbNail}
           className={classes.cardMedia}

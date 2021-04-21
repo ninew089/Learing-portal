@@ -133,24 +133,25 @@ export default function MaterialTableDemo(props: any) {
           return (
             <div style={{ margin: 20 }}>
               <div style={{ fontSize: "12px" }}>
-                เลขประจำตัวประชาชน: {rowData.userid}
+                เลขประจำตัวประชาชน:&nbsp; &nbsp; {rowData.userid}
               </div>
-
               <div style={{ fontSize: "12px" }}>
-                ชื่อ: {rowData.title}
+                ชื่อ:&nbsp; &nbsp; {rowData.title}
                 {rowData.firstname} {rowData.lastname}
               </div>
 
               <div style={{ fontSize: "12px" }}>
-                วันเปิดเรียน:
+                วันเปิดเรียน:&nbsp; &nbsp;
                 {formatDatetoThaiTest(rowData.startdate)}
               </div>
               <div style={{ fontSize: "12px" }}>
-                วันที่สำเร็จการศึกษา:
+                วันที่สำเร็จการศึกษา:&nbsp; &nbsp;
                 {formatDatetoThaiTest(rowData.enddate)}
               </div>
 
-              <div style={{ fontSize: "12px" }}>หมายเหตุ: {rowData.note}</div>
+              <div style={{ fontSize: "12px" }}>
+                หมายเหตุ:&nbsp; &nbsp; {rowData.note}
+              </div>
             </div>
           );
         }}
@@ -189,23 +190,22 @@ export default function MaterialTableDemo(props: any) {
           return (
             <div style={{ margin: 20 }}>
               <div style={{ fontSize: "12px" }}>
-                เลขประจำตัวประชาชน: {rowData.userid}
+                เลขประจำตัวประชาชน:&nbsp; &nbsp; {rowData.userid}
               </div>
 
               <div style={{ fontSize: "12px" }}>
-                {" "}
-                ชื่อ: {rowData.title}
+                ชื่อ:&nbsp; &nbsp;{rowData.title}
                 {rowData.firstname} {rowData.lastname}
               </div>
 
               <div style={{ fontSize: "12px" }}>
-                {" "}
-                วันเปิดเรียน: {formatDatetoThaiTest(rowData.startdate)}
+                วันเปิดเรียน:&nbsp; &nbsp;
+                {formatDatetoThaiTest(rowData.startdate)}
               </div>
 
               <div style={{ fontSize: "12px" }}>
-                {" "}
-                วันที่สำเร็จการศึกษา: {formatDatetoThaiTest(rowData.enddate)}
+                วันที่สำเร็จการศึกษา:&nbsp; &nbsp;
+                {formatDatetoThaiTest(rowData.enddate)}
               </div>
 
               <div style={{ fontSize: "12px" }}> หมายเหตุ: {rowData.note}</div>
