@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import Alert from "modules/compoenent/atomic/Alert";
-import img from "assets/images/welearn_logo.webp";
+import img from "assets/images/logo.webp";
 import {
   Visibility,
   VisibilityOff,
@@ -18,7 +18,6 @@ import {
   TextField,
   Grid,
   Typography,
-  Toolbar,
 } from "@material-ui/core";
 import { NavLink } from "react-router-dom";
 import * as actions from "../actions";
@@ -190,7 +189,6 @@ export default function SignIn() {
 
   return (
     <Container component="main" maxWidth="xs">
-      <Toolbar />
       <div className={classes.form}>
         <CssBaseline />
         <div className={classes.paper}>

@@ -1,26 +1,26 @@
 {
   "files": {
     "main.css": "/learning-portal/static/css/main.898f808c.chunk.css",
-    "main.js": "/learning-portal/static/js/main.580bb23b.chunk.js",
-    "main.js.map": "/learning-portal/static/js/main.580bb23b.chunk.js.map",
-    "runtime-main.js": "/learning-portal/static/js/runtime-main.f52a99ef.js",
-    "runtime-main.js.map": "/learning-portal/static/js/runtime-main.f52a99ef.js.map",
+    "main.js": "/learning-portal/static/js/main.b1c88515.chunk.js",
+    "main.js.map": "/learning-portal/static/js/main.b1c88515.chunk.js.map",
+    "runtime-main.js": "/learning-portal/static/js/runtime-main.42c7e1a0.js",
+    "runtime-main.js.map": "/learning-portal/static/js/runtime-main.42c7e1a0.js.map",
     "static/css/2.5a56e992.chunk.css": "/learning-portal/static/css/2.5a56e992.chunk.css",
-    "static/js/2.79c40465.chunk.js": "/learning-portal/static/js/2.79c40465.chunk.js",
-    "static/js/2.79c40465.chunk.js.map": "/learning-portal/static/js/2.79c40465.chunk.js.map",
-    "static/js/3.d58e6597.chunk.js": "/learning-portal/static/js/3.d58e6597.chunk.js",
-    "static/js/3.d58e6597.chunk.js.map": "/learning-portal/static/js/3.d58e6597.chunk.js.map",
+    "static/js/2.c668f25d.chunk.js": "/learning-portal/static/js/2.c668f25d.chunk.js",
+    "static/js/2.c668f25d.chunk.js.map": "/learning-portal/static/js/2.c668f25d.chunk.js.map",
+    "static/js/3.9c386629.chunk.js": "/learning-portal/static/js/3.9c386629.chunk.js",
+    "static/js/3.9c386629.chunk.js.map": "/learning-portal/static/js/3.9c386629.chunk.js.map",
     "static/js/4.6b370864.chunk.js": "/learning-portal/static/js/4.6b370864.chunk.js",
     "static/js/4.6b370864.chunk.js.map": "/learning-portal/static/js/4.6b370864.chunk.js.map",
     "static/js/5.739ecb56.chunk.js": "/learning-portal/static/js/5.739ecb56.chunk.js",
     "static/js/5.739ecb56.chunk.js.map": "/learning-portal/static/js/5.739ecb56.chunk.js.map",
     "index.html": "/learning-portal/index.html",
-    "precache-manifest.893de5ecbde7915f44bffdf1d6063b8a.js": "/learning-portal/precache-manifest.893de5ecbde7915f44bffdf1d6063b8a.js",
+    "precache-manifest.1786bbf3ce9d210dd39c5d94d7c2ce24.js": "/learning-portal/precache-manifest.1786bbf3ce9d210dd39c5d94d7c2ce24.js",
     "service-worker.js": "/learning-portal/service-worker.js",
     "static/css/2.5a56e992.chunk.css.map": "/learning-portal/static/css/2.5a56e992.chunk.css.map",
     "static/css/main.898f808c.chunk.css.map": "/learning-portal/static/css/main.898f808c.chunk.css.map",
-    "static/js/2.79c40465.chunk.js.LICENSE.txt": "/learning-portal/static/js/2.79c40465.chunk.js.LICENSE.txt",
-    "static/js/3.d58e6597.chunk.js.LICENSE.txt": "/learning-portal/static/js/3.d58e6597.chunk.js.LICENSE.txt",
+    "static/js/2.c668f25d.chunk.js.LICENSE.txt": "/learning-portal/static/js/2.c668f25d.chunk.js.LICENSE.txt",
+    "static/js/3.9c386629.chunk.js.LICENSE.txt": "/learning-portal/static/js/3.9c386629.chunk.js.LICENSE.txt",
     "static/js/4.6b370864.chunk.js.LICENSE.txt": "/learning-portal/static/js/4.6b370864.chunk.js.LICENSE.txt",
     "static/js/5.739ecb56.chunk.js.LICENSE.txt": "/learning-portal/static/js/5.739ecb56.chunk.js.LICENSE.txt",
     "static/media/01.webp": "/learning-portal/static/media/01.420ffea6.webp",
@@ -34,10 +34,10 @@
     "static/media/welearn_logo.webp": "/learning-portal/static/media/welearn_logo.fd5da741.webp"
   },
   "entrypoints": [
-    "static/js/runtime-main.f52a99ef.js",
+    "static/js/runtime-main.42c7e1a0.js",
     "static/css/2.5a56e992.chunk.css",
-    "static/js/2.79c40465.chunk.js",
+    "static/js/2.c668f25d.chunk.js",
     "static/css/main.898f808c.chunk.css",
-    "static/js/main.580bb23b.chunk.js"
+    "static/js/main.b1c88515.chunk.js"
   ]
 }
