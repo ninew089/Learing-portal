@@ -252,7 +252,7 @@ export default function CustomizedDialogs({ open, setOpen }: DialogsProps) {
                   <TextField
                     fullWidth
                     multiline
-                    label="เปอร์เซ็นความก้าวหน้า"
+                    label="เปอร์เซ็นต์ความก้าวหน้า"
                     name="percent"
                     type="number"
                     inputRef={register}

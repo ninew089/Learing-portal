@@ -2,7 +2,7 @@
   "name": "learning-portal",
   "version": "1.0.0",
   "private": true,
-  "homepage": "https://welearn.ocsc.go.th/learning-portal",
+  "homepage": "https://learningspace.ocsc.go.th/learning-portal",
   "dependencies": {
     "@date-io/date-fns": "^1.3.13",
     "@date-io/moment": "^1.3.13",

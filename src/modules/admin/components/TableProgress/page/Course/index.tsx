@@ -149,7 +149,7 @@ export default function ReportTable() {
             dateSetting: { locale: "th-TH" },
           },
           {
-            title: "เปอร์เซ็นความก้าวหน้า",
+            title: "เปอร์เซ็นต์ความก้าวหน้า",
             field: "percent",
             type: "numeric",
             validate: (rowData) =>

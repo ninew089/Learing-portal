@@ -63,9 +63,11 @@ export default function PersistentDrawerLeft(props: any) {
           <div className={classes.color1}>
             47/111 หมู่ 4 ถนนติวานนท์ ตำบลตลาดขวัญ อำเภอเมือง จังหวัดนนทบุรี
             11000
-            <div className={classes.color}>E-mail : ocsc.hrd@gmail.com</div>
+            <div className={classes.color}>
+              E-mail : learningspace@ocsc.go.th
+            </div>
             <div className={classes.color1}>
-              โทร. 02-547-1795 , 02-547-1807 (ภายในเวลาราชการ)
+              โทร. 02-547-1000 ต่อ 1795, 1807 และ 6942 (ภายในเวลาราชการ)
             </div>
           </div>
         </Grid>
