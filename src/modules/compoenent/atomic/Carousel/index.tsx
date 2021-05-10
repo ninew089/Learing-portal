@@ -88,7 +88,9 @@ export default function CourseCarousel(props: CourseCarouselProps) {
       data!.filter((item: any) =>
         selected_platform === "ทั้งหมด" || selected_platform === null
           ? item
-          : item.platformName.toLowerCase().includes(selected_platform)
+          : item.platformName
+              .toLowerCase()
+              .includes(selected_platform.toLowerCase())
       ).length === 0 ? (
         <h3 style={{ color: "gray" }}>ไม่พบผลการค้นหา</h3>
       ) : (
@@ -109,7 +111,7 @@ export default function CourseCarousel(props: CourseCarouselProps) {
                     ? item
                     : item.platformName
                         .toLowerCase()
-                        .includes(selected_platform)
+                        .includes(selected_platform.toLowerCase())
                 )
                 .map((item: any, index: number) => (
                   <Slide

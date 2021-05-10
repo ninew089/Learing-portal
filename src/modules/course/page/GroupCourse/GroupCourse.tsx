@@ -23,7 +23,7 @@ export default function GroupCourse() {
     const action = actions.loadCourseCategories(
       category === undefined ? 1 : category
     );
-    const actionCourseAll = actions.loadCourses("all");
+    const actionCourseAll = actions.loadCourses("shown");
     dispatch(actionCourseAll);
     dispatch(action);
     setPostsToShow([]);

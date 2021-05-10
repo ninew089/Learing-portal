@@ -27,13 +27,13 @@ export default function AlertDialog(props: any) {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {`กำลังเข้าสู่แพล็ตฟอร์มการเรียนรู้ ${
+          {`กำลังเข้าสู่แพลตฟอร์มการเรียนรู้ ${
             data ? data.officialName : "กำลังโหลดข้อมูล"
           }`}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            {`คุณกำลังเข้าสู่ เว็บ ${data ? data.link : ""}`}
+            {`คุณกำลังเข้าสู่  ${data ? data.link : ""}`}
           </DialogContentText>
         </DialogContent>
         <DialogActions>

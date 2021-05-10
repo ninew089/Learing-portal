@@ -23,9 +23,7 @@ export default function SingleLineGridList(props: { id: number }) {
       () =>
         filterCoursebyCategory(
           id + 1,
-          parsed.name !== undefined
-            ? parsed.name
-            : "ความรู้เกี่ยวกับราชการไทยและการเป็นข้าราชการ"
+          parsed.name !== undefined ? parsed.name : "การพัฒนาองค์ความรู้"
         ),
       1000
     );
@@ -46,11 +44,7 @@ export default function SingleLineGridList(props: { id: number }) {
 
   return (
     <CourseContainerTemplate
-      name={
-        parsed.name
-          ? parsed.name
-          : "ความรู้เกี่ยวกับราชการไทยและการเป็นข้าราชการ"
-      }
+      name={parsed.name ? parsed.name : "การพัฒนาองค์ความรู้"}
       Next={Next}
       isLoadingCourseCategories={isLoadingCourseCategories}
       courseCategories={courseCategories}

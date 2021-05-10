@@ -16,7 +16,7 @@ export default function SingleLineGridList(props: any) {
   const [postsToShow, setPostsToShow] = useState<any>([]);
 
   useEffect(() => {
-    const action = actions.loadCurriculums("all");
+    const action = actions.loadCurriculums("shown");
     dispatch(action);
     setPostsToShow([]);
 

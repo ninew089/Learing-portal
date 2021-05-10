@@ -11,7 +11,7 @@ export default function GroupCourse() {
   );
   const [postsToShow, setPostsToShow] = useState<CardProps[]>([]);
   useEffect(() => {
-    const action = actions.loadCourses("all");
+    const action = actions.loadCourses("shown");
     dispatch(action);
     setPostsToShow([]);
     // eslint-disable-next-line

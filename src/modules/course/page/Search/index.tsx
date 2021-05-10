@@ -89,7 +89,7 @@ export default function GroupCourse(props: any) {
   };
   useEffect(() => {
     setPostsToShow([]);
-    const action = actions.loadCourses("all");
+    const action = actions.loadCourses("shown");
     dispatch(action);
     // eslint-disable-next-line
   }, [q]);
