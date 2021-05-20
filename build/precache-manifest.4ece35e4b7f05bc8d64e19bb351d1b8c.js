@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "d9ed318accacb4ae159af7c62b65c4dc",
+    "revision": "5c98df32640c69c933457eacb28e3da2",
     "url": "/learning-portal/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/learning-portal/static/css/2.5a56e992.chunk.css"
   },
   {
-    "revision": "22704fd0cf446ba988e9",
+    "revision": "5feb317947156a7b6f47",
     "url": "/learning-portal/static/css/main.898f808c.chunk.css"
   },
   {
@@ -44,16 +44,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/learning-portal/static/js/5.3b70f469.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "22704fd0cf446ba988e9",
-    "url": "/learning-portal/static/js/main.ba2bafcc.chunk.js"
+    "revision": "5feb317947156a7b6f47",
+    "url": "/learning-portal/static/js/main.763a12ef.chunk.js"
   },
   {
     "revision": "3ac0bda92e9f3d5dc8d9",
     "url": "/learning-portal/static/js/runtime-main.18634fba.js"
-  },
-  {
-    "revision": "420ffea69efa355f847e00636ff51d6e",
-    "url": "/learning-portal/static/media/01.420ffea6.webp"
   },
   {
     "revision": "f90ae5bcfbd90d3e9013627104f06b61",
@@ -62,6 +58,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "86c7ddea5cd8b4ac9194003b308cd843",
     "url": "/learning-portal/static/media/HowToRegister.86c7ddea.webp"
+  },
+  {
+    "revision": "41a9e872575ce1ccdd7f4920bc95bd9f",
+    "url": "/learning-portal/static/media/Learning-Space.41a9e872.jpg"
   },
   {
     "revision": "17b21c36107b7e971f946b55b793bdfe",

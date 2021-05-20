@@ -2,7 +2,7 @@ import React from "react";
 
 import { makeStyles } from "@material-ui/core/styles";
 import { LocalLibrary } from "@material-ui/icons";
-import img from "assets/images/01.webp";
+import img from "assets/images/Learning-Space.jpg";
 
 const useStyles = makeStyles((theme) => ({
   header: {
