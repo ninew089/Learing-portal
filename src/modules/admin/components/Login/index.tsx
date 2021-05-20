@@ -149,7 +149,7 @@ export default function SignIn() {
                   variant="h5"
                   className={classes.title}
                 >
-                  ระบบเจ้าหน้าที่ Learning-Portal
+                  ผู้ดูแลระบบแพลตฟอร์มการเรียนรู้
                 </Typography>
 
                 <TextField

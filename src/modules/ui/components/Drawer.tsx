@@ -16,7 +16,7 @@ import { NavLink } from "react-router-dom";
 
 import { useSelector } from "react-redux";
 import { eraseCookie, getCookie } from "cookie/cookie";
-import banner from "assets/images/welearn_logo.webp";
+import banner from "assets/images/logo.webp";
 
 import {
   CreateRounded,
@@ -61,19 +61,19 @@ export default function TemporaryDrawer() {
     right: false,
   });
 
-  const toggleDrawer = (anchor: Anchor, open: boolean) => (
-    event: React.KeyboardEvent | React.MouseEvent
-  ) => {
-    if (
-      event.type === "keydown" &&
-      ((event as React.KeyboardEvent).key === "Tab" ||
-        (event as React.KeyboardEvent).key === "Shift")
-    ) {
-      return;
-    }
+  const toggleDrawer =
+    (anchor: Anchor, open: boolean) =>
+    (event: React.KeyboardEvent | React.MouseEvent) => {
+      if (
+        event.type === "keydown" &&
+        ((event as React.KeyboardEvent).key === "Tab" ||
+          (event as React.KeyboardEvent).key === "Shift")
+      ) {
+        return;
+      }
 
-    setState({ ...state, [anchor]: open });
-  };
+      setState({ ...state, [anchor]: open });
+    };
 
   const onLogout = () => {
     eraseCookie("token");

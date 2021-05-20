@@ -316,7 +316,9 @@ function loadCourseCategories(id: any) {
   return async (dispatch: any) => {
     dispatch({ type: LOAD_COURSESCATEGORIES_REQUEST });
     try {
-      const { data } = await axios.get(`/CourseCategories/${id}/Courses`);
+      const { data } = await axios.get(
+        `/CourseCategories/${id}/Courses?filter=shown`
+      );
       dispatch({
         type: LOAD_COURSESCATEGORIES_SUCCESS,
         payload: {

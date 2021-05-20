@@ -16,7 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Snackbar from "modules/compoenent/atomic/SnackBar";
 
 const useStyles = makeStyles((theme) => ({
-  root: { marginTop: "2rem" },
+  root: { marginTop: "2rem", background: "#fff" },
   paper: {
     display: "flex",
     flexDirection: "column",
@@ -31,8 +31,6 @@ const useStyles = makeStyles((theme) => ({
     color: "#132740",
   },
   submit: {
-    background: "#ff533d",
-    color: theme.palette.primary.light,
     margin: theme.spacing(3, 0, 2),
   },
   input: {
@@ -106,7 +104,6 @@ const useStyles = makeStyles((theme) => ({
     width: "50%",
   },
   container: {
-    background: theme.palette.primary.light,
     borderRadius: 10,
     padding: 10,
   },
@@ -286,7 +283,7 @@ export default function SignIn() {
                   <Button
                     type="submit"
                     fullWidth
-                    variant="contained"
+                    variant="outlined"
                     className={classes.submit}
                   >
                     ส่งข้อมูล

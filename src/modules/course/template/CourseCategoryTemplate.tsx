@@ -50,8 +50,11 @@ export default function CourseCategoryTemplate({
   const classes = useStyles();
   const postsPerPage = 8;
   const [next, setNext] = useState(8);
+  //           item.isShown &&
   const loopWithSlice = (start: any, end: any) => {
-    const slicedPosts = courseCategories.slice(start, end);
+    const slicedPosts = courseCategories
+      .filter((item: any) => item.isShown)
+      .slice(start, end);
 
     setPostsToShow([...postsToShow, ...slicedPosts]);
   };

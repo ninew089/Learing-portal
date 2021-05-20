@@ -108,7 +108,7 @@ export default function SignIn(props: any) {
       <div className={classes.form}>
         <FormControl className={classes.formControlInfo} fullWidth>
           <Typography component="h1" variant="h5" align="center">
-            ลงทะเบียนเข้ารับการอบรมออนไลน์
+            สมัครสมาชิก
           </Typography>
           <TextField
             fullWidth
@@ -174,7 +174,7 @@ export default function SignIn(props: any) {
           />
 
           <Button fullWidth className={classes.submit} onClick={onPresence}>
-            ตรวจสอบว่ามีผู้ใช้หรือไม่
+            ตรวจสอบว่ามีเลขประจำตัวประชาชนหรือไม่
           </Button>
         </FormControl>
       </div>
