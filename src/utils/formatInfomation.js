@@ -246,8 +246,6 @@ export function infoEdit(signUpInfo) {
 }
 
 export function infoEditver2(signUpInfo) {
-  const token = getCookie("token");
-  const id = parseJwt(token).unique_name;
   if (signUpInfo.usertypeid === "1") {
     const data = JSON.parse(`{
 
@@ -356,7 +354,7 @@ export function infoEditver2(signUpInfo) {
         "email": "${signUpInfo.email}",
 
           "user5": {
-              
+  
              "occupationid": ${parseInt(signUpInfo.OccupationId)},
               "jobtitle": "${signUpInfo.jobTitle}",
               "workplace": "${signUpInfo.workPlace}"
