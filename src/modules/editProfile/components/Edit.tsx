@@ -10,7 +10,7 @@ import * as yup from "yup";
 import * as actions from "../actions";
 import { useDispatch, useSelector } from "react-redux";
 import Snackbar from "modules/compoenent/atomic/SnackBar";
-import { infoEdit } from "utils/formatInfomation";
+import { infoEditver2 } from "utils/formatInfomation";
 import { accountFormProps } from "../typescript";
 import { getCookie } from "cookie/cookie";
 import { parseJwt } from "utils/getDataJWT";
@@ -310,7 +310,8 @@ export default function Edit(props: any) {
   const dispatch = useDispatch();
 
   const onSubmitData = (data: any) => {
-    const preinfo = infoEdit(data);
+    console.log(data);
+    const preinfo = infoEditver2(data);
 
     const action = actions.loadEdit(preinfo);
     dispatch(action);

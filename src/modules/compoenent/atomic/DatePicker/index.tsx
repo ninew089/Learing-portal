@@ -179,7 +179,11 @@ export function DatePicker(props: any) {
 export function DatePickerJob(props: any) {
   const { title, register, name } = props;
   const { data } = useSelector((state: any) => state.edit);
-  var date: string = `${data[`user${data.userTypeId}`].jobStartDate}`;
+  var newDate: Date = new Date();
+  var date: string =
+    data[`user${data.userTypeId}`].jobStartDate === undefined
+      ? `${newDate}`
+      : `${data[`user${data.userTypeId}`].jobStartDate}`;
 
   const [selectedDate, handleDateChange] = useState(date);
   const classes = useStyles();

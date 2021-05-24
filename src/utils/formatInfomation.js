@@ -244,3 +244,126 @@ export function infoEdit(signUpInfo) {
   }
   return "";
 }
+
+export function infoEditver2(signUpInfo) {
+  const token = getCookie("token");
+  const id = parseJwt(token).unique_name;
+  if (signUpInfo.usertypeid === "1") {
+    const data = JSON.parse(`{
+
+        "usertypeid": ${parseInt(signUpInfo.usertypeid)},
+        "title": "${signUpInfo.title}",
+        "firstname": "${signUpInfo.name}",
+        "lastname": "${signUpInfo.lastname}",
+        "gender": "${signUpInfo.gender}",
+        "educationid": ${parseInt(signUpInfo.educationid)},
+        "birthyear": "${signUpInfo.birthyear}",
+        "email": "${signUpInfo.email}",
+     
+        "user1":{
+        
+        "jobtypeid": ${parseInt(signUpInfo.jobtypeId)},
+        "jobtitle": "${signUpInfo.jobTitle}",
+        "joblevelid":${parseInt(signUpInfo.jobLevelid)},
+        "ministryid" :${parseInt(signUpInfo.MinistryId)},
+        "departmentid": ${parseInt(signUpInfo.DepartmentId)},
+        "division": "${signUpInfo.Division}",
+        "jobstartdate": "${formatDate(signUpInfo.jobStartDate)}"
+      }
+    }`);
+    return data;
+  }
+  if (signUpInfo.usertypeid === "2") {
+    const data = JSON.parse(`{
+
+        "usertypeid": ${parseInt(signUpInfo.usertypeid)},
+        "title": "${signUpInfo.title}",
+        "firstname": "${signUpInfo.name}",
+        "lastname": "${signUpInfo.lastname}",
+        "gender": "${signUpInfo.gender}",
+        "educationid": ${parseInt(signUpInfo.educationid)},
+        "birthyear": "${signUpInfo.birthyear}",
+        "email": "${signUpInfo.email}",
+  
+        "user2": {
+          
+          "jobtypeid": ${parseInt(signUpInfo.jobtypeId)},
+          "jobtitle": "${signUpInfo.jobTitle}",
+          "joblevel":"${signUpInfo.jobLevel}",
+          "ministryid" :${parseInt(signUpInfo.MinistryId)},
+          "departmentid": ${parseInt(signUpInfo.DepartmentId)},
+          "division": "${signUpInfo.Division}",
+          "jobstartdate": "${formatDate(signUpInfo.jobStartDate)}"
+        }
+      }`);
+    return data;
+  }
+  if (signUpInfo.usertypeid === "3") {
+    const data = JSON.parse(`{
+
+        "usertypeid": ${parseInt(signUpInfo.usertypeid)},
+        "title": "${signUpInfo.title}",
+        "firstname": "${signUpInfo.name}",
+        "lastname": "${signUpInfo.lastname}",
+        "gender": "${signUpInfo.gender}",
+        "educationid": ${parseInt(signUpInfo.educationid)},
+        "birthyear": "${signUpInfo.birthyear}",
+        "email": "${signUpInfo.email}",
+        
+         "user3": {
+            
+            "jobtypeid": ${parseInt(signUpInfo.jobtypeId)},
+            "jobtitle":"${signUpInfo.jobTitle}",
+            "joblevel":"${signUpInfo.jobLevel}",
+            "ministryid" :${parseInt(signUpInfo.MinistryId)},
+            "departmentid":${parseInt(signUpInfo.DepartmentId)},
+            "division": "${signUpInfo.Division}",
+            "jobstartdate": "${formatDate(signUpInfo.jobStartDate)}"}}`);
+    return data;
+  }
+
+  if (signUpInfo.usertypeid === "4") {
+    const data = JSON.parse(`{
+     
+        "usertypeid": ${parseInt(signUpInfo.usertypeid)},
+        "title": "${signUpInfo.title}",
+        "firstname": "${signUpInfo.name}",
+        "lastname": "${signUpInfo.lastname}",
+        "gender": "${signUpInfo.gender}",
+        "educationid": ${parseInt(signUpInfo.educationid)},
+        "birthyear": "${signUpInfo.birthyear}",
+        "email": "${signUpInfo.email}",
+        "password": "${signUpInfo.password}",
+          "user4": {
+              
+              "stateenterpriseid":${parseInt(signUpInfo.stateEnterprisid)},
+              "jobtitle": "${signUpInfo.jobTitle}",
+              "jobstartdate": "${formatDate(signUpInfo.jobStartDate)}"
+          }
+        }`);
+    return data;
+  }
+  if (signUpInfo.usertypeid === "5") {
+    const data = JSON.parse(`{
+ 
+        "usertypeid": ${parseInt(signUpInfo.usertypeid)},
+        "title": "${signUpInfo.title}",
+        "firstname": "${signUpInfo.name}",
+        "lastname": "${signUpInfo.lastname}",
+        "gender": "${signUpInfo.gender}",
+        "educationid": ${parseInt(signUpInfo.educationid)},
+        "birthyear": "${signUpInfo.birthyear}",
+        "email": "${signUpInfo.email}",
+
+          "user5": {
+              
+             "occupationid": ${parseInt(signUpInfo.OccupationId)},
+              "jobtitle": "${signUpInfo.jobTitle}",
+              "workplace": "${signUpInfo.workPlace}"
+          }
+        }`);
+
+    return data;
+  }
+  return "";
+}
