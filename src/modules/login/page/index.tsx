@@ -163,7 +163,8 @@ export default function SignIn() {
   function redirect() {
     var res = "response_type=code";
     var clientId = "&client_id=105c7cf7-a02d-48aa-84ba-1a861633ea7a";
-    var uri = "&redirect_uri=https://welearn.ocsc.go.th/etda/callback.html";
+    var uri =
+      "&redirect_uri=https://learningspace.ocsc.go.th/etda/callback.html";
     var scope = "&scope=openid%20profile";
     var state = "&state=";
     var random = randomState(11);
